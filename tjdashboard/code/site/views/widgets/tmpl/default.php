@@ -1,0 +1,129 @@
+<form name="adminForm" id="adminForm" class="form-validate" method="post">
+	<div class="to-display-messages">
+</div>
+	<div class="row">
+		<div class="report-c">
+			<h1>
+				<?php echo JText::_('COM_TJDASHBOARD_TITLE_WIDGET');?>
+			</h1>
+
+			<div class="span12">
+				<table width=100%>
+					<tr class="marginb20 paddingb10">
+						<th>
+							<div class="table">
+								<?php
+									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_WIDGET_TITLE', 'title', $this->sortDirection, $this->sortColumn);
+								?>
+							</div>
+						</th>
+						<th>
+							<div class="candidate-name">
+								<?php
+									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_DATA_PLUGIN', 'data_plugin', $this->sortDirection, $this->sortColumn);
+								?>
+							</div>
+						</th>
+						<th>
+							<div class="candidate-name">
+								<?php
+									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_RENDERER_PLUGIN', 'renderer_plugin', $this->sortDirection, $this->sortColumn);
+								?>
+							</div>
+						</th>
+						<th>
+							<div class="candidate-name">
+								<?php
+									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_SIZE', 'size', $this->sortDirection, $this->sortColumn);
+								?>
+							</div>
+						</th>
+						<th>
+							<div class="candidate-name">
+								<?php
+									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ID', 'dashboard_id', $this->sortDirection, $this->sortColumn);
+								?>
+							</div>
+						</th>
+						<th>
+							<div class="candidate-name">
+								<?php
+									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_WIDGET_ID', 'dashboard_widget_id', $this->sortDirection, $this->sortColumn);
+								?>
+							</div>
+						</th>
+					</tr>
+					<?php
+						if (!empty($this->items))
+						{
+							foreach ($this->items as $widget)
+							{ ?>
+								<tr class="">
+									<td class="">
+										<div class="center">
+											<?php echo $widget->title;?>
+										</div>
+									</td>
+									<td class="">
+										<div class="center">
+											<?php echo $widget->data_plugin; ?>
+										</div>
+									</td>
+									<td class="">
+										<div class="center">
+											<?php echo $widget->renderer_plugin; ?>
+										</div>
+									</td>
+									<td class="">
+										<div class="center">
+											<?php echo $widget->size; ?>
+										</div>
+									</td>
+									<td class="">
+										<div class="center">
+											<?php echo $widget->dashboard_id; ?>
+										</div>
+									</td>
+									<td class="">
+										<div class="center">
+											<?php echo $widget->dashboard_widget_id; ?>
+										</div>
+									</td>
+								</tr>
+							<?php
+							}
+						}
+						else
+						{ ?>
+							<tr>
+								<table width=100%>
+									<tr>
+										<td>
+											<div class="alert alert-warning text-center margin15">
+												<?php
+													echo JText::_('NO_DATA');
+												?>
+											</div>
+										</td>
+									</tr>
+								</table>
+							</tr>
+						<?php
+						}
+					?>
+				</table>
+			</div>
+			<div>
+				<div class="pager">
+					<?php echo $this->pagination->getListFooter(); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<input type="hidden" name="option" value="com_tjdashboard" />
+	<input type="hidden" name="task" id="task" value=""/>
+	<input type="hidden" name="view" value="dashboard" />
+	<input type="hidden" name="filter_order" id="filter_order" value="<?php echo $this->sortColumn; ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->sortDirection; ?>" />
+</form>

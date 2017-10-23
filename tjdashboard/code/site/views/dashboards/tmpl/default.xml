@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+    <layout title="COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARD" option="View">
+        <message>
+                        <![CDATA[COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARD_DESC]]>
+        </message>
+    </layout>
+    <fields name="params">
+        <fieldset
+            name="basic"
+            label="COM_TJDASHBOARD_FIELDSET_ITEM_ID_SELECT_LABEL">
+            <field
+                name="dashboard_id"
+                query="SELECT `dashboard_id`, `title` FROM #__tj_dashboards ORDER BY `dashboard_id`"
+                type="sql"
+                key_field="dashboard_id"
+                value_field="title"
+                label="COM_TJDASHBOARD_ITEM_ID_SELECT_LABEL"
+                require="true"
+                description="JGLOBAL_SHOW_TITLE_DESC">
+            </field>
+        </fieldset>
+    </fields>
+</metadata>
