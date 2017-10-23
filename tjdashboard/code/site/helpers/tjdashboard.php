@@ -58,31 +58,31 @@ class TjdashboardFrontendHelper
 								$widgetRealData = $pluginClass->$methodName($widgetDetails);
 
 								$responce['status'] = 1;
-								$responce['msg'] = "Success";
+								$responce['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
 								$responce['data'] = $widgetRealData;
 							}
 							else
 							{
 								$responce['status'] = 0;
-								$responce['msg'] = "Method not exists";
+								$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_METHOD_NOT_FOUND");
 							}
 						}
 						else
 						{
 							$responce['status'] = 0;
-							$responce['msg'] = "Class not exists";
+							$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_CLASS_NOT_FOUND");
 						}
 					}
 					else
 					{
 						$responce['status'] = 0;
-						$responce['msg'] = "File not exists";
+						$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FILE_NOT_FOUND");
 					}
 				}
 				else
 				{
 					$responce['status'] = 0;
-					$responce['msg'] = "Folder not exists";
+					$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FOLDER_NOT_FOUND");
 				}
 			}
 
