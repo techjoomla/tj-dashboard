@@ -53,9 +53,6 @@ class TjdashboardModelDashboards extends JModelList
 	protected function getListQuery()
 	{
 		$app = JFactory::getApplication();
-		$jinput = $app->input;
-
-		$dashboardId = $jinput->get('id', 0, 'INT');
 
 		// Initialize variables.
 		$db    = JFactory::getDbo();
