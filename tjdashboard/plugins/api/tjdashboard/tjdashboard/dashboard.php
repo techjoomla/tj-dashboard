@@ -26,8 +26,8 @@ class TjdashboardApiResourceDashboard extends ApiResource
 	{
 		$app            = JFactory::getApplication();
 		$jinput         = $app->input;
-		$formData       = $app->input->post->getArray();
-		$dashboardId    = $app->input->getInt('id');
+		$formData       = $jinput->post->getArray();
+		$dashboardId    = $jinput->getInt('id');
 		$dashboard      = TjdashboardDashboard::getInstance($dashboardId);
 		$responceObject = new stdclass;
 
@@ -53,13 +53,12 @@ class TjdashboardApiResourceDashboard extends ApiResource
 	 */
 	public function get()
 	{
-		$app         = JFactory::getApplication();
-		$jinput      = $app->input;
-
-		$dashboardId = $app->input->getInt('id');
+		$dashboardId = JFactory::getApplication()->input->getInt('id');
+		$dashboard = new stdClass;
 
 		if (!empty($dashboardId))
 		{
+			//@Todo- Check if object id empty ->set record not found if object have error raise it
 			$dashboard   = TjdashboardDashboard::getInstance($dashboardId);
 		}
 		else

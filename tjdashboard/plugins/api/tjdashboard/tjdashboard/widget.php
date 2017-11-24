@@ -46,7 +46,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 	}
 
 	/**
-	 * Function to get dashboard data.
+	 * Function to get widget data.
 	 *
 	 * @return boolean
 	 */
@@ -55,17 +55,19 @@ class TjdashboardApiResourceWidget extends ApiResource
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
 
-		$dashboardId = $jinput->getInt('id');
+		$widgetId = $jinput->getInt('id');
+		$widget = new stdClass;
 
-		if (!empty($dashboardId))
+		if (!empty($widgetId))
 		{
-			$dashboard   = TjdashboardWidget::getInstance($dashboardId);
+			//@Todo- Check widget if id empty set record not found if object have error raise it
+			$widget   = TjdashboardWidget::getInstance($widgetId);
 		}
 		else
 		{
 			ApiError::raiseError(400, JText::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
 		}
 
-		$this->plugin->setResponse($dashboard);
+		$this->plugin->setResponse($widget);
 	}
 }

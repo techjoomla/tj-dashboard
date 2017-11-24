@@ -1,7 +1,7 @@
 <?php
 /**
- * @package     Joomla.Administrator
- * @subpackage  com_TjDashboard
+ * @package     Dashboard.Administrator
+ * @subpackage  Com_TjDashboard
  *
  * @author      Techjoomla <contact@techjoomla.com>
  * @copyright   2017 Techjoomla

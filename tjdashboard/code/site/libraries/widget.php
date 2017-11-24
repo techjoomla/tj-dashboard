@@ -74,6 +74,7 @@ class TjdashboardWidget extends JObject
 	 */
 	public static function getInstance($id = 0)
 	{
+		// @Todo- Check the comments for this function
 		if (!$id)
 		{
 			return new TjdashboardWidget;
