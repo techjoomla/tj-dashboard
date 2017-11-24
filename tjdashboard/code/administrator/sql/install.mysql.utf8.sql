@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboard` (
 `modified_by` INT(11)  NOT NULL ,
 `title` VARCHAR(255)  NOT NULL ,
 PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;
+)
 

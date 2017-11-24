@@ -52,10 +52,8 @@ class TjdashboardModelDashboards extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		$app = JFactory::getApplication();
-
 		// Initialize variables.
-		$db    = JFactory::getDbo();
+		$db    = $this->getDbo();
 		$query = $db->getQuery(true);
 
 		// Create the base select statement.
@@ -68,6 +66,22 @@ class TjdashboardModelDashboards extends JModelList
 		if (!empty($id))
 		{
 			$query->where($db->quoteName('dashboard_id') . ' = ' . $db->escape($id));
+		}
+
+		// Filter by search in title.
+		$search = $this->getState('filter.search');
+
+		if (!empty($search))
+		{
+			if (stripos($search, 'id:') === 0)
+			{
+				$query->where('dashboard_id = ' . (int) substr($search, 3));
+			}
+			else
+			{
+				$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
+				$query->where('(title LIKE ' . $search . ' OR alias LIKE ' . $search . ')');
+			}
 		}
 
 		// Filter by created_by

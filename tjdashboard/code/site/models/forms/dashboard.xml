@@ -11,25 +11,25 @@
 
 		<field
 			name="asset_id"
+			filter="unset"
 			type="hidden"
 		/>
 
 		<field
 			name="title" type="text"
-			filter="safehtml"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_TITLE"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_TITLE"
 			size="10" />
 
 		<field
 			name="alias" type="text"
-			filter="safehtml"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ALIAS"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_ALIAS"
 			size="10" />
 
 		<field
 			name="description" type="textarea"
+			filter="safehtml"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_DESCRIPTION"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_DESCRIPTION"
 			rows="10" cols="5" />
@@ -39,6 +39,7 @@
 			default="1"
 			type="list"
 			label="JSTATUS"
+			filter="intval"
 			description="JFIELD_PUBLISHED_DESC"
 			class="inputbox"
 			size="1">
@@ -77,11 +78,13 @@
 		<field
 			name="checked_out"
 			type="hidden"
+			filter="unset"
 		/>
 
 		<field
 			name="checked_out_time"
 			type="hidden"
+			filter="unset"
 		/>
 
 		<field

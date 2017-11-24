@@ -1,7 +1,6 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_truck
+ * @package     Com_Tjdashboard
  *
  * @author      Techjoomla <contact@techjoomla.com>
  * @copyright   2017 Techjoomla

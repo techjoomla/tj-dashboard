@@ -87,7 +87,7 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (empty($orderCol))
 		{
-			$orderCol  = "dashboard_widget_id";
+			$orderCol  = "ordering";
 		}
 
 		if (empty($orderDirn))
