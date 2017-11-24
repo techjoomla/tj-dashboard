@@ -40,11 +40,7 @@ class PlgAPITjdashboard extends ApiPlugin
 		$lang->load('plg_api_tjdashboard', JPATH_ADMINISTRATOR, '', true);
 
 		// Set the resource to be public
-		$this->setResourceAccess('dashboards', 'public', 'post');
-		$this->setResourceAccess('widgets', 'public', 'post');
 		$this->setResourceAccess('widget', 'public', 'get');
-		$this->setResourceAccess('widget', 'public', 'post');
-		$this->setResourceAccess('dashboard', 'public', 'post');
 		$this->setResourceAccess('dashboard', 'public', 'get');
 	}
 }

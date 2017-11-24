@@ -27,6 +27,5 @@ class TjdashboardApiResourceDashboards extends ApiResource
 		$dashboardmodel = TjdashboardFactory::model("Dashboards");
 		$dashboardData = $dashboardmodel->getItems();
 		$this->plugin->setResponse($dashboardData);
-		return;
 	}
 }

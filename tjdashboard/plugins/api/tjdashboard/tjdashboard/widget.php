@@ -43,8 +43,6 @@ class TjdashboardApiResourceWidget extends ApiResource
 		}
 
 		$this->plugin->setResponse($renderObject);
-
-		return;
 	}
 
 	/**
@@ -69,7 +67,5 @@ class TjdashboardApiResourceWidget extends ApiResource
 		}
 
 		$this->plugin->setResponse($dashboard);
-
-		return;
 	}
 }
