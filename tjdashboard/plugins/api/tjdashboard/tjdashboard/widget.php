@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 class TjdashboardApiResourceWidget extends ApiResource
 {
 	/**
-	 * Function get for widgets record.
+	 * Function to get widgets record.
 	 *
 	 * @return boolean
 	 */
@@ -26,8 +26,8 @@ class TjdashboardApiResourceWidget extends ApiResource
 	{
 		$app      = JFactory::getApplication();
 		$jinput   = $app->input;
-		$formData = $app->input->post->getArray();
-		$widgetId = $app->input->getInt('id');
+		$formData = $jinput->post->getArray();
+		$widgetId = $jinput->getInt('id');
 		$widget   = TjdashboardWidget::getInstance($widgetId);
 		$save     = $widget->save($formData);
 		$renderObject     = new stdclass;
@@ -47,8 +47,8 @@ class TjdashboardApiResourceWidget extends ApiResource
 		return;
 	}
 
-		/**
-	 * Function get dashboard data.
+	/**
+	 * Function to get dashboard data.
 	 *
 	 * @return boolean
 	 */
@@ -57,7 +57,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
 
-		$dashboardId = $app->input->getInt('id');
+		$dashboardId = $jinput->getInt('id');
 
 		if (!empty($dashboardId))
 		{

@@ -23,6 +23,7 @@
 
 		<field
 			name="alias" type="text"
+			filter="safehtml"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ALIAS"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_ALIAS"
 			size="10" />
