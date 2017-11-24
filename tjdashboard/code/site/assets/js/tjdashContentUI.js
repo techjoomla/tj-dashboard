@@ -38,7 +38,7 @@ tjdashContentUI.dashboard.init = function(id){
 			var j = 1;
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 
-
+			// TODO move html to better place
 			jQuery.each (data.widget_data, function(index, value)
 			{
 				jQuery('<div class="widget-data span' +value.size+'"><div class="widget-title"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" style="min-height: 250px;"></div></div>').appendTo('.dashboard-widget-row-'+j);
@@ -160,7 +160,7 @@ tjdashContentUI.renderer.render = function(renderer, data)
 		jQuery('<div class="alert alert-info">Library not found</div>').appendTo('".'+data['element']+'"');
 	}
 }
-
+//Rmove this lines framework should load things dynamically
 tjdashContentUI.renderer.morris = tjdashContentUI.renderer.morris ? tjdashContentUI.renderer.morris : {};
 
 tjdashContentUI.renderer.morris = {

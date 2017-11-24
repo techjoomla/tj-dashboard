@@ -40,6 +40,8 @@ class TjdashboardFactory
 	 **/
 	public static function table($name)
 	{
+		// @TODO Improve file loading with specific table file.
+
 		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/tables');
 
 		// @TODO Add support for cache
@@ -66,22 +68,5 @@ class TjdashboardFactory
 		$model = JModelLegacy::getInstance($name, 'TjdashboardModel', $config);
 
 		return $model;
-	}
-
-	/**
-	 * Retrieves a table from the table folder
-	 *
-	 * @param   mixed  $id  The Joomla user id
-	 *
-	 * @return	Mixed
-	 *
-	 * @since 	1.0
-	 **/
-	public static function getUser($id = null)
-	{
-		$user = JFactory::getUser($id);
-
-		// Return the default user object
-		return $user;
 	}
 }

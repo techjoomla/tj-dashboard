@@ -25,6 +25,7 @@ class TjdashboardFrontendHelper
 	 */
 	public function getWidgetRendererData($widgetDetails)
 	{
+		// @TODO Need to review this code
 		if (count($widgetDetails))
 		{
 			$responce = array();
