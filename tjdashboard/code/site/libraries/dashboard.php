@@ -178,7 +178,7 @@ class TjdashboardDashboard extends JObject
 	 *
 	 * @param   INT  $dashboardId  dashboard Id
 	 *
-	 * @return	Array
+	 * @return mixed An array of data on success, false on failure.
 	 *
 	 * @since 	1.0
 	 **/
@@ -189,8 +189,6 @@ class TjdashboardDashboard extends JObject
 			$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
 			$widgetModel->setState('filter.dashboard_id', $dashboardId);
 			$widgetData = $widgetModel->getItems();
-
-
 
 			return $widgetData;
 		}

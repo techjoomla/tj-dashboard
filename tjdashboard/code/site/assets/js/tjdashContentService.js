@@ -15,7 +15,6 @@ var tjdashContentService = {
 		params['url']		= url;
 		params['data'] 		= formData;
 		params['type'] 		= typeof params['type'] != "undefined" ? params['type'] : 'POST';
-		params['async'] 	= typeof params['async'] != "undefined" ? params['async'] :false;
 		params['dataType'] 	= typeof params['datatype'] != "undefined" ? params['datatype'] : 'json';
 
 		var promise = jQuery.ajax(params);

@@ -8,17 +8,14 @@
 
 "use_strict";
 var tjdashContentUI      = (typeof tjdashContentUI == 'undefined') ? {} : tjdashContentUI;
-
+tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
 
 tjdashContentUI.dashboard = tjdashContentUI.dashboard ? tjdashContentUI.dashboard : {};
-
-tjdashContentUI.dashboard.apiurl = 'index.php?option=com_api&app=tjdashboard&resource=dashboard&format=raw&id=';
+tmtContentUI.dashboard.apiurl = '';
 tjdashContentUI.dashboard.init = function(id){
-	tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
-
 	var params = [];
 	params['type'] = 'GET';
-	var promise = tjdashContentService.postData(tjdashContentUI.root_url + tjdashContentUI.dashboard.apiurl + id, '', params);
+	var promise = tjdashContentService.postData(tjdashContentUI.root_url + this.apiurl + id, '', params);
 	var data = tjdashContentUI.utility.processPromise(promise);
 
 	if(!data.dashboard_id)
@@ -102,14 +99,11 @@ tjdashContentUI.utility.processPromise = function(promise)
 	}
 
 tjdashContentUI.widget = tjdashContentUI.widget ? tjdashContentUI.widget : {};
-tjdashContentUI.widget.apiurl = 'index.php?option=com_api&app=tjdashboard&resource=widget&format=raw&id=';
+tjdashContentUI.widget.apiurl = "";
 tjdashContentUI.widget.init = function(id){
-
-	tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
-
 	var params = [];
 	params['type'] = 'GET';
-	var promise = tjdashContentService.postData(tjdashContentUI.root_url + tjdashContentUI.widget.apiurl + id, '', params);
+	var promise = tjdashContentService.postData(tjdashContentUI.root_url + this.apiurl + id, '', params);
 	var data = tjdashContentUI.utility.processPromise(promise);
 
 	if(!data.dashboard_widget_id)
