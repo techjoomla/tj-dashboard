@@ -13,7 +13,7 @@
 			name="dashboard_id" type="sql"
 			default="10"
 			label="COM_TJDASHBOARD_FORM_LBL_WIDGET_DASHBOARD_ID"
-			query="SELECT dashboard_id, title FROM #__tj_dashboards"
+			query="SELECT dashboard_id, title FROM #__tj_dashboards ORDER BY `ordering` where `state`=1"
 			key_field="dashboard_id" value_field="title"
 			required="true" />
 

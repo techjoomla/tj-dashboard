@@ -65,7 +65,7 @@ class TjdashboardModelDashboards extends JModelList
 
 		if (!empty($id))
 		{
-			$query->where($db->quoteName('dashboard_id') . ' = ' . $db->escape($id));
+			$query->where($db->quoteName('dashboard_id') . ' = ' . (int) $id);
 		}
 
 		// Filter by search in title.
@@ -87,39 +87,41 @@ class TjdashboardModelDashboards extends JModelList
 		// Filter by created_by
 		$created_by = $this->getState('filter.created_by');
 
-		if (!empty($user_id))
+		if (!empty($created_by))
 		{
-			$query->where($db->quoteName('created_by') . ' = ' . $db->escape($created_by));
+			$query->where($db->quoteName('created_by') . ' = ' . (int) $created_by);
 		}
 
 		// Filter by state
 		$state = $this->getState('filter.state');
 
-		if (!empty($status))
+		if (!empty($state))
 		{
-			$query->where($db->quoteName('state') . ' = ' . $db->escape($state));
+			$query->where($db->quoteName('state') . ' = ' . (int) $state);
 		}
 
 		// Filter by context
 		$context = $this->getState('filter.context');
 
-		if (!empty($status))
+		if (!empty($context))
 		{
 			$query->where($db->quoteName('context') . ' = ' . $db->escape($context));
 		}
+
 		// Filter by core
 		$core = $this->getState('filter.core');
 
-		if (!empty($status))
+		if (!empty($core))
 		{
-			$query->where($db->quoteName('core') . ' = ' . $db->escape($core));
+			$query->where($db->quoteName('core') . ' = ' . (int) $core);
 		}
+
 		// Filter by parent
 		$parent = $this->getState('filter.parent');
 
-		if (!empty($status))
+		if (!empty($parent))
 		{
-			$query->where($db->quoteName('parent') . ' = ' . $db->escape($parent));
+			$query->where($db->quoteName('parent') . ' = ' . (int) $parent);
 		}
 
 		return $query;

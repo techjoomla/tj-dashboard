@@ -23,7 +23,7 @@
 
 		<field
 			name="alias" type="text"
-			filter="safehtml"
+			filter="string"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ALIAS"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_ALIAS"
 			size="10" />
@@ -59,14 +59,14 @@
 
 		<field
 			name="core" type="text"
-			filter="safehtml"
+			filter="intval"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CORE"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CORE"
 			size="10" />
 
 		<field
 			name="parent" type="text"
-			filter="safehtml"
+			filter="intval"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_PARENT"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_PARENT"
 			size="10" />
@@ -74,6 +74,7 @@
 		<field
 			name="ordering"
 			type="hidden"
+			filter="intval"
 		/>
 
 		<field
