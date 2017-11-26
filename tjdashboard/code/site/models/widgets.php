@@ -62,7 +62,7 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (!empty($id))
 		{
-			$query->where($db->quoteName('dashboard_widget_id') . ' = ' . $db->escape($id));
+			$query->where($db->quoteName('dashboard_widget_id') . ' = ' . (int) $id);
 		}
 
 		// Filter by dashboard_id
@@ -70,7 +70,7 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (!empty($dashboard_id))
 		{
-			$query->where($db->quoteName('dashboard_id') . ' = ' . $db->escape($dashboard_id));
+			$query->where($db->quoteName('dashboard_id') . ' = ' . (int) $dashboard_id);
 		}
 
 		// Filter by size
@@ -79,25 +79,6 @@ class TjdashboardModelWidgets extends JModelList
 		if (!empty($size))
 		{
 			$query->where($db->quoteName('size') . ' = ' . $db->escape($size));
-		}
-
-		// Add the list ordering clause.
-		$orderCol  = $this->getState('list.ordering');
-		$orderDirn = $this->getState('list.direction');
-
-		if (empty($orderCol))
-		{
-			$orderCol  = "ordering";
-		}
-
-		if (empty($orderDirn))
-		{
-			$orderDirn = "asc";
-		}
-
-		if ($orderCol && $orderDirn)
-		{
-			$query->order($db->escape($orderCol . ' ' . $orderDirn));
 		}
 
 		return $query;
