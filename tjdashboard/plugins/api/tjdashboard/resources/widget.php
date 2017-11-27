@@ -1,6 +1,5 @@
 <?php
 /**
- * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -20,7 +19,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 	/**
 	 * Function to get widgets record.
 	 *
-	 * @return boolean
+	 * @return API response object
 	 */
 	public function post()
 	{
@@ -48,7 +47,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 	/**
 	 * Function to get widget data.
 	 *
-	 * @return boolean
+	 * @return API response object
 	 */
 	public function get()
 	{

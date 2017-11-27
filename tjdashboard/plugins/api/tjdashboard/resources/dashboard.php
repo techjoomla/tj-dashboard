@@ -1,6 +1,5 @@
 <?php
 /**
- * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -20,7 +19,7 @@ class TjdashboardApiResourceDashboard extends ApiResource
 	/**
 	 * Function save dashboard.
 	 *
-	 * @return boolean
+	 * @return API object
 	 */
 	public function post()
 	{
@@ -43,13 +42,12 @@ class TjdashboardApiResourceDashboard extends ApiResource
 
 		$this->plugin->setResponse($responceObject);
 
-		return;
 	}
 
 	/**
 	 * Function get dashboard data.
 	 *
-	 * @return boolean
+	 * @return API Object
 	 */
 	public function get()
 	{
@@ -68,6 +66,5 @@ class TjdashboardApiResourceDashboard extends ApiResource
 
 		$this->plugin->setResponse($dashboard);
 
-		return;
 	}
 }
