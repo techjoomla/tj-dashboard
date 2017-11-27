@@ -1,6 +1,4 @@
 <form name="adminForm" id="adminForm" class="form-validate" method="post">
-	<div class="to-display-messages">
-</div>
 	<div class="row">
 		<div class="report-c">
 			<h1>
@@ -9,7 +7,7 @@
 
 			<div class="span12">
 				<table width=100%>
-					<tr class="marginb20 paddingb10">
+					<tr class="">
 						<th>
 							<div class="table">
 								<?php
@@ -18,28 +16,28 @@
 							</div>
 						</th>
 						<th>
-							<div class="candidate-name">
+							<div class="">
 								<?php
 									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CREATED_ON', 'created_on', $this->sortDirection, $this->sortColumn);
 								?>
 							</div>
 						</th>
 						<th>
-							<div class="candidate-name">
+							<div class="">
 								<?php
 									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CREATED_BY', 'created_on', $this->sortDirection, $this->sortColumn);
 								?>
 							</div>
 						</th>
 						<th>
-							<div class="candidate-name">
+							<div class="">
 								<?php
 									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CONTEXT', 'context', $this->sortDirection, $this->sortColumn);
 								?>
 							</div>
 						</th>
 						<th>
-							<div class="candidate-name">
+							<div class="">
 								<?php
 									echo JHTML::_( 'grid.sort', 'COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ID', 'dashboard_id', $this->sortDirection, $this->sortColumn);
 								?>

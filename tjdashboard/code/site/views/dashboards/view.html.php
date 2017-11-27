@@ -21,7 +21,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 {
 	protected $state;
 
-	protected $item;
+	protected $items;
 
 	protected $form;
 
@@ -36,26 +36,11 @@ class TjdashboardViewDashboards extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$userId = JFactory::getUser()->id;
-		$this->userid = $userId;
+		$this->userid = JFactory::getUser()->id;
 
-		if ($userId)
-		{
-			$app = JFactory::getApplication();
-
-			$currentMenuItem = $app->getMenu()->getActive();
-			$params = $currentMenuItem->params;
-
-			$this->dashboardId = $params->get('dashboard_id', 0, 'INT');
-
-			$this->items = $this->get('Items');
-			$this->state	= $this->get('State');
-			$this->pagination = $this->get('Pagination');
-
-			// Ordering by name
-			$this->sortColumn		= $this->state->get('list.ordering');
-			$this->sortDirection	= $this->state->get('list.direction');
-		}
+		$this->items = $this->get('Items');
+		$this->state	= $this->get('State');
+		$this->pagination = $this->get('Pagination');
 
 		parent::display($tpl);
 	}

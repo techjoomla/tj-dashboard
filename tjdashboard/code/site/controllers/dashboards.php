@@ -15,6 +15,6 @@ defined('_JEXEC') or die;
  *
  * @since  1.6
  */
-class TjdashboardControllerDashboards extends JControllerForm
+class TjdashboardControllerDashboards extends JControllerAdmin
 {
 }

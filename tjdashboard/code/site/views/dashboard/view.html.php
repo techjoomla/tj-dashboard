@@ -36,19 +36,11 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$userId = JFactory::getUser()->id;
-		$this->userid = $userId;
-
-		if ($userId)
-		{
-			$app = JFactory::getApplication();
-
-			$currentMenuItem = $app->getMenu()->getActive();
-			$params = $currentMenuItem->params;
-
-			$this->dashboardId = $params->get('dashboard_id', 0, 'INT');
-		}
-
+		$app = JFactory::getApplication();
+		$currentMenuItem = $app->getMenu()->getActive();
+		$params = $currentMenuItem->params;
+		$this->dashboardId = $params->get('dashboard_id', 0, 'INT');
+		$this->userid = JFactory::getUser()->id;
 		parent::display($tpl);
 	}
 }

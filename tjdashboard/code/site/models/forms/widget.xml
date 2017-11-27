@@ -19,7 +19,6 @@
 
 		<field
 			name="title" type="text"
-			filter="safehtml"
 			label="COM_TJDASHBOARD_FORM_LBL_WIDGET_TITLE"
 			description="COM_TJDASHBOARD_FORM_DESC_WIDGET_TITLE"
 			size="10"
@@ -64,7 +63,7 @@
 
 		<field
 			name="autorefresh" type="text"
-			filter="safehtml"
+			filter="intval"
 			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_AUTOREFRESH"
 			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_AUTOREFRESH"
 			size="10" />
@@ -78,6 +77,7 @@
 			name="state"
 			default="1"
 			type="list"
+			filter="intval"
 			label="JSTATUS"
 			description="JFIELD_PUBLISHED_DESC"
 			class="inputbox"
