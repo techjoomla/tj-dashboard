@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0.0" type="plugin" group="api" method="upgrade">
+    <name>Tj-Dashboard</name>
+    <version>1.6</version>
+    <creationDate>20 September 2017</creationDate>
+    <author></author>
+    <description>Tj-Dashboard API plugin</description>
+    <files>
+        <filename plugin="tjdashboard">tjdashboard.php</filename>
+        <folder>tjdashboard</folder>
+    </files>
+    <languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_api_tjdashboard.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_api_tjdashboard.sys.ini</language>
+	</languages>
+
+</extension>
