@@ -41,6 +41,8 @@ class TjdashboardViewDashboard extends JViewLegacy
 		$params = $currentMenuItem->params;
 		$this->dashboardId = $params->get('dashboard_id', 0, 'INT');
 		$this->userid = JFactory::getUser()->id;
+
+		// @Todo - Add permission based view accessing code
 		parent::display($tpl);
 	}
 }

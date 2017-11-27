@@ -1,6 +1,6 @@
 <form name="adminForm" id="adminForm" class="form-validate" method="post">
 	<div class="row">
-		<div class="report-c">
+		<div class="">
 			<h1>
 				<?php echo JText::_('COM_TJDASHBOARD_TITLE_DASHBOARD');?>
 			</h1>

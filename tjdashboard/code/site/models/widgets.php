@@ -65,6 +65,22 @@ class TjdashboardModelWidgets extends JModelList
 			$query->where($db->quoteName('dashboard_widget_id') . ' = ' . (int) $id);
 		}
 
+		// Filter by search in title.
+		$search = $this->getState('filter.search');
+
+		if (!empty($search))
+		{
+			if (stripos($search, 'id:') === 0)
+			{
+				$query->where('dashboard_widget_id = ' . (int) substr($search, 3));
+			}
+			else
+			{
+				$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
+				$query->where('(title LIKE ' . $search . ' OR alias LIKE ' . $search . ')');
+			}
+		}
+
 		// Filter by dashboard_id
 		$dashboard_id = $this->getState('filter.dashboard_id');
 
@@ -78,7 +94,7 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (!empty($size))
 		{
-			$query->where($db->quoteName('size') . ' = ' . $db->escape($size));
+			$query->where($db->quoteName('size') . ' = ' . (int) $size);
 		}
 
 		return $query;

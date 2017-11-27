@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARD" option="View">
+    <layout title="COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARDS" option="View">
         <message>
-                        <![CDATA[COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARD_DESC]]>
+                        <![CDATA[COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARDS_DESC]]>
         </message>
     </layout>
     <fields name="params">

@@ -42,6 +42,8 @@ class TjdashboardViewDashboards extends JViewLegacy
 		$this->state	= $this->get('State');
 		$this->pagination = $this->get('Pagination');
 
+		// @Todo- Add permisson based view accessing code
+
 		parent::display($tpl);
 	}
 }

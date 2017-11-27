@@ -20,8 +20,6 @@ tjdashContentUI.dashboard.init = function(id){
 
 	if(!data.dashboard_id)
 	{
-		console.log("no length");
-		//tjdashContentUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 		return false;
 	}
 	else
@@ -35,7 +33,7 @@ tjdashContentUI.dashboard.init = function(id){
 			var j = 1;
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 
-			// TODO move html to better place
+			//@TODO move html to better place
 			jQuery.each (data.widget_data, function(index, value)
 			{
 				jQuery('<div class="widget-data span' +value.size+'"><div class="widget-title"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" style="min-height: 250px;"></div></div>').appendTo('.dashboard-widget-row-'+j);
@@ -58,7 +56,6 @@ tjdashContentUI.dashboard.init = function(id){
 				}
 			});
 
-			//jQuery('</div>').appendTo('.tjdashboard');
 		}
 		else
 		{
@@ -83,11 +80,6 @@ tjdashContentUI.utility.processPromise = function(promise)
 						alert(r.err_msg);
 					}
 
-					/*if (r.messages)
-					{
-						Joomla.renderMessages(r.messages);
-					}*/
-
 					if (r.data)
 					{
 						data =  r.data;
@@ -109,7 +101,6 @@ tjdashContentUI.widget.init = function(id){
 	if(!data.dashboard_widget_id)
 	{
 		alert("no data");
-		//tjdashContentUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 		return false;
 	}
 	else
@@ -130,7 +121,6 @@ tjdashContentUI.widget.init = function(id){
 		}
 		else
 		{
-			//console.log(sourceData['element']);
 			jQuery('<div class="alert alert-info">No data to render</div>').appendTo('#dashboard-widget-'+data.dashboard_widget_id);
 		}
 	}
@@ -146,7 +136,6 @@ tjdashContentUI.renderer.render = function(renderer, data)
 
 	 if (tjdashContentUI.renderer[library] && data)
 	 {
-		 //console.log("library present");
 		 tjdashContentUI.renderer[library].init(method, data);
 	}
 	else
@@ -154,7 +143,7 @@ tjdashContentUI.renderer.render = function(renderer, data)
 		jQuery('<div class="alert alert-info">Library not found</div>').appendTo('".'+data['element']+'"');
 	}
 }
-//Rmove this lines framework should load things dynamically
+//@Todo - Rmove this lines framework should load things dynamically
 tjdashContentUI.renderer.morris = tjdashContentUI.renderer.morris ? tjdashContentUI.renderer.morris : {};
 
 tjdashContentUI.renderer.morris = {
