@@ -1,16 +1,14 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_truck
- *
- * @author      Techjoomla <contact@techjoomla.com>
- * @copyright   2017 Techjoomla
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @package    Com_Tjdashboard
+ * @author     Techjoomla <contact@techjoomla.com>
+ * @copyright  2017 Techjoomla
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die('Unauthorized Access');
 
 /**
- * Event class.  Handles all application interaction with a Widget
+ * Widget class.  Handles all application interaction with a Widget
  *
  * @since  11.1
  */
@@ -64,11 +62,11 @@ class TjdashboardWidget extends JObject
 	}
 
 	/**
-	 * Returns the global job object
+	 * Returns the global widget object
 	 *
-	 * @param   integer  $id  The primary key of the event_id to load (optional).
+	 * @param   integer  $id  The primary key of the widget_id to load (optional).
 	 *
-	 * @return  TruckWidget  The event object.
+	 * @return  Widget  The widget object.
 	 *
 	 * @since   1.0
 	 */
@@ -91,9 +89,9 @@ class TjdashboardWidget extends JObject
 	}
 
 	/**
-	 * Method to load a event object by event id
+	 * Method to load a widget object by widget id
 	 *
-	 * @param   int  $id  The event id
+	 * @param   int  $id  The widget id
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -171,10 +169,10 @@ class TjdashboardWidget extends JObject
 		}
 	}
 
-	protected function getWidgetData($widgetId)
+	protected function getWidgetData()
 	{
 		$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
-		$widgetModel->setState('filter.dashboard_widget_id', $widgetId);
+		$widgetModel->setState('filter.dashboard_widget_id', $this->dashboard_widget_id);
 		$widgetData = $widgetModel->getItems();
 
 		JLoader::import("/components/com_tjdashboard/helpers/tjdashboard", JPATH_SITE);

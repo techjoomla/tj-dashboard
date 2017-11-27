@@ -1,6 +1,5 @@
 <?php
 /**
- * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -11,7 +10,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Methods supporting a list of TjDashboards.
+ * Tjdashboard model class for dashboards
  *
  * @since  1.0.0
  */
@@ -44,7 +43,7 @@ class TjdashboardModelDashboards extends JModelList
 	}
 
 	/**
-	 * Get the master query for retrieving a list of requests to the senior.
+	 * Get the master query for retrieving a list of dashboards.
 	 *
 	 * @return  JDatabaseQuery
 	 *

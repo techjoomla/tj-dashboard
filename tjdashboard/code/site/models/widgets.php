@@ -1,6 +1,5 @@
 <?php
 /**
- * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -11,7 +10,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Methods supporting a list of TjDashboard's widgets.
+ * Tjdashboard model class for widgets
  *
  * @since  1.0.0
  */

@@ -1,15 +1,14 @@
 <?php
 /**
- * @package     Com_Tjdashboard
- *
- * @author      Techjoomla <contact@techjoomla.com>
- * @copyright   2017 Techjoomla
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @package    Com_Tjdashboard
+ * @author     Techjoomla <contact@techjoomla.com>
+ * @copyright  2017 Techjoomla
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die('Unauthorized Access');
 
 /**
- * Event class.  Handles all application interaction with a Event
+ * Dashboard class.  Handles all application interaction with a Dashboard
  *
  * @since  11.1
  */
@@ -52,7 +51,7 @@ class TjdashboardDashboard extends JObject
 	protected static $dashboardObj = array();
 
 	/**
-	 * Constructor activating the default information of the Event
+	 * Constructor activating the default information of the Dashboard
 	 *
 	 * @param   int  $id  The unique event key to load.
 	 *
@@ -67,11 +66,11 @@ class TjdashboardDashboard extends JObject
 	}
 
 	/**
-	 * Returns the global job object
+	 * Returns the global Dashboard object
 	 *
-	 * @param   integer  $id  The primary key of the event_id to load (optional).
+	 * @param   integer  $id  The primary key of the dashboard_id to load (optional).
 	 *
-	 * @return  TjdashboardDashboard  The event object.
+	 * @return  TjdashboardDashboard  The Dashboard object.
 	 *
 	 * @since   1.0
 	 */
@@ -95,7 +94,7 @@ class TjdashboardDashboard extends JObject
 	/**
 	 * Method to load a dashboard object by dashboard id
 	 *
-	 * @param   int  $id  The event id
+	 * @param   int  $id  The dashboard id
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -175,18 +174,16 @@ class TjdashboardDashboard extends JObject
 	/**
 	 * get the dashboard widget Data
 	 *
-	 * @param   INT  $dashboardId  dashboard Id
-	 *
 	 * @return mixed An array of data on success, false on failure.
 	 *
 	 * @since 	1.0
 	 **/
-	protected function getWidgetDetails($dashboardId)
+	protected function getWidgetDetails()
 	{
-		if ($dashboardId)
+		if ($this->dashboard_id)
 		{
 			$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
-			$widgetModel->setState('filter.dashboard_id', $dashboardId);
+			$widgetModel->setState('filter.dashboard_id', $this->dashboard_id);
 			$widgetData = $widgetModel->getItems();
 
 			return $widgetData;

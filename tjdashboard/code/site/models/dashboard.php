@@ -1,6 +1,5 @@
 <?php
 /**
- * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -18,13 +17,13 @@ defined('_JEXEC') or die;
 class TjdashboardModelDashboard extends JModelAdmin
 {
 	/**
-	 * @var		object	The Agency data.
+	 * @var		object	The Dashboard data.
 	 * @since   1.0
 	 */
 	protected $data;
 
 	/**
-	 * Method to get the job form data.
+	 * Method to get the dashboard form data.
 	 *
 	 * @param   int  $pk  An optional array of data for the form to interogate.
 	 *

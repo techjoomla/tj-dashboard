@@ -1,11 +1,10 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_Tjdashboard
+ * @package    Com_Tjdashboard
  *
- * @author      Techjoomla <contact@techjoomla.com>
- * @copyright   2017 Techjoomla
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @author     Techjoomla <contact@techjoomla.com>
+ * @copyright  2017 Techjoomla
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die();
 
