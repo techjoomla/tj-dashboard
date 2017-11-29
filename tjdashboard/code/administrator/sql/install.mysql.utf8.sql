@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboards` (
   `core` int(11) NOT NULL,
   `parent` int(11) NOT NULL,
   PRIMARY KEY (`dashboard_id`)
-)
+);
 
 CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   `dashboard_widget_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -34,4 +34,4 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   `modified_by` int(11) NOT NULL,
   `modified_on` datetime NOT NULL,
   PRIMARY KEY (`dashboard_widget_id`)
-)
+);

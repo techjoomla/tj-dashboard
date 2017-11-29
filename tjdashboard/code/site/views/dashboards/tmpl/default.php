@@ -1,3 +1,14 @@
+<?php
+/**
+ * @package    Com_Tjdashboard
+ * @author     Techjoomla <extensions@techjoomla.com>
+ * @copyright  2017 Techjoomla
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+// No direct access
+
+defined('_JEXEC') or die;
+?>
 <form name="adminForm" id="adminForm" class="form-validate" method="post">
 	<div class="row">
 		<div class="">

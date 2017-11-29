@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="dashboard_id"
+			type="text"
+			readonly="true"
+			class="readonly"
+			default="0"
+			description="JGLOBAL_FIELD_ID_DESC"/>
+
+		<field
+			name="asset_id"
+			filter="unset"
+			type="hidden"
+		/>
+
+		<field
+			name="title" type="text"
+			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_TITLE"
+			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_TITLE"
+			size="10" />
+
+		<field
+			name="alias" type="text"
+			filter="string"
+			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ALIAS"
+			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_ALIAS"
+			size="10" />
+
+		<field
+			name="description" type="textarea"
+			filter="safehtml"
+			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_DESCRIPTION"
+			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_DESCRIPTION"
+			rows="10" cols="5" />
+
+		<field
+			name="state"
+			default="1"
+			type="list"
+			label="JSTATUS"
+			filter="intval"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox"
+			size="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+				<option value="2">JARCHIVED</option>
+				<option value="-2">JTRASHED</option>
+		</field>
+
+		<field
+			name="context" type="text"
+			filter="safehtml"
+			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CONTEXT"
+			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CONTEXT"
+			size="10" />
+
+		<field
+			name="core" type="text"
+			filter="intval"
+			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CORE"
+			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CORE"
+			size="10" />
+
+		<field
+			name="parent" type="text"
+			filter="intval"
+			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_PARENT"
+			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_PARENT"
+			size="10" />
+
+		<field
+			name="ordering"
+			type="hidden"
+			filter="intval"
+		/>
+
+		<field
+			name="checked_out"
+			type="hidden"
+			filter="unset"
+		/>
+
+		<field
+			name="checked_out_time"
+			type="hidden"
+			filter="unset"
+		/>
+
+		<field
+			name="created_on"
+			type="hidden"
+		/>
+
+		<field
+			name="created_by"
+			type="hidden"
+		/>
+
+		<field
+			name="modified_on"
+			type="hidden"
+		/>
+
+		<field
+			name="modified_by"
+			type="hidden"
+		/>
+	</fieldset>
+</form>

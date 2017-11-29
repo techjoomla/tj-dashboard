@@ -7,7 +7,6 @@
     <author>Techjoomla</author>
     <authorEmail>extensions@techjoomla.com</authorEmail>
     <authorUrl>http://techjoomla.com</authorUrl>
-    <version>CVS: 1.0.0</version>
     <description></description>
 
     <install> <!-- Runs on install -->
