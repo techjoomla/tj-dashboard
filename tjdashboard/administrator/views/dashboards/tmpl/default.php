@@ -130,7 +130,7 @@ if ($saveOrder)
 										<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'dashboards.', $canCheckin); ?>
 										<?php endif; ?>
 										<?php if ($canEdit || $canEditOwn) : ?>
-											<a class="hasTooltip" href="<?php echo JRoute::_('index.php?option=com_tjdashboard&task=dashboard.edit&id=' . $item->dashboard_id); ?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">
+											<a class="hasTooltip" href="<?php echo JRoute::_('index.php?option=com_tjdashboard&task=dashboard.edit&dashboard_id=' . $item->dashboard_id); ?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">
 											<?php echo $this->escape($item->title); ?></a>
 											<?php else : ?>
 											<span title="<?php echo JText::sprintf('JFIELD_ALIAS_LABEL', $this->escape($item->alias)); ?>"><?php echo $this->escape($item->title); ?></span>
