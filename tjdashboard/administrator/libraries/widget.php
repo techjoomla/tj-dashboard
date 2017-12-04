@@ -171,7 +171,7 @@ class TjdashboardWidget extends JObject
 	/**
 	 * Get the widget data
 	 *
-	 * @return	Array of Objects
+	 * @return	Array
 	 *
 	 * @since 	1.0
 	 **/
@@ -181,17 +181,13 @@ class TjdashboardWidget extends JObject
 		$widgetModel->setState('filter.dashboard_widget_id', $this->dashboard_widget_id);
 		$widgetData = $widgetModel->getItems();
 
-		JLoader::import("/components/com_tjdashboard/helpers/tjdashboard", JPATH_SITE);
-		$tjDashboardHelper = new TjdashboardFrontendHelper;
+		JLoader::import("/components/com_tjdashboard/helpers/dashboard", JPATH_ADMINISTRATOR);
+		$tjDashboardHelper = new DashboardHelper;
 		$result = $tjDashboardHelper->getWidgetRendererData($widgetData);
 
 		if ($result && $result['status'])
 		{
 			return $result['data'];
-		}
-		else
-		{
-			return false;
 		}
 	}
 }
