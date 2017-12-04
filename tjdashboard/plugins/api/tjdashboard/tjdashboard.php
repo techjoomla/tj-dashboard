@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
-JLoader::import("/components/com_tjdashboard/includes/tjdashboard", JPATH_SITE);
+JLoader::import("/components/com_tjdashboard/includes/tjdashboard", JPATH_ADMINISTRATOR);
 
 /**
  * Tjdashboard API plugin

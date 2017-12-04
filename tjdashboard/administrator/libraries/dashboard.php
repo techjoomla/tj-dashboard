@@ -138,7 +138,7 @@ class TjdashboardDashboard extends JObject
 		}
 
 		$model = TjdashboardFactory::model("Dashboard");
-		JForm::addFormPath(JPATH_SITE . '/components/com_tjdashboard/models/forms');
+		JForm::addFormPath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/models/forms');
 		$form = $model->getForm();
 
 		if (!$form)

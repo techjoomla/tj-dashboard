@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JLoader::discover("tjdashboard", JPATH_SITE . '/components/com_tjdashboard/libraries');
+JLoader::discover("tjdashboard", JPATH_ADMINISTRATOR . '/components/com_tjdashboard/libraries');
 
 /* load language file*/
 $lang = JFactory::getLanguage();
@@ -61,7 +61,7 @@ class TjdashboardFactory
 	 **/
 	public static function model($name, $config = array())
 	{
-		JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_tjdashboard/models');
+		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/models');
 
 		// @TODO Add support for cache
 		$model = JModelLegacy::getInstance($name, 'TjdashboardModel', $config);
