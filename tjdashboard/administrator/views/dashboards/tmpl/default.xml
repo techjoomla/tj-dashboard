@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARDS" option="View">
+    <layout title="COM_TJDASHBOARD_DASHBOARDS_VIEW_DEFAULT_TITLE" option="View">
         <message>
-                        <![CDATA[COM_TJDASHBOARD_TITLE_ITEM_VIEW_DASHBOARDS_DESC]]>
+                 <![CDATA[COM_TJDASHBOARD_DASHBOARDS_VIEW_DEFAULT_DESC]]>
         </message>
     </layout>
-    <fields name="params">
-        <fieldset
-            name="basic"
-            label="COM_TJDASHBOARD_FIELDSET_ITEM_ID_SELECT_LABEL">
-        </fieldset>
-    </fields>
 </metadata>

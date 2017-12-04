@@ -11,9 +11,9 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
+JHtml::_('formbehavior.chosen', 'select');
 ?>
 <script type="text/javascript">
 	Joomla.submitbutton = function(task)
@@ -45,50 +45,6 @@ JHtml::_('behavior.keepalive');
 		<div class="form-horizontal">
 			<div class="row-fluid">
 				<div class="span12 form-horizontal">
-					<fieldset class="adminform">
-
-						<div class="control-group">
-							<div class="control-label">
-								<?php echo $this->form->getLabel('dashboard_id'); ?>
-							</div>
-							<div class="controls">
-								<?php echo $this->form->getInput('dashboard_id'); ?>
-							</div>
-							<div class="control-label">
-								<?php echo $this->form->getLabel('asset_id'); ?>
-							</div>
-							<div class="controls">
-								<?php echo $this->form->getInput('asset_id'); ?>
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="control-label">
-								<?php echo $this->form->getLabel('created_by'); ?>
-							</div>
-							<div class="controls">
-								<?php echo $this->form->getInput('created_by'); ?>
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="control-label">
-								<?php echo $this->form->getLabel('title'); ?>
-							</div>
-							<div class="controls">
-								<?php echo $this->form->getInput('title'); ?>
-							</div>
-						</div>
-
-						<div class="control-group">
-							<div class="control-label">
-								<?php echo $this->form->getLabel('alias'); ?>
-							</div>
-							<div class="controls">
-								<?php echo $this->form->getInput('alias'); ?>
-							</div>
-						</div>
-					</fieldset>
 				</div>
 			</div>
 
