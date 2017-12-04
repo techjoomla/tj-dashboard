@@ -8,6 +8,7 @@
     <authorEmail>extensions@techjoomla.com</authorEmail>
     <authorUrl>http://techjoomla.com</authorUrl>
     <description></description>
+    <version>1.0.0</version>
 
     <install> <!-- Runs on install -->
         <sql>
@@ -39,9 +40,9 @@
         <folder>js</folder>
         <folder>css</folder>
     </media>
-    <languages folder="site">
+    <languages folder="languages/site">
 
-			<language tag="en-GB">language/en-GB/en-GB.com_tjdashboard.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_tjdashboard.ini</language>
     </languages>
     <administration>
         <menu img="media/com_tjdashboard/images/s_com_tjdashboard.png" >COM_TJDASHBOARD</menu>
@@ -64,10 +65,10 @@
             <folder>tables</folder>
             <folder>views</folder>
         </files>
-        <languages folder="administrator">
+        <languages folder="languages/administrator">
 
-			<language tag="en-GB">language/en-GB/en-GB.com_tjdashboard.ini</language>
-			<language tag="en-GB">language/en-GB/en-GB.com_tjdashboard.sys.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_tjdashboard.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_tjdashboard.sys.ini</language>
         </languages>
     </administration>
     <config>
@@ -77,6 +78,7 @@
             </fieldset>
         </fields>
     </config>
+    <!--I am not sure why group is 'search' for the plugins-->
     <plugins>
         <plugin group="search" plugin="tjdashboard"/>
     </plugins>
