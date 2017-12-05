@@ -45,21 +45,9 @@ class TjdashboardTableDashboards extends JTable
 			$this->ordering = self::getNextOrder();
 		}
 
-		if ($this->dashboard_id == 0)
-		{
-			$this->created_by = JFactory::getUser()->id;
-			$this->created_on = JFactory::getDate("now", "UTC")->tosql();
-		}
-
-		$this->modified_by = JFactory::getUser()->id;
-		$this->modified_on = JFactory::getDate("now", "UTC")->tosql();
-
 		$this->alias = trim($this->alias);
 
-		if (empty($this->alias))
-		{
-			$this->alias = $this->title;
-		}
+		$this->alias = empty($this->alias) ? $this->title : $this->alias;
 
 		if ($this->alias)
 		{

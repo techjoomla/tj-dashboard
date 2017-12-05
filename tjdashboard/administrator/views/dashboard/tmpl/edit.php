@@ -47,7 +47,9 @@ JHtml::_('formbehavior.chosen', 'select');
 				<div class="span12 form-horizontal">
 				</div>
 			</div>
-
+			<?php
+				echo $this->form->renderFieldset();
+			?>
 			<input type="hidden" name="task" value="" />
 			<?php echo JHtml::_('form.token'); ?>
 		</div>

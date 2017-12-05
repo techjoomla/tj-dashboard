@@ -1,80 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fieldset>
+		<field 	name="dashboard_id" type="hidden" filter="unset"/>
+		<field 	name="asset_id" type="hidden" filter="unset"/>
+		<field 	name="title" 
+				type="text" 
+				filter="string"
+				label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_TITLE"
+				description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_TITLE"/>
 		<field
-			name="dashboard_id"
-			type="text"
-			readonly="true"
-			class="readonly"
-			default="0"
-			description="JGLOBAL_FIELD_ID_DESC"/>
+				name="alias" 
+				type="text"
+				filter="string"
+				label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ALIAS"
+				description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_ALIAS"/>
 
 		<field
-			name="asset_id"
-			filter="unset"
-			type="hidden"
-		/>
+				name="description" 
+				type="editor"
+				filter="safehtml"
+				label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_DESCRIPTION"
+				description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_DESCRIPTION"
+				width="300" />
 
 		<field
-			name="title" type="text"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_TITLE"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_TITLE"
-			size="10" />
-
-		<field
-			name="alias" type="text"
-			filter="string"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_ALIAS"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_ALIAS"
-			size="10" />
-
-		<field
-			name="description" type="textarea"
-			filter="safehtml"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_DESCRIPTION"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_DESCRIPTION"
-			rows="10" cols="5" />
-
-		<field
-			name="state"
-			default="1"
-			type="list"
-			label="JSTATUS"
-			filter="intval"
-			description="JFIELD_PUBLISHED_DESC"
-			class="inputbox"
-			size="1">
-				<option value="1">JPUBLISHED</option>
-				<option value="0">JUNPUBLISHED</option>
-				<option value="2">JARCHIVED</option>
-				<option value="-2">JTRASHED</option>
+				name="state"
+				type="list"
+				default="1"
+				label="JSTATUS"
+				filter="intval"
+				description="JFIELD_PUBLISHED_DESC"
+				class="inputbox"
+				size="1">
+					<option value="1">JPUBLISHED</option>
+					<option value="0">JUNPUBLISHED</option>
+					<option value="2">JARCHIVED</option>
+					<option value="-2">JTRASHED</option>
 		</field>
 
 		<field
-			name="context" type="text"
-			filter="safehtml"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CONTEXT"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CONTEXT"
-			size="10" />
+				type="text"
+				name="context" 
+				filter="safehtml"
+				label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CONTEXT"
+				description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CONTEXT"
+				size="10" />
 
 		<field
-			name="core" type="text"
-			filter="intval"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CORE"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CORE"
-			size="10" />
+				name="core" 
+				type="text"
+				filter="intval"
+				label=""
+				description=""
+				size="10" />
 
 		<field
-			name="parent" type="text"
-			filter="intval"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_PARENT"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_PARENT"
-			size="10" />
+				name="parent" 
+				type="text"
+				filter="intval"
+				label=""
+				description=""
+				size="10" />
 
 		<field
-			name="ordering"
-			type="hidden"
-			filter="intval"
+				name="ordering"
+				type="hidden"
+				filter="intval"
 		/>
 
 		<field
@@ -94,10 +85,13 @@
 			type="hidden"
 		/>
 
-		<field
-			name="created_by"
-			type="hidden"
-		/>
+		<field 
+			name="created_by" 
+			type="user"
+			label="Created By"
+			class="readonly"
+			readonly="true"
+			filter="unset" />
 
 		<field
 			name="modified_on"
@@ -107,6 +101,12 @@
 		<field
 			name="modified_by"
 			type="hidden"
+		/>
+		<field name="access" 
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			class="span12 small" 
 		/>
 	</fieldset>
 </form>
