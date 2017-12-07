@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
-
+JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 /**
  * Item Model for an Dashboard.
  *
@@ -20,6 +20,23 @@ use Joomla\Utilities\ArrayHelper;
  */
 class TjdashboardModelDashboard extends JModelAdmin
 {
+	private $item = null;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $config  An optional associative array of configuration settings.
+	 *
+	 * @see        JController
+	 * @since      1.6
+	 */
+	public function __construct($config = array())
+	{
+		$this->widgetModel = TjdashboardFactory::model("widget");
+		$this->widgetsModel = TjdashboardFactory::model("widgets");
+		parent::__construct($config);
+	}
+
 	/**
 	 * Method to get the record form.
 	 *
@@ -35,12 +52,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 		// Get the form.
 		$form = $this->loadForm('com_tjdashboard.dashboard', 'dashboard', array('control' => 'jform', 'load_data' => $loadData));
 
-		if (empty($form))
-		{
-			return false;
-		}
-
-		return $form;
+		return $form = empty($form) ? false : $form;
 	}
 
 	/**
@@ -72,6 +84,20 @@ class TjdashboardModelDashboard extends JModelAdmin
 		if (empty($data))
 		{
 			$data = $this->getItem();
+
+			if (!empty($data->dashboard_id))
+			{
+				$this->widgetsModel->setState('filter.dashboard_id', $data->dashboard_id);
+				$widgetsData   = $this->widgetsModel->getItems();
+				$widgets = array();
+
+				foreach ($widgetsData as $widget)
+				{
+					$widgets[] = $widget;
+				}
+
+				$data->widgets = $widgets;
+			}
 		}
 
 		return $data;
@@ -93,6 +119,12 @@ class TjdashboardModelDashboard extends JModelAdmin
 
 		if ($table->save($data) === true)
 		{
+			foreach ($data['widgets'] as $widget)
+			{
+				$widget->dashboard_widget_id = $table->dashboard_id;
+				$this->widgetModel->save($widget);
+			}
+
 			$this->setState('dashboard_id', $table->dashboard_id);
 
 			return true;

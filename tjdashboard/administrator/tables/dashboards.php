@@ -8,7 +8,7 @@
  */
 
 defined('_JEXEC') or die;
-
+JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 /**
  * Tj-Dashboard dashboard table class
  *
@@ -45,9 +45,17 @@ class TjdashboardTableDashboards extends JTable
 			$this->ordering = self::getNextOrder();
 		}
 
+		if (!$this->created_by)
+		{
+			$this->created_by = JFactory::getUser()->id;
+		}
+
 		$this->alias = trim($this->alias);
 
-		$this->alias = empty($this->alias) ? $this->title : $this->alias;
+		if (empty($this->alias))
+		{
+			$this->alias = $this->title;
+		}
 
 		if ($this->alias)
 		{
@@ -66,7 +74,7 @@ class TjdashboardTableDashboards extends JTable
 
 		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
 		{
-			$msg = JText::_('COM_TJDASHBOARD_SAVE_ALIAS_WARNING');
+			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
 
 			while ($table->load(array('alias' => $this->alias)))
 			{

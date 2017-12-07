@@ -49,7 +49,7 @@ class TjdashboardModelWidgets extends JModelList
 	protected function getListQuery()
 	{
 		// Initialize variables.
-		$db    = JFactory::getDbo();
+		$db    = $this->getDbo();
 		$query = $db->getQuery(true);
 
 		// Create the base select statement.
@@ -76,7 +76,7 @@ class TjdashboardModelWidgets extends JModelList
 			else
 			{
 				$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
-				$query->where('(title LIKE ' . $search . ' OR alias LIKE ' . $search . ')');
+				$query->where('(title LIKE ' . $search . ')');
 			}
 		}
 

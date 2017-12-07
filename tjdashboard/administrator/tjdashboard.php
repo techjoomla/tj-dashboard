@@ -10,9 +10,8 @@ defined('_JEXEC') or die;
 
 // Include dependancies
 jimport('joomla.application.component.controller');
-
-JLoader::registerPrefix('Tjdashboard', JPATH_COMPONENT);
-JLoader::register('TjdashboardController', JPATH_COMPONENT . '/controller.php');
+JLoader::registerPrefix('Tjdashboard', JPATH_ADMINISTRATOR);
+JLoader::register('TjdashboardController', JPATH_ADMINISTRATOR . '/controller.php');
 
 
 // Execute the task.

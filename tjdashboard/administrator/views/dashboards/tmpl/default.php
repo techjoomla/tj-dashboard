@@ -127,7 +127,7 @@ if ($saveOrder)
 								<td class="has-context">
 									<div class="pull-left break-word">
 										<?php if ($item->checked_out) : ?>
-										<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'dashboards.', $canCheckin); ?>
+										<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'dashboards.', $canCheckin); ?>
 										<?php endif; ?>
 										<?php if ($canEdit || $canEditOwn) : ?>
 											<a class="hasTooltip" href="<?php echo JRoute::_('index.php?option=com_tjdashboard&task=dashboard.edit&dashboard_id=' . $item->dashboard_id); ?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">

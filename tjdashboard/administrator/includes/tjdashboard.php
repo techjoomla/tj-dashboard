@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die();
 
-JLoader::discover("tjdashboard", JPATH_ADMINISTRATOR . '/components/com_tjdashboard/libraries');
+JLoader::discover("Tjdashboard", JPATH_ADMINISTRATOR . '/components/com_tjdashboard/libraries');
 
 /* load language file*/
 $lang = JFactory::getLanguage();

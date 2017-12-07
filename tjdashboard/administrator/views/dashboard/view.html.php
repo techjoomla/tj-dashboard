@@ -18,11 +18,33 @@ jimport('joomla.application.component.view');
  */
 class TjdashboardViewDashboard extends JViewLegacy
 {
-	protected $state;
+	/**
+	 * The JForm object
+	 *
+	 * @var  JForm
+	 */
+	protected $form;
 
+	/**
+	 * The active item
+	 *
+	 * @var  object
+	 */
 	protected $item;
 
-	protected $form;
+	/**
+	 * The model state
+	 *
+	 * @var  object
+	 */
+	protected $state;
+
+	/**
+	 * The actions the user is authorised to perform
+	 *
+	 * @var  JObject
+	 */
+	protected $canDo;
 
 	/**
 	 * Display the view
@@ -39,21 +61,14 @@ class TjdashboardViewDashboard extends JViewLegacy
 		$this->item  = $this->get('Item');
 		$this->form  = $this->get('Form');
 		$this->input = JFactory::getApplication()->input;
+		$this->canDo = JHelperContent::getActions('com_tjdashboard', 'dashboard', $this->item->dashboard_id);
+
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
-			throw new Exception(implode("\n", $errors));
+			throw new Exception(implode("\n", $errors), 500);
 		}
-
-		// Get ACL actions
-		$this->user            = JFactory::getUser();
-
-		$this->canCreate       = $this->user->authorise('core.content.create', 'com_tjdashboard');
-		$this->canEdit         = $this->user->authorise('core.content.edit', 'com_tjdashboard');
-		$this->canCheckin      = $this->user->authorise('core.content.manage', 'com_tjdashboard');
-		$this->canChangeStatus = $this->user->authorise('core.content.edit.state', 'com_tjdashboard');
-		$this->canDelete       = $this->user->authorise('core.content.delete', 'com_tjdashboard');
 
 		$this->addToolbar();
 
@@ -70,44 +85,54 @@ class TjdashboardViewDashboard extends JViewLegacy
 	protected function addToolbar()
 	{
 		JFactory::getApplication()->input->set('hidemainmenu', true);
+		$user       = JFactory::getUser();
+		$userId     = $user->id;
+		$isNew      = ($this->item->dashboard_id == 0);
+		$checkedOut = !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
 
-		$user = JFactory::getUser();
-		$isNew = ($this->item->dashboard_id == 0);
+		// Built the actions for new and existing records.
+		$canDo = $this->canDo;
 
+		JToolbarHelper::title(
+			JText::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_DASHBOARD' : ($isNew ? 'ADD_DASHBOARD' : 'EDIT_DASHBOARD'))),
+			'pencil-2 dashboard-add'
+		);
+
+		// For new records, check the create permission.
 		if ($isNew)
 		{
-			$viewTitle = JText::_('COM_TJDASHBOARD_VIEW_ADD_DASHBOARD');
+			//JToolbarHelper::apply('dashboard.apply');
+			JToolbarHelper::save('dashboard.save');
+			//JToolbarHelper::save2new('dashboard.save2new');
+			JToolbarHelper::cancel('dashboard.cancel');
 		}
 		else
 		{
-			$viewTitle = JText::_('COM_TJDASHBOARD_VIEW_EDIT_DASHBOARD');
+			// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
+			$itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+
+			// Can't save the record if it's checked out and editable
+			if (!$checkedOut && $itemEditable)
+			{
+				//JToolbarHelper::apply('dashboard.apply');
+				JToolbarHelper::save('dashboard.save');
+
+				// We can save this record, but check the create permission to see if we can return to make a new one.
+				/*if ($canDo->get('core.create'))
+				{
+					JToolbarHelper::save2new('dashboard.save2new');
+				}*/
+			}
+
+			// If checked out, we can still save
+			/*if ($canDo->get('core.create'))
+			{
+				JToolbarHelper::save2copy('dashboard.save2copy');
+			}*/
+
+			JToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolBarHelper::title($viewTitle, 'pencil-2');
-
-		if (isset($this->item->checked_out))
-		{
-			$checkedOut = ! ($this->item->checked_out == 0 || $this->item->checked_out == $user->id);
-		}
-		else
-		{
-			$checkedOut = false;
-		}
-
-		// If not checked out, can save the item.
-		if (! $checkedOut && ($this->canEdit || $this->canCreate))
-		{
-			JToolBarHelper::apply('dashboard.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('dashboard.save', 'JTOOLBAR_SAVE');
-		}
-
-		if (empty($this->item->dashboard_id))
-		{
-			JToolBarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CANCEL');
-		}
-		else
-		{
-			JToolBarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
-		}
+		JToolbarHelper::divider();
 	}
 }
