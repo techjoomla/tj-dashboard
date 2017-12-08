@@ -21,8 +21,8 @@
 			name="description" 
 			type="editor"
 			filter="safehtml"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_DESCRIPTION"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_DESCRIPTION"
+			label="COM_TJDASHBOARD_FORM_DASHBOARD_LBL_DESCRIPTION"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_DESCRIPTION"
 			width="300" />
 
 		<field
@@ -30,7 +30,7 @@
 			type="list"
 			filter="intval"
 			label="JSTATUS"
-			description="JFIELD_PUBLISHED_DESC"
+			description=""
 			default="1"
 			class="inputbox"
 			size="1">
@@ -40,41 +40,33 @@
 				<option value="-2">JTRASHED</option>
 		</field>
 
+		<field 
+			name="access" 
+			type="accesslevel"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_ACCESSLEVEL"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_ACCESSLEVEL"
+			class="" />
+
 		<field
 			name="context"
 			type="text" 
 			filter="safehtml"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_CONTEXT"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_CONTEXT"
-			size="10" />
-
-		<field
-			name="core" 
-			type="text"
-			filter="intval"
-			label="Core"
-			description=""
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_CONTEXT"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_CONTEXT"
 			size="10" />
 
 		<field
 			name="parent" 
 			type="text"
 			filter="intval"
-			label="Parent"
-			description=""
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_PARENT"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_PARENT"
 			size="10" />
 
 		<field 
 			name="created_by" 
-			type="user"
-			label="Created By"/>
-
-		<field 
-			name="access" 
-			type="accesslevel"
-			label="JFIELD_ACCESS_LABEL"
-			description="JFIELD_ACCESS_DESC"
-			class="" />
+			type="hidden"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_CREATED_BY"/>
 
 		<field
 			name="modified_on"
@@ -106,9 +98,7 @@
 		<field 
 			name="widgets"
 			min="1"
-			type="subform"
-			label="Widgets" 
-			description="Subform Widget Description"
+			type="subform" 
 			formsource="administrator/components/com_tjdashboard/models/forms/widget.xml" 
 			multiple="true"/>
 	</fieldset>

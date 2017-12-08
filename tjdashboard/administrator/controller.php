@@ -9,10 +9,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
+JLoader::load(JPATH_COMPONENT_ADMINISTRATOR . '/includes/tjdashboard');
 
-//JLoader::import("includes/tjdashboard", JPATH_COMPONENT_ADMINISTRATOR);
-require_once JPATH_COMPONENT_ADMINISTRATOR. '/includes/tjdashboard.php';
-//JLoader::load(JPATH_COMPONENT_ADMINISTRATOR.'/includes/tjdashboard');
 /**
  * Class TjdashboardController
  *

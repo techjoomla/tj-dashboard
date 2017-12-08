@@ -34,6 +34,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	{
 		$this->widgetModel = TjdashboardFactory::model("widget");
 		$this->widgetsModel = TjdashboardFactory::model("widgets");
+		$this->widgetTable = TjdashboardFactory::table("widgets");
 		parent::__construct($config);
 	}
 
@@ -87,11 +88,10 @@ class TjdashboardModelDashboard extends JModelAdmin
 
 			if (!empty($data->dashboard_id))
 			{
-				$this->widgetsModel->setState('filter.dashboard_id', $data->dashboard_id);
-				$widgetsData   = $this->widgetsModel->getItems();
+				$dashboardWidgetsData = $this->getDashboardWidgetDetails($data->dashboard_id);
 				$widgets = array();
 
-				foreach ($widgetsData as $widget)
+				foreach ($dashboardWidgetsData as $widget)
 				{
 					$widgets[] = $widget;
 				}
@@ -119,12 +119,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 
 		if ($table->save($data) === true)
 		{
-			foreach ($data['widgets'] as $widget)
-			{
-				$widget->dashboard_widget_id = $table->dashboard_id;
-				$this->widgetModel->save($widget);
-			}
-
+			$this->saveWidgetDetails($data['widgets'], $table->dashboard_id);
 			$this->setState('dashboard_id', $table->dashboard_id);
 
 			return true;
@@ -133,5 +128,65 @@ class TjdashboardModelDashboard extends JModelAdmin
 		{
 			return false;
 		}
+	}
+
+	/**
+	 * Method to save the widget form data.
+	 *
+	 * @param   array  $postedWidgets  The widget form data
+	 * @param   array  $dashboard_id   The dashboard id
+	 *
+	 * @return bool
+	 *
+	 * @throws Exception
+	 * @since 1.6
+	 */
+	public function saveWidgetDetails($postedWidgets, $dashboard_id)
+	{
+		// First need to delete widgets that not posted from form by comparing widgets in db and posted widgets
+		$widgetsInDB = $this->getDashboardWidgetDetails($dashboard_id);
+
+		$array = array_values($postedWidgets);
+		$widgetsIdsInDB = $widgetIdsPosted = array();
+		$count = count($array);
+
+		foreach ($widgetsInDB as $key => $value)
+		{
+			$widgetsIdsInDB[$key] = $value->dashboard_widget_id;
+
+			if ($key < $count)
+			{
+				$widgetIdsPosted[$key] = $array[$key]['dashboard_widget_id'];
+			}
+		}
+
+		$widgetsToDelete = array_diff($widgetsIdsInDB, $widgetIdsPosted);
+
+		foreach ($widgetsToDelete as $value)
+		{
+			$this->widgetTable->delete($value);
+		}
+
+		foreach ($postedWidgets as $widget)
+		{
+			$widget['dashboard_id'] = $dashboard_id;
+			$this->widgetModel->save($widget);
+		}
+	}
+
+	/**
+	 * Method to get the data of widget for provided dashboard.
+	 *
+	 * @param   int  $dashboard_id  dashboard for which widget data needed
+	 * 
+	 * @return  mixed  $data          The data for the provide dashboard id .
+	 *
+	 * @since	1.6
+	 */
+	public function getDashboardWidgetDetails($dashboard_id)
+	{
+		$this->widgetsModel->setState('filter.dashboard_id', $dashboard_id);
+
+		return $this->widgetsModel->getItems();
 	}
 }

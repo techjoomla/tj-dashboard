@@ -63,7 +63,6 @@ class TjdashboardViewDashboard extends JViewLegacy
 		$this->input = JFactory::getApplication()->input;
 		$this->canDo = JHelperContent::getActions('com_tjdashboard', 'dashboard', $this->item->dashboard_id);
 
-
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
 		{
@@ -101,9 +100,10 @@ class TjdashboardViewDashboard extends JViewLegacy
 		// For new records, check the create permission.
 		if ($isNew)
 		{
-			//JToolbarHelper::apply('dashboard.apply');
+			// JToolbarHelper::apply('dashboard.apply');
 			JToolbarHelper::save('dashboard.save');
-			//JToolbarHelper::save2new('dashboard.save2new');
+
+			// JToolbarHelper::save2new('dashboard.save2new');
 			JToolbarHelper::cancel('dashboard.cancel');
 		}
 		else
@@ -114,18 +114,18 @@ class TjdashboardViewDashboard extends JViewLegacy
 			// Can't save the record if it's checked out and editable
 			if (!$checkedOut && $itemEditable)
 			{
-				//JToolbarHelper::apply('dashboard.apply');
+				// JToolbarHelper::apply('dashboard.apply');
 				JToolbarHelper::save('dashboard.save');
 
-				// We can save this record, but check the create permission to see if we can return to make a new one.
-				/*if ($canDo->get('core.create'))
+				/* We can save this record, but check the create permission to see if we can return to make a new one.
+				if ($canDo->get('core.create'))
 				{
 					JToolbarHelper::save2new('dashboard.save2new');
 				}*/
 			}
 
-			// If checked out, we can still save
-			/*if ($canDo->get('core.create'))
+			/* If checked out, we can still save
+			if ($canDo->get('core.create'))
 			{
 				JToolbarHelper::save2copy('dashboard.save2copy');
 			}*/
