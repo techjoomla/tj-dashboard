@@ -74,11 +74,6 @@ JFactory::getDocument()->addScriptDeclaration('
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php if ($this->canDo->get('core.admin')) : ?>
-			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'widgets', JText::_('COM_TJDASHBOARD_WIDGET_FORM')); ?>
-				<?php echo $this->form->getInput('widgets'); ?>
-			<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php endif; ?>
-		<?php if ($this->canDo->get('core.admin')) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('COM_TJDASHBOARD_FIELDSET_RULES')); ?>
 				<?php echo $this->form->getInput('rules'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>

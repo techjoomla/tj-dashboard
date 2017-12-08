@@ -7,12 +7,15 @@
 			filter="intval"
 			description="JGLOBAL_FIELD_ID_DESC"/>
 
-		<!--This field needed at all ??-->
 		<field
 			name="dashboard_id" 
-			type="hidden"
-			filter="intval"
-			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARD_ID"/>
+			type="sql"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
+			class="inputbox"
+			query="SELECT dashboard_id, title FROM #__tj_dashboards ORDER BY `ordering`"
+			key_field="dashboard_id" value_field="title"
+			required="true" />
 
 		<field
 			name="title"
@@ -28,44 +31,38 @@
 			type="list"
 			filter="intval"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
-			description="COM_TJDASHBOARD_FORM_DESC_WIDGET_DATA_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN"
 			size="10" />
 
 		<field
 			name="renderer_plugin" 
 			type="list"
 			filter="intval"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_RENDERER_PLUGIN"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_RENDERER_PLUGIN"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_RENDERER_PLUGIN"
 			size="10" />
 
 		<field
 			name="size"
 			type="list"
-			label="COM_TJDASHBOARD_FORM_LBL_DASHBOARD_SIZE"
-			description="COM_TJDASHBOARD_FORM_DESC_DASHBOARD_SIZE"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_SIZE"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_SIZE"
 			class="inputbox"
 			required="true">
 				<option value=""></option>
-				<option value="1">3</option>
-				<option value="2">6</option>
-				<option value="3">9</option>
-				<option value="4">12</option>
+				<option value="3">Screen 1</option>
+				<option value="6">Screen 2</option>
+				<option value="9">Screen 3</option>
+				<option value="12">Screen 4</option>
 		</field>
 
 		<field
 			name="autorefresh"
-			type="list"
+			type="number"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_AUTOREFRESH"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_AUTOREFRESH"
 			class="inputbox"
 			required="true">
-				<option value=""></option>
-				<option value="1">2</option>
-				<option value="2">5</option>
-				<option value="3">10</option>
-				<option value="4">30</option>
-				<option value="5">60</option>
 		</field>
 
 		<field
@@ -86,9 +83,10 @@
 		<field
 			name="params" 
 			type="textarea"
-			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_PARAMS"
-			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_PARAMS"
-			rows="10" cols="5" />
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_PARAMS"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_PARAMS"
+			rows="10" cols="5" filter="raw"
+			/>
 
 		<field
 			name="ordering"

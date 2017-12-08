@@ -49,6 +49,7 @@
         <submenu>
 
 			<menu link="option=com_tjdashboard&amp;view=dashboards" view="dashboards" img="media/com_tjdashboard/images/s_dashboards.png" alt="Tjdashboard/Dashboards">COM_TJDASHBOARD_TITLE_DASHBOARDS</menu>
+			<menu link="option=com_tjdashboard&amp;view=widgets" view="widgets" img="media/com_tjdashboard/images/s_widgets.png" alt="Tjdashboard/Widgets">COM_TJDASHBOARD_TITLE_WIDGETS</menu>
 
         </submenu>
         <files folder="administrator">

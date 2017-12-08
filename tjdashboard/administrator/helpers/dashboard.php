@@ -30,6 +30,11 @@ class DashboardHelper
 			'index.php?option=com_tjdashboard&view=dashboards',
 			$vName == 'dashboards'
 		);
+		JHtmlSidebar::addEntry(
+			JText::_('COM_TJDASHBOARD_VIEW_WIDGETS'),
+			'index.php?option=com_tjdashboard&view=widgets',
+			$vName == 'widgets'
+		);
 	}
 
 	/**

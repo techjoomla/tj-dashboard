@@ -95,11 +95,5 @@
 			name="checked_out_time"
 			type="hidden"
 			filter="unset"/>
-		<field 
-			name="widgets"
-			min="1"
-			type="subform" 
-			formsource="administrator/components/com_tjdashboard/models/forms/widget.xml" 
-			multiple="true"/>
 	</fieldset>
 </form>
