@@ -112,7 +112,7 @@ class TjdashboardViewWidgets extends JViewLegacy
 	{
 		$state = $this->get('State');
 
-		JToolBarHelper::title(JText::_('COM_TJDASHBOARD_VIEW_WIDGETS'),'stack article');
+		JToolBarHelper::title(JText::_('COM_TJDASHBOARD_VIEW_WIDGETS'), 'stack article');
 
 		// Check if the form exists before showing the add/edit buttons
 		$formPath = JPATH_COMPONENT_ADMINISTRATOR . '/views/widget';
