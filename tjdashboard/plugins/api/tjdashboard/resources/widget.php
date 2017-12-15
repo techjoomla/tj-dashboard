@@ -1,5 +1,6 @@
 <?php
 /**
+ * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -17,16 +18,16 @@ defined('_JEXEC') or die;
 class TjdashboardApiResourceWidget extends ApiResource
 {
 	/**
-	 * Function to get widgets record.
+	 * Function get for widgets record.
 	 *
-	 * @return API response object
+	 * @return boolean
 	 */
 	public function post()
 	{
 		$app      = JFactory::getApplication();
 		$jinput   = $app->input;
-		$formData = $jinput->post->getArray();
-		$widgetId = $jinput->getInt('id');
+		$formData = $app->input->post->getArray();
+		$widgetId = $app->input->getInt('id');
 		$widget   = TjdashboardWidget::getInstance($widgetId);
 		$save     = $widget->save($formData);
 		$renderObject     = new stdclass;
@@ -42,31 +43,33 @@ class TjdashboardApiResourceWidget extends ApiResource
 		}
 
 		$this->plugin->setResponse($renderObject);
+
+		return;
 	}
 
-	/**
-	 * Function to get widget data.
+		/**
+	 * Function get dashboard data.
 	 *
-	 * @return API response object
+	 * @return boolean
 	 */
 	public function get()
 	{
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
 
-		$widgetId = $jinput->getInt('id');
-		$widget = new stdClass;
+		$dashboardId = $app->input->getInt('id');
 
-		if (!empty($widgetId))
+		if (!empty($dashboardId))
 		{
-			//@Todo- Check widget if id empty set record not found if object have error raise it
-			$widget   = TjdashboardWidget::getInstance($widgetId);
+			$dashboard   = TjdashboardWidget::getInstance($dashboardId);
 		}
 		else
 		{
 			ApiError::raiseError(400, JText::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
 		}
 
-		$this->plugin->setResponse($widget);
+		$this->plugin->setResponse($dashboard);
+
+		return;
 	}
 }

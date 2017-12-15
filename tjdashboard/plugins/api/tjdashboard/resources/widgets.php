@@ -1,5 +1,6 @@
 <?php
 /**
+ * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -19,7 +20,7 @@ class TjdashboardApiResourceWidgets extends ApiResource
 	/**
 	 * Function get for widgets record.
 	 *
-	 * @return API response object
+	 * @return boolean
 	 */
 	public function post()
 	{
@@ -76,7 +77,7 @@ class TjdashboardApiResourceWidgets extends ApiResource
 
 		$wobj->request = $filterData;
 		$wobj->data    = $widgetmodel->getItems();
-		//@Todo - Check for errors and empty object
 		$this->plugin->setResponse($wobj);
+		return;
 	}
 }
