@@ -102,4 +102,16 @@ class TjlmsTopcoursesDatasource
 			return json_encode($dataArray);
 		}
 	}
+
+	/**
+	 * Get supported Renderers List
+	 * 
+	 * @return array supported renderes for this data source 
+	 *
+	 * @since   1.0
+	 * */
+	public function getSupportedRenderers()
+	{
+		return array('morris.bar' => 'Morris Bar', 'morris.donut' => 'Morris Donut');
+	}
 }
