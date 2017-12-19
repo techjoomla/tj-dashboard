@@ -15,11 +15,11 @@ JHTML::_('behavior.modal');
 $document = JFactory::getDocument();
 $script = 'var root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
-$document->addScript('components/com_tjdashboard/assets/js/morris.min.js');
-$document->addScript('components/com_tjdashboard/assets/js/raphael-min.js');
 $document->addScript('components/com_tjdashboard/assets/js/tjdashContentService.js');
 $document->addScript('components/com_tjdashboard/assets/js/tjdashContentUI.js');
-$document->addStylesheet('components/com_tjdashboard/assets/css/morris.css');
+$document->addScript('components/com_tjdashboard/assets/js/raphael-min.js');
+$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/morris.min.js');
+$document->addStylesheet('plugins/tjdashboardrenderer/morris/assets/css/morris.css');
 ?>
 <script>
 jQuery(document).ready(function() {
