@@ -66,7 +66,7 @@ class DashboardHelper
 					if (JFile::exists(JPATH_SITE . $filePath))
 					{
 						JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
-						$className = 'TjdashboardData' . ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]);
+						$className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
 
 						if (class_exists($className))
 						{

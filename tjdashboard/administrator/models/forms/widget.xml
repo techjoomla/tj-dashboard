@@ -13,7 +13,7 @@
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
 			class="inputbox"
-			query="SELECT dashboard_id, title FROM #__tj_dashboards ORDER BY `ordering`"
+			query="SELECT dashboard_id, title FROM #__tj_dashboards WHERE `state`=1 ORDER BY `ordering`"
 			key_field="dashboard_id" value_field="title"
 			required="true" />
 
@@ -28,19 +28,18 @@
 
 		<field
 			name="data_plugin" 
-			type="list"
-			filter="intval"
+			type="tjdashboardsourceplugins"
+			folder="tjdashboardsource"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
-			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN"
-			size="10" />
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN"/>
 
 		<field
 			name="renderer_plugin" 
 			type="list"
-			filter="intval"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN"
-			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_RENDERER_PLUGIN"
-			size="10" />
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_RENDERER_PLUGIN">
+			<option value=""></option>
+		</field>
 
 		<field
 			name="size"

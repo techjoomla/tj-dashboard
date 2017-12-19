@@ -10,12 +10,14 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * plugin of TjdashboardDataTjlmsTopcourses
+ * plugin of TjlmsTopcoursesDatasource
  *
  * @since  1.0.0
  */
-class TjdashboardDataTjlmsTopcourses
+class TjlmsTopcoursesDatasource
 {
+	public $dataSourceName = "Top Courses";
+
 	/**
 	 * Get Topcourses data
 	 * 
