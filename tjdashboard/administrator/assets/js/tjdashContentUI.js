@@ -196,3 +196,40 @@ tjdashContentUI.renderer.morris = {
 			});
 	}
 }
+
+tjdashContentUI.tjdashboard  = tjdashContentUI.tjdashboard ? tjdashContentUI.tjdashboard : {};
+
+jQuery.extend(tjdashContentUI.tjdashboard, {
+	getRenderers:function(){
+		tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
+		var url     = tjdashContentUI.root_url + 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers&format=json';
+		var $form   = jQuery('#jform_data_plugin');
+		jQuery('#task',$form).val('widget.getSupportedRenderers');
+		var promise = tjdashContentService.postData(url, $form.serialize());
+		jQuery('#task',$form).val();
+		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
+		promise.fail(
+			function(response) {
+				if (response.status == 403)
+				{
+					alert(Joomla.JText._('JERROR_ALERTNOAUTHOR'));
+				}
+			}
+		).done(
+			function(response) {
+				if (response.success)
+				{
+					// Append option to plugin dropdown list.
+					var list = jQuery("#jform_renderer_plugin");
+					jQuery.each(response.data, function(index, item) {
+						list.append(new Option(item,index));
+					});
+				}
+				else
+				{
+					console.log('Something went wrong.', response.message, response.messages)
+				}
+			}
+		);
+	}
+});

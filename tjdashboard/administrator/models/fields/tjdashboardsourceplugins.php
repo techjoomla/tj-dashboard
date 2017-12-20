@@ -161,36 +161,4 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 
 		return array_merge($tjDashboardSourcePlugins);
 	}
-
-	/**
-	 * Method to get the field input markup.
-	 *
-	 * @return  string  The field input markup.
-	 *
-	 * @since   11.1
-	 */
-	protected function getInput()
-	{
-		$html = parent::getInput();
-
-		// @TODO : Convert this into a snippet that loads only once
-
-		$doc = JFactory::getDocument();
-		$data = 'morris.donot,morris.bar';
-		$supportedRenderers = 'var supportedRenderer = "' . $data . '"';
-		$doc->addScriptDeclaration($supportedRenderers, 'text/javascript');
-		$doc->addScriptDeclaration('
-			jQuery(document).ready(function() {
-				jQuery("#' . $this->id . '").on("change", function() {
-						list = jQuery("#jform_renderer_plugin");
-						var supportedRendererArray = supportedRenderer.split(",");
-						jQuery.each(supportedRendererArray, function(index, item) {
-							list.append(new Option(item,item));
-						});
-					});
-				});
-			');
-
-		return $html;
-	}
 }

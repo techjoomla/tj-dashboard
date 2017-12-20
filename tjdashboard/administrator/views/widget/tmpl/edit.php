@@ -18,7 +18,11 @@ JHtml::_('behavior.keepalive');
 //JHtml::_('formbehavior.chosen', 'select');
 $app = JFactory::getApplication();
 $input = $app->input;
-
+$document = JFactory::getDocument();
+$script = 'var root_url = "' . Juri::root() . '";';
+$document->addScriptDeclaration($script, 'text/javascript');
+$document->addScript('components/com_tjdashboard/assets/js/tjdashContentService.js');
+$document->addScript('components/com_tjdashboard/assets/js/tjdashContentUI.js');
 // In case of modal
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout  = $isModal ? 'modal' : 'edit';
@@ -36,7 +40,7 @@ JFactory::getDocument()->addScriptDeclaration('
 ');
 ?>
 <div class="">
-	<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_widget_id=' . (int) $this->item->dashboard_widget_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="widget-form" class="form-validate">
+	<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_widget_id=' . (int) $this->item->dashboard_widget_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="widget-form" class="form-validate tjdashForm">
 		<div class="form-horizontal">
 		<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
 		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
@@ -80,7 +84,7 @@ JFactory::getDocument()->addScriptDeclaration('
 		<?php
 				//echo $this->form->renderFieldset();
 		?>
-		<input type="hidden" name="task" value="" />
+		<input type="hidden" id="task" name="task" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 	</form>

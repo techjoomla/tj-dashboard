@@ -30,11 +30,16 @@
 			name="data_plugin" 
 			type="tjdashboardsourceplugins"
 			folder="tjdashboardsource"
+			required="true"
+			onchange="tjdashContentUI.tjdashboard.getRenderers();"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
-			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN"/>
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN">
+			<option></option>
+		</field>
 
 		<field
 			name="renderer_plugin" 
+			required="true"
 			type="list"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_RENDERER_PLUGIN">
