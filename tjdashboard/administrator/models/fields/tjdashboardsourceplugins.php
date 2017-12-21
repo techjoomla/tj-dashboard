@@ -137,7 +137,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 				$extension = 'plg_' . $folder . '_' . $item->value;
 				$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, true) || $lang->load($extension . '.sys', $source, null, false, true);
 
-				// @Todo : Need to improve this code
+				// @Todo : Need to improve this code, Can be Move to Model
 				$dataSources = array_diff(scandir($source), array('..', '.'));
 
 				foreach ($dataSources as $dataSourceFile)

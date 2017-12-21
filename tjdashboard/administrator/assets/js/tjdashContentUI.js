@@ -115,7 +115,6 @@ tjdashContentUI.widget.init = function(id){
 	if(!data.dashboard_widget_id)
 	{
 		alert("no data");
-		//tjdashContentUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 		return false;
 	}
 	else
@@ -127,73 +126,21 @@ tjdashContentUI.widget.init = function(id){
 			sourceData['data'] = data.widget_render_data;
 
 			var renderer = data.renderer_plugin;
+			var redererDetail = renderer.split(".");
+			var library = redererDetail[0]; // morris
+			var method = redererDetail[1]; // method
 
 			if (sourceData && renderer)
 			{
-				//create widget div with convention
-				tjdashContentUI.renderer.render(renderer, sourceData);
+				loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderrer.js', function(){
+					renderData(method,sourceData);
+				});
 			}
 		}
 		else
 		{
-			//console.log(sourceData['element']);
 			jQuery('<div class="alert alert-info">No data to render</div>').appendTo('#dashboard-widget-'+data.dashboard_widget_id);
 		}
-	}
-}
-
-tjdashContentUI.renderer = tjdashContentUI.renderer ? tjdashContentUI.renderer : {};
-tjdashContentUI.renderer.render = function(renderer, data)
-{
-	 var redererDetail = renderer.split(".");
-
-	 var library = redererDetail[0]; // morris
-	 var method = redererDetail[1]; // method
-
-	 if (tjdashContentUI.renderer[library] && data)
-	 {
-		 tjdashContentUI.renderer[library].init(method, data);
-	}
-	else
-	{
-		jQuery('<div class="alert alert-info">Library not found</div>').appendTo('".'+data['element']+'"');
-	}
-}
-
-tjdashContentUI.renderer.morris = tjdashContentUI.renderer.morris ? tjdashContentUI.renderer.morris : {};
-
-tjdashContentUI.renderer.morris = {
-
-	init: function(renderer, data)
-	{
-		this[renderer](data);
-	},
-
-	bar:function(data)
-	{
-		var renderData = JSON.parse(data.data);
-
-		Morris.Bar({
-			  element: data.element,
-			  data: renderData,
-			  xkey: 'x',
-			  ykeys: ['y'],
-			  labels: ['Y'],
-			  barColors: 'rgb(0, 84, 141)',
-			  barSize: '30',
-			  yLabelMargin: 10,
-		  });
-	},
-
-	donut: function(data)
-	{
-		var renderData = JSON.parse(data.data);
-
-		//actual code
-		Morris.Donut({
-			  element: data.element,
-			  data: renderData
-			});
 	}
 }
 
@@ -233,3 +180,25 @@ jQuery.extend(tjdashContentUI.tjdashboard, {
 		);
 	}
 });
+function loadScript(url, callback){
+
+    var script = document.createElement("script")
+    script.type = "text/javascript";
+
+    if (script.readyState){  //IE
+        script.onreadystatechange = function(){
+            if (script.readyState == "loaded" ||
+                    script.readyState == "complete"){
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else {  //Others
+        script.onload = function(){
+            callback();
+        };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+}

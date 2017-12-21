@@ -13,8 +13,9 @@ JHTML::_('behavior.modal');
 
 
 $document = JFactory::getDocument();
-$script = 'var root_url = "' . Juri::root() . '";';
+$script  = 'var root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
+
 $document->addScript('administrator/components/com_tjdashboard/assets/js/tjdashContentService.js');
 $document->addScript('administrator/components/com_tjdashboard/assets/js/tjdashContentUI.js');
 $document->addScript('administrator/components/com_tjdashboard/assets/js/raphael-min.js');
