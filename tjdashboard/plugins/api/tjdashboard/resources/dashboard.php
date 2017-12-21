@@ -1,5 +1,6 @@
 <?php
 /**
+ * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -19,14 +20,14 @@ class TjdashboardApiResourceDashboard extends ApiResource
 	/**
 	 * Function save dashboard.
 	 *
-	 * @return API object
+	 * @return boolean
 	 */
 	public function post()
 	{
 		$app            = JFactory::getApplication();
 		$jinput         = $app->input;
-		$formData       = $jinput->post->getArray();
-		$dashboardId    = $jinput->getInt('id');
+		$formData       = $app->input->post->getArray();
+		$dashboardId    = $app->input->getInt('id');
 		$dashboard      = TjdashboardDashboard::getInstance($dashboardId);
 		$responceObject = new stdclass;
 
@@ -42,21 +43,23 @@ class TjdashboardApiResourceDashboard extends ApiResource
 
 		$this->plugin->setResponse($responceObject);
 
+		return;
 	}
 
 	/**
 	 * Function get dashboard data.
 	 *
-	 * @return API Object
+	 * @return boolean
 	 */
 	public function get()
 	{
-		$dashboardId = JFactory::getApplication()->input->getInt('id');
-		$dashboard = new stdClass;
+		$app         = JFactory::getApplication();
+		$jinput      = $app->input;
+
+		$dashboardId = $app->input->getInt('id');
 
 		if (!empty($dashboardId))
 		{
-			// @Todo- Check if object id empty ->set record not found if object have error raise it
 			$dashboard   = TjdashboardDashboard::getInstance($dashboardId);
 		}
 		else
@@ -66,5 +69,6 @@ class TjdashboardApiResourceDashboard extends ApiResource
 
 		$this->plugin->setResponse($dashboard);
 
+		return;
 	}
 }

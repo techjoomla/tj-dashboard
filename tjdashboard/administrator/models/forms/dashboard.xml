@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field 	name="dashboard_id" type="hidden"/>
+		<field 	name="asset_id" type="hidden"/>
+		<field 	
+			name="title" 
+			type="text" 
+			required="true"
+			filter="string"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_TITLE"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_TITLE"/>
+		<field
+			name="alias" 
+			type="text"
+			filter="string"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_ALIAS"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_ALIAS"/>
+
+		<field
+			name="description" 
+			type="editor"
+			filter="safehtml"
+			label="COM_TJDASHBOARD_FORM_DASHBOARD_LBL_DESCRIPTION"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_DESCRIPTION"
+			width="300" />
+
+		<field
+			name="state"
+			type="list"
+			filter="intval"
+			label="JSTATUS"
+			description=""
+			default="1"
+			class="inputbox"
+			size="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+				<option value="2">JARCHIVED</option>
+				<option value="-2">JTRASHED</option>
+		</field>
+
+		<field 
+			name="access" 
+			type="accesslevel"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_ACCESSLEVEL"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_ACCESSLEVEL"
+			class="" />
+
+		<field
+			name="context"
+			type="text" 
+			filter="safehtml"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_CONTEXT"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_CONTEXT"
+			size="10" />
+
+		<field
+			name="parent" 
+			type="text"
+			filter="intval"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_PARENT"
+			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_PARENT"
+			size="10" />
+
+		<field 
+			name="created_by" 
+			type="hidden"
+			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_CREATED_BY"/>
+
+		<field
+			name="modified_on"
+			type="hidden"/>
+
+		<field
+			name="modified_by"
+			type="hidden"
+		/>
+
+		<field
+			name="created_on"
+			type="hidden"/>
+
+		<field
+			name="ordering"
+			type="hidden"
+			filter="intval"/>
+
+		<field
+			name="checked_out"
+			type="hidden"
+			filter="unset"/>
+
+		<field
+			name="checked_out_time"
+			type="hidden"
+			filter="unset"/>
+	</fieldset>
+</form>
