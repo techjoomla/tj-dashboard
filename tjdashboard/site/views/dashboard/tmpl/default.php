@@ -19,7 +19,6 @@ $document->addScriptDeclaration($script, 'text/javascript');
 $document->addScript('administrator/components/com_tjdashboard/assets/js/tjdashContentService.js');
 $document->addScript('administrator/components/com_tjdashboard/assets/js/tjdashContentUI.js');
 $document->addScript('administrator/components/com_tjdashboard/assets/js/raphael-min.js');
-$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/morris.min.js');
 $document->addStylesheet('plugins/tjdashboardrenderer/morris/assets/css/morris.css');
 ?>
 <script>

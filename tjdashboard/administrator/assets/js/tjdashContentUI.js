@@ -132,8 +132,10 @@ tjdashContentUI.widget.init = function(id){
 
 			if (sourceData && renderer)
 			{
-				loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderrer.js', function(){
-					renderData(method,sourceData);
+				loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/'+library+'.min.js', function(){
+					loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderer.js', 	function(){
+						renderData(method,sourceData);
+					});
 				});
 			}
 		}
