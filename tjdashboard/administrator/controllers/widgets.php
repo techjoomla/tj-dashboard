@@ -16,4 +16,20 @@ defined('_JEXEC') or die;
  */
 class TjdashboardControllerWidgets extends JControllerAdmin
 {
+	/**
+	 * Proxy for getModel.
+	 *
+	 * @param   STRING  $name    model name
+	 * @param   STRING  $prefix  model prefix
+	 *
+	 * @return  void
+	 *
+	 * @since  1.0.0
+	 */
+	public function getModel($name = 'Widget', $prefix = 'TjdashboardModel')
+	{
+		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
+
+		return $model;
+	}
 }

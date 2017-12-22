@@ -21,7 +21,7 @@ $saveOrder = $listOrder == 'dash.ordering';
 
 if ($saveOrder)
 {
-	$saveOrderingUrl = 'index.php?option=com_tjdashboard&task=dashboards.saveOrderAjax&tmpl=component';
+	$saveOrderingUrl = 'index.php?option=com_tjdashboard&task=dashboards.saveOrderAjax';
 	JHtml::_('sortablelist.sortable', 'dashboardsList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 ?>
@@ -58,11 +58,9 @@ if ($saveOrder)
 									<?php echo JHtml::_('grid.checkall'); ?>
 								</th>
 
-								<?php if (isset($this->items[0]->state)): ?>
-									<th width="1%" class="nowrap center">
-										<?php echo JHtml::_('grid.sort', 'JSTATUS', 'dash.state', $listDirn, $listOrder); ?>
-									</th>
-								<?php endif; ?>
+								<th width="1%" class="nowrap center">
+									<?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'dash.state', $listDirn, $listOrder); ?>
+								</th>
 
 								<th>
 									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_TITLE', 'dash.title', $listDirn, $listOrder); ?>
@@ -119,11 +117,9 @@ if ($saveOrder)
 								<td class="center">
 									<?php echo JHtml::_('grid.id', $i, $item->dashboard_id); ?>
 								</td>
-								<?php if (isset($this->items[0]->state)): ?>
 								<td class="center">
 									<?php echo JHtml::_('jgrid.published', $item->state, $i, 'dashboards.', $canChange, 'cb'); ?>
 								</td>
-								<?php endif; ?>
 								<td class="has-context">
 									<div class="pull-left break-word">
 										<?php if ($item->checked_out) : ?>

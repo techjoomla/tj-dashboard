@@ -10,7 +10,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
- * School helper.
+ * TjDashboard helper.
  *
  * @since  1.6
  */

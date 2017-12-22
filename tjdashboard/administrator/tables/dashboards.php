@@ -26,6 +26,9 @@ class TjdashboardTableDashboards extends JTable
 	public function __construct(&$db)
 	{
 		parent::__construct('#__tj_dashboards', 'dashboard_id', $db);
+
+		// Set the alias since the column is called state
+		$this->setColumnAlias('published', 'state');
 	}
 
 	/**

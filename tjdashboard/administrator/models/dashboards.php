@@ -35,63 +35,10 @@ class TjdashboardModelDashboards extends JModelList
 				'created_by', 'dash.created_by',
 				'ordering', 'dash.ordering',
 				'state', 'dash.state',
-				'published', 'dash.published',
-				'search',
 			);
 		}
 
 		parent::__construct($config);
-	}
-
-	/**
-	 * Method to auto-populate the model state.
-	 *
-	 * Note. Calling getState in this method will result in recursion.
-	 *
-	 * @param   string  $ordering   Elements order
-	 * @param   string  $direction  Order direction
-	 *
-	 * @return void
-	 *
-	 * @throws Exception
-	 */
-	protected function populateState($ordering = 'dash.ordering', $direction = 'desc')
-	{
-		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
-
-		// Set ordering.
-		$orderCol = $app->getUserStateFromRequest($this->context . '.filter_order', 'filter_order');
-
-		if (!in_array($orderCol, $this->filter_fields))
-		{
-			$orderCol = 'dash.ordering';
-		}
-
-		$this->setState('list.ordering', $orderCol);
-
-		// Set ordering direction.
-		$listOrder = $app->getUserStateFromRequest($this->context . 'filter_order_Dir', 'filter_order_Dir');
-
-		if (!in_array(strtoupper($listOrder), array('ASC', 'DESC', '')))
-		{
-			$listOrder = 'ASC';
-		}
-
-		// Load the filter search
-		$search = $app->getUserStateFromRequest($this->context . 'filter.search', 'filter_search');
-		$this->setState('filter.search', $search);
-
-		// Load the filter state
-		$published = $app->getUserStateFromRequest($this->context . 'filter.state', 'filter_state', '', 'string');
-		$this->setState('filter.state', $published);
-
-		// Load the parameters.
-		$params = JComponentHelper::getParams('com_tjdashboard');
-		$this->setState('params', $params);
-
-		// List state information.
-		parent::populateState($ordering, $direction);
 	}
 
 	/**
@@ -143,12 +90,16 @@ class TjdashboardModelDashboards extends JModelList
 			$query->where($db->quoteName('dash.created_by') . ' = ' . (int) $created_by);
 		}
 
-		// Filter by state
-		$state = $this->getState('filter.state');
+		// Filter by published state
+		$published = $this->getState('filter.state');
 
-		if (!empty($state))
+		if (is_numeric($published))
 		{
-			$query->where($db->quoteName('dash.state') . ' = ' . (int) $state);
+			$query->where('dash.state = ' . (int) $published);
+		}
+		elseif ($published === '')
+		{
+			$query->where('(dash.state = 0 OR dash.state = 1)');
 		}
 
 		// Filter by context

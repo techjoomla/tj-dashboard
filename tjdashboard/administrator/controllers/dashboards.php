@@ -10,7 +10,6 @@
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\Utilities\ArrayHelper;
-
 /**
  * Dashboards list controller class.
  *
@@ -18,4 +17,20 @@ use Joomla\Utilities\ArrayHelper;
  */
 class TjDashboardControllerDashboards extends JControllerAdmin
 {
+	/**
+	 * Proxy for getModel.
+	 *
+	 * @param   STRING  $name    model name
+	 * @param   STRING  $prefix  model prefix
+	 *
+	 * @return  void
+	 *
+	 * @since  1.0.0
+	 */
+	public function getModel($name = 'Dashboard', $prefix = 'TjdashboardModel')
+	{
+		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
+
+		return $model;
+	}
 }

@@ -58,11 +58,9 @@ if ($saveOrder)
 									<?php echo JHtml::_('grid.checkall'); ?>
 								</th>
 
-								<?php if (isset($this->items[0]->state)): ?>
-									<th width="1%" class="nowrap center">
-										<?php echo JHtml::_('grid.sort', 'JSTATUS', 'wid.state', $listDirn, $listOrder); ?>
-									</th>
-								<?php endif; ?>
+								<th width="1%" class="nowrap center">
+									<?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'wid.state', $listDirn, $listOrder); ?>
+								</th>
 
 								<th>
 									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_TITLE', 'wid.title', $listDirn, $listOrder); ?>
@@ -121,7 +119,7 @@ if ($saveOrder)
 								</td>
 								<?php if (isset($this->items[0]->state)): ?>
 								<td class="center">
-									<?php echo JHtml::_('jgrid.published', $item->state, $i, 'dashboards.', $canChange, 'cb'); ?>
+									<?php echo JHtml::_('jgrid.published', $item->state, $i, 'widgets.', $canChange, 'cb'); ?>
 								</td>
 								<?php endif; ?>
 								<td class="has-context">

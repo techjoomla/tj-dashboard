@@ -54,14 +54,14 @@ class TjdashboardModelWidgets extends JModelList
 
 		// Create the base select statement.
 		$query->select('*');
-		$query->from($db->quoteName('#__tj_dashboard_widgets'));
+		$query->from($db->quoteName('#__tj_dashboard_widgets', 'wid'));
 
 		// Filter by dashboard_widget_id
 		$id = $this->getState('filter.dashboard_widget_id');
 
 		if (!empty($id))
 		{
-			$query->where($db->quoteName('dashboard_widget_id') . ' = ' . (int) $id);
+			$query->where($db->quoteName('wid.dashboard_widget_id') . ' = ' . (int) $id);
 		}
 
 		// Filter by search in title.
@@ -71,12 +71,12 @@ class TjdashboardModelWidgets extends JModelList
 		{
 			if (stripos($search, 'id:') === 0)
 			{
-				$query->where('dashboard_widget_id = ' . (int) substr($search, 3));
+				$query->where('wid.dashboard_widget_id = ' . (int) substr($search, 3));
 			}
 			else
 			{
 				$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
-				$query->where('(title LIKE ' . $search . ')');
+				$query->where('(wid.title LIKE ' . $search . ')');
 			}
 		}
 
@@ -85,7 +85,19 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (!empty($dashboard_id))
 		{
-			$query->where($db->quoteName('dashboard_id') . ' = ' . (int) $dashboard_id);
+			$query->where($db->quoteName('wid.dashboard_id') . ' = ' . (int) $dashboard_id);
+		}
+
+		// Filter by published state
+		$published = $this->getState('filter.state');
+
+		if (is_numeric($published))
+		{
+			$query->where('wid.state = ' . (int) $published);
+		}
+		elseif ($published === '')
+		{
+			$query->where('(wid.state = 0 OR wid.state = 1)');
 		}
 
 		// Filter by size
@@ -93,7 +105,7 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (!empty($size))
 		{
-			$query->where($db->quoteName('size') . ' = ' . (int) $size);
+			$query->where($db->quoteName('wid.size') . ' = ' . (int) $size);
 		}
 
 		return $query;

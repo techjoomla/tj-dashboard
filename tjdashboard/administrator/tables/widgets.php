@@ -26,6 +26,7 @@ class TjdashboardTableWidgets extends JTable
 	public function __construct(&$db)
 	{
 		parent::__construct('#__tj_dashboard_widgets', 'dashboard_widget_id', $db);
+		$this->setColumnAlias('published', 'state');
 	}
 
 	/**
