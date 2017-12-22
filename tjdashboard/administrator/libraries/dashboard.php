@@ -118,7 +118,7 @@ class TjdashboardDashboard extends JObject
 	}
 
 	/**
-	 * Method to save the Widget object to the database
+	 * Method to save the Dashboard object to the database
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -127,7 +127,7 @@ class TjdashboardDashboard extends JObject
 	 */
 	public function save()
 	{
-		// Create the user table object
+		// Create the widget table object
 		$table = TjdashboardFactory::table("dashboards");
 		$table->bind($this->getProperties());
 
@@ -180,7 +180,7 @@ class TjdashboardDashboard extends JObject
 	}
 
 	/**
-	 * Method to bind an associative array of data to a user object
+	 * Method to bind an associative array of data to a dashboard object
 	 *
 	 * @param   array  &$array  The associative array to bind to the object
 	 *
