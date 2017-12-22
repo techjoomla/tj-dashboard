@@ -102,17 +102,27 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		$table = $this->getTable();
+		$pk   = (!empty($data['dashboard_id'])) ? $data['dashboard_id'] : (int) $this->getState('dashboard.dashboard_id');
+		$dashboard = TjdashboardDashboard::getInstance($pk);
 
-		if ($table->save($data) === true)
+		// Bind the data.
+		if (!$dashboard->bind($data))
 		{
-			$this->setState('dashboard_id', $table->dashboard_id);
+			$this->setError($dashboard->getError());
 
-			return true;
-		}
-		else
-		{
 			return false;
 		}
+
+		// Store the data.
+		if (!$dashboard->save())
+		{
+			$this->setError($dashboard->getError());
+
+			return false;
+		}
+
+		$this->setState('dashboard.dashboard_id', $dashboard->dashboard_id);
+
+		return true;
 	}
 }

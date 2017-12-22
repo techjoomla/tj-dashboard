@@ -118,57 +118,46 @@ class TjdashboardDashboard extends JObject
 	}
 
 	/**
-	 * Save the current object properties to database
+	 * Method to save the Widget object to the database
 	 *
-	 * @param   array  $data  The associative array to bind to the object
+	 * @return  boolean  True on success
 	 *
-	 * @return	String
-	 *
-	 * @since 	1.0
-	 **/
-	public function save($data = array())
+	 * @since   1.0
+	 * @throws  \RuntimeException
+	 */
+	public function save()
 	{
-		$data = array_filter($data);
+		// Create the user table object
+		$table = TjdashboardFactory::table("dashboards");
+		$table->bind($this->getProperties());
 
-		if (empty($data))
+		// Allow an exception to be thrown.
+		try
 		{
-			$this->setError(JText::_("COM_TJDASHBOARD_EMPTY_DATA"));
+			// Check and store the object.
+			if (!$table->check())
+			{
+				$this->setError($table->getError());
+
+				return false;
+			}
+
+			// Store the user data in the database
+			if (!($result = $table->store()))
+			{
+				$this->setError($table->getError());
+
+				return false;
+			}
+		}
+		catch (\Exception $e)
+		{
+			$this->setError($e->getMessage());
 
 			return false;
 		}
 
-		$model = TjdashboardFactory::model("Dashboard");
-		JForm::addFormPath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/models/forms');
-		$form = $model->getForm();
-
-		if (!$form)
-		{
-			$this->setError($model->getError());
-
-			return false;
-		}
-
-		$data = $model->validate($form, $data);
-
-		if (!$data)
-		{
-			$this->setError($model->getError());
-
-			return false;
-		}
-
-		$save = $model->save($data);
-
-		if (!$save)
-		{
-			$this->setError($model->getError());
-
-			return false;
-		}
-		else
-		{
-			return $this->load($model->getState("dashboard_id"));
-		}
+		return $result;
 	}
 
 	/**
@@ -188,5 +177,37 @@ class TjdashboardDashboard extends JObject
 
 			return $widgetData;
 		}
+	}
+
+	/**
+	 * Method to bind an associative array of data to a user object
+	 *
+	 * @param   array  &$array  The associative array to bind to the object
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since   11.1
+	 */
+	public function bind(&$array)
+	{
+		if (empty ($array))
+		{
+			$this->setError(JText::_('COM_TJDASHBOARD_EMPTY_DATA'));
+
+			return false;
+		}
+
+		// Bind the array
+		if (!$this->setProperties($array))
+		{
+			$this->setError(\JText::_('COM_TJDASHBOARD_BINDING_ERROR'));
+
+			return false;
+		}
+
+		// Make sure its an integer
+		$this->dashboard_id = (int) $this->dashboard_id;
+
+		return true;
 	}
 }

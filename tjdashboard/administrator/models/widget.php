@@ -8,7 +8,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
-
+JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 /**
  * Tjdashboard model class for widget
  *
@@ -102,17 +102,27 @@ class TjdashboardModelWidget extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		$table = $this->getTable();
+		$pk   = (!empty($data['widget_dashboard_id'])) ? $data['widget_dashboard_id'] : (int) $this->getState('widget.widget_dashboard_id');
+		$widget = TjdashboardWidget::getInstance($pk);
 
-		if ($table->save($data) === true)
+		// Bind the data.
+		if (!$widget->bind($data))
 		{
-			$this->setState('dashboard_widget_id', $table->dashboard_widget_id);
+			$this->setError($widget->getError());
 
-			return true;
-		}
-		else
-		{
 			return false;
 		}
+
+		// Store the data.
+		if (!$widget->save())
+		{
+			$this->setError($widget->getError());
+
+			return false;
+		}
+
+		$this->setState('widget.dashboard_widget_id', $widget->dashboard_widget_id);
+
+		return true;
 	}
 }

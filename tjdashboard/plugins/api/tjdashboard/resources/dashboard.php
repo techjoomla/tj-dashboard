@@ -31,10 +31,17 @@ class TjdashboardApiResourceDashboard extends ApiResource
 		$dashboard      = TjdashboardDashboard::getInstance($dashboardId);
 		$responceObject = new stdclass;
 
-		if ($dashboard->save($formData))
+		if($dashboard->bind($formData))
 		{
-			$responceObject->data   = $dashboard->dashboard_id;
-			$responceObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			if ($dashboard->save($formData))
+			{
+				$responceObject->data   = $dashboard->dashboard_id;
+				$responceObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			}
+			else
+			{
+				ApiError::raiseError(400, JText::_($dashboard->getError()));
+			}
 		}
 		else
 		{
@@ -42,8 +49,6 @@ class TjdashboardApiResourceDashboard extends ApiResource
 		}
 
 		$this->plugin->setResponse($responceObject);
-
-		return;
 	}
 
 	/**

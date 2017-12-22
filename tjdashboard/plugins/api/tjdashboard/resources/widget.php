@@ -29,22 +29,28 @@ class TjdashboardApiResourceWidget extends ApiResource
 		$formData = $app->input->post->getArray();
 		$widgetId = $app->input->getInt('id');
 		$widget   = TjdashboardWidget::getInstance($widgetId);
-		$save     = $widget->save($formData);
+
 		$renderObject     = new stdclass;
 
-		if ($save)
+		if($widget->bind($formData))
 		{
-			$renderObject->data   = $widget->dashboard_widget_id;
-			$renderObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			if ($widget->save())
+			{
+				$renderObject->data   = $widget->dashboard_widget_id;
+				$renderObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			}
+			else
+			{
+				ApiError::raiseError(400, JText::_($widget->getError()));
+			}
 		}
 		else
 		{
-			ApiError::raiseError(400, JText::_($widget->getError()));
+				ApiError::raiseError(400, JText::_($widget->getError()));
 		}
 
 		$this->plugin->setResponse($renderObject);
 
-		return;
 	}
 
 		/**
