@@ -54,10 +54,7 @@ class TjlmsTopcoursesDatasource
 	 * */
 	public function getDataMorrisDonut()
 	{
-		$coursesData = array();
-		$coursesData = $this->getData();
-
-		if (count($coursesData))
+		if (count($this->getData()))
 		{
 			$dataArray = array();
 
@@ -82,10 +79,9 @@ class TjlmsTopcoursesDatasource
 	 * */
 	public function getDataMorrisBar()
 	{
-		$coursesData = array();
 		$coursesData = $this->getData();
 
-		if (count($coursesData))
+		if ($coursesData)
 		{
 			$dataArray = array();
 
