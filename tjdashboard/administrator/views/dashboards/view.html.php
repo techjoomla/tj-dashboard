@@ -59,6 +59,41 @@ class TjdashboardViewDashboards extends JViewLegacy
 	protected $sidebar;
 
 	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canCreate;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canEdit;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canCheckin;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canChangeStatus;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canDelete;
+
+	/**
 	 * Display the view
 	 *
 	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
@@ -176,7 +211,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 	/**
 	 * Method to order fields
 	 *
-	 * @return void
+	 * @return ARRAY
 	 */
 	protected function getSortFields()
 	{
