@@ -45,6 +45,13 @@ class TjdashboardViewDashboards extends JViewLegacy
 	public $filterForm;
 
 	/**
+	 * Logged in User
+	 *
+	 * @var  JObject
+	 */
+	public $user;
+
+	/**
 	 * The active search filters
 	 *
 	 * @var  array
@@ -57,6 +64,41 @@ class TjdashboardViewDashboards extends JViewLegacy
 	 * @var  string
 	 */
 	protected $sidebar;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canCreate;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canEdit;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canCheckin;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canChangeStatus;
+
+	/**
+	 * The access varible
+	 *
+	 * @var  int
+	 */
+	protected $canDelete;
 
 	/**
 	 * Display the view
@@ -95,7 +137,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 	/**
 	 * Method to order fields
 	 *
-	 * @return void
+	 * @return ARRAY
 	 */
 	protected function getSortFields()
 	{

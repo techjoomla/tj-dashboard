@@ -45,6 +45,13 @@ class TjdashboardViewDashboards extends JViewLegacy
 	public $filterForm;
 
 	/**
+	 * Logged in User
+	 *
+	 * @var  JObject
+	 */
+	public $user;
+
+	/**
 	 * The active search filters
 	 *
 	 * @var  array

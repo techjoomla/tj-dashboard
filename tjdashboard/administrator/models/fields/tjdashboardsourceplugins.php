@@ -113,6 +113,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	protected function getOptions()
 	{
 		$folder        = $this->folder;
+		$tjDashboardSourcePlugins = array();
 
 		if (!empty($folder))
 		{
@@ -127,8 +128,6 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 
 			$options   = $db->setQuery($query)->loadObjectList();
 			$lang      = JFactory::getLanguage();
-
-			$tjDashboardSourcePlugins = array();
 			$j = 0;
 
 			foreach ($options as $i => $item)
