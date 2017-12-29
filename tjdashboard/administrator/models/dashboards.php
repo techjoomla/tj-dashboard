@@ -90,40 +90,16 @@ class TjdashboardModelDashboards extends JModelList
 			$query->where($db->quoteName('dash.created_by') . ' = ' . (int) $created_by);
 		}
 
-		// Filter by published state
-		$published = $this->getState('filter.state');
+		// Filter by state
+		$state = $this->getState('filter.state');
 
-		if (is_numeric($published))
+		if (is_numeric($state))
 		{
-			$query->where('dash.state = ' . (int) $published);
+			$query->where('dash.state = ' . (int) $state);
 		}
-		elseif ($published === '')
+		elseif ($state === '')
 		{
 			$query->where('(dash.state = 0 OR dash.state = 1)');
-		}
-
-		// Filter by context
-		$context = $this->getState('filter.context');
-
-		if (!empty($context))
-		{
-			$query->where($db->quoteName('dash.context') . ' = ' . $db->escape($context));
-		}
-
-		// Filter by core
-		$core = $this->getState('filter.core');
-
-		if (!empty($core))
-		{
-			$query->where($db->quoteName('dash.core') . ' = ' . (int) $core);
-		}
-
-		// Filter by parent
-		$parent = $this->getState('filter.parent');
-
-		if (!empty($parent))
-		{
-			$query->where($db->quoteName('dash.parent') . ' = ' . (int) $parent);
 		}
 
 		// Add the list ordering clause.
