@@ -16,29 +16,4 @@ defined('_JEXEC') or die('Restricted access');
  */
 class PlgTjdashboardRendererMorris
 {
-	/**
-	 * Get renderer html
-	 * 
-	 * @param   ARRAY  $widgetData  widgetData
-	 * 
-	 * @return STRING html 
-	 *
-	 * @since   1.0
-	 * */
-	public function getRendererHtml($widgetData)
-	{
-		if ($widgetData)
-		{
-			$rendererInfo = explode(".", $widgetData->renderer_plugin);
-
-			require_once JPATH_SITE . '/plugins/tjdashboardrenderer/' . $rendererInfo[0] . '/' . $rendererInfo[0] . '/' . $rendererInfo[1] . '.php';
-
-			$rendererClass = 'PlgTjdashboardRenderer' . ucfirst($rendererInfo[0]) . ucfirst($rendererInfo[1]);
-
-			$renderePlugin = new $rendererClass;
-			$html = $renderePlugin->display($widgetData);
-
-			return $html;
-		}
-	}
 }

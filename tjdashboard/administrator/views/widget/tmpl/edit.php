@@ -15,7 +15,6 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
-//JHtml::_('formbehavior.chosen', 'select');
 $app = JFactory::getApplication();
 $input = $app->input;
 $document = JFactory::getDocument();

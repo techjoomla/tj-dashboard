@@ -62,19 +62,19 @@ class TjdashboardApiResourceWidget extends ApiResource
 	{
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
+		$widget = new stdClass;
+		$widgetId = $app->input->getInt('id');
 
-		$dashboardId = $app->input->getInt('id');
-
-		if (!empty($dashboardId))
+		if (!empty($widgetId))
 		{
-			$dashboard   = TjdashboardWidget::getInstance($dashboardId);
+			$widget   = TjdashboardWidget::getInstance($widgetId);
 		}
 		else
 		{
 			ApiError::raiseError(400, JText::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
 		}
 
-		$this->plugin->setResponse($dashboard);
+		$this->plugin->setResponse($widget);
 
 		return;
 	}
