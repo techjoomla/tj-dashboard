@@ -9,11 +9,11 @@
 "use_strict";
 var tjdashContentUI      = (typeof tjdashContentUI == 'undefined') ? {} : tjdashContentUI;
 
-
 tjdashContentUI.dashboard = tjdashContentUI.dashboard ? tjdashContentUI.dashboard : {};
 
 tjdashContentUI.dashboard.apiurl = 'index.php?option=com_api&app=tjdashboard&resource=dashboard&format=raw&id=';
 tjdashContentUI.dashboard.init = function(id){
+	/** global: root_url */
 	tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
 
 	var params = [];
@@ -23,7 +23,7 @@ tjdashContentUI.dashboard.init = function(id){
 
 	if(!data.dashboard_id)
 	{
-		console.log("no length");
+		alert("no length");
 		//tjdashContentUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 		return false;
 	}
@@ -76,7 +76,10 @@ tjdashContentUI.utility.processPromise = function(promise)
 		var data = [];
 		promise.fail(
 				function(response) {
-					alert("Ajax Error.");
+					if (response.status == 403)
+					{
+						alert(Joomla.JText._('JERROR_ALERTNOAUTHOR'));
+					}
 				}
 			).done(
 				function(r) {
@@ -85,11 +88,6 @@ tjdashContentUI.utility.processPromise = function(promise)
 					{
 						alert(r.err_msg);
 					}
-
-					/*if (r.messages)
-					{
-						Joomla.renderMessages(r.messages);
-					}*/
 
 					if (r.data)
 					{
@@ -105,6 +103,7 @@ tjdashContentUI.widget = tjdashContentUI.widget ? tjdashContentUI.widget : {};
 tjdashContentUI.widget.apiurl = 'index.php?option=com_api&app=tjdashboard&resource=widget&format=raw&id=';
 tjdashContentUI.widget.init = function(id){
 
+	/** global: root_url */
 	tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
 
 	var params = [];
@@ -130,14 +129,15 @@ tjdashContentUI.widget.init = function(id){
 			var library = redererDetail[0]; // morris
 			var method = redererDetail[1]; // method
 
-			if (sourceData && renderer)
+			if ((!sourceData) && (!renderer))
 			{
+				return false;
+			}
 				loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/'+library+'.min.js', function(){
 					loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderer.js', 	function(){
 						renderData(method,sourceData);
 					});
 				});
-			}
 		}
 		else
 		{
@@ -150,6 +150,7 @@ tjdashContentUI.tjdashboard  = tjdashContentUI.tjdashboard ? tjdashContentUI.tjd
 
 jQuery.extend(tjdashContentUI.tjdashboard, {
 	getRenderers:function(){
+		/** global: root_url */
 		tjdashContentUI.root_url = (typeof root_url == 'undefined') ? root_url : root_url;
 		var url     = tjdashContentUI.root_url + 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers&format=json';
 		var $form   = jQuery('#jform_data_plugin');
@@ -176,7 +177,7 @@ jQuery.extend(tjdashContentUI.tjdashboard, {
 				}
 				else
 				{
-					console.log('Something went wrong.', response.message, response.messages)
+					alert(Joomla.JText._('COM_TJDASHBOARD_ERROR'), response.message, response.messages)
 				}
 			}
 		);
