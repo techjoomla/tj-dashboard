@@ -21,7 +21,7 @@ class TjlmsTopcoursesDatasource
 	/**
 	 * Get Topcourses data
 	 * 
-	 * @return STRING html 
+	 * @return ARRAY Objects list 
 	 *
 	 * @since   1.0
 	 * */
@@ -48,13 +48,15 @@ class TjlmsTopcoursesDatasource
 	/**
 	 * Get Data for morris donut
 	 * 
-	 * @return json dataArray 
+	 * @return mix dataArray 
 	 *
 	 * @since   1.0
 	 * */
 	public function getDataMorrisDonut()
 	{
-		if (count($this->getData()))
+		$coursesData = $this->getData();
+
+		if (count($coursesData))
 		{
 			$dataArray = array();
 
@@ -73,7 +75,7 @@ class TjlmsTopcoursesDatasource
 	/**
 	 * Get Data for morris bar
 	 * 
-	 * @return json dataArray 
+	 * @return mix dataArray 
 	 *
 	 * @since   1.0
 	 * */
@@ -81,7 +83,7 @@ class TjlmsTopcoursesDatasource
 	{
 		$coursesData = $this->getData();
 
-		if ($coursesData)
+		if (count($coursesData))
 		{
 			$dataArray = array();
 
