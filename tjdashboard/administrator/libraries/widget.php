@@ -66,7 +66,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @param   integer  $id  The primary key of the widget_id to load (optional).
 	 *
-	 * @return  Widget  The widget object.
+	 * @return  Object  Widget object.
 	 *
 	 * @since   1.0
 	 */
@@ -160,24 +160,28 @@ class TjdashboardWidget extends JObject
 	/**
 	 * Get the widget data
 	 *
+	 * @param   integer  $id  The primary key of the widget_id to load (optional).
+	 * 
 	 * @return	Array
 	 *
 	 * @since 	1.0
 	 **/
-	protected function getWidgetData()
+	protected function getWidgetData($id)
 	{
 		$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
-		$widgetModel->setState('filter.dashboard_widget_id', $this->dashboard_widget_id);
+		$widgetModel->setState('filter.dashboard_widget_id', $id);
 		$widgetData = $widgetModel->getItems();
 
 		JLoader::import("/components/com_tjdashboard/helpers/dashboard", JPATH_ADMINISTRATOR);
 		$tjDashboardHelper = new DashboardHelper;
 		$result = $tjDashboardHelper->getWidgetRendererData($widgetData);
 
-		if ($result && $result['status'])
+		if (!count($result) && !$result['status'])
 		{
-			return $result['data'];
+			return false;
 		}
+
+		return $result['data'];
 	}
 
 	/**
