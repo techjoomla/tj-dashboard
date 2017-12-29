@@ -20,24 +20,6 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  */
 class TjdashboardModelDashboard extends JModelAdmin
 {
-	private $item = null;
-
-	/**
-	 * Constructor.
-	 *
-	 * @param   array  $config  An optional associative array of configuration settings.
-	 *
-	 * @see        JController
-	 * @since      1.6
-	 */
-	public function __construct($config = array())
-	{
-		$this->widgetModel = TjdashboardFactory::model("widget");
-		$this->widgetsModel = TjdashboardFactory::model("widgets");
-		$this->widgetTable = TjdashboardFactory::table("widgets");
-		parent::__construct($config);
-	}
-
 	/**
 	 * Method to get the record form.
 	 *
@@ -53,7 +35,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 		// Get the form.
 		$form = $this->loadForm('com_tjdashboard.dashboard', 'dashboard', array('control' => 'jform', 'load_data' => $loadData));
 
-		return $form = empty($form) ? false : $form;
+		return empty($form) ? false : $form;
 	}
 
 	/**

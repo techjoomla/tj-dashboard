@@ -26,13 +26,13 @@ class TjdashboardApiResourceWidget extends ApiResource
 	{
 		$app      = JFactory::getApplication();
 		$jinput   = $app->input;
-		$formData = $app->input->post->getArray();
-		$widgetId = $app->input->getInt('id');
+		$formData = $jinput->post->getArray();
+		$widgetId = $jinput->getInt('id');
 		$widget   = TjdashboardWidget::getInstance($widgetId);
 
 		$renderObject     = new stdclass;
 
-		if($widget->bind($formData))
+		if ($widget->bind($formData))
 		{
 			if ($widget->save())
 			{
@@ -50,10 +50,9 @@ class TjdashboardApiResourceWidget extends ApiResource
 		}
 
 		$this->plugin->setResponse($renderObject);
-
 	}
 
-		/**
+	/**
 	 * Function get dashboard data.
 	 *
 	 * @return boolean
@@ -63,7 +62,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
 		$widget = new stdClass;
-		$widgetId = $app->input->getInt('id');
+		$widgetId = $jinput->getInt('id');
 
 		if (!empty($widgetId))
 		{
@@ -75,7 +74,5 @@ class TjdashboardApiResourceWidget extends ApiResource
 		}
 
 		$this->plugin->setResponse($widget);
-
-		return;
 	}
 }

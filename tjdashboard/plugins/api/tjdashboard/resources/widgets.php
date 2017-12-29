@@ -78,6 +78,5 @@ class TjdashboardApiResourceWidgets extends ApiResource
 		$wobj->request = $filterData;
 		$wobj->data    = $widgetmodel->getItems();
 		$this->plugin->setResponse($wobj);
-		return;
 	}
 }

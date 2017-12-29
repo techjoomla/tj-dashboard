@@ -26,14 +26,14 @@ class TjdashboardApiResourceDashboard extends ApiResource
 	{
 		$app            = JFactory::getApplication();
 		$jinput         = $app->input;
-		$formData       = $app->input->post->getArray();
-		$dashboardId    = $app->input->getInt('id');
+		$formData       = $jinput->post->getArray();
+		$dashboardId    = $jinput->getInt('id');
 		$dashboard      = TjdashboardDashboard::getInstance($dashboardId);
 		$responceObject = new stdclass;
 
-		if($dashboard->bind($formData))
+		if ($dashboard->bind($formData))
 		{
-			if ($dashboard->save($formData))
+			if ($dashboard->save())
 			{
 				$responceObject->data   = $dashboard->dashboard_id;
 				$responceObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
@@ -61,7 +61,8 @@ class TjdashboardApiResourceDashboard extends ApiResource
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
 
-		$dashboardId = $app->input->getInt('id');
+		$dashboardId = $jinput->getInt('id');
+		$dashboard = new stdClass;
 
 		if (!empty($dashboardId))
 		{
