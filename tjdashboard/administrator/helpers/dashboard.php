@@ -56,7 +56,6 @@ class DashboardHelper
 				$dataPlugin = explode(".", $widgetDetails[0]->data_plugin);
 
 				$path = "/plugins/tjdashboardsource/";
-
 				$folderPath = $path . $dataPlugin[0] . "/" . $dataPlugin[0];
 
 				if (JFolder::exists(JPATH_SITE . $folderPath))
@@ -72,13 +71,11 @@ class DashboardHelper
 						{
 							$pluginClass = new $className;
 							$rendererPlugin = explode(".", $widgetDetails[0]->renderer_plugin);
-
 							$methodName = 'getData' . ucfirst($rendererPlugin[0]) . ucfirst($rendererPlugin[1]);
 
 							if (method_exists($pluginClass, $methodName))
 							{
-								$widgetRealData = $pluginClass->$methodName($widgetDetails);
-
+								$widgetRealData = $pluginClass->$methodName();
 								$responce['status'] = 1;
 								$responce['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
 								$responce['data'] = $widgetRealData;

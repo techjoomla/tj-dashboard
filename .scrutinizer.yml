@@ -49,8 +49,6 @@ build_failure_conditions:
     - 'elements.rating(<= D).new.exists'           
     # No doc comments patches allowed
     - 'patches.label("Doc Comments").exists'       
-    # More than 1 new spacing patch
-    - 'patches.label("Spacing").new.count > 1'     
     # No new coding style issues allowed
     - 'issues.label("coding-style").new.exists'    
     # More than 1 new coding style issues.
