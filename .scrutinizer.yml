@@ -4,8 +4,6 @@ build:
             dependencies:
                 before:
                     - 'git clone --depth 1 https://github.com/joomla/joomla-cms.git joomla-cms'
-            dependencies:
-                before:
                     - 'git clone --depth 1 https://github.com/techjoomla/com_api.git com_api'
             project_setup:
                 override:
@@ -25,6 +23,7 @@ filter:
     excluded_paths:
         - '*.min.js'
         - 'joomla-cms/*'
+        - 'com_api/*'
         - 'tests/*'
     dependency_paths: 
         # Excluded from analysis but treated as a dependency
