@@ -18,11 +18,7 @@ jimport('joomla.application.component.view');
  */
 class TjdashboardViewDashboard extends JViewLegacy
 {
-	protected $state;
-
 	protected $item;
-
-	protected $form;
 
 	/**
 	 * Display the view
@@ -35,7 +31,6 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 */
 	public function display($tpl = null)
 	{
-		$app = JFactory::getApplication();
 		$this->item = $this->get('Item');
 
 		// @Todo - Add permission based view accessing code

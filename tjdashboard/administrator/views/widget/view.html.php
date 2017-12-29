@@ -60,7 +60,8 @@ class TjdashboardViewWidget extends JViewLegacy
 		$this->state = $this->get('State');
 		$this->item  = $this->get('Item');
 		$this->form  = $this->get('Form');
-		$this->input = JFactory::getApplication()->input;
+		$app 		 = JFactory::getApplication();
+		$this->input = $app->input;
 		$this->canDo = JHelperContent::getActions('com_tjdashboard', 'widget', $this->item->dashboard_widget_id);
 
 		// Check for errors.

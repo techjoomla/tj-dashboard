@@ -176,12 +176,12 @@ class TjdashboardWidget extends JObject
 		$tjDashboardHelper = new DashboardHelper;
 		$result = $tjDashboardHelper->getWidgetRendererData($widgetData);
 
-		if (!count($result) && !$result['status'])
+		if (count($result) && $result['status'])
 		{
-			return false;
+			return $result['data'];
 		}
 
-		return $result['data'];
+		return $result;
 	}
 
 	/**
