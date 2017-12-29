@@ -48,8 +48,8 @@ class TjlmsTopcoursesDatasource
 	/**
 	 * Get Data for morris donut
 	 * 
-	 * @return mix dataArray 
-	 *
+	 * @return string|null dataArray If coursesData empty returns null
+	 * 
 	 * @since   1.0
 	 * */
 	public function getDataMorrisDonut()
@@ -75,7 +75,7 @@ class TjlmsTopcoursesDatasource
 	/**
 	 * Get Data for morris bar
 	 * 
-	 * @return mix dataArray 
+	 * @return string|null dataArray If coursesData empty returns null
 	 *
 	 * @since   1.0
 	 * */
