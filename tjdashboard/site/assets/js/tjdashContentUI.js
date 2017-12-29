@@ -18,6 +18,7 @@ tjdashContentUI.dashboard.init = function(id){
 
 	var params = [];
 	params['type'] = 'GET';
+	/** global: tjdashContentService */
 	var promise = tjdashContentService.postData(tjdashContentUI.root_url + tjdashContentUI.dashboard.apiurl + id, '', params);
 	var data = tjdashContentUI.utility.processPromise(promise);
 
@@ -108,6 +109,7 @@ tjdashContentUI.widget.init = function(id){
 
 	var params = [];
 	params['type'] = 'GET';
+	/** global: tjdashContentService */
 	var promise = tjdashContentService.postData(tjdashContentUI.root_url + tjdashContentUI.widget.apiurl + id, '', params);
 	var data = tjdashContentUI.utility.processPromise(promise);
 
@@ -133,11 +135,11 @@ tjdashContentUI.widget.init = function(id){
 			{
 				return false;
 			}
-				loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/'+library+'.min.js', function(){
-					loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderer.js', 	function(){
-						renderData(method,sourceData);
-					});
+			loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/'+library+'.min.js', function(){
+				loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderer.js', 	function(){
+					renderData(method,sourceData);
 				});
+			});
 		}
 		else
 		{
@@ -155,6 +157,7 @@ jQuery.extend(tjdashContentUI.tjdashboard, {
 		var url     = tjdashContentUI.root_url + 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers&format=json';
 		var $form   = jQuery('#jform_data_plugin');
 		jQuery('#task',$form).val('widget.getSupportedRenderers');
+		/** global: tjdashContentService */
 		var promise = tjdashContentService.postData(url, $form.serialize());
 		jQuery('#task',$form).val();
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
@@ -171,6 +174,7 @@ jQuery.extend(tjdashContentUI.tjdashboard, {
 				{
 					// Append option to plugin dropdown list.
 					var list = jQuery("#jform_renderer_plugin");
+					/** global: Option */
 					jQuery.each(response.data, function(index, item) {
 						list.append(new Option(item,index));
 					});
