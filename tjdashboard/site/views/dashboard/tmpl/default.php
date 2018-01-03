@@ -16,14 +16,13 @@ $document = JFactory::getDocument();
 $script  = 'var root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
 
-$document->addScript('components/com_tjdashboard/assets/js/tjdashContentService.js');
-$document->addScript('components/com_tjdashboard/assets/js/tjdashContentUI.js');
-$document->addScript('components/com_tjdashboard/assets/js/raphael.min.js');
-$document->addStylesheet('plugins/tjdashboardrenderer/morris/assets/css/morris.css');
+$document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.js');
+$document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.js');
+
 ?>
 <script>
 jQuery(document).ready(function() {
-		tjdashContentUI.dashboard.init(<?php echo $this->item->dashboard_id; ?>);
+		TJDashboardUI.initDashboard(<?php echo $this->item->dashboard_id; ?>);
 	});
 </script>
 

@@ -44,6 +44,10 @@ class TjdashboardWidget extends JObject
 
 	public $widget_render_data = array();
 
+	public $widget_js = array();
+
+	public $widget_css = array();
+
 	protected static $widgetObj = array();
 
 	/**
@@ -83,6 +87,8 @@ class TjdashboardWidget extends JObject
 			$widget = new TjdashboardWidget($id);
 			self::$widgetObj[$id] = $widget;
 			self::$widgetObj[$id]->widget_render_data = $widget->getWidgetData($id);
+			self::$widgetObj[$id]->widget_js = $widget->getWidgetJS($id);
+			self::$widgetObj[$id]->widget_css = $widget->getWidgetCSS($id);
 		}
 
 		return self::$widgetObj[$id];
@@ -168,13 +174,11 @@ class TjdashboardWidget extends JObject
 	 **/
 	protected function getWidgetData($id)
 	{
-		$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
-		$widgetModel->setState('filter.dashboard_widget_id', $id);
-		$widgetData = $widgetModel->getItems();
+		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		$widgetData = $widgetModel->getItem($id);
 
 		JLoader::import("/components/com_tjdashboard/helpers/dashboard", JPATH_ADMINISTRATOR);
-		$tjDashboardHelper = new DashboardHelper;
-		$result = $tjDashboardHelper->getWidgetRendererData($widgetData);
+		$result = $this->getWidgetRendererData($widgetData);
 
 		if (count($result) && $result['status'])
 		{
@@ -214,5 +218,105 @@ class TjdashboardWidget extends JObject
 		$this->dashboard_widget_id = (int) $this->dashboard_widget_id;
 
 		return true;
+	}
+
+	/**
+	 * Get the widget JS files
+	 *
+	 * @param   integer  $id  The primary key of the widget_id to load (optional).
+	 * 
+	 * @return	Array JS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	protected function getWidgetJS($id)
+	{
+		return array('');
+	}
+
+	/**
+	 * Get the widget CSS files
+	 *
+	 * @param   integer  $id  The primary key of the widget_id to load (optional).
+	 * 
+	 * @return	Array CSS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	protected function getWidgetCSS($id)
+	{
+		return array('');
+	}
+
+	/**
+	 * Get the Widgets Renderers data files
+	 *
+	 * @param   array  $widgetDetails  to load (optional).
+	 * 
+	 * @return	Array
+	 *
+	 * @since 	1.0
+	 **/
+	protected function getWidgetRendererData($widgetDetails)
+	{
+		$response = array();
+
+		if (!$widgetDetails->data_plugin)
+		{
+			return;
+		}
+
+		$dataPlugin = explode(".", $widgetDetails->data_plugin);
+
+		$path = "/plugins/tjdashboardsource/";
+		$folderPath = $path . $dataPlugin[0] . "/" . $dataPlugin[0];
+
+		if (JFolder::exists(JPATH_SITE . $folderPath))
+		{
+			$filePath = $folderPath . "/" . $dataPlugin[1] . ".php";
+
+			if (JFile::exists(JPATH_SITE . $filePath))
+			{
+				JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
+				$className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
+
+				if (class_exists($className))
+				{
+					$pluginClass = new $className;
+					$rendererPlugin = explode(".", $widgetDetails->renderer_plugin);
+					$methodName = 'getData' . ucfirst($rendererPlugin) . ucfirst($rendererPlugin[1]);
+
+					if (method_exists($pluginClass, $methodName))
+					{
+						$widgetRealData = $pluginClass->$methodName();
+						$response['status'] = 1;
+						$response['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
+						$response['data'] = $widgetRealData;
+					}
+					else
+					{
+						$response['status'] = 0;
+						$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_METHOD_NOT_FOUND");
+					}
+				}
+				else
+				{
+					$response['status'] = 0;
+					$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_CLASS_NOT_FOUND");
+				}
+			}
+			else
+			{
+				$response['status'] = 0;
+				$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FILE_NOT_FOUND");
+			}
+		}
+		else
+		{
+			$response['status'] = 0;
+			$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FOLDER_NOT_FOUND");
+		}
+
+		return $response;
 	}
 }

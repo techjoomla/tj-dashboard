@@ -16,4 +16,27 @@ defined('_JEXEC') or die('Restricted access');
  */
 class PlgTjdashboardRendererMorris
 {
+	/**
+	 * Get the widget JS files
+	 *
+	 * @return	Array JS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	public function getJS()
+	{
+		return array('asets/js/raphael.min.js', 'asets/js/morris.min.js', 'asets/js/renderer.js');
+	}
+
+	/**
+	 * Get the widget CSS files
+	 *
+	 * @return	Array CSS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	public function getCSS()
+	{
+		return array('asets/js/morris.css');
+	}
 }

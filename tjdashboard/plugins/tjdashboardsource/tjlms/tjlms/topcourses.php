@@ -55,11 +55,10 @@ class TjlmsTopcoursesDatasource
 	public function getDataMorrisDonut()
 	{
 		$coursesData = $this->getData();
+		$dataArray = array();
 
 		if (count($coursesData))
 		{
-			$dataArray = array();
-
 			foreach ($coursesData as $key => $value)
 			{
 				$dataArray[$key] = new stdclass;
@@ -67,9 +66,9 @@ class TjlmsTopcoursesDatasource
 				$dataArray[$key]->label = $value->title;
 				$dataArray[$key]->value = ($value->totalenrolledusers);
 			}
-
-			return json_encode($dataArray);
 		}
+
+		return json_encode($dataArray);
 	}
 
 	/**
@@ -83,10 +82,10 @@ class TjlmsTopcoursesDatasource
 	{
 		$coursesData = $this->getData();
 
+		$dataArray = array();
+
 		if (count($coursesData))
 		{
-			$dataArray = array();
-
 			foreach ($coursesData as $key => $value)
 			{
 				$dataArray[$key] = new stdclass;
@@ -94,9 +93,9 @@ class TjlmsTopcoursesDatasource
 				$dataArray[$key]->x = $value->title;
 				$dataArray[$key]->y = $value->totalenrolledusers;
 			}
-
-			return json_encode($dataArray);
 		}
+
+		return json_encode($dataArray);
 	}
 
 	/**
