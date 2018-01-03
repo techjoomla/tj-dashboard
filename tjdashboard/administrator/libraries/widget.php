@@ -176,8 +176,6 @@ class TjdashboardWidget extends JObject
 	{
 		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
 		$widgetData = $widgetModel->getItem($id);
-
-		JLoader::import("/components/com_tjdashboard/helpers/dashboard", JPATH_ADMINISTRATOR);
 		$result = $this->getWidgetRendererData($widgetData);
 
 		if (count($result) && $result['status'])
@@ -231,7 +229,17 @@ class TjdashboardWidget extends JObject
 	 **/
 	protected function getWidgetJS($id)
 	{
-		return array('');
+		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		$widgetData = $widgetModel->getItem($id);
+
+		$renderer = explode('.', $widgetData->renderer_plugin);
+		$rendererClass = 'PlgTjdashboardRenderer' . ucfirst($renderer[0]);
+		$path = "plugins.tjdashboardrenderer.";
+		$folderPath = $path . $renderer[0] . '.' . $renderer[0];
+		JLoader::import($folderPath, JPATH_SITE);
+		$rendererObj = new $rendererClass;
+
+		return $rendererObj->getJS();
 	}
 
 	/**
@@ -245,7 +253,17 @@ class TjdashboardWidget extends JObject
 	 **/
 	protected function getWidgetCSS($id)
 	{
-		return array('');
+		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		$widgetData = $widgetModel->getItem($id);
+
+		$renderer = explode('.', $widgetData->renderer_plugin);
+		$rendererClass = 'PlgTjdashboardRenderer' . ucfirst($renderer[0]);
+		$path = "plugins.tjdashboardrenderer.";
+		$folderPath = $path . $renderer[0] . '.' . $renderer[0];
+		JLoader::import($folderPath, JPATH_SITE);
+		$rendererObj = new $rendererClass;
+
+		return $rendererObj->getCSS();
 	}
 
 	/**
@@ -259,64 +277,64 @@ class TjdashboardWidget extends JObject
 	 **/
 	protected function getWidgetRendererData($widgetDetails)
 	{
-		$response = array();
-
-		if (!$widgetDetails->data_plugin)
+		if ((!$widgetDetails->data_plugin) && (!$widgetDetails->renderer_plugin))
 		{
-			return;
+			return false;
 		}
 
-		$dataPlugin = explode(".", $widgetDetails->data_plugin);
+		$responce = array();
 
+		try
+		{
+			$dataPluginClass = $this->getClassNameForDataPlugin($widgetDetails->data_plugin);
+			$pluginObj = new $dataPluginClass;
+			$methodName = $this->getMethodNameForRenderer($widgetDetails->renderer_plugin);
+			$widgetRealData = $pluginObj->$methodName();
+			$responce['status'] = 1;
+			$responce['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
+			$responce['data'] = $widgetRealData;
+		}
+		catch (Exception $e)
+		{
+			$responce['status'] = 0;
+			$responce['msg'] = JText::_("Something went wrong");
+		}
+
+		return $responce;
+	}
+
+	/**
+	 * Get the Class Name
+	 *
+	 * @param   string  $dataPlugin  .
+	 * 
+	 * @return	string
+	 *
+	 * @since 	1.0
+	 **/
+	public function getClassNameForDataPlugin($dataPlugin)
+	{
+		$dataPlugin = explode(".", $dataPlugin);
 		$path = "/plugins/tjdashboardsource/";
 		$folderPath = $path . $dataPlugin[0] . "/" . $dataPlugin[0];
+		JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
 
-		if (JFolder::exists(JPATH_SITE . $folderPath))
-		{
-			$filePath = $folderPath . "/" . $dataPlugin[1] . ".php";
+		return $className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
+	}
 
-			if (JFile::exists(JPATH_SITE . $filePath))
-			{
-				JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
-				$className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
+	/**
+	 * Get the Method Name
+	 *
+	 * @param   string  $renderPlugin  .
+	 * 
+	 * @return	string
+	 *
+	 * @since 	1.0
+	 **/
+	public function getMethodNameForRenderer($renderPlugin)
+	{
+		$rendererPlugin = explode(".", $renderPlugin);
 
-				if (class_exists($className))
-				{
-					$pluginClass = new $className;
-					$rendererPlugin = explode(".", $widgetDetails->renderer_plugin);
-					$methodName = 'getData' . ucfirst($rendererPlugin) . ucfirst($rendererPlugin[1]);
-
-					if (method_exists($pluginClass, $methodName))
-					{
-						$widgetRealData = $pluginClass->$methodName();
-						$response['status'] = 1;
-						$response['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
-						$response['data'] = $widgetRealData;
-					}
-					else
-					{
-						$response['status'] = 0;
-						$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_METHOD_NOT_FOUND");
-					}
-				}
-				else
-				{
-					$response['status'] = 0;
-					$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_CLASS_NOT_FOUND");
-				}
-			}
-			else
-			{
-				$response['status'] = 0;
-				$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FILE_NOT_FOUND");
-			}
-		}
-		else
-		{
-			$response['status'] = 0;
-			$response['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FOLDER_NOT_FOUND");
-		}
-
-		return $response;
+		return 'getData' . ucfirst($rendererPlugin[0]) . ucfirst($rendererPlugin[1]);
 	}
 }

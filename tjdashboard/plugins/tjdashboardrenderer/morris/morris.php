@@ -25,7 +25,7 @@ class PlgTjdashboardRendererMorris
 	 **/
 	public function getJS()
 	{
-		return array('asets/js/raphael.min.js', 'asets/js/morris.min.js', 'asets/js/renderer.js');
+		return array('assets/js/raphael.min.js', 'assets/js/morris.min.js', 'assets/js/renderer.js');
 	}
 
 	/**
@@ -37,6 +37,6 @@ class PlgTjdashboardRendererMorris
 	 **/
 	public function getCSS()
 	{
-		return array('asets/js/morris.css');
+		return array('assets/css/morris.min.css');
 	}
 }

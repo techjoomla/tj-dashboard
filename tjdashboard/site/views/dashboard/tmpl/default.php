@@ -19,6 +19,12 @@ $document->addScriptDeclaration($script, 'text/javascript');
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.js');
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.js');
 
+$document->addScript('components/com_tjdashboard/assets/js/system.js');
+
+//$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/renderer.js');
+//$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/morris.min.js');
+//$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/raphael.min.js');
+
 ?>
 <script>
 jQuery(document).ready(function() {

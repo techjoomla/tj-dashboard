@@ -14,53 +14,50 @@ var TJDashboardUI = {
 	var promise = TJDashboardService.getDashboard(id);
 
 	promise.done(function(response) {
-		if(!response.data.dashboard_id)
-		{
-			alert("no length");
-			//TJDashboardUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
-			return false;
-		}
-		else
-		{
-			jQuery('<h1><div data-dashboard-id="'+response.data.dashboard_id+'" class="tjdashboard-title">' + response.data.title + '</div></h1>').appendTo('.tjdashboard');
-
-			if (response.data.widget_data.length <= 0)
+			if(!response.data.dashboard_id)
 			{
-				jQuery('<div class="alert alert-info"> No widgets found to show</div>').appendTo('.tjdashboard');
+				alert("no length");
+				//TJDashboardUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 				return false;
 			}
-			
-			var divSpan = 0;
-			var i = 0;
-			var j = 1;
-			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
-
-			jQuery.each (response.data.widget_data, function(index, value)
+			else
 			{
-				jQuery('<div class="widget-data span' +value.size+'"><div class="widget-title"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" style="min-height: 250px;"></div></div>').appendTo('.dashboard-widget-row-'+j);
+				jQuery('<h1><div data-dashboard-id="'+response.data.dashboard_id+'" class="tjdashboard-title">' + response.data.title + '</div></h1>').appendTo('.tjdashboard');
 
-				TJDashboardUI.initWidget(value.dashboard_widget_id);
-
-				i++;
-				divSpan = parseInt(divSpan) + parseInt(value.size);
-
-				if (divSpan === 12 && response.data.widget_data.length !== i)
+				if (response.data.widget_data.length <= 0)
 				{
-					j++;
-					jQuery('</div><div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
-					divSpan = 0;
+					jQuery('<div class="alert alert-info"> No widgets found to show</div>').appendTo('.tjdashboard');
+					return false;
 				}
 
-				if (response.data.widget_data.length === i)
+				var divSpan = 0;
+				var i = 0;
+				var j = 1;
+				jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+				jQuery.each (response.data.widget_data, function(index, value)
 				{
-					jQuery('</div>').appendTo('.tjdashboard');
-				}
-			});
+					jQuery('<div class="widget-data span' +value.size+'"><div class="widget-title"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" style="min-height: 250px;"></div></div>').appendTo('.dashboard-widget-row-'+j);
 
-			//jQuery('</div>').appendTo('.tjdashboard');
-		}
-	});
-},
+					TJDashboardUI.initWidget(value.dashboard_widget_id);
+
+					i++;
+					divSpan = parseInt(divSpan) + parseInt(value.size);
+
+					if (divSpan === 12 && response.data.widget_data.length !== i)
+					{
+						j++;
+						jQuery('</div><div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+						divSpan = 0;
+					}
+
+					if (response.data.widget_data.length === i)
+					{
+						jQuery('</div>').appendTo('.tjdashboard');
+					}
+				});
+			}
+		});
+	},
 
 	initWidget : function(id){
 		/** global: TJDashboardService */
@@ -72,7 +69,6 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			//console.log(JSON.parse(response.data.widget_render_data));
 			if (!TJDashboardUI._validWidget(response.data.widget_render_data))
 			{
 				jQuery('<div class="alert alert-info">No data to render</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
@@ -81,24 +77,33 @@ var TJDashboardUI = {
 
 			var sourceData = [];
 			sourceData['element'] = 'dashboard-widget-'+response.data.dashboard_widget_id;
+			//console.log(response);
 			sourceData['data'] = response.data.widget_render_data;
-			var renderer = response.data.renderer_plugin;
-			var redererDetail = renderer.split(".");
-			var library = redererDetail[0]; // morris
-			var method = redererDetail[1]; // method
+			var redererDetail = response.data.renderer_plugin.split(".");
+			var library = redererDetail[0];
+			var method = redererDetail[1];
 
-			if ((!sourceData) && (!renderer))
+			if ((!sourceData) && (!response.data.renderer_plugin))
 			{
 				return false;
 			}
 
-			TJDashboardService.loadScript(root_url+'plugins/tjdashboardrenderer/'+library+'/assets/js/'+library+'.min.js', function()
+			for(i=0; i < response.data.widget_js.length; i++)
 			{
-				TJDashboardService.loadScript(root_url+'/plugins/tjdashboardrenderer/'+library+'/assets/js/renderer.js', 	function()
-				{
-					renderData(method,sourceData);
-				});
-			});
+				//@ Todo : we can check if library file is already loaded don't load for next widgets  
+				TJDashboardService.loadAsset(root_url+'plugins/tjdashboardrenderer/'+library+'/'+response.data.widget_js[i],'js');
+			}
+
+			for(i=0; i< response.data.widget_css.length; i++)
+			{
+				//@ Todo : we can check if library file is already loaded don't load for next widgets 
+				TJDashboardService.loadAsset(root_url+'plugins/tjdashboardrenderer/'+library+'/'+response.data.widget_css[i],'css');
+			}
+
+			setTimeout(function(){
+				libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
+				 window[libraryClassName].renderData(method,sourceData); 
+			}, 160);
 		});
 	},
 	_validWidget: function (widgetJson) {
@@ -108,5 +113,10 @@ var TJDashboardUI = {
 			return false;
 		}
     return true;
+	},
+
+	_jsLibraryUperCase: function(library) 
+	{
+		return library.charAt(0).toUpperCase() + library.slice(1);
 	}
 }

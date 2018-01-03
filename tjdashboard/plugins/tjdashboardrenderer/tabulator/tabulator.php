@@ -16,4 +16,27 @@ defined('_JEXEC') or die('Restricted access');
  */
 class PlgTjdashboardRendererTabulator
 {
+	/**
+	 * Get the widget JS files
+	 *
+	 * @return	Array JS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	public function getJS()
+	{
+		return array('assets/js/jquery-ui.min', 'assets/js/tabulator.min.js', 'assets/js/renderer.js');
+	}
+
+	/**
+	 * Get the widget CSS files
+	 *
+	 * @return	Array CSS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	public function getCSS()
+	{
+		return array('assets/css/tabulator.min.css');
+	}
 }

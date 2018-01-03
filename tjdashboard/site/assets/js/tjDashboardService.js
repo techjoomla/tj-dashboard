@@ -39,26 +39,40 @@ var TJDashboardService = {
 		return this.postData(root_url + this.api_widget_url + id, params);
 	},
 
-	loadScript: function(url, callback){
+	loadAsset: function(url, tagtype){
+		//console.log(callback);
+		var tag = null;
+		switch(tagtype)
+		{
+			case 'js':
+				//console.log('In Js');
+				tag = document.createElement("script")
+				tag.type = "text/javascript";
+				tag.src = url;
+			break;
+			case 'css':
+				tag = document.createElement("link")
+				tag.rel = "stylesheet";
+				tag.href = url;
+			break;
+		}
 
-		var script = document.createElement("script")
-		script.type = "text/javascript";
-
-		if (script.readyState){  //IE
-			script.onreadystatechange = function(){
-				if (script.readyState == "loaded" ||
-						script.readyState == "complete"){
-					script.onreadystatechange = null;
-					callback();
+		if (tag.readyState){  //IE
+			tag.onreadystatechange = function(){
+				if (tag.readyState == "loaded" || tag.readyState == "complete"){
+					tag.onreadystatechange = null;
+					//callback();
 				}
 			};
-		} else {  //Others
-			script.onload = function(){
-				callback();
+		}
+		else
+		{  //Others
+			tag.onload = function(){
+				//callback();
 			};
 		}
 
-		script.src = url;
-		document.getElementsByTagName("head")[0].appendChild(script);
+		//console.log(tag);
+		document.getElementsByTagName("head")[0].appendChild(tag);
 	}
 }

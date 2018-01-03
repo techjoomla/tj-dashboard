@@ -68,11 +68,11 @@ class TjlmsEnrolledcoursescountDatasource
 	 *
 	 * @since   1.0
 	 * */
-	public function getDataTjdashPlainhtml()
+	public function getDataTjdashhtmlPlainhtml()
 	{
 		$coursesData = $this->getData();
 
-		return $coursesData;
+		return json_encode($coursesData);
 	}
 
 	/**
@@ -84,6 +84,6 @@ class TjlmsEnrolledcoursescountDatasource
 	 * */
 	public function getSupportedRenderers()
 	{
-		return array('tjdash.plainhtml' => 'TJLMS Plain Text Box', 'tjdash.iconhtml' => 'TJLMS Text With Icon Box');
+		return array('tjdashhtml.plainhtml' => 'TJLMS Plain Text Box', 'tjdashhtml.iconhtml' => 'TJLMS Text With Icon Box');
 	}
 }
