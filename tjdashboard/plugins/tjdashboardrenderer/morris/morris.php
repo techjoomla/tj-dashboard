@@ -25,7 +25,12 @@ class PlgTjdashboardRendererMorris
 	 **/
 	public function getJS()
 	{
-		return array('assets/js/raphael.min.js', 'assets/js/morris.min.js', 'assets/js/renderer.js');
+		$J1 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/eve.min.js';
+		$J2 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/raphael.min.js';
+		$J3 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/morris.min.js';
+		$J4 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/renderer.js';
+
+		return array($J3,$J2,$J4);
 	}
 
 	/**
@@ -37,6 +42,6 @@ class PlgTjdashboardRendererMorris
 	 **/
 	public function getCSS()
 	{
-		return array('assets/css/morris.min.css');
+		return array( 'css!' . Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/css/morris.min.css');
 	}
 }

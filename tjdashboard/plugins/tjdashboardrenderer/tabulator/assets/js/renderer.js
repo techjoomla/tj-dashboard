@@ -2,12 +2,11 @@
 var TJDashboardTabulator = {
 	renderData: function(method,sourceData)
 	{
-		console(method);
 		this[method](sourceData);
 	},
 	tjdashtable: function(sourceData)
 	{
-		console.log(sourceData.data);
+		//console.log(sourceData.data);
 		//var renderData = JSON.parse(sourceData.data);
 		jQuery("#"+sourceData.element).tabulator({
 			layout:"fitColumns",

@@ -2,12 +2,10 @@
 var TJDashboardMorris = {
 	renderData: function(method,sourceData)
 	{
-		//console.log('Morris RendereData Method');
 		this[method](sourceData);
 	},
 	bar: function(data)
 	{
-		console.log(data);
 		var renderData = JSON.parse(data.data);
 		Morris.Bar({
 			element: data.element,

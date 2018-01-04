@@ -36,12 +36,4 @@ class DashboardHelper
 			$vName == 'widgets'
 		);
 	}
-
-	/**
-	 * Method to get widget Data as er rendered.
-	 *
-	 * @param   Array  $widgetDetails  widget Data
-	 *
-	 * @return Array
-	 */
 }

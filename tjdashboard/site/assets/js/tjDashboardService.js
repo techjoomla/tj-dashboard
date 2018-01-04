@@ -9,12 +9,12 @@
 var TJDashboardService = {
 	api_dashboard_url : 'index.php?option=com_api&app=tjdashboard&resource=dashboard&id=',
 	api_widget_url : 'index.php?option=com_api&app=tjdashboard&resource=widget&id=',
+	get_renderers_url : 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers',
 
 	postData: function(url, params, formData) {
 		if(!params){
 			params = {};
 		}
-
 		params['url']		= url;
 		params['data'] 		= formData;
 		params['type'] 		= typeof params['type'] != "undefined" ? params['type'] : 'POST';
@@ -40,12 +40,10 @@ var TJDashboardService = {
 	},
 
 	loadAsset: function(url, tagtype){
-		//console.log(callback);
 		var tag = null;
 		switch(tagtype)
 		{
 			case 'js':
-				//console.log('In Js');
 				tag = document.createElement("script")
 				tag.type = "text/javascript";
 				tag.src = url;
@@ -71,8 +69,13 @@ var TJDashboardService = {
 				//callback();
 			};
 		}
-
-		//console.log(tag);
 		document.getElementsByTagName("head")[0].appendChild(tag);
+	},
+
+	getRenderers: function(selectedDataPlugin) {
+		var formData = {};
+		formData.pluginName = selectedDataPlugin;
+
+		return this.postData(root_url + this.get_renderers_url, '', formData);
 	}
 }

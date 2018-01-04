@@ -31,7 +31,7 @@
 			type="tjdashboardsourceplugins"
 			folder="tjdashboardsource"
 			required="true"
-			onchange="tjdashContentUI.tjdashboard.getRenderers();"
+			onchange="TJDashboardUI._setRenderers();"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN">
 			<option></option>

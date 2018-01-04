@@ -77,7 +77,6 @@ var TJDashboardUI = {
 
 			var sourceData = [];
 			sourceData['element'] = 'dashboard-widget-'+response.data.dashboard_widget_id;
-			//console.log(response);
 			sourceData['data'] = response.data.widget_render_data;
 			var redererDetail = response.data.renderer_plugin.split(".");
 			var library = redererDetail[0];
@@ -88,22 +87,10 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			for(i=0; i < response.data.widget_js.length; i++)
-			{
-				//@ Todo : we can check if library file is already loaded don't load for next widgets  
-				TJDashboardService.loadAsset(root_url+'plugins/tjdashboardrenderer/'+library+'/'+response.data.widget_js[i],'js');
-			}
-
-			for(i=0; i< response.data.widget_css.length; i++)
-			{
-				//@ Todo : we can check if library file is already loaded don't load for next widgets 
-				TJDashboardService.loadAsset(root_url+'plugins/tjdashboardrenderer/'+library+'/'+response.data.widget_css[i],'css');
-			}
-
-			setTimeout(function(){
+			requirejs(response.data.widget_js, function() {
 				libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
-				 window[libraryClassName].renderData(method,sourceData); 
-			}, 160);
+				window[libraryClassName].renderData(method,sourceData); 
+			});
 		});
 	},
 	_validWidget: function (widgetJson) {
@@ -118,5 +105,21 @@ var TJDashboardUI = {
 	_jsLibraryUperCase: function(library) 
 	{
 		return library.charAt(0).toUpperCase() + library.slice(1);
+	},
+
+	_setRenderers: function()
+	{
+		var selectedDataPlugin = jQuery('#jform_data_plugin').val();
+		/** global: TJDashboardService */
+		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
+		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
+		promise.done(function(response) {
+			// Append option to plugin dropdown list.
+			var list = jQuery("#jform_renderer_plugin");
+			/** global: Option */
+			jQuery.each(response.data, function(index, item) {
+				list.append(new Option(item,index));
+			});
+		});
 	}
 }

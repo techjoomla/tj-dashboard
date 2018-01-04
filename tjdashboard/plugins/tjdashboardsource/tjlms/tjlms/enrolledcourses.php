@@ -26,6 +26,7 @@ $lang->load('plg_tjlmsdashboard_enrolledcourses', JPATH_ADMINISTRATOR);
 
 class TjlmsEnrolledcoursesDatasource
 {
+	public $dataSourceName = "Enrolled courses";
 	/**
 	 * Function to get data of the whole block
 	 *

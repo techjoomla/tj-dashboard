@@ -25,7 +25,11 @@ class PlgTjdashboardRendererTabulator
 	 **/
 	public function getJS()
 	{
-		return array('assets/js/jquery-ui.min', 'assets/js/tabulator.min.js', 'assets/js/renderer.js');
+		$JS1 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js';
+		$JS2 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/js/tabulator.min.js';
+		$JS3 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/js/renderer.js';
+
+		return array($JS1,$JS2,$JS3);
 	}
 
 	/**
@@ -37,6 +41,6 @@ class PlgTjdashboardRendererTabulator
 	 **/
 	public function getCSS()
 	{
-		return array('assets/css/tabulator.min.css');
+		return array(Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/tabulator.min.css');
 	}
 }
