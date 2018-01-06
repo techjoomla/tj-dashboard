@@ -88,10 +88,11 @@ var TJDashboardUI = {
 			}
 
 			requirejs(response.data.widget_js, function() {
-				libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
+				var libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
 				window[libraryClassName].renderData(method,sourceData); 
 			});
 		});
+		return;
 	},
 	_validWidget: function (widgetJson) {
 		try {
