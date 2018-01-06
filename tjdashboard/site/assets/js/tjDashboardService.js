@@ -26,55 +26,25 @@ var TJDashboardService = {
 	},
 
 	getDashboard: function(id) {
-		params = {};
+		var params = {};
 		params.method = 'GET';
+		/** global: root_url */
 
 		return this.postData(root_url + this.api_dashboard_url + id, params);
 	},
 
 	getWidget: function(id) {
-		params = {};
+		var params = {};
 		params.method = 'GET';
+		/** global: root_url */
 
 		return this.postData(root_url + this.api_widget_url + id, params);
-	},
-
-	loadAsset: function(url, tagtype){
-		var tag = null;
-		switch(tagtype)
-		{
-			case 'js':
-				tag = document.createElement("script")
-				tag.type = "text/javascript";
-				tag.src = url;
-			break;
-			case 'css':
-				tag = document.createElement("link")
-				tag.rel = "stylesheet";
-				tag.href = url;
-			break;
-		}
-
-		if (tag.readyState){  //IE
-			tag.onreadystatechange = function(){
-				if (tag.readyState == "loaded" || tag.readyState == "complete"){
-					tag.onreadystatechange = null;
-					//callback();
-				}
-			};
-		}
-		else
-		{  //Others
-			tag.onload = function(){
-				//callback();
-			};
-		}
-		document.getElementsByTagName("head")[0].appendChild(tag);
 	},
 
 	getRenderers: function(selectedDataPlugin) {
 		var formData = {};
 		formData.pluginName = selectedDataPlugin;
+		/** global: root_url */
 
 		return this.postData(root_url + this.get_renderers_url, '', formData);
 	}
