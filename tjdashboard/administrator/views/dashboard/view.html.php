@@ -87,7 +87,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 		$user       = JFactory::getUser();
 		$userId     = $user->id;
 		$isNew      = ($this->item->dashboard_id == 0);
-		$checkedOut = !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
+		$checkedOut = $this->isCheckedOut($userId);
 
 		// Built the actions for new and existing records.
 		$canDo = $this->canDo;
@@ -108,11 +108,10 @@ class TjdashboardViewDashboard extends JViewLegacy
 		}
 		else
 		{
-			// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
-			$itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+			$itemEditable = $this->isEditable($canDo, $userId);
 
 			// Can't save the record if it's checked out and editable
-			$this->_canSave($checkedOut, $itemEditable);
+			$this->canSave($checkedOut, $itemEditable);
 
 			/* If checked out, we can still save
 			if ($canDo->get('core.create'))
@@ -135,7 +134,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 *
 	 * @return void
 	 */
-	protected function _canSave($checkedOut, $itemEditable)
+	protected function canSave($checkedOut, $itemEditable)
 	{
 		if (!$checkedOut && $itemEditable)
 		{
@@ -148,5 +147,32 @@ class TjdashboardViewDashboard extends JViewLegacy
 				JToolbarHelper::save2new('dashboard.save2new');
 			}*/
 		}
+	}
+
+	/**
+	 * Is editable
+	 *
+	 * @param   Object   $canDo   Checked Out
+	 * 
+	 * @param   integer  $userId  User ID
+	 *
+	 * @return boolean
+	 */
+	protected function isEditable($canDo, $userId)
+	{
+		// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
+		return $itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+	}
+
+	/**
+	 * Is Checked Out
+	 *
+	 * @param   integer  $userId  User ID
+	 *
+	 * @return boolean
+	 */
+	protected function isCheckedOut($userId)
+	{
+		return !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
 	}
 }
