@@ -112,17 +112,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 			$itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
 
 			// Can't save the record if it's checked out and editable
-			if (!$checkedOut && $itemEditable)
-			{
-				// JToolbarHelper::apply('dashboard.apply');
-				JToolbarHelper::save('dashboard.save');
-
-				/* We can save this record, but check the create permission to see if we can return to make a new one.
-				if ($canDo->get('core.create'))
-				{
-					JToolbarHelper::save2new('dashboard.save2new');
-				}*/
-			}
+			$this->_canSave($checkedOut, $itemEditable);
 
 			/* If checked out, we can still save
 			if ($canDo->get('core.create'))
@@ -134,5 +124,29 @@ class TjdashboardViewDashboard extends JViewLegacy
 		}
 
 		JToolbarHelper::divider();
+	}
+
+	/**
+	 * Can't save the record if it's checked out and editable
+	 *
+	 * @param   boolean  $checkedOut    Checked Out
+	 * 
+	 * @param   boolean  $itemEditable  Item editable
+	 *
+	 * @return void
+	 */
+	protected function _canSave($checkedOut, $itemEditable)
+	{
+		if (!$checkedOut && $itemEditable)
+		{
+			// JToolbarHelper::apply('dashboard.apply');
+			JToolbarHelper::save('dashboard.save');
+
+			/* We can save this record, but check the create permission to see if we can return to make a new one.
+			if ($canDo->get('core.create'))
+			{
+				JToolbarHelper::save2new('dashboard.save2new');
+			}*/
+		}
 	}
 }
