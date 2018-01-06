@@ -161,16 +161,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 
 		if (file_exists($formPath))
 		{
-			if ($this->canCreate)
-			{
-				JToolBarHelper::addNew('dashboard.add', 'JTOOLBAR_NEW');
-				JToolbarHelper::custom('dashboard.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
-			}
-
-			if ($this->canEdit && isset($this->items[0]))
-			{
-				JToolBarHelper::editList('dashboard.edit', 'JTOOLBAR_EDIT');
-			}
+			$this->renderCreateDuplicateEditButtons();
 		}
 
 		if ($this->canChangeStatus)
@@ -202,16 +193,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 		// Show trash and delete for components that uses the state field
 		if (isset($this->items[0]->state))
 		{
-			if ($state->get('filter.state') == -2 && $this->canDelete)
-			{
-				JToolBarHelper::deleteList('', 'dashboards.delete', 'JTOOLBAR_EMPTY_TRASH');
-				JToolBarHelper::divider();
-			}
-			elseif ($this->canChangeStatus)
-			{
-				JToolBarHelper::trash('dashboards.trash', 'JTOOLBAR_TRASH');
-				JToolBarHelper::divider();
-			}
+			$this->renderTrashDeleteButtons();
 		}
 	}
 
@@ -228,5 +210,45 @@ class TjdashboardViewDashboards extends JViewLegacy
 			'dash.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 			'dash.state' => JText::_('JSTATUS'),
 		);
+	}
+
+	/**
+	 * Method to render Create,Dubplicate, Edit buttons on view
+	 *
+	 * @return void
+	 */
+	protected function renderCreateDuplicateEditButtons()
+	{
+		if ($this->canCreate)
+		{
+			JToolBarHelper::addNew('dashboard.add', 'JTOOLBAR_NEW');
+			JToolbarHelper::custom('dashboard.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
+		}
+
+		if ($this->canEdit && isset($this->items[0]))
+		{
+			JToolBarHelper::editList('dashboard.edit', 'JTOOLBAR_EDIT');
+		}
+	}
+
+	/**
+	 * Method to render Trash,Delete buttons on view
+	 *
+	 * @return void
+	 */
+	protected function renderTrashDeleteButtons()
+	{
+		$state = $this->get('State');
+
+		if ($state->get('filter.state') == -2 && $this->canDelete)
+		{
+			JToolBarHelper::deleteList('', 'dasboards.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
+		}
+		elseif ($this->canChangeStatus)
+		{
+			JToolBarHelper::trash('dashboards.trash', 'JTOOLBAR_TRASH');
+			JToolBarHelper::divider();
+		}
 	}
 }

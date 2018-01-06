@@ -152,8 +152,6 @@ class TjdashboardViewWidgets extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		$state = $this->get('State');
-
 		JToolBarHelper::title(JText::_('COM_TJDASHBOARD_VIEW_WIDGETS'), 'stack article');
 
 		// Check if the form exists before showing the add/edit buttons
@@ -161,16 +159,7 @@ class TjdashboardViewWidgets extends JViewLegacy
 
 		if (file_exists($formPath))
 		{
-			if ($this->canCreate)
-			{
-				JToolBarHelper::addNew('widget.add', 'JTOOLBAR_NEW');
-				JToolbarHelper::custom('widget.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
-			}
-
-			if ($this->canEdit && isset($this->items[0]))
-			{
-				JToolBarHelper::editList('widget.edit', 'JTOOLBAR_EDIT');
-			}
+			$this->renderCreateDuplicateEditButtons();
 		}
 
 		if ($this->canChangeStatus)
@@ -202,16 +191,7 @@ class TjdashboardViewWidgets extends JViewLegacy
 		// Show trash and delete for components that uses the state field
 		if (isset($this->items[0]->state))
 		{
-			if ($state->get('filter.state') == -2 && $this->canDelete)
-			{
-				JToolBarHelper::deleteList('', 'widgets.delete', 'JTOOLBAR_EMPTY_TRASH');
-				JToolBarHelper::divider();
-			}
-			elseif ($this->canChangeStatus)
-			{
-				JToolBarHelper::trash('widgets.trash', 'JTOOLBAR_TRASH');
-				JToolBarHelper::divider();
-			}
+			$this->renderTrashDeleteButtons();
 		}
 	}
 
@@ -228,5 +208,45 @@ class TjdashboardViewWidgets extends JViewLegacy
 			'wid.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 			'wid.state' => JText::_('JSTATUS'),
 		);
+	}
+
+	/**
+	 * Method to render Create,Dubplicate, Edit buttons on view
+	 *
+	 * @return void
+	 */
+	protected function renderCreateDuplicateEditButtons()
+	{
+		if ($this->canCreate)
+		{
+			JToolBarHelper::addNew('widget.add', 'JTOOLBAR_NEW');
+			JToolbarHelper::custom('widget.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
+		}
+
+		if ($this->canEdit && isset($this->items[0]))
+		{
+			JToolBarHelper::editList('widget.edit', 'JTOOLBAR_EDIT');
+		}
+	}
+
+	/**
+	 * Method to render Trash,Delete buttons on view
+	 *
+	 * @return void
+	 */
+	protected function renderTrashDeleteButtons()
+	{
+		$state = $this->get('State');
+
+		if ($state->get('filter.state') == -2 && $this->canDelete)
+		{
+			JToolBarHelper::deleteList('', 'widgets.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
+		}
+		elseif ($this->canChangeStatus)
+		{
+			JToolBarHelper::trash('widgets.trash', 'JTOOLBAR_TRASH');
+			JToolBarHelper::divider();
+		}
 	}
 }
