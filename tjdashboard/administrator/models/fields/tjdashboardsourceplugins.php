@@ -97,7 +97,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 
 		if ($return)
 		{
-			$this->folder = (string) $this->element['folder'];
+			$this->folder = (string) $element['folder'];
 		}
 
 		return $return;
