@@ -49,7 +49,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 				ApiError::raiseError(400, JText::_($widget->getError()));
 		}
 
-		$this->plugin->setResponse($renderObject);
+		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $renderObject);
 	}
 
 	/**
@@ -73,6 +73,6 @@ class TjdashboardApiResourceWidget extends ApiResource
 			ApiError::raiseError(400, JText::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
 		}
 
-		$this->plugin->setResponse($widget);
+		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $widget);
 	}
 }

@@ -48,7 +48,7 @@ class TjdashboardApiResourceDashboard extends ApiResource
 			ApiError::raiseError(400, JText::_($dashboard->getError()));
 		}
 
-		$this->plugin->setResponse($responceObject);
+		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $responceObject);
 	}
 
 	/**
