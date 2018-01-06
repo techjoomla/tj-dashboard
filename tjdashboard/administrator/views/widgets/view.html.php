@@ -169,6 +169,9 @@ class TjdashboardViewWidgets extends JViewLegacy
 				JToolBarHelper::divider();
 				JToolBarHelper::custom('widgets.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
 				JToolBarHelper::custom('widgets.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+				JToolBarHelper::divider();
+				JToolBarHelper::archiveList('widgets.archive', 'JTOOLBAR_ARCHIVE');
+				$this->renderTrashDeleteButtons();
 			}
 			elseif (isset($this->items[0]))
 			{
@@ -176,22 +179,10 @@ class TjdashboardViewWidgets extends JViewLegacy
 				JToolBarHelper::deleteList('', 'widgets.delete', 'JTOOLBAR_DELETE');
 			}
 
-			if (isset($this->items[0]->state))
-			{
-				JToolBarHelper::divider();
-				JToolBarHelper::archiveList('widgets.archive', 'JTOOLBAR_ARCHIVE');
-			}
-
 			if (isset($this->items[0]->checked_out))
 			{
 				JToolBarHelper::custom('widgets.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 			}
-		}
-
-		// Show trash and delete for components that uses the state field
-		if (isset($this->items[0]->state))
-		{
-			$this->renderTrashDeleteButtons();
 		}
 	}
 

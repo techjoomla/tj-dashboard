@@ -152,8 +152,6 @@ class TjdashboardViewDashboards extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		$state = $this->get('State');
-
 		JToolBarHelper::title(JText::_('COM_TJDASHBOARD_VIEW_DASHBOARDS'), 'stack article');
 
 		// Check if the form exists before showing the add/edit buttons
@@ -171,6 +169,9 @@ class TjdashboardViewDashboards extends JViewLegacy
 				JToolBarHelper::divider();
 				JToolBarHelper::custom('dashboards.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
 				JToolBarHelper::custom('dashboards.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+				JToolBarHelper::divider();
+				JToolBarHelper::archiveList('dashboards.archive', 'JTOOLBAR_ARCHIVE');
+				$this->renderTrashDeleteButtons();
 			}
 			elseif (isset($this->items[0]))
 			{
@@ -178,22 +179,10 @@ class TjdashboardViewDashboards extends JViewLegacy
 				JToolBarHelper::deleteList('', 'dashboards.delete', 'JTOOLBAR_DELETE');
 			}
 
-			if (isset($this->items[0]->state))
-			{
-				JToolBarHelper::divider();
-				JToolBarHelper::archiveList('dashboards.archive', 'JTOOLBAR_ARCHIVE');
-			}
-
 			if (isset($this->items[0]->checked_out))
 			{
 				JToolBarHelper::custom('dashboards.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 			}
-		}
-
-		// Show trash and delete for components that uses the state field
-		if (isset($this->items[0]->state))
-		{
-			$this->renderTrashDeleteButtons();
 		}
 	}
 
@@ -242,7 +231,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 
 		if ($state->get('filter.state') == -2 && $this->canDelete)
 		{
-			JToolBarHelper::deleteList('', 'dasboards.delete', 'JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::deleteList('', 'dashboards.delete', 'JTOOLBAR_EMPTY_TRASH');
 			JToolBarHelper::divider();
 		}
 		elseif ($this->canChangeStatus)
