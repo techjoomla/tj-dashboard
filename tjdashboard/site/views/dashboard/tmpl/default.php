@@ -16,9 +16,18 @@ $document = JFactory::getDocument();
 $script  = 'var root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
 
-$document->addScript('components/com_tjdashboard/assets/js/require.min.js');
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.js');
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.js');
+
+$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/raphael.min.js');
+$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/renderer.js');
+$document->addScript('plugins/tjdashboardrenderer/morris/assets/js/morris.min.js');
+
+$document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/tabulator.min.css');
+$document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/semantic-ui/tabulator_semantic-ui.min.css');
+$document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js');
+$document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/renderer.js');
+$document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/tabulator.min.js');
 
 ?>
 <script>

@@ -25,7 +25,6 @@ class PlgTjdashboardRendererMorris
 	 **/
 	public function getJS()
 	{
-		$J1 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/eve.min.js';
 		$J2 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/raphael.min.js';
 		$J3 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/morris.min.js';
 		$J4 = Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/js/renderer.js';

@@ -28,7 +28,7 @@ class TjDashboardControllerWidget extends JControllerForm
 		{
 			$app     = JFactory::getApplication();
 			$jinput  = $app->input;
-			$formData   = $jinput->post->get('pluginName', STRING, 'string');
+			$formData   = $jinput->post->get('pluginName', '', 'string');
 			$dataPlugin = explode('.', $formData);
 			$pluginFolder = $dataPlugin[0] . '/' . $dataPlugin[0];
 			$pluginFileName = $dataPlugin[1];

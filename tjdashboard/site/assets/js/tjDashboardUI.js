@@ -90,10 +90,9 @@ var TJDashboardUI = {
 			libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
 			window[libraryClassName].renderData(method,sourceData); 
 			return true;
-
 			});
-		});
 	},
+
 	_validWidget: function (widgetJson) {
 		try {
 			JSON.parse(widgetJson);

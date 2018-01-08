@@ -16,18 +16,6 @@ defined('_JEXEC') or die;
  */
 class TjdashboardTableWidgets extends JTable
 {
-	private $ordering;
-
-	private $dashboard_widget_id;
-
-	private $created_by;
-
-	private $created_on;
-
-	private $modified_by;
-
-	private $modified_on;
-
 	/**
 	 * Constructor
 	 *

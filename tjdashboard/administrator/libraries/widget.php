@@ -254,6 +254,7 @@ class TjdashboardWidget extends JObject
 	protected function getWidgetCSS($id)
 	{
 		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		/** @scrutinizer ignore-call */
 		$widgetData = $widgetModel->getItem($id);
 
 		$renderer = explode('.', $widgetData->renderer_plugin);
@@ -271,7 +272,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @param   array  $widgetDetails  to load (optional).
 	 * 
-	 * @return	Array
+	 * @return	Array|boolean False if result fails
 	 *
 	 * @since 	1.0
 	 **/
@@ -319,7 +320,7 @@ class TjdashboardWidget extends JObject
 		$folderPath = $path . $dataPlugin[0] . "/" . $dataPlugin[0];
 		JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
 
-		return $className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
+		return ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
 	}
 
 	/**
