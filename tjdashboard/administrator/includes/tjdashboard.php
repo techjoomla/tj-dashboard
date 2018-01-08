@@ -10,15 +10,6 @@ defined('_JEXEC') or die();
 
 JLoader::discover("Tjdashboard", JPATH_ADMINISTRATOR . '/components/com_tjdashboard/libraries');
 
-/* load language file*/
-$lang = JFactory::getLanguage();
-
-$extension = 'com_tjdashboard';
-$base_dir = JPATH_SITE;
-$language_tag = 'en-GB';
-$reload = true;
-$lang->load($extension, $base_dir, $language_tag, $reload);
-
 /**
  * Tjdashboard factory class.
  *
