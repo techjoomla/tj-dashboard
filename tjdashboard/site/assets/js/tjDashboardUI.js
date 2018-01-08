@@ -87,7 +87,7 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
+			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
 			window[libraryClassName].renderData(method,sourceData); 
 			return true;
 			});

@@ -168,13 +168,14 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @param   integer  $id  The primary key of the widget_id to load (optional).
 	 * 
-	 * @return	Array
+	 * @return	Array|boolean 
 	 *
 	 * @since 	1.0
 	 **/
 	protected function getWidgetData($id)
 	{
 		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		/** @scrutinizer ignore-call */
 		$widgetData = $widgetModel->getItem($id);
 		$result = $this->getWidgetRendererData($widgetData);
 
@@ -230,6 +231,7 @@ class TjdashboardWidget extends JObject
 	protected function getWidgetJS($id)
 	{
 		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		/** @scrutinizer ignore-call */
 		$widgetData = $widgetModel->getItem($id);
 
 		$renderer = explode('.', $widgetData->renderer_plugin);
@@ -254,6 +256,7 @@ class TjdashboardWidget extends JObject
 	protected function getWidgetCSS($id)
 	{
 		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+
 		/** @scrutinizer ignore-call */
 		$widgetData = $widgetModel->getItem($id);
 
@@ -278,12 +281,12 @@ class TjdashboardWidget extends JObject
 	 **/
 	protected function getWidgetRendererData($widgetDetails)
 	{
+		$response = array();
+
 		if ((!$widgetDetails->data_plugin) && (!$widgetDetails->renderer_plugin))
 		{
 			return false;
 		}
-
-		$responce = array();
 
 		try
 		{
@@ -291,17 +294,17 @@ class TjdashboardWidget extends JObject
 			$pluginObj = new $dataPluginClass;
 			$methodName = $this->getMethodNameForRenderer($widgetDetails->renderer_plugin);
 			$widgetRealData = $pluginObj->$methodName();
-			$responce['status'] = 1;
-			$responce['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
-			$responce['data'] = $widgetRealData;
+			$response['status'] = 1;
+			$response['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
+			$response['data'] = $widgetRealData;
 		}
 		catch (Exception $e)
 		{
-			$responce['status'] = 0;
-			$responce['msg'] = JText::_("Something went wrong");
+			$response['status'] = 0;
+			$response['msg'] = JText::_("Something went wrong");
 		}
 
-		return $responce;
+		return $response;
 	}
 
 	/**
