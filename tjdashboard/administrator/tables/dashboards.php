@@ -40,43 +40,17 @@ class TjdashboardTableDashboards extends JTable
 	 */
 	public function check()
 	{
-		$this->setOrdering();
+		// If there is an ordering column and this is a new row then get the next ordering value
+		if (property_exists($this, 'ordering') && $this->dashboard_id == 0)
+		{
+			$this->ordering = self::getNextOrder();
+		}
 
 		if (!$this->created_by)
 		{
 			$this->created_by = JFactory::getUser()->id;
 		}
 
-		$this->prepareAlias();
-
-		return parent::check();
-	}
-
-	/**
-	 * Set Incremental Ordering
-	 *
-	 * @return  void
-	 *
-	 * @since  1.0.0
-	 */
-	protected function setOrdering()
-	{
-		// If there is an ordering column and this is a new row then get the next ordering value
-		if (property_exists($this, 'ordering') && $this->dashboard_id == 0)
-		{
-			$this->ordering = self::getNextOrder();
-		}
-	}
-
-	/**
-	 * Prepare Alias Here
-	 *
-	 * @return  void
-	 *
-	 * @since  1.0.0
-	 */
-	protected function prepareAlias()
-	{
 		$this->alias = trim($this->alias);
 
 		if (empty($this->alias))
@@ -96,6 +70,7 @@ class TjdashboardTableDashboards extends JTable
 			}
 		}
 
+		// Check if course with same alias is present
 		$table = TjdashboardFactory::table("dashboards");
 
 		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
@@ -114,5 +89,7 @@ class TjdashboardTableDashboards extends JTable
 		{
 			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
 		}
+
+		return parent::check();
 	}
 }
