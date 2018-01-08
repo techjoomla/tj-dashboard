@@ -17,6 +17,11 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
 class TjdashboardTableDashboards extends JTable
 {
 	protected $alias;
+
+	protected $ordering;
+
+	protected $created_by;
+
 	/**
 	 * Constructor
 	 *
@@ -41,8 +46,6 @@ class TjdashboardTableDashboards extends JTable
 	 */
 	public function check()
 	{
-		$db = JFactory::getDbo();
-
 		// If there is an ordering column and this is a new row then get the next ordering value
 		if (property_exists($this, 'ordering') && $this->dashboard_id == 0)
 		{
