@@ -49,13 +49,6 @@ class TjdashboardTableDashboards extends JTable
 
 		$this->prepareAlias();
 
-		// Check if dashboard with same alias is present
-
-		if (trim(str_replace('-', '', $this->alias)) == '')
-		{
-			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
-		}
-
 		return parent::check();
 	}
 
@@ -115,6 +108,11 @@ class TjdashboardTableDashboards extends JTable
 			}
 
 			JFactory::getApplication()->enqueueMessage($msg, 'warning');
+		}
+
+		if (trim(str_replace('-', '', $this->alias)) == '')
+		{
+			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
 		}
 	}
 }
