@@ -40,11 +40,7 @@ class TjdashboardTableDashboards extends JTable
 	 */
 	public function check()
 	{
-		// If there is an ordering column and this is a new row then get the next ordering value
-		if (property_exists($this, 'ordering') && $this->dashboard_id == 0)
-		{
-			$this->ordering = self::getNextOrder();
-		}
+		$this->setOrdering();
 
 		if (!$this->created_by)
 		{
@@ -55,26 +51,28 @@ class TjdashboardTableDashboards extends JTable
 
 		// Check if dashboard with same alias is present
 
-		$table = TjdashboardFactory::table("dashboards");
-
-		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
-		{
-			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
-
-			while ($table->load(array('alias' => $this->alias)))
-			{
-				$this->alias = JString::increment($this->alias, 'dash');
-			}
-
-			JFactory::getApplication()->enqueueMessage($msg, 'warning');
-		}
-
 		if (trim(str_replace('-', '', $this->alias)) == '')
 		{
 			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
 		}
 
 		return parent::check();
+	}
+
+	/**
+	 * Set Incremental Ordering
+	 *
+	 * @return  void
+	 *
+	 * @since  1.0.0
+	 */
+	protected function setOrdering()
+	{
+		// If there is an ordering column and this is a new row then get the next ordering value
+		if (property_exists($this, 'ordering') && $this->dashboard_id == 0)
+		{
+			$this->ordering = self::getNextOrder();
+		}
 	}
 
 	/**
@@ -103,6 +101,20 @@ class TjdashboardTableDashboards extends JTable
 			{
 				$this->alias = JFilterOutput::stringURLSafe($this->alias);
 			}
+		}
+
+		$table = TjdashboardFactory::table("dashboards");
+
+		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
+		{
+			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
+
+			while ($table->load(array('alias' => $this->alias)))
+			{
+				$this->alias = JString::increment($this->alias, 'dash');
+			}
+
+			JFactory::getApplication()->enqueueMessage($msg, 'warning');
 		}
 	}
 }
