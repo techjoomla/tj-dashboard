@@ -16,12 +16,6 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  */
 class TjdashboardTableDashboards extends JTable
 {
-	protected $alias;
-
-	protected $ordering;
-
-	protected $created_by;
-
 	/**
 	 * Constructor
 	 *
@@ -57,9 +51,23 @@ class TjdashboardTableDashboards extends JTable
 			$this->created_by = JFactory::getUser()->id;
 		}
 
-		$this->alias = trim($this->alias);
-
 		$this->prepareAlias();
+
+		// Check if dashboard with same alias is present
+
+		$table = TjdashboardFactory::table("dashboards");
+
+		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
+		{
+			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
+
+			while ($table->load(array('alias' => $this->alias)))
+			{
+				$this->alias = JString::increment($this->alias, 'dash');
+			}
+
+			JFactory::getApplication()->enqueueMessage($msg, 'warning');
+		}
 
 		if (trim(str_replace('-', '', $this->alias)) == '')
 		{
@@ -70,7 +78,7 @@ class TjdashboardTableDashboards extends JTable
 	}
 
 	/**
-	 * prepare Alias
+	 * Prepare Alias Here
 	 *
 	 * @return  void
 	 *
@@ -78,6 +86,8 @@ class TjdashboardTableDashboards extends JTable
 	 */
 	protected function prepareAlias()
 	{
+		$this->alias = trim($this->alias);
+
 		if (empty($this->alias))
 		{
 			$this->alias = $this->title;
@@ -93,20 +103,6 @@ class TjdashboardTableDashboards extends JTable
 			{
 				$this->alias = JFilterOutput::stringURLSafe($this->alias);
 			}
-		}
-
-		$table = TjdashboardFactory::table("dashboards");
-
-		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
-		{
-			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
-
-			while ($table->load(array('alias' => $this->alias)))
-			{
-				$this->alias = JString::increment($this->alias, 'dash');
-			}
-
-			JFactory::getApplication()->enqueueMessage($msg, 'warning');
 		}
 	}
 }
