@@ -55,24 +55,9 @@ class TjdashboardTableDashboards extends JTable
 
 		$this->alias = trim($this->alias);
 
-		if (empty($this->alias))
-		{
-			$this->alias = $this->title;
-		}
+		$this->prepareAlias();
 
-		if ($this->alias)
-		{
-			if (JFactory::getConfig()->get('unicodeslugs') == 1)
-			{
-				$this->alias = JFilterOutput::stringURLUnicodeSlug($this->alias);
-			}
-			else
-			{
-				$this->alias = JFilterOutput::stringURLSafe($this->alias);
-			}
-		}
-
-		// Check if course with same alias is present
+		// Check if Dashboard with same alias is present
 		$table = TjdashboardFactory::table("dashboards");
 
 		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
@@ -93,5 +78,32 @@ class TjdashboardTableDashboards extends JTable
 		}
 
 		return parent::check();
+	}
+
+	/**
+	 * prepare Alias
+	 *
+	 * @return  void
+	 *
+	 * @since  1.0.0
+	 */
+	protected function prepareAlias()
+	{
+		if (empty($this->alias))
+		{
+			$this->alias = $this->title;
+		}
+
+		if ($this->alias)
+		{
+			if (JFactory::getConfig()->get('unicodeslugs') == 1)
+			{
+				$this->alias = JFilterOutput::stringURLUnicodeSlug($this->alias);
+			}
+			else
+			{
+				$this->alias = JFilterOutput::stringURLSafe($this->alias);
+			}
+		}
 	}
 }
