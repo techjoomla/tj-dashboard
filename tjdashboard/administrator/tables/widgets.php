@@ -16,6 +16,18 @@ defined('_JEXEC') or die;
  */
 class TjdashboardTableWidgets extends JTable
 {
+	private $ordering;
+
+	private $dashboard_widget_id;
+
+	private $created_by;
+
+	private $created_on;
+
+	private $modified_by;
+
+	private $modified_on;
+
 	/**
 	 * Constructor
 	 *
@@ -38,8 +50,6 @@ class TjdashboardTableWidgets extends JTable
 	 */
 	public function check()
 	{
-		$db = JFactory::getDbo();
-
 		// If there is an ordering column and this is a new row then get the next ordering value
 		if (property_exists($this, 'ordering') && $this->dashboard_widget_id == 0)
 		{
