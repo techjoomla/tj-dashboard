@@ -61,21 +61,6 @@ class TjdashboardTableDashboards extends JTable
 
 		$this->prepareAlias();
 
-		// Check if Dashboard with same alias is present
-		$table = TjdashboardFactory::table("dashboards");
-
-		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
-		{
-			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
-
-			while ($table->load(array('alias' => $this->alias)))
-			{
-				$this->alias = JString::increment($this->alias, 'dash');
-			}
-
-			JFactory::getApplication()->enqueueMessage($msg, 'warning');
-		}
-
 		if (trim(str_replace('-', '', $this->alias)) == '')
 		{
 			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
@@ -108,6 +93,20 @@ class TjdashboardTableDashboards extends JTable
 			{
 				$this->alias = JFilterOutput::stringURLSafe($this->alias);
 			}
+		}
+
+		$table = TjdashboardFactory::table("dashboards");
+
+		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
+		{
+			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
+
+			while ($table->load(array('alias' => $this->alias)))
+			{
+				$this->alias = JString::increment($this->alias, 'dash');
+			}
+
+			JFactory::getApplication()->enqueueMessage($msg, 'warning');
 		}
 	}
 }
