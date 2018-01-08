@@ -161,7 +161,7 @@ class TjdashboardViewWidget extends JViewLegacy
 	protected function isEditable($canDo, $userId)
 	{
 		// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
-		return $itemEditable = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+		return $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
 	}
 
 	/**

@@ -16,6 +16,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  */
 class TjdashboardTableDashboards extends JTable
 {
+	protected $alias;
 	/**
 	 * Constructor
 	 *
