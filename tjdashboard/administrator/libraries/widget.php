@@ -168,7 +168,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @param   integer  $id  The primary key of the widget_id to load (optional).
 	 * 
-	 * @return	Array|boolean 
+	 * @return	Array 
 	 *
 	 * @since 	1.0
 	 **/
@@ -275,7 +275,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @param   array  $widgetDetails  to load (optional).
 	 * 
-	 * @return	Array|boolean False if result fails
+	 * @return	Array
 	 *
 	 * @since 	1.0
 	 **/
@@ -285,7 +285,7 @@ class TjdashboardWidget extends JObject
 
 		if ((!$widgetDetails->data_plugin) && (!$widgetDetails->renderer_plugin))
 		{
-			return false;
+			return $response;
 		}
 
 		try
