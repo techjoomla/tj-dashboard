@@ -19,7 +19,7 @@ class DashboardHelper
 	/**
 	 * Configure the Linkbar.
 	 *
-	 * @param   string  $vName  string
+	 * @param   string  $vName  view name string
 	 *
 	 * @return void
 	 */
@@ -35,77 +35,5 @@ class DashboardHelper
 			'index.php?option=com_tjdashboard&view=widgets',
 			$vName == 'widgets'
 		);
-	}
-
-	/**
-	 * Method to get widget Data as er rendered.
-	 *
-	 * @param   Array  $widgetDetails  widget Data
-	 *
-	 * @return Array
-	 */
-	public function getWidgetRendererData($widgetDetails)
-	{
-		// @TODO Need to review this code
-		if (count($widgetDetails))
-		{
-			$responce = array();
-
-			if ($widgetDetails[0]->data_plugin)
-			{
-				$dataPlugin = explode(".", $widgetDetails[0]->data_plugin);
-
-				$path = "/plugins/tjdashboardsource/";
-				$folderPath = $path . $dataPlugin[0] . "/" . $dataPlugin[0];
-
-				if (JFolder::exists(JPATH_SITE . $folderPath))
-				{
-					$filePath = $folderPath . "/" . $dataPlugin[1] . ".php";
-
-					if (JFile::exists(JPATH_SITE . $filePath))
-					{
-						JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
-						$className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
-
-						if (class_exists($className))
-						{
-							$pluginClass = new $className;
-							$rendererPlugin = explode(".", $widgetDetails[0]->renderer_plugin);
-							$methodName = 'getData' . ucfirst($rendererPlugin[0]) . ucfirst($rendererPlugin[1]);
-
-							if (method_exists($pluginClass, $methodName))
-							{
-								$widgetRealData = $pluginClass->$methodName();
-								$responce['status'] = 1;
-								$responce['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
-								$responce['data'] = $widgetRealData;
-							}
-							else
-							{
-								$responce['status'] = 0;
-								$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_METHOD_NOT_FOUND");
-							}
-						}
-						else
-						{
-							$responce['status'] = 0;
-							$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_CLASS_NOT_FOUND");
-						}
-					}
-					else
-					{
-						$responce['status'] = 0;
-						$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FILE_NOT_FOUND");
-					}
-				}
-				else
-				{
-					$responce['status'] = 0;
-					$responce['msg'] = JText::_("COM_TJDASHBOARD_ERROR_TEXT_FOLDER_NOT_FOUND");
-				}
-			}
-
-			return $responce;
-		}
 	}
 }

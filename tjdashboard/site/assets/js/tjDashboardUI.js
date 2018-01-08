@@ -87,12 +87,11 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			requirejs(response.data.widget_js, function() {
-				var libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
-				window[libraryClassName].renderData(method,sourceData); 
-			});
+			libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
+			window[libraryClassName].renderData(method,sourceData); 
+			return true;
 
-		return true;
+			});
 		});
 	},
 	_validWidget: function (widgetJson) {

@@ -20,8 +20,8 @@ $input = $app->input;
 $document = JFactory::getDocument();
 $script = 'var root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
-$document->addScript(Juri::root().'components/com_tjdashboard/assets/js/tjdashContentService.js');
-$document->addScript(Juri::root().'components/com_tjdashboard/assets/js/tjdashContentUI.js');
+$document->addScript(Juri::root().'components/com_tjdashboard/assets/js/tjDashboardService.js');
+$document->addScript(Juri::root().'components/com_tjdashboard/assets/js/tjDashboardUI.js');
 // In case of modal
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout  = $isModal ? 'modal' : 'edit';

@@ -44,6 +44,10 @@ class TjdashboardWidget extends JObject
 
 	public $widget_render_data = array();
 
+	public $widget_js = array();
+
+	public $widget_css = array();
+
 	protected static $widgetObj = array();
 
 	/**
@@ -83,6 +87,8 @@ class TjdashboardWidget extends JObject
 			$widget = new TjdashboardWidget($id);
 			self::$widgetObj[$id] = $widget;
 			self::$widgetObj[$id]->widget_render_data = $widget->getWidgetData($id);
+			self::$widgetObj[$id]->widget_js = $widget->getWidgetJS($id);
+			self::$widgetObj[$id]->widget_css = $widget->getWidgetCSS($id);
 		}
 
 		return self::$widgetObj[$id];
@@ -168,13 +174,9 @@ class TjdashboardWidget extends JObject
 	 **/
 	protected function getWidgetData($id)
 	{
-		$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
-		$widgetModel->setState('filter.dashboard_widget_id', $id);
-		$widgetData = $widgetModel->getItems();
-
-		JLoader::import("/components/com_tjdashboard/helpers/dashboard", JPATH_ADMINISTRATOR);
-		$tjDashboardHelper = new DashboardHelper;
-		$result = $tjDashboardHelper->getWidgetRendererData($widgetData);
+		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		$widgetData = $widgetModel->getItem($id);
+		$result = $this->getWidgetRendererData($widgetData);
 
 		if (count($result) && $result['status'])
 		{
@@ -214,5 +216,125 @@ class TjdashboardWidget extends JObject
 		$this->dashboard_widget_id = (int) $this->dashboard_widget_id;
 
 		return true;
+	}
+
+	/**
+	 * Get the widget JS files
+	 *
+	 * @param   integer  $id  The primary key of the widget_id to load (optional).
+	 * 
+	 * @return	Array JS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	protected function getWidgetJS($id)
+	{
+		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		$widgetData = $widgetModel->getItem($id);
+
+		$renderer = explode('.', $widgetData->renderer_plugin);
+		$rendererClass = 'PlgTjdashboardRenderer' . ucfirst($renderer[0]);
+		$path = "plugins.tjdashboardrenderer.";
+		$folderPath = $path . $renderer[0] . '.' . $renderer[0];
+		JLoader::import($folderPath, JPATH_SITE);
+		$rendererObj = new $rendererClass;
+
+		return $rendererObj->getJS();
+	}
+
+	/**
+	 * Get the widget CSS files
+	 *
+	 * @param   integer  $id  The primary key of the widget_id to load (optional).
+	 * 
+	 * @return	Array CSS files paths
+	 *
+	 * @since 	1.0
+	 **/
+	protected function getWidgetCSS($id)
+	{
+		$widgetModel = TjdashboardFactory::model("widget", array("ignore_request" => 1));
+		$widgetData = $widgetModel->getItem($id);
+
+		$renderer = explode('.', $widgetData->renderer_plugin);
+		$rendererClass = 'PlgTjdashboardRenderer' . ucfirst($renderer[0]);
+		$path = "plugins.tjdashboardrenderer.";
+		$folderPath = $path . $renderer[0] . '.' . $renderer[0];
+		JLoader::import($folderPath, JPATH_SITE);
+		$rendererObj = new $rendererClass;
+
+		return $rendererObj->getCSS();
+	}
+
+	/**
+	 * Get the Widgets Renderers data files
+	 *
+	 * @param   array  $widgetDetails  to load (optional).
+	 * 
+	 * @return	Array
+	 *
+	 * @since 	1.0
+	 **/
+	protected function getWidgetRendererData($widgetDetails)
+	{
+		if ((!$widgetDetails->data_plugin) && (!$widgetDetails->renderer_plugin))
+		{
+			return false;
+		}
+
+		$responce = array();
+
+		try
+		{
+			$dataPluginClass = $this->getClassNameForDataPlugin($widgetDetails->data_plugin);
+			$pluginObj = new $dataPluginClass;
+			$methodName = $this->getMethodNameForRenderer($widgetDetails->renderer_plugin);
+			$widgetRealData = $pluginObj->$methodName();
+			$responce['status'] = 1;
+			$responce['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
+			$responce['data'] = $widgetRealData;
+		}
+		catch (Exception $e)
+		{
+			$responce['status'] = 0;
+			$responce['msg'] = JText::_("Something went wrong");
+		}
+
+		return $responce;
+	}
+
+	/**
+	 * Get the Class Name
+	 *
+	 * @param   string  $dataPlugin  .
+	 * 
+	 * @return	string
+	 *
+	 * @since 	1.0
+	 **/
+	public function getClassNameForDataPlugin($dataPlugin)
+	{
+		$dataPlugin = explode(".", $dataPlugin);
+		$path = "/plugins/tjdashboardsource/";
+		$folderPath = $path . $dataPlugin[0] . "/" . $dataPlugin[0];
+		JLoader::import($folderPath . "/" . $dataPlugin[1], JPATH_SITE);
+
+		return $className = ucfirst($dataPlugin[0]) . ucfirst($dataPlugin[1]) . 'Datasource';
+	}
+
+	/**
+	 * Get the Method Name
+	 *
+	 * @param   string  $renderPlugin  .
+	 * 
+	 * @return	string
+	 *
+	 * @since 	1.0
+	 **/
+	public function getMethodNameForRenderer($renderPlugin)
+	{
+		$rendererPlugin = explode(".", $renderPlugin);
+
+		return 'getData' . ucfirst($rendererPlugin[0]) . ucfirst($rendererPlugin[1]);
 	}
 }

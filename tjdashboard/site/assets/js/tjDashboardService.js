@@ -37,7 +37,6 @@ var TJDashboardService = {
 		var params = {};
 		params.method = 'GET';
 		/** global: root_url */
-
 		return this.postData(root_url + this.api_widget_url + id, params);
 	},
 
@@ -45,7 +44,6 @@ var TJDashboardService = {
 		var formData = {};
 		formData.pluginName = selectedDataPlugin;
 		/** global: root_url */
-
 		return this.postData(root_url + this.get_renderers_url, '', formData);
 	}
 }
