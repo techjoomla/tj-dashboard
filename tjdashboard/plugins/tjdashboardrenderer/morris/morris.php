@@ -42,6 +42,6 @@ class PlgTjdashboardRendererMorris
 	 **/
 	public function getCSS()
 	{
-		return array( 'css!' . Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/css/morris.min.css');
+		return array(Juri::root() . '/plugins/tjdashboardrenderer/morris/assets/css/morris.min.css');
 	}
 }
