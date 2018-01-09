@@ -1,5 +1,6 @@
 <?php
 /**
+ * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -19,7 +20,7 @@ class TjdashboardApiResourceDashboard extends ApiResource
 	/**
 	 * Function save dashboard.
 	 *
-	 * @return API object
+	 * @return boolean
 	 */
 	public function post()
 	{
@@ -30,33 +31,41 @@ class TjdashboardApiResourceDashboard extends ApiResource
 		$dashboard      = TjdashboardDashboard::getInstance($dashboardId);
 		$responceObject = new stdclass;
 
-		if ($dashboard->save($formData))
+		if ($dashboard->bind($formData))
 		{
-			$responceObject->data   = $dashboard->dashboard_id;
-			$responceObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			if ($dashboard->save())
+			{
+				$responceObject->data   = $dashboard->dashboard_id;
+				$responceObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			}
+			else
+			{
+				ApiError::raiseError(400, JText::_($dashboard->getError()));
+			}
 		}
 		else
 		{
 			ApiError::raiseError(400, JText::_($dashboard->getError()));
 		}
 
-		$this->plugin->setResponse($responceObject);
-
+		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $responceObject);
 	}
 
 	/**
 	 * Function get dashboard data.
 	 *
-	 * @return API Object
+	 * @return boolean
 	 */
 	public function get()
 	{
-		$dashboardId = JFactory::getApplication()->input->getInt('id');
+		$app         = JFactory::getApplication();
+		$jinput      = $app->input;
+
+		$dashboardId = $jinput->getInt('id');
 		$dashboard = new stdClass;
 
 		if (!empty($dashboardId))
 		{
-			// @Todo- Check if object id empty ->set record not found if object have error raise it
 			$dashboard   = TjdashboardDashboard::getInstance($dashboardId);
 		}
 		else
@@ -66,5 +75,6 @@ class TjdashboardApiResourceDashboard extends ApiResource
 
 		$this->plugin->setResponse($dashboard);
 
+		return;
 	}
 }

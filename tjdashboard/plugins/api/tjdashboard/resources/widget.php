@@ -1,5 +1,6 @@
 <?php
 /**
+ * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -17,9 +18,9 @@ defined('_JEXEC') or die;
 class TjdashboardApiResourceWidget extends ApiResource
 {
 	/**
-	 * Function to get widgets record.
+	 * Function get for widgets record.
 	 *
-	 * @return API response object
+	 * @return boolean
 	 */
 	public function post()
 	{
@@ -28,38 +29,43 @@ class TjdashboardApiResourceWidget extends ApiResource
 		$formData = $jinput->post->getArray();
 		$widgetId = $jinput->getInt('id');
 		$widget   = TjdashboardWidget::getInstance($widgetId);
-		$save     = $widget->save($formData);
+
 		$renderObject     = new stdclass;
 
-		if ($save)
+		if ($widget->bind($formData))
 		{
-			$renderObject->data   = $widget->dashboard_widget_id;
-			$renderObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			if ($widget->save())
+			{
+				$renderObject->data   = $widget->dashboard_widget_id;
+				$renderObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+			}
+			else
+			{
+				ApiError::raiseError(400, JText::_($widget->getError()));
+			}
 		}
 		else
 		{
-			ApiError::raiseError(400, JText::_($widget->getError()));
+				ApiError::raiseError(400, JText::_($widget->getError()));
 		}
 
-		$this->plugin->setResponse($renderObject);
+		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $renderObject);
 	}
 
 	/**
-	 * Function to get widget data.
+	 * Function get dashboard data.
 	 *
-	 * @return API response object
+	 * @return boolean
 	 */
 	public function get()
 	{
 		$app         = JFactory::getApplication();
 		$jinput      = $app->input;
-
-		$widgetId = $jinput->getInt('id');
 		$widget = new stdClass;
+		$widgetId = $jinput->getInt('id');
 
 		if (!empty($widgetId))
 		{
-			//@Todo- Check widget if id empty set record not found if object have error raise it
 			$widget   = TjdashboardWidget::getInstance($widgetId);
 		}
 		else
@@ -67,6 +73,6 @@ class TjdashboardApiResourceWidget extends ApiResource
 			ApiError::raiseError(400, JText::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
 		}
 
-		$this->plugin->setResponse($widget);
+		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $widget);
 	}
 }

@@ -1,0 +1,59 @@
+build:
+    nodes:
+        analysis:
+            dependencies:
+                before:
+                    - 'git clone --depth 1 https://github.com/joomla/joomla-cms.git joomla-cms'
+                    - 'git clone --depth 1 https://github.com/techjoomla/com_api.git com_api'
+            project_setup:
+                override:
+                    - true
+            tests:
+                override:
+                    - php-scrutinizer-run
+                    #- jshint-run
+                    -
+                        command: phpcs-run
+                        use_website_config: true
+            environment:
+                node:
+                    version: 6.0.0
+
+filter:
+    excluded_paths:
+        - '*.min.js'
+        - 'joomla-cms/*'
+        - 'com_api/*'
+        - 'tests/*'
+    dependency_paths: 
+        # Excluded from analysis but treated as a dependency
+        - 'joomla-cms/*'
+        - 'com_api/*'
+
+checks:
+    php: true
+    javascript: true
+
+tools:
+    php_analyzer:
+
+coding_style:
+    php:
+        indentation:
+            general:
+                use_tabs: true
+
+build_failure_conditions:
+    # No new classes/methods with a rating of D or worse
+    # allowed (useful for legacy code)
+    - 'elements.rating(<= D).new.exists'           
+    # No doc comments patches allowed
+    - 'patches.label("Doc Comments").exists'       
+    # No new coding style issues allowed
+    - 'issues.label("coding-style").new.exists'    
+    # More than 1 new coding style issues.
+    - 'issues.label("coding-style").new.count > 1' 
+    # New issues of major or higher severity
+    - 'issues.severity(>= MAJOR).new.exists'       
+    # Code Coverage decreased from previous inspection
+    - 'project.metric_change("scrutinizer.test_coverage", < 0)'

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="dashboard_widget_id"
+			type="hidden"
+			filter="intval"
+			description="JGLOBAL_FIELD_ID_DESC"/>
+
+		<field
+			name="dashboard_id" 
+			type="sql"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
+			class="inputbox"
+			query="SELECT dashboard_id, title FROM #__tj_dashboards WHERE `state`=1 ORDER BY `ordering`"
+			key_field="dashboard_id" value_field="title"
+			required="true" />
+
+		<field
+			name="title"
+			filter="string" 
+			type="text"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_TITLE"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_TITLE"
+			size="10"
+			required="true" />
+
+		<field
+			name="data_plugin" 
+			type="tjdashboardsourceplugins"
+			folder="tjdashboardsource"
+			required="true"
+			onchange="TJDashboardUI._setRenderers();"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN">
+			<option></option>
+		</field>
+
+		<field
+			name="renderer_plugin" 
+			required="true"
+			type="list"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_RENDERER_PLUGIN">
+			<option value=""></option>
+		</field>
+
+		<field
+			name="size"
+			type="list"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_SIZE"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_SIZE"
+			class="inputbox"
+			required="true">
+				<option value=""></option>
+				<option value="3">Screen 1</option>
+				<option value="6">Screen 2</option>
+				<option value="9">Screen 3</option>
+				<option value="12">Screen 4</option>
+		</field>
+
+		<field
+			name="autorefresh"
+			type="number"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_AUTOREFRESH"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_AUTOREFRESH"
+			class="inputbox"
+			required="true">
+		</field>
+
+		<field
+			name="state"
+			default="1"
+			type="list"
+			filter="intval"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox"
+			size="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+				<option value="2">JARCHIVED</option>
+				<option value="-2">JTRASHED</option>
+		</field>
+
+		<field
+			name="params" 
+			type="textarea"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_PARAMS"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_PARAMS"
+			rows="10" cols="5" filter="raw"
+			/>
+
+		<field
+			name="ordering"
+			type="hidden"
+		/>
+
+		<field
+			name="created_on"
+			type="hidden"
+		/>
+
+		<field
+			name="created_by"
+			type="hidden"
+		/>
+
+		<field
+			name="modified_on"
+			type="hidden"
+		/>
+
+		<field
+			name="modified_by"
+			type="hidden"
+		/>
+	</fieldset>
+</form>

@@ -1,5 +1,6 @@
 <?php
 /**
+ * @version    CVS: 1.0.0
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
  * @copyright  2017 Techjoomla
@@ -10,7 +11,9 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
-JLoader::import("/components/com_tjdashboard/includes/tjdashboard", JPATH_SITE);
+JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
+JLoader::import('components.com_tjdashboard.libraries.dashboard', JPATH_ADMINISTRATOR);
+JLoader::import('components.com_tjdashboard.libraries.widget', JPATH_ADMINISTRATOR);
 
 /**
  * Tjdashboard API plugin
@@ -32,7 +35,7 @@ class PlgAPITjdashboard extends ApiPlugin
 		parent::__construct($subject, $config = array());
 
 		// Set resource path
-		ApiResource::addIncludePath(dirname(__FILE__) . '/tjdashboard');
+		ApiResource::addIncludePath(dirname(__FILE__) . '/resources');
 
 		// Load language files
 		$lang = JFactory::getLanguage();
