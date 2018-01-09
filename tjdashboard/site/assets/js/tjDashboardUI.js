@@ -53,6 +53,8 @@ var TJDashboardUI = {
 					jQuery('</div>').appendTo('.tjdashboard');
 				}
 			});
+
+			return true;
 		});
 	},
 
