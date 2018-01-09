@@ -100,10 +100,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 		// For new records, check the create permission.
 		if ($isNew)
 		{
-			// JToolbarHelper::apply('dashboard.apply');
 			JToolbarHelper::save('dashboard.save');
-
-			// JToolbarHelper::save2new('dashboard.save2new');
 			JToolbarHelper::cancel('dashboard.cancel');
 		}
 		else
@@ -112,13 +109,6 @@ class TjdashboardViewDashboard extends JViewLegacy
 
 			// Can't save the record if it's checked out and editable
 			$this->canSave($checkedOut, $itemEditable);
-
-			/* If checked out, we can still save
-			if ($canDo->get('core.create'))
-			{
-				JToolbarHelper::save2copy('dashboard.save2copy');
-			}*/
-
 			JToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
 		}
 
@@ -138,14 +128,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	{
 		if (!$checkedOut && $itemEditable)
 		{
-			// JToolbarHelper::apply('dashboard.apply');
 			JToolbarHelper::save('dashboard.save');
-
-			/* We can save this record, but check the create permission to see if we can return to make a new one.
-			if ($canDo->get('core.create'))
-			{
-				JToolbarHelper::save2new('dashboard.save2new');
-			}*/
 		}
 	}
 

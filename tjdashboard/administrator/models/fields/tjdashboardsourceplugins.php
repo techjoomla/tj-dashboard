@@ -115,47 +115,46 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 		$folder        = $this->folder;
 		$tjDashboardSourcePlugins = array();
 
-		if (!empty($folder))
-		{
-			// Get list of plugins
-			$db    = JFactory::getDbo();
-			$query = $db->getQuery(true)
-				->select('element AS value, name AS text')
-				->from('#__extensions')
-				->where('folder = ' . $db->quote($folder))
-				->where('enabled = 1')
-				->order('ordering, name');
-
-			$options   = $db->setQuery($query)->loadObjectList();
-			$lang      = JFactory::getLanguage();
-			$j = 0;
-
-			foreach ($options as $i => $item)
-			{
-				$source    = JPATH_PLUGINS . '/' . $folder . '/' . $item->value . '/' . $item->value;
-				$extension = 'plg_' . $folder . '_' . $item->value;
-				$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, true) || $lang->load($extension . '.sys', $source, null, false, true);
-
-				// @Todo : Need to improve this code, Can be Move to Model
-				$dataSources = array_diff(scandir($source), array('..', '.'));
-
-				foreach ($dataSources as $dataSourceFile)
-				{
-					$j++;
-					$className = ucfirst($item->value) . ucfirst(str_replace('.php', '', $dataSourceFile)) . 'Datasource';
-					require_once $source . '/' . $dataSourceFile;
-					$dataSourceClassObject = new $className;
-					$dataSourceName 	 = $item->text . ' ' . $dataSourceClassObject->dataSourceName;
-					$dataSourceNameValue = strtolower(trim($item->text)) . '.' . strtolower(str_replace(' ', '', $dataSourceClassObject->dataSourceName));
-
-					$tjDashboardSourcePlugins[$j]->text   = $dataSourceName;
-					$tjDashboardSourcePlugins[$j]->value  = $dataSourceNameValue;
-				}
-			}
-		}
-		else
+		if (empty($folder))
 		{
 			JLog::add(JText::_('JFRAMEWORK_FORM_FIELDS_PLUGINS_ERROR_FOLDER_EMPTY'), JLog::WARNING, 'jerror');
+
+			return array_merge($tjDashboardSourcePlugins);
+		}
+
+		// Get list of plugins
+		$db    = JFactory::getDbo();
+		$query = $db->getQuery(true)
+			->select('element AS value, name AS text')
+			->from('#__extensions')
+			->where('folder = ' . $db->quote($folder))
+			->where('enabled = 1')
+			->order('ordering, name');
+
+		$options   = $db->setQuery($query)->loadObjectList();
+		$lang      = JFactory::getLanguage();
+		$j = 0;
+
+		foreach ($options as $item)
+		{
+			$source    = JPATH_PLUGINS . '/' . $folder . '/' . $item->value . '/' . $item->value;
+			$extension = 'plg_' . $folder . '_' . $item->value;
+			$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, true) || $lang->load($extension . '.sys', $source, null, false, true);
+
+			// @Todo : Need to improve this code, Can be Move to Model
+			$dataSources = array_diff(scandir($source), array('..', '.'));
+
+			foreach ($dataSources as $dataSourceFile)
+			{
+				$j++;
+				$className = ucfirst($item->value) . ucfirst(str_replace('.php', '', $dataSourceFile)) . 'Datasource';
+				require_once $source . '/' . $dataSourceFile;
+				$dataSourceClassObject = new $className;
+				$dataSourceName 	 = $item->text . ' ' . $dataSourceClassObject->dataSourceName;
+				$dataSourceNameValue = strtolower(trim($item->text)) . '.' . strtolower(str_replace(' ', '', $dataSourceClassObject->dataSourceName));
+				$tjDashboardSourcePlugins[$j]['text']   = $dataSourceName;
+				$tjDashboardSourcePlugins[$j]['value']  = $dataSourceNameValue;
+			}
 		}
 
 		return array_merge($tjDashboardSourcePlugins);

@@ -110,6 +110,7 @@ var TJDashboardUI = {
 	_setRenderers: function()
 	{
 		var selectedDataPlugin = jQuery('#jform_data_plugin').val();
+		alert(selectedDataPlugin);
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();

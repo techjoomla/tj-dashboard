@@ -40,8 +40,9 @@ var TJDashboardService = {
 
 	getRenderers: function(selectedDataPlugin) {
 		var formData = {};
+		var params = {};
 		formData.pluginName = selectedDataPlugin;
 		/** global: root_url */
-		return this.postData(root_url + this.get_renderers_url, '', formData);
+		return this.postData(root_url + this.get_renderers_url, params, formData);
 	}
 }
