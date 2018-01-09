@@ -113,19 +113,4 @@ class TjdashboardModelDashboards extends JModelList
 
 		return $query;
 	}
-
-	/**
-	 * Method to get a list of dashboards.
-	 * Overridden to add a check for access levels.
-	 *
-	 * @return  mixed  An array of data items on success, false on failure.
-	 *
-	 * @since   1.6.1
-	 */
-	public function getItems()
-	{
-		$items = parent::getItems();
-
-		return $items;
-	}
 }

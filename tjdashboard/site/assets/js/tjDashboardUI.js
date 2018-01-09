@@ -86,7 +86,7 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
+			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
 			window[libraryClassName].renderData(method,sourceData); 
 
 			return true;
@@ -102,7 +102,7 @@ var TJDashboardUI = {
     return true;
 	},
 
-	_jsLibraryUperCase: function(library) 
+	_jsUcFirst: function(library) 
 	{
 		return library.charAt(0).toUpperCase() + library.slice(1);
 	},
@@ -110,7 +110,6 @@ var TJDashboardUI = {
 	_setRenderers: function()
 	{
 		var selectedDataPlugin = jQuery('#jform_data_plugin').val();
-		alert(selectedDataPlugin);
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();

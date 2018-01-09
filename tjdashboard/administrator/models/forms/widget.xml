@@ -13,8 +13,7 @@
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
 			class="inputbox"
-			query="SELECT dashboard_id, title FROM #__tj_dashboards WHERE `state`=1 ORDER BY `ordering`"
-			key_field="dashboard_id" value_field="title"
+			query="SELECT dashboard_id as id, title as value FROM #__tj_dashboards WHERE `state`=1 ORDER BY `ordering`"
 			required="true" />
 
 		<field

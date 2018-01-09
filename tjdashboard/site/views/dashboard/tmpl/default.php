@@ -23,11 +23,10 @@ $document->addScript('plugins/tjdashboardrenderer/morris/assets/js/raphael.min.j
 $document->addScript('plugins/tjdashboardrenderer/morris/assets/js/renderer.js');
 $document->addScript('plugins/tjdashboardrenderer/morris/assets/js/morris.min.js');
 
-$document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/tabulator.min.css');
-$document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/semantic-ui/tabulator_semantic-ui.min.css');
 $document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js');
 $document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/renderer.js');
 $document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/tabulator.min.js');
+$document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/tabulator_semantic-ui.min.css');
 
 ?>
 <script>
