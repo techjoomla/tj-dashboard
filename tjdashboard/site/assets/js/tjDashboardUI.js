@@ -20,44 +20,42 @@ var TJDashboardUI = {
 				//TJDashboardUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 				return false;
 			}
-			else
-			{
-				jQuery('<h1><div data-dashboard-id="'+response.data.dashboard_id+'" class="tjdashboard-title">' + response.data.title + '</div></h1>').appendTo('.tjdashboard');
 
-				if (response.data.widget_data.length <= 0)
+			jQuery('<h1><div data-dashboard-id="'+response.data.dashboard_id+'" class="tjdashboard-title">' + response.data.title + '</div></h1>').appendTo('.tjdashboard');
+
+			if (response.data.widget_data.length <= 0)
+			{
+				jQuery('<div class="alert alert-info"> No widgets found to show</div>').appendTo('.tjdashboard');
+				return false;
+			}
+
+			var divSpan = 0;
+			var i = 0;
+			var j = 1;
+			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+			jQuery.each (response.data.widget_data, function(index, value)
+			{
+				jQuery('<div class="widget-data span' +value.size+'"><div class="widget-title"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" style="min-height: 250px;"></div></div>').appendTo('.dashboard-widget-row-'+j);
+
+				TJDashboardUI.initWidget(value.dashboard_widget_id);
+				i++;
+				divSpan = parseInt(divSpan) + parseInt(value.size);
+
+				if (divSpan === 12 && response.data.widget_data.length !== i)
 				{
-					jQuery('<div class="alert alert-info"> No widgets found to show</div>').appendTo('.tjdashboard');
-					return false;
+					j++;
+					jQuery('</div><div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+					divSpan = 0;
 				}
 
-				var divSpan = 0;
-				var i = 0;
-				var j = 1;
-				jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
-				jQuery.each (response.data.widget_data, function(index, value)
+				if (response.data.widget_data.length === i)
 				{
-					jQuery('<div class="widget-data span' +value.size+'"><div class="widget-title"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" style="min-height: 250px;"></div></div>').appendTo('.dashboard-widget-row-'+j);
-
-					TJDashboardUI.initWidget(value.dashboard_widget_id);
-
-					i++;
-					divSpan = parseInt(divSpan) + parseInt(value.size);
-
-					if (divSpan === 12 && response.data.widget_data.length !== i)
-					{
-						j++;
-						jQuery('</div><div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
-						divSpan = 0;
-					}
-
-					if (response.data.widget_data.length === i)
-					{
-						jQuery('</div>').appendTo('.tjdashboard');
-					}
-				});
-			}
-		});
-	},
+					jQuery('</div>').appendTo('.tjdashboard');
+				}
+			});
+		}
+	});
+},
 
 	initWidget : function(id){
 		/** global: TJDashboardService */
@@ -89,6 +87,7 @@ var TJDashboardUI = {
 
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsLibraryUperCase(library);
 			window[libraryClassName].renderData(method,sourceData); 
+
 			return true;
 			});
 	},

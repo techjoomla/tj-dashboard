@@ -56,14 +56,6 @@ class TjdashboardModelWidgets extends JModelList
 		$query->select('*');
 		$query->from($db->quoteName('#__tj_dashboard_widgets', 'wid'));
 
-		// Filter by dashboard_widget_id
-		$id = $this->getState('filter.dashboard_widget_id');
-
-		if (!empty($id))
-		{
-			$query->where($db->quoteName('wid.dashboard_widget_id') . ' = ' . (int) $id);
-		}
-
 		// Filter by search in title.
 		$search = $this->getState('filter.search');
 
