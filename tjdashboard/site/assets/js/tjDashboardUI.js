@@ -53,9 +53,8 @@ var TJDashboardUI = {
 					jQuery('</div>').appendTo('.tjdashboard');
 				}
 			});
-		}
-	});
-},
+		});
+	},
 
 	initWidget : function(id){
 		/** global: TJDashboardService */

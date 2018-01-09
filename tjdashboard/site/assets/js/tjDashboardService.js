@@ -12,9 +12,7 @@ var TJDashboardService = {
 	get_renderers_url : 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers',
 
 	postData: function(url, params, formData) {
-		if(!params){
-			params = {};
-		}
+
 		params['url']		= url;
 		params['data'] 		= formData;
 		params['type'] 		= typeof params['type'] != "undefined" ? params['type'] : 'POST';
