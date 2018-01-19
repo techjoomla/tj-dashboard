@@ -74,7 +74,5 @@ class TjdashboardApiResourceDashboard extends ApiResource
 		}
 
 		$this->plugin->setResponse($dashboard);
-
-		return;
 	}
 }
