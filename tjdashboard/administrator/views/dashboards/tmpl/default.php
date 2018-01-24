@@ -136,7 +136,7 @@ if ($saveOrder)
 										</span>
 									</div>
 								</td>
-								<td><?php echo $item->created_by; ?></td>
+								<td><?php echo $item->name; ?></td>
 								<td><?php echo $item->dashboard_id; ?></td>
 							</tr>
 							<?php

@@ -53,10 +53,10 @@
 			class="inputbox"
 			required="true">
 				<option value=""></option>
-				<option value="3">Screen 1</option>
-				<option value="6">Screen 2</option>
-				<option value="9">Screen 3</option>
-				<option value="12">Screen 4</option>
+				<option value="3">Single column layout</option>
+				<option value="6">Double column layout</option>
+				<option value="9">3 column layout</option>
+				<option value="12">4 column layout</option>
 		</field>
 
 		<field

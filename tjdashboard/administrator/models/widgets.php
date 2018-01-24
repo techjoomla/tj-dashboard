@@ -53,8 +53,10 @@ class TjdashboardModelWidgets extends JModelList
 		$query = $db->getQuery(true);
 
 		// Create the base select statement.
-		$query->select('*');
+		$query->select(['wid.*','dash.title as dashboard_name','users.name']);
 		$query->from($db->quoteName('#__tj_dashboard_widgets', 'wid'));
+		$query->join('LEFT', $db->quoteName('#__tj_dashboards', 'dash') . ' ON (' . $db->quoteName('wid.dashboard_id') . ' = ' . $db->quoteName('dash.dashboard_id') . ')');
+		$query->join('LEFT', $db->quoteName('#__users', 'users') . ' ON (' . $db->quoteName('wid.created_by') . ' = ' . $db->quoteName('users.id') . ')');
 
 		// Filter by search in title.
 		$search = $this->getState('filter.search');

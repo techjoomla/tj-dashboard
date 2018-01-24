@@ -55,8 +55,10 @@ class TjdashboardModelDashboards extends JModelList
 		$query = $db->getQuery(true);
 
 		// Create the base select statement.
-		$query->select('*');
+		$query->select(['dash.*','users.name']);
 		$query->from($db->quoteName('#__tj_dashboards', 'dash'));
+		$query->join('LEFT', $db->quoteName('#__users', 'users') . ' ON (' . $db->quoteName('dash.created_by') . ' = ' . $db->quoteName('users.id') . ')');
+
 
 		// Filter by dashboard_id
 		$id = $this->getState('filter.dashboard_id');

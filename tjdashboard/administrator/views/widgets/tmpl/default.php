@@ -66,6 +66,10 @@ if ($saveOrder)
 									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_TITLE', 'wid.title', $listDirn, $listOrder); ?>
 								</th>
 								<th>
+									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_DASHBOARD', 'dash.dashboard_name', $listDirn, $listOrder); ?>
+								</th>
+
+								<th>
 									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_CREATEDBY', 'wid.created_by', $listDirn, $listOrder); ?>
 								</th>
 								<th>
@@ -135,7 +139,8 @@ if ($saveOrder)
 										<?php endif; ?>
 									</div>
 								</td>
-								<td><?php echo $item->created_by; ?></td>
+								<td><?php echo $item->dashboard_name; ?></td>
+								<td><?php echo $item->name; ?></td>
 								<td><?php echo $item->dashboard_widget_id; ?></td>
 							</tr>
 							<?php
