@@ -48,28 +48,20 @@ JFactory::getDocument()->addScriptDeclaration('
 			<div class="span9">
 				<fieldset class="adminform">
 					<?php 
-						echo $this->form->getLabel('dashboard_id'); 
-						echo $this->form->getInput('dashboard_id'); 
-						echo $this->form->getLabel('state'); 
-						echo $this->form->getInput('state'); 
+						echo $this->form->renderField('dashboard_id'); 
+						echo $this->form->renderField('state'); 
 
-						echo $this->form->getLabel('data_plugin'); 
-						echo $this->form->getInput('data_plugin'); 
+						echo $this->form->renderField('data_plugin'); 
 
-						echo $this->form->getLabel('renderer_plugin'); 
-						echo $this->form->getInput('renderer_plugin'); 
+						echo $this->form->renderField('renderer_plugin'); 
 
-						echo $this->form->getLabel('size'); 
-						echo $this->form->getInput('size'); 
+						echo $this->form->renderField('size'); 
 
-						echo $this->form->getLabel('autorefresh'); 
-						echo $this->form->getInput('autorefresh'); 
+						echo $this->form->renderField('autorefresh'); 
 
-						echo $this->form->getLabel('params'); 
-						echo $this->form->getInput('params');
+						echo $this->form->renderField('params');
 
-						echo $this->form->getLabel('created_by'); 
-						echo $this->form->getInput('created_by'); 
+						echo $this->form->renderField('created_by'); 
 						echo $this->form->getInput('ordering'); 
 						echo $this->form->getInput('modified_on'); 
 						echo $this->form->getInput('modified_by'); 
