@@ -53,10 +53,10 @@
 			class="inputbox"
 			required="true">
 				<option value=""></option>
-				<option value="3">Single column layout</option>
-				<option value="6">Double column layout</option>
-				<option value="9">3 column layout</option>
-				<option value="12">4 column layout</option>
+				<option value="3">Full width</option>
+				<option value="6">Half width</option>
+				<option value="9">One Third width</option>
+				<option value="12">One fourth width</option>
 		</field>
 
 		<field
