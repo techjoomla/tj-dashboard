@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>
+		<field
+			name="dashboard_widget_id"
+			type="hidden"
+			filter="intval"
+			description="JGLOBAL_FIELD_ID_DESC"/>
+
+		<field
+			name="dashboard_id" 
+			type="sql"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
+			class="inputbox"
+			query="SELECT dashboard_id as value, title as dashboard_id FROM #__tj_dashboards WHERE `state`=1 ORDER BY `ordering`"
+			required="true" />
+
+
+
+		<field
+			name="title"
+			filter="string" 
+			type="text"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_TITLE"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_TITLE"
+			size="10"
+			required="true" />
+
+		<field
+			name="primary_text" 
+			filter="string" 
+			type="text"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_PRIMARY_TEXT"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_PRIMARY_TEXT"
+			size="15"/>
+		
+		<field
+			name="secondary_text" 
+			filter="string"
+			type="text"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_SECONDARY_TEXT"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_SECONDARY_TEXT"
+			size="15"/>
+
+		<field
+			name="color" 
+			filter="string"
+			type="text"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_COLOR"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_COLOR"
+			size="15"/>
+		
+		<field
+			name="data_plugin" 
+			type="tjdashboardsourceplugins"
+			folder="tjdashboardsource"
+			required="true"
+			onchange="TJDashboardUI._setRenderers();"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN">
+			<option></option>
+		</field>
+
+		<field
+			name="renderer_plugin" 
+			required="true"
+			type="list"
+			onchange="TJDashboardUI._setRendererFields();"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_RENDERER_PLUGIN">
+			<option value=""></option>
+		</field>
+
+		
+
+		<field
+			name="size"
+			type="list"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_SIZE"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_SIZE"
+			class="inputbox"
+			required="true">
+				<option value=""></option>
+				<option value="12">Full width</option>
+				<option value="6">Half width</option>
+				<option value="4">One Third width</option>
+				<option value="3">One fourth width</option>
+		</field>
+
+		<field
+			name="autorefresh"
+			type="number"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_AUTOREFRESH"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_AUTOREFRESH"
+			class="inputbox"
+			required="true">
+		</field>
+
+		<field
+			name="state"
+			default="1"
+			type="list"
+			filter="intval"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox"
+			size="1">
+				<option value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+				<option value="2">JARCHIVED</option>
+				<option value="-2">JTRASHED</option>
+		</field>
+
+		<field
+			name="params" 
+			type="textarea"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_PARAMS"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_PARAMS"
+			rows="10" cols="5" filter="raw"
+			/>
+
+		<field
+			name="ordering"
+			type="hidden"
+		/>
+
+		<field
+			name="created_on"
+			type="hidden"
+		/>
+
+		<field
+			name="created_by"
+			type="hidden"
+		/>
+
+		<field
+			name="modified_on"
+			type="hidden"
+		/>
+
+		<field
+			name="modified_by"
+			type="hidden"
+		/>
+	</fieldset>
+</form>
