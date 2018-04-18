@@ -102,8 +102,8 @@ class TjdashboardModelWidget extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		$pk   = (!empty($data['widget_dashboard_id'])) ? $data['widget_dashboard_id'] : (int) $this->getState('widget.widget_dashboard_id');
-		$widget = TjdashboardWidget::getInstance($pk);
+		// $pk   = (!empty($data['widget_dashboard_id'])) ? $data['widget_dashboard_id'] : (int) $this->getState('widget.widget_dashboard_id');
+		$widget = TjdashboardWidget::getInstance();
 
 		// Bind the data.
 		if (!$widget->bind($data))
@@ -127,49 +127,293 @@ class TjdashboardModelWidget extends JModelAdmin
 	}
 
 	public function addAdminWidgets($dashboardId){
+		$data = [];
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Active Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.totalcoursescount",
+		    "renderer_plugin" => "numbercardbox.tjdashnumbercardbox",
+		    "size" => 6,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Students Enrolled",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.totalstudentsenrolled",
+		    "renderer_plugin" => "numbercardbox.tjdashnumbercardbox",
+		    "size" => 6,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Paid Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.paidcourses",
+		    "renderer_plugin" => "numbercardbox.tjdashnumbercardbox",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Free Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.freecoursescount",
+		    "renderer_plugin" => "numbercardbox.tjdashnumbercardbox",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Orders",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.totalorderscount",
+		    "renderer_plugin" => "numbercardbox.tjdashnumbercardbox",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Revenue",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.totalrevenuecount",
+		    "renderer_plugin" => "numbercardbox.tjdashnumbercardbox",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Activities",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.activities",
+		    "renderer_plugin" => "chartjs.tjdashgraph",
+		    "size" => 12,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		foreach ($data as $key => $value) {
+			$this->save($value);
+		}
+
+		return true;
+	}
+
+	public function addUserWidgets($dashboardId){
+
 		// $widgets
+		$data = [];
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Enrolled Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.enrolledcoursescount",
+		    "renderer_plugin" => "countbox.tjdashcount",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Pending Enrollment",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.pendingenrolledcount",
+		    "renderer_plugin" => "countbox.tjdashcount",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Incomplete Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.inprogresscoursescount",
+		    "renderer_plugin" => "countbox.tjdashcount",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Complete Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.completedcoursescount",
+		    "renderer_plugin" => "countbox.tjdashcount",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Total Time Spent",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.totaltimespent",
+		    "renderer_plugin" => "countbox.tjdashcount",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Total Ideal Time",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.totalidealtime",
+		    "renderer_plugin" => "countbox.tjdashcount",
+		    "size" => 3,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Enrolled Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.enrolledcourses",
+		    "renderer_plugin" => "tabulator.tjdashtable",
+		    "size" => 12,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Liked Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.likedcourses",
+		    "renderer_plugin" => "tabulator.tjdashtable",
+		    "size" => 6,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Recommended Courses",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.recommendedcourses",
+		    "renderer_plugin" => "tabulator.tjdashtable",
+		    "size" => 6,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Liked Lessons",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.likedlesson",
+		    "renderer_plugin" => "tabulator.tjdashtable",
+		    "size" => 6,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id
+		);
+
 
 		// $data[] = array(
-		//     "dashboard_widget_id" => 0,
-		//     "dashboard_id" => $dashboardId,
-		//     "title" => "Activity",
-		//     "primary_text" => "",
-		//     "secondary_text" => "",
-		//     "color" => "",
-		//     "data_plugin" => "tjlms.latestcourses",
-		//     "renderer_plugin" => "tabulator.tjdashtable",
-		//     "size" => 12,
-		//     "autorefresh" => 1,
-		//     "state" => 1,
-		//     "params" => "",
-		//     "ordering" => "",
-		//     "created_by" => "",
-		//     "modified_on" => "",
-		//     "modified_by" => "",
-		//     "tags" => ""
-		// );
-
-		// $data[] = array(
-		//     "dashboard_widget_id" => 0,
-		//     "dashboard_id" => $dashboardId,
-		//     "title" => "Activity",
-		//     "primary_text" => "",
-		//     "secondary_text" => "",
-		//     "color" => "",
-		//     "data_plugin" => "tjlms.activitygraph",
-		//     "renderer_plugin" => "chartjs.tjdashgraph",
-		//     "size" => 12,
-		//     "autorefresh" => 1,
-		//     "state" => 1,
-		//     "params" => "",
-		//     "ordering" => "",
-		//     "created_by" => "",
-		//     "modified_on" => "",
-		//     "modified_by" => "",
-		//     "tags" => ""
-		// );
-		// $data[] = array(
-		//     "dashboard_widget_id" => 0,
 		//     "dashboard_id" => $dashboardId,
 		//     "title" => "Activity Donut Chart",
 		//     "primary_text" => "",
@@ -182,56 +426,47 @@ class TjdashboardModelWidget extends JModelAdmin
 		//     "state" => 1,
 		//     "params" => "",
 		//     "ordering" => "",
-		//     "created_by" => "",
-		//     "modified_on" => "",
-		//     "modified_by" => "",
+		//     "created_by" =>  JFactory::getUser()->id,
 		//     "tags" => ""
 		// );
-		// $data[] = array(
-		//     "dashboard_widget_id" => 0,
-		//     "dashboard_id" => $dashboardId,
-		//     "title" => "Activity",
-		//     "primary_text" => "",
-		//     "secondary_text" => "",
-		//     "color" => "",
-		//     "data_plugin" => "tjlms.activitygraph",
-		//     "renderer_plugin" => "chartjs.tjdashgraph",
-		//     "size" => 12,
-		//     "autorefresh" => 1,
-		//     "state" => 1,
-		//     "params" => "",
-		//     "ordering" => "",
-		//     "created_by" => "",
-		//     "modified_on" => "",
-		//     "modified_by" => "",
-		//     "tags" => ""
-		// );
-		// $data[] = array(
-		//     "dashboard_widget_id" => 0,
-		//     "dashboard_id" => $dashboardId,
-		//     "title" => "Activity",
-		//     "primary_text" => "",
-		//     "secondary_text" => "",
-		//     "color" => "",
-		//     "data_plugin" => "tjlms.activitygraph",
-		//     "renderer_plugin" => "chartjs.tjdashgraph",
-		//     "size" => 12,
-		//     "autorefresh" => 1,
-		//     "state" => 1,
-		//     "params" => "",
-		//     "ordering" => "",
-		//     "created_by" => "",
-		//     "modified_on" => "",
-		//     "modified_by" => "",
-		//     "tags" => ""
-		// );
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "My Activity",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.myactivities",
+		    "renderer_plugin" => "tabulator.tjdashtable",
+		    "size" => 12,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id,
+		    "tags" => ""
+		);
 
+		$data[] = array(
+		    "dashboard_id" => $dashboardId,
+		    "title" => "Activity",
+		    "primary_text" => "",
+		    "secondary_text" => "",
+		    "color" => "",
+		    "data_plugin" => "tjlms.activitygraph",
+		    "renderer_plugin" => "chartjs.tjdashgraph",
+		    "size" => 12,
+		    "autorefresh" => 1,
+		    "state" => 1,
+		    "params" => "",
+		    "ordering" => "",
+		    "created_by" =>  JFactory::getUser()->id,
+		    "tags" => ""
+		);
 
+		foreach ($data as $key => $value) {
+			$this->save($value);
+		}
 
-
-	}
-
-	public function addUserWidgets($dashboardId){
-
+		return true;
 	}
 }

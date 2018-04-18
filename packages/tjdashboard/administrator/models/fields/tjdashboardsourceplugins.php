@@ -150,8 +150,8 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 				$className = ucfirst($item->value) . ucfirst(str_replace('.php', '', $dataSourceFile)) . 'Datasource';
 				require_once $source . '/' . $dataSourceFile;
 				$dataSourceClassObject = new $className;
-				$dataSourceName 	 = $item->text . ' ' . $dataSourceClassObject->dataSourceName;
-				$dataSourceNameValue = strtolower(trim($item->text)) . '.' . strtolower(str_replace(' ', '', $dataSourceClassObject->dataSourceName));
+				$dataSourceName 	 = $item->value . ' ' . $dataSourceClassObject->dataSourceName;
+				$dataSourceNameValue = strtolower(trim($item->value)) . '.' . strtolower(str_replace(' ', '', $dataSourceClassObject->dataSourceName));
 				$tjDashboardSourcePlugins[$j]['text']   = $dataSourceName;
 				$tjDashboardSourcePlugins[$j]['value']  = $dataSourceNameValue;
 			}

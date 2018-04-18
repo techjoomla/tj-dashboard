@@ -11,7 +11,7 @@
 	<description>PLG_TJDASHBOARDRENDERER_TABULATOR_DESC</description>
 
 	<files>
-		<filename plugin="morris">tabulator.php</filename>
+		<filename plugin="tabulator">tabulator.php</filename>
 		<filename>index.html</filename>
 		<folder>assets</folder>
 	</files>

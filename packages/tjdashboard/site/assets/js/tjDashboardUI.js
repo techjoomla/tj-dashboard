@@ -9,7 +9,7 @@
 var TJDashboardUI = {
 
 	initDashboard : function(id){
-debugger;
+
 	/** global: TJDashboardService */
 	var promise = TJDashboardService.getDashboard(id);
 
@@ -20,16 +20,7 @@ debugger;
 				//TJDashboardUI.utility.displayMessage(Joomla.JText._('COM_TMT_TEST_FORM_MSG_NO_Q_FOUND'));
 				return false;
 			}
-
-			// if(response.data.params.parseInt() && response.data.params.parseInt()==1){
-			// 	response.data.title='';
-			// }
-			// if (response.data.color) {
-			// 	var color = response.data.color;
-			// }
-			// else{
-			// 	var color = "panel-default";
-			// }
+			// console.log(response.data);
 
 
 			jQuery('<h1><div data-dashboard-id="'+response.data.dashboard_id+'" class="tjdashboard-title">' + response.data.title + '</div></h1>').appendTo('.tjdashboard');
@@ -46,7 +37,12 @@ debugger;
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
-				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel panel-default"><div class="widget-title panel-heading"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
+				var colorClass = "panel-default";
+				if(value.color.length!=0){
+					colorClass="panel-"+value.color;
+				}
+
+				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
 
 				TJDashboardUI.initWidget(value.dashboard_widget_id);
 				i++;
@@ -80,10 +76,6 @@ debugger;
 				alert("no data");
 				return false;
 			}
-
-
-			TJDashboardUI._addCssFiles(response.data.widget_css);
-			TJDashboardUI._addJsFiles(response.data.widget_js);
 
 			if (!TJDashboardUI._validWidget(response.data.widget_render_data))
 			{
@@ -128,12 +120,15 @@ debugger;
 
 	_addJsFiles: function(jsObj){
 		jQuery.each(jsObj,function(index,value){
-			var script = document.createElement('script');
-			script.src = value;
-			script.type = 'text/javascript';
+
 			if(jQuery.find("script [src='"+value+"']").length==0){
-				//jQuery('head').append(script);
-				jQuery.getScript(script);
+
+				(function(document, tag) {
+				    var scriptTag = document.createElement(tag), // create a script tag
+				        firstScriptTag = document.getElementsByTagName(tag)[0]; // find the first script tag in the document
+				    scriptTag.src = value; // set the source of the script to your script
+				    firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag); // append the script to the DOM
+				}(document, 'script'));
 			}
 		});
 	},
@@ -155,8 +150,10 @@ debugger;
 	_setRenderers: function()
 	{
 		var selectedDataPlugin = jQuery('#jform_data_plugin').val();
+		var defaultValue = jQuery('#jform_renderer_plugin').val();
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
+		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true" onchange="TJDashboardUI._setRendererFields();"><option value="">Select renderer plugin</option></select>');
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
 		promise.done(function(response) {
 			// Append option to plugin dropdown list.
@@ -165,7 +162,14 @@ debugger;
 			jQuery.each(response.data, function(index, item) {
 				list.append(new Option(item,index));
 			});
+			jQuery('#jform_renderer_plugin').val(defaultValue);
 		});
+	},
+
+	_setSize:function() {
+		var defaultValue = jQuery('#jform_size').val();
+		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">Full width</option><option value="6">Half width</option><option value="4">One Third width</option><option value="3">One fourth width</option></select>');
+		jQuery('#jform_size').val(defaultValue);
 	},
 
 	_setRendererFields: function(){

@@ -8,7 +8,7 @@
 			description="JGLOBAL_FIELD_ID_DESC"/>
 
 		<field
-			name="dashboard_id" 
+			name="dashboard_id"
 			type="sql"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
@@ -20,7 +20,7 @@
 
 		<field
 			name="title"
-			filter="string" 
+			filter="string"
 			type="text"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_TITLE"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_TITLE"
@@ -28,15 +28,15 @@
 			required="true" />
 
 		<field
-			name="primary_text" 
-			filter="string" 
+			name="primary_text"
+			filter="string"
 			type="text"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_PRIMARY_TEXT"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_PRIMARY_TEXT"
 			size="15"/>
-		
+
 		<field
-			name="secondary_text" 
+			name="secondary_text"
 			filter="string"
 			type="text"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_SECONDARY_TEXT"
@@ -44,15 +44,21 @@
 			size="15"/>
 
 		<field
-			name="color" 
-			filter="string"
-			type="text"
+			name="color"
+			type="list"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_COLOR"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_COLOR"
-			size="15"/>
-		
+			class="inputbox">
+				<option value="">Default</option>
+				<option value="primary">Primary</option>
+				<option value="success">Success</option>
+				<option value="info">Info</option>
+				<option value="warning">Warning</option>
+				<option value="danger">Danger</option>
+		</field>
+
 		<field
-			name="data_plugin" 
+			name="data_plugin"
 			type="tjdashboardsourceplugins"
 			folder="tjdashboardsource"
 			required="true"
@@ -63,7 +69,17 @@
 		</field>
 
 		<field
-			name="renderer_plugin" 
+			name="renderer_plugin"
+			type="tjdashboardrendererplugins"
+			folder="tjdashboardrenderer"
+			required="true"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
+			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN">
+			<option></option>
+		</field>
+<!--
+		<field
+			name="renderer_plugin"
 			required="true"
 			type="list"
 			onchange="TJDashboardUI._setRendererFields();"
@@ -72,7 +88,7 @@
 			<option value=""></option>
 		</field>
 
-		
+		 -->
 
 		<field
 			name="size"
@@ -113,7 +129,7 @@
 		</field>
 
 		<field
-			name="params" 
+			name="params"
 			type="textarea"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_PARAMS"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_PARAMS"
