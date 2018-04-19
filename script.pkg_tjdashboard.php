@@ -33,33 +33,28 @@ class Pkg_TjdashboardInstallerScript
 	private $oldversion = "";
 
 	private $installation_queue = array(
-										'plugins' =>  array(
-															"tjdashboardrenderer"=>array(
-																	'chartjs'=>1,
-																	'tabulator'=>1,
-																	'numbercardbox'=>1,
-																	'countbox'=>1
+										'plugins' => array(
+															"tjdashboardrenderer" => array(
+																	'chartjs' => 1,
+																	'tabulator' => 1,
 																),
-															"api"=>array(
-																	"tjdashboard"=>1
+															"api" => array(
+																	"tjdashboard" => 1
 																)
 														)
 									);
 
 	private $uninstall_queue = array(
-										'plugins' =>  array(
-															"tjdashboardrenderer"=>array(
-																	'chartjs'=>1,
-																	'tabulator'=>1,
-																	'numbercardbox'=>1,
-																	'countbox'=>1
+										'plugins' => array(
+															"tjdashboardrenderer" => array(
+																	'chartjs' => 1,
+																	'tabulator' => 1,
 																),
-															"api"=>array(
-																	"tjdashboard"=>1
+															"api" => array(
+																	"tjdashboard" => 1
 																)
 														)
 									);
-
 
 	/**
 	 * method to run before an install/update/uninstall method
@@ -115,7 +110,7 @@ class Pkg_TjdashboardInstallerScript
 	 *
 	 * @return  void
 	 */
-	function _removeFiles()
+	public function _removeFiles()
 	{
 		$file1 = JPATH_SITE . '/components/com_tjlms/views/coupon/default.xml';
 		$file2 = JPATH_SITE . '/components/com_tjlms/views/coupon/tmpl/default.xml';
@@ -143,18 +138,6 @@ class Pkg_TjdashboardInstallerScript
 	}
 
 	/**
-	 * Renders the post-installation message
-	 *
-	 * @param   JInstaller  $status         parent
-	 * @param   JInstaller  $straperStatus  parent
-	 * @param   JInstaller  $parent         parent
-	 *
-	 * @return  void
-	 */
-	private function _renderPostInstallation($status, $straperStatus, $parent)
-	{
-	}
-	/**
 	 * Installs subextensions (modules, plugins) bundled with the main extension
 	 *
 	 * @param   JInstaller  $parent  parent
@@ -168,7 +151,6 @@ class Pkg_TjdashboardInstallerScript
 
 		$status          = new JObject;
 		$status->plugins = array();
-
 
 		// Plugins installation
 		if (count($this->installation_queue['plugins']))

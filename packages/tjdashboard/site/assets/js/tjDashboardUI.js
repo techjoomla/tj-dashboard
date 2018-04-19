@@ -76,6 +76,21 @@ var TJDashboardUI = {
 				alert("no data");
 				return false;
 			}
+			// response.data.widget_render_data.class = "panel-default";
+			// if(response.data.color.length!=0){
+			// 	response.data.widget_render_data.class="panel-"+response.data.color;
+			// }
+			// console.log(response.data.color);return;
+
+			// if (response.data.color) {
+			// 	var color = response.data.color;
+			// }
+			// else{
+			// 	var color = "panel-default";
+			// }
+
+			// TJDashboardUI._addCssFiles(response.data.widget_css);
+			// TJDashboardUI._addJsFiles(response.data.widget_js);
 
 			if (!TJDashboardUI._validWidget(response.data.widget_render_data))
 			{
@@ -122,7 +137,8 @@ var TJDashboardUI = {
 		jQuery.each(jsObj,function(index,value){
 
 			if(jQuery.find("script [src='"+value+"']").length==0){
-
+				//jQuery('head').append(script);
+				// loadscript(script);
 				(function(document, tag) {
 				    var scriptTag = document.createElement(tag), // create a script tag
 				        firstScriptTag = document.getElementsByTagName(tag)[0]; // find the first script tag in the document

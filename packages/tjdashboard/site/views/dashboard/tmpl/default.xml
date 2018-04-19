@@ -9,6 +9,18 @@
         <fieldset
             name="basic"
             label="COM_TJDASHBOARD_FIELDSET_ITEM_ID_SELECT_LABEL">
+                <fieldset
+                name="basic"
+                label="COM_TJDASHBOARD_FIELDSET_ITEM_ID_SELECT_LABEL">
+                    <field name="dashboard_id"
+                type="sql"
+                label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID"
+                description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DASHBOARDID"
+                class="inputbox"
+                query="SELECT dashboard_id as value, title as dashboard_id FROM #__tj_dashboards WHERE `state`=1 ORDER BY `ordering`"
+                required="true" />
+                COM_TJDASHBOARD_DASHBOARDS_VIEW_DEFAULT_DESC
+            </fieldset>
         </fieldset>
     </fields>
 </metadata>
