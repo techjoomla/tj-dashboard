@@ -110,39 +110,4 @@ class TjdashboardModelDashboard extends JModelAdmin
 		return $dashboard->dashboard_id;
 	}
 
-	public function addTjDashboardAdmin(){
-
-		$adminDashboard = array(
-			'dashboard_id'=>'0',
-		    "title" => "Dashboard",
-		    "alias" => "admin-dashboard",
-		    "description" => "<p>Default admin dashboard.</p>",
-		    "state" => 1,
-		    "access" => 1,
-		    "context" =>"" ,
-		    "parent" => 0,
-		    "created_by" =>  JFactory::getUser()->id
-	    );
-
-		$this->save($adminDashboard);
-
-		return true;
-	}
-
-	public function addTjDashboardUser(){
-		$userDashboard = array(
-			'dashboard_id'=>'0',
-		    "title" => "My Dashboard",
-		    "alias" => "user-dashboard",
-		    "description" => "<p>Default user dashboard.</p>",
-		    "state" => 1,
-		    "access" => 1,
-		    "context" => "",
-		    "parent" => 0,
-		    "created_by" =>  JFactory::getUser()->id
-		    );
-		$this->save($userDashboard);
-
-		return true;
-	}
 }
