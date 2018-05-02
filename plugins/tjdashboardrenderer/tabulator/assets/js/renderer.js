@@ -6,7 +6,7 @@ var TJDashboardTabulator = {
 	tjdashtable: function(sourceData)
 	{
 		var renderData = JSON.parse(sourceData.data);
-		console.log(sourceData);
+
 		jQuery("#"+sourceData.element).tabulator({
 			layout:"fitColumns",
 			addRowPos:"top",
