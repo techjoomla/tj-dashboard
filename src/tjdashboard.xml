@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+    <name>com_tjdashboard</name>
+    <creationDate>2017-09-15</creationDate>
+    <copyright>2017 Techjoomla</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Techjoomla</author>
+    <authorEmail>extensions@techjoomla.com</authorEmail>
+    <authorUrl>http://techjoomla.com</authorUrl>
+    <description></description>
+    <version>1.0.0</version>
+
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update> <!-- Runs on Update -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>tjdashboard.php</filename>
+        <filename>controller.php</filename>
+        <filename>router.php</filename>
+        <folder>views</folder>
+        <folder>models</folder>
+        <folder>assets</folder>
+    </files>
+    <media destination="com_tjdashboard" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+    </media>
+    <languages folder="site">
+
+			<language tag="en-GB">languages/en-GB/en-GB.com_tjdashboard.ini</language>
+    </languages>
+    <administration>
+        <menu img="media/com_tjdashboard/images/s_com_tjdashboard.png" >COM_TJDASHBOARD</menu>
+        <submenu>
+
+			<menu link="option=com_tjdashboard&amp;view=dashboards" view="dashboards" img="media/com_tjdashboard/images/s_dashboards.png" alt="Tjdashboard/Dashboards">COM_TJDASHBOARD_TITLE_DASHBOARDS</menu>
+
+        </submenu>
+        <files folder="administrator">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <filename>controller.php</filename>
+            <filename>index.html</filename>
+            <filename>tjdashboard.php</filename>
+            <folder>controllers</folder>
+            <folder>includes</folder>
+            <folder>helpers</folder>
+            <folder>models</folder>
+            <folder>sql</folder>
+            <folder>tables</folder>
+            <folder>views</folder>
+            <folder>libraries</folder>
+            <folder>languages</folder>
+        </files>
+        <languages folder="administrator">
+
+			<language tag="en-GB">languages/en-GB/en-GB.com_tjdashboard.ini</language>
+			<language tag="en-GB">languages/en-GB/en-GB.com_tjdashboard.sys.ini</language>
+        </languages>
+    </administration>
+    <config>
+        <fields name="params">
+            <fieldset name="component">
+                <field name="save_history" default="0" />
+            </fieldset>
+        </fields>
+    </config>
+    <!--I am not sure why group is 'search' for the plugins-->
+    <plugins>
+        <plugin group="search" plugin="tjdashboard"/>
+    </plugins>
+
+</extension>
