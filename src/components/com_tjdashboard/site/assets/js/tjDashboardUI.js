@@ -73,7 +73,7 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			if (!TJDashboardUI._validWidget(response.data.widget_render_data))
+			if (!TJDashboardUI._validWidget(response.data.widget_render_data) || response.data.widget_render_data.data.length==0)
 			{
 				jQuery('<div class="alert alert-info">No data to render</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
 				return false;

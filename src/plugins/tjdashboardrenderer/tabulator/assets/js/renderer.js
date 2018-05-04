@@ -17,6 +17,11 @@ var TJDashboardTabulator = {
 		if (renderData.columns.length==1) {
 			jQuery("#"+sourceData.element+" > .tabulator-header").addClass('hide');
 		}
+
+		if (renderData.data.length==0) {
+			jQuery("#"+sourceData.element).html('<div class="alert alert-info"> No data Available</div>');
+		}
+
 		jQuery("#"+sourceData.element).removeClass('panel-body');
 		jQuery(" .tabulator").css('margin',0);
 
