@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<extension type="package" version="3.0" method="upgrade">
+	<name>TJ Dashboard Package</name>
+	<author>Techjoomla</author>
+	<authorUrl>www.techjoomla.com</authorUrl>
+	<copyright>Copyright(C)2012-17 TechJoomla</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<creationDate>5th December 2017</creationDate>
+	<packagename>TJDashboard</packagename>
+	<version>0</version>
+	<packager>Techjoomla Team</packager>
+	<description></description>
+	<scriptfile>script.pkg_tjdashboard.php</scriptfile>
+
+	<files folder="packages">
+		<file type="component" id="com_api">com_api.zip</file>
+		<file type="component" id="tjdashboard">tjdashboard.zip</file>
+	</files>
+
+</extension>
