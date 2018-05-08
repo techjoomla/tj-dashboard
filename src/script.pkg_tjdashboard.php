@@ -36,8 +36,6 @@ class Pkg_TjdashboardInstallerScript
 								'plugins' => array(
 										'tjdashboardrenderer' => array(
 																	'chartjs' => 1,
-																	'countbox' => 1,
-																	'numbercardbox' => 1,
 																	'tabulator' => 1,
 																),
 										'api' => array('tjdashboard'=>1),
@@ -48,8 +46,6 @@ class Pkg_TjdashboardInstallerScript
 		'plugins' => array(
 						'tjdashboardrenderer' => array(
 														'chartjs' => 1,
-														'countbox' => 1,
-														'numbercardbox' => 1,
 														'tabulator' => 1,
 													),
 						'api' => array('tjdashboard'=>1),
