@@ -167,8 +167,8 @@ class TjdashboardWidget extends JObject
 	 * Get the widget data
 	 *
 	 * @param   integer  $id  The primary key of the widget_id to load (optional).
-	 * 
-	 * @return	Array 
+	 *
+	 * @return	Array
 	 *
 	 * @since 	1.0
 	 **/
@@ -223,7 +223,7 @@ class TjdashboardWidget extends JObject
 	 * Get the widget JS files
 	 *
 	 * @param   integer  $id  The primary key of the widget_id to load (optional).
-	 * 
+	 *
 	 * @return	Array JS files paths
 	 *
 	 * @since 	1.0
@@ -248,7 +248,7 @@ class TjdashboardWidget extends JObject
 	 * Get the widget CSS files
 	 *
 	 * @param   integer  $id  The primary key of the widget_id to load (optional).
-	 * 
+	 *
 	 * @return	Array CSS files paths
 	 *
 	 * @since 	1.0
@@ -274,7 +274,7 @@ class TjdashboardWidget extends JObject
 	 * Get the Widgets Renderers data files
 	 *
 	 * @param   array  $widgetDetails  to load (optional).
-	 * 
+	 *
 	 * @return	Array
 	 *
 	 * @since 	1.0
@@ -311,7 +311,7 @@ class TjdashboardWidget extends JObject
 	 * Get the Class Name
 	 *
 	 * @param   string  $dataPlugin  .
-	 * 
+	 *
 	 * @return	string
 	 *
 	 * @since 	1.0
@@ -330,7 +330,7 @@ class TjdashboardWidget extends JObject
 	 * Get the Method Name
 	 *
 	 * @param   string  $renderPlugin  .
-	 * 
+	 *
 	 * @return	string
 	 *
 	 * @since 	1.0

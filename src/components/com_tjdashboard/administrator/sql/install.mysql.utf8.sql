@@ -59,8 +59,3 @@ ALTER TABLE `#__tj_dashboard_widgets`
   ADD KEY `idx_checkout` (`checked_out`),
   ADD KEY `idx_state` (`state`),
   ADD KEY `idx_createdby` (`created_by`);
-
-
-
-ALTER TABLE `#__tj_dashboard_widgets`  ADD `primary_text` VARCHAR(100) NOT NULL  AFTER `renderer_plugin`,  ADD `secondary_text` VARCHAR(100) NOT NULL  AFTER `primary_text`;
-ALTER TABLE `#__tj_dashboard_widgets`  ADD `color` VARCHAR(10) NOT NULL  AFTER `autorefresh`;

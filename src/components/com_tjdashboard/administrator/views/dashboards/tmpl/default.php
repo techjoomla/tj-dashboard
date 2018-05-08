@@ -19,7 +19,7 @@ $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 $saveOrder = $listOrder == 'dash.ordering';
 
-if ($saveOrder)
+if ( $saveOrder )
 {
 	$saveOrderingUrl = 'index.php?option=com_tjdashboard&task=dashboards.saveOrderAjax';
 	JHtml::_('sortablelist.sortable', 'dashboardsList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
@@ -29,24 +29,37 @@ if ($saveOrder)
 <div class="tj-page">
 	<div class="row-fluid">
 		<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboards'); ?>" method="post" name="adminForm" id="adminForm">
-			<?php if (!empty( $this->sidebar)) : ?>
+
+			<?php if (!empty( $this->sidebar))
+			{
+			?>
 				<div id="j-sidebar-container" class="span2">
 					<?php echo $this->sidebar; ?>
 				</div>
 				<div id="j-main-container" class="span10">
-			<?php else : ?>
+			<?php
+			}
+			else
+			{
+				?>
 				<div id="j-main-container">
-			<?php endif; ?>
-
-					<?php
-					// Search tools bar
-					echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this));
-					?>
-					<?php if (empty($this->items)) : ?>
-						<div class="alert alert-no-items">
-							<?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
-						</div>
-					<?php else : ?>
+			<?php
+			}
+			// Search tools bar
+			echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this));
+			?>
+			<?php
+			if (empty($this->items))
+			{
+			?>
+				<div class="alert alert-no-items">
+					<?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
+				</div>
+			<?php
+			}
+			else
+			{
+				?>
 					<table class="table table-striped" id="dashboardsList">
 						<thead>
 							<tr>
@@ -86,18 +99,21 @@ if ($saveOrder)
 							{
 								$item->max_ordering = 0;
 								$ordering   = ($listOrder == 'dash.ordering');
-								$canCreate  = $this->canCreate; //user->authorise('core.create',     'com_content.category.' . $item->catid);
-								$canEdit    = $this->canEdit; // $user->authorise('core.edit',       'com_content.article.' . $item->id);
+								$canCreate  = $this->canCreate;
 
-								$canCheckin = $this->canCheckin; //$user->authorise('core.manage',     'com_checkin') || $item->checked_out == $userId || $item->checked_out == 0;
-									// $canEditOwn = $user->authorise('core.edit.own',   'com_content.article.' . $item->id) && $item->created_by == $userId;
+								$canEdit    = $this->canEdit;
 
-								$canChange  = $this->canChangeStatus; // $user->authorise('core.edit.state', 'com_content.article.' . $item->id) && $canCheckin;
+								$canCheckin = $this->canCheckin;
+
+								$canChange  = $this->canChangeStatus;
 								?>
-								<tr class="row<?php echo $i % 2; ?>" sortable-group-id="<?php echo $item->dashboard_id; ?>">
+								<tr class="row
+								<?php echo $i % 2; ?>" sortable-group-id="
+								<?php echo $item->dashboard_id; ?>">
 								<td class="order nowrap center hidden-phone">
 									<?php
 									$iconClass = '';
+
 									if (!$canChange)
 									{
 										$iconClass = ' inactive';
@@ -110,9 +126,14 @@ if ($saveOrder)
 									<span class="sortable-handler<?php echo $iconClass ?>">
 										<span class="icon-menu" aria-hidden="true"></span>
 									</span>
-									<?php if ($canChange && $saveOrder) : ?>
+									<?php
+									if ($canChange && $saveOrder)
+									{
+									?>
 									<input type="text" style="display:none" name="order[]" size="5" value="<?php echo $item->ordering; ?>" class="width-20 text-area-order" />
-									<?php endif; ?>
+									<?php
+									}
+									?>
 								</td>
 								<td class="center">
 									<?php echo JHtml::_('grid.id', $i, $item->dashboard_id); ?>
@@ -122,15 +143,29 @@ if ($saveOrder)
 								</td>
 								<td class="has-context">
 									<div class="pull-left break-word">
-										<?php if ($item->checked_out) : ?>
+										<?php if ($item->checked_out)
+										{
+											?>
 										<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'dashboards.', $canCheckin); ?>
-										<?php endif; ?>
-										<?php if ($canEdit || $canEditOwn) : ?>
-											<a class="hasTooltip" href="<?php echo JRoute::_('index.php?option=com_tjdashboard&task=dashboard.edit&dashboard_id=' . $item->dashboard_id); ?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">
+										<?php
+										}
+										?>
+										<?php if ($canEdit || $canEditOwn)
+										{
+											?>
+											<a class="hasTooltip" href="
+											<?php echo JRoute::_('index.php?option=com_tjdashboard&task=dashboard.edit&dashboard_id=' . $item->dashboard_id); ?>" title="
+											<?php echo JText::_('JACTION_EDIT'); ?>">
 											<?php echo $this->escape($item->title); ?></a>
-											<?php else : ?>
-											<span title="<?php echo JText::sprintf('JFIELD_ALIAS_LABEL', $this->escape($item->alias)); ?>"><?php echo $this->escape($item->title); ?></span>
-										<?php endif; ?>
+											<?php
+											}
+											else
+											{
+												?>
+											<span title="<?php echo JText::sprintf('JFIELD_ALIAS_LABEL', $this->escape($item->alias)); ?>">
+											<?php echo $this->escape($item->title); ?></span>
+										<?php
+										}?>
 										<span class="small break-word">
 											<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias)); ?>
 										</span>
@@ -144,7 +179,9 @@ if ($saveOrder)
 							?>
 						<tbody>
 					</table>
-					<?php endif; ?>
+					<?php
+					}
+					?>
 
 					<input type="hidden" name="task" value="" />
 					<input type="hidden" name="boxchecked" value="0" />

@@ -79,8 +79,6 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			TJDashboardUI._addCssFiles(response.data.widget_css);
-			TJDashboardUI._addJsFiles(response.data.widget_js);
 			jQuery(window).trigger('resize');
 			var sourceData = [];
 			sourceData['element'] = 'dashboard-widget-'+response.data.dashboard_widget_id;
@@ -95,7 +93,9 @@ var TJDashboardUI = {
 			}
 
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
-			window[libraryClassName].renderData(method,sourceData);
+			TJDashboardUI._addCssFiles(response.data.widget_css);
+			TJDashboardUI._addJsFiles(response.data.widget_js,method,sourceData,libraryClassName);
+
 
 			return true;
 			});
@@ -113,17 +113,11 @@ var TJDashboardUI = {
 		});
 	},
 
-	_addJsFiles: function(jsObj){
+	_addJsFiles: function(jsObj,method,sourceData,libraryClassName){
 		jQuery.each(jsObj,function(index,value){
-
-			if(jQuery.find("script [src='"+value+"']").length==0){
-				(function(document, tag) {
-				    var scriptTag = document.createElement(tag), // create a script tag
-				        firstScriptTag = document.getElementsByTagName(tag)[0]; // find the first script tag in the document
-				    scriptTag.src = value; // set the source of the script to your script
-				    firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag); // append the script to the DOM
-				}(document, 'script'));
-			}
+			jQuery.getScript(value, function() {
+			   window[libraryClassName].renderData(method,sourceData);
+			});
 		});
 	},
 
@@ -147,7 +141,7 @@ var TJDashboardUI = {
 		var defaultValue = jQuery('#jform_renderer_plugin').val();
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
-		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true" onchange="TJDashboardUI._setRendererFields();"><option value="">Select renderer plugin</option></select>');
+		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">Select renderer plugin</option></select>');
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
 		promise.done(function(response) {
 			// Append option to plugin dropdown list.
@@ -164,16 +158,6 @@ var TJDashboardUI = {
 		var defaultValue = jQuery('#jform_size').val();
 		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH</option><option value="6">COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH</option><option value="4">COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH</option><option value="3">COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH</option></select>');
 		jQuery('#jform_size').val(defaultValue);
-	},
-
-	_setRendererFields: function(){
-		var selectedRendererPlugin = jQuery('#jform_renderer_plugin').val();
-		/** global: TJDashboardService */
-		if(selectedRendererPlugin=='countbox.tjdashcount' || selectedRendererPlugin=='numbercardbox.tjdashnumbercardbox'){
-			jQuery("#jform_primary_text").closest(".control-group").toggleClass("hidden");
-			jQuery("#jform_secondary_text").closest(".control-group").toggleClass("hidden");
-			jQuery("#jform_color").closest(".control-group").toggleClass("hidden");
-		}
 	}
 
 }

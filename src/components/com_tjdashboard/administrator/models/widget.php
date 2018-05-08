@@ -35,7 +35,10 @@ class TjdashboardModelWidget extends JModelAdmin
 	{
 		if ($this->data === null)
 		{
-			return parent::getItem($pk);
+			$data = parent::getItem($pk);
+			$data->params = json_encode($data->params);
+
+			return $data;
 		}
 
 		return $this->data;

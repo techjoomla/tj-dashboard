@@ -120,7 +120,7 @@ class TjdashboardViewWidget extends JViewLegacy
 	 * Can't save the record if it's checked out and editable
 	 *
 	 * @param   boolean  $checkedOut    Checked Out
-	 * 
+	 *
 	 * @param   boolean  $itemEditable  Item editable
 	 *
 	 * @return void
@@ -137,7 +137,7 @@ class TjdashboardViewWidget extends JViewLegacy
 	 * Is editable
 	 *
 	 * @param   Object   $canDo   Checked Out
-	 * 
+	 *
 	 * @param   integer  $userId  User ID
 	 *
 	 * @return boolean
