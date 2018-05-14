@@ -156,8 +156,9 @@ class TjdashboardDashboard extends JObject
 
 			return false;
 		}
+		$this->dashboard_id = $table->dashboard_id;
 
-		return $result;
+		return $this->dashboard_id;
 	}
 
 	/**

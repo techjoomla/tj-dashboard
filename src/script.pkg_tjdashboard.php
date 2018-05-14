@@ -32,23 +32,27 @@ class Pkg_TjdashboardInstallerScript
 	/** @var array The list of extra modules and plugins to install */
 	private $oldversion = "";
 
-	private $installation_queue =array(
-								'plugins' => array(
-										'tjdashboardrenderer' => array(
-																	'chartjs' => 1,
-																	'tabulator' => 1,
-																),
-										'api' => array('tjdashboard'=>1),
-									),
-								);
+	private $installation_queue = array(
+									'plugins' => array(
+											'tjdashboardrenderer' => array(
+																		'chartjs' => 1,
+																		'tabulator' => 1,
+																		'countbox' => 1,
+																		'numbercardbox' => 1,
+																	),
+											'api' => array('tjdashboard' => 1),
+										),
+									);
 
 	private $uninstall_queue = array(
 		'plugins' => array(
 						'tjdashboardrenderer' => array(
 														'chartjs' => 1,
 														'tabulator' => 1,
+															'countbox' => 1,
+															'numbercardbox' => 1,
 													),
-						'api' => array('tjdashboard'=>1),
+						'api' => array('tjdashboard' => 1),
 					)
 				);
 
@@ -106,7 +110,7 @@ class Pkg_TjdashboardInstallerScript
 	 *
 	 * @return  void
 	 */
-	function _removeFiles()
+	public function _removeFiles()
 	{
 		$file1 = JPATH_SITE . '/components/com_tjlms/views/coupon/default.xml';
 		$file2 = JPATH_SITE . '/components/com_tjlms/views/coupon/tmpl/default.xml';

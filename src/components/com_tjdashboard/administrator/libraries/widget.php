@@ -291,8 +291,8 @@ class TjdashboardWidget extends JObject
 		try
 		{
 			$dataPluginClass = $this->getClassNameForDataPlugin($widgetDetails->data_plugin);
-			$pluginObj = new $dataPluginClass;
 			$methodName = $this->getMethodNameForRenderer($widgetDetails->renderer_plugin);
+			$pluginObj = new $dataPluginClass;
 			$widgetRealData = $pluginObj->$methodName();
 			$response['status'] = 1;
 			$response['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
