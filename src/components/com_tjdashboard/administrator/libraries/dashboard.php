@@ -143,7 +143,7 @@ class TjdashboardDashboard extends JObject
 			}
 
 			// Store the user data in the database
-			if (!($result = $table->store()))
+			if (!($table->store()))
 			{
 				$this->setError($table->getError());
 
