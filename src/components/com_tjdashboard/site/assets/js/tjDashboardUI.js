@@ -95,9 +95,9 @@ var TJDashboardUI = {
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
 			TJDashboardUI._addCssFiles(response.data.widget_css);
 
-			// The rendering of the widget itself is done in the below
-			// method. Later the rendering might be decoupled from
-			// loading of the JS
+			/*The rendering of the widget itself is done in the below
+			method. Later the rendering might be decoupled from
+			loading of the JS*/
 			TJDashboardUI._addJsFiles(response.data.widget_js,method,sourceData,libraryClassName);
 
 			return true;
