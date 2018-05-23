@@ -37,9 +37,7 @@ JFactory::getDocument()->addScriptDeclaration('
 ');
 ?>
 <div class="">
-	<form action="
-	<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_id=' . (int) $this->item->dashboard_id, false);?>"
-	 method="post" enctype="multipart/form-data" name="adminForm" id="dashboard-form" class="form-validate">
+	<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_id=' . (int) $this->item->dashboard_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="dashboard-form" class="form-validate">
 		<div class="form-horizontal">
 		<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
 		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
@@ -48,7 +46,7 @@ JFactory::getDocument()->addScriptDeclaration('
 		<div class="row-fluid">
 			<div class="span9">
 				<fieldset class="adminform">
-					<?php echo $this->form->renderField('description'); ?>
+					<?php echo $this->form->getInput('description'); ?>
 				</fieldset>
 			</div>
 			<div class="span3">
@@ -75,12 +73,14 @@ JFactory::getDocument()->addScriptDeclaration('
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php /*if ($this->canDo->get('core.admin')) : ?>
+		<?php if ($this->canDo->get('core.admin')) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('COM_TJDASHBOARD_FIELDSET_RULES')); ?>
 				<?php echo $this->form->getInput('rules'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php endif;*/ ?>
-		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+		<?php endif; ?>
+		<?php
+				//echo $this->form->renderFieldset();
+		?>
 		<input type="hidden" name="task" value="" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>

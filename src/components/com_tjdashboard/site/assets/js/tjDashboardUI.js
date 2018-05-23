@@ -73,7 +73,7 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			if (!TJDashboardUI._validWidget(response.data.widget_render_data) || response.data.widget_render_data.data.length==0)
+			if (!TJDashboardUI._validWidget(response.data.widget_render_data) || response.data.widget_render_data.length==0)
 			{
 				jQuery('<div class="alert alert-info">No data to render</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
 				return false;
@@ -94,11 +94,14 @@ var TJDashboardUI = {
 
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
 			TJDashboardUI._addCssFiles(response.data.widget_css);
+
+			/*The rendering of the widget itself is done in the below
+			method. Later the rendering might be decoupled from
+			loading of the JS*/
 			TJDashboardUI._addJsFiles(response.data.widget_js,method,sourceData,libraryClassName);
 
-
 			return true;
-			});
+		});
 	},
 
 	_addCssFiles: function(cssObj){

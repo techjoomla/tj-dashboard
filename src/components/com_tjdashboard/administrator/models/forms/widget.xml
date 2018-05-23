@@ -43,7 +43,7 @@
 			type="tjdashboardrendererplugins"
 			folder="tjdashboardrenderer"
 			required="true"
-			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN"
+			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_DATA_PLUGIN">
 			<option></option>
 		</field>

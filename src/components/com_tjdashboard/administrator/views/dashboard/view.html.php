@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
@@ -10,7 +9,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
-
 /**
  * View to edit
  *
@@ -24,6 +22,13 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 * @var  JForm
 	 */
 	protected $form;
+
+	/**
+	 * The dashboard helper
+	 *
+	 * @var  object
+	 */
+	protected $tjdashboardHelper;
 
 	/**
 	 * The active item
@@ -83,33 +88,59 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
 		$user       = JFactory::getUser();
 		$userId     = $user->id;
 		$isNew      = ($this->item->dashboard_id == 0);
+		JLoader::import('administrator.components.com_tjdashboard.helpers.dashboard', JPATH_SITE);
+
+		$this->tjdashboardHelper = new DashboardHelper;
 		$checkedOut = $this->isCheckedOut($userId);
 
 		// Built the actions for new and existing records.
 		$canDo = $this->canDo;
+		$layout = JFactory::getApplication()->input->get("layout");
 
-		JToolbarHelper::title(
-			JText::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_DASHBOARD' : ($isNew ? 'ADD_DASHBOARD' : 'EDIT_DASHBOARD'))),
-			'pencil-2 dashboard-add'
-		);
+		$this->sidebar = JHtmlSidebar::render();
 
 		// For new records, check the create permission.
-		if ($isNew)
+		if ($layout != "default")
 		{
-			JToolbarHelper::save('dashboard.save');
-			JToolbarHelper::cancel('dashboard.cancel');
+			JFactory::getApplication()->input->set('hidemainmenu', true);
+
+			JToolbarHelper::title(
+				JText::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_DASHBOARD' : ($isNew ? 'ADD_DASHBOARD' : 'EDIT_DASHBOARD'))),
+				'pencil-2 dashboard-add'
+			);
+
+			if ($isNew)
+			{
+				JToolbarHelper::save('dashboard.save');
+				JToolbarHelper::cancel('dashboard.cancel');
+			}
+			else
+			{
+				$itemEditable = $this->isEditable($canDo, $userId);
+
+				// Can't save the record if it's checked out and editable
+				$this->canSave($checkedOut, $itemEditable);
+				JToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
+			}
 		}
 		else
 		{
-			$itemEditable = $this->isEditable($canDo, $userId);
+			JToolbarHelper::title(
+				JText::_('COM_TJDASHBOARD_PAGE_VIEW_DASHBOARD')
+			);
 
-			// Can't save the record if it's checked out and editable
-			$this->canSave($checkedOut, $itemEditable);
-			JToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
+			$app = JFactory::getApplication();
+
+			JLoader::import('administrator.components.com_tjdashboard.helpers.dashboard', JPATH_SITE);
+			DashboardHelper::addSubmenu('dashboard');
+
+			if ($app->isAdmin())
+			{
+				$this->sidebar = JHtmlSidebar::render();
+			}
 		}
 
 		JToolbarHelper::divider();
