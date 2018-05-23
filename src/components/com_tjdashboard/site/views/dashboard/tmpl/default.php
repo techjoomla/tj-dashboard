@@ -13,8 +13,7 @@ JHTML::_('behavior.modal');
 
 
 $document = JFactory::getDocument();
-$script  = 'var root_url = "' . Juri::root() . '";';
-$document->addScriptDeclaration($script, 'text/javascript');
+
 $document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js');
 $document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/tabulator_semantic-ui.min.css');
 $document->addStylesheet('components/com_tjdashboard/assets/css/dashboard.css');

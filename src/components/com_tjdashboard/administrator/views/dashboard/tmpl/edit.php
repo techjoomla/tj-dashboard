@@ -78,7 +78,6 @@ JFactory::getDocument()->addScriptDeclaration('
 				<?php echo $this->form->getInput('rules'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
 		<?php endif; ?>
-		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 		<?php
 				//echo $this->form->renderFieldset();
 		?>

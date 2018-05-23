@@ -11,8 +11,7 @@ defined('_JEXEC') or die;
 
 
 $document = JFactory::getDocument();
-$script  = 'var root_url = "' . Juri::root() . '";';
-$document->addScriptDeclaration($script, 'text/javascript');
+
 $document->addScript(Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js');
 $document->addStyleSheet(JUri::root() . '/media/techjoomla_strapper/bs3/css/bootstrap.css');
 $document->addStyleSheet(JUri::root() . 'media/com_tjdashboard/css/font-awesome.min.css');

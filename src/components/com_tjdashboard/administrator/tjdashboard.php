@@ -10,6 +10,11 @@ defined('_JEXEC') or die;
 
 // Include dependancies
 jimport('joomla.application.component.controller');
+
+$document = JFactory::getDocument();
+$script  = 'const root_url = "' . Juri::root() . '";';
+$document->addScriptDeclaration($script, 'text/javascript');
+
 JLoader::registerPrefix('Tjdashboard', JPATH_ADMINISTRATOR);
 JLoader::register('TjdashboardController', JPATH_ADMINISTRATOR . '/controller.php');
 
