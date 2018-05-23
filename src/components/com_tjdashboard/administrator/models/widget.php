@@ -105,8 +105,8 @@ class TjdashboardModelWidget extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		// $pk   = (!empty($data['widget_dashboard_id'])) ? $data['widget_dashboard_id'] : (int) $this->getState('widget.widget_dashboard_id');
-		$widget = TjdashboardWidget::getInstance();
+		$pk   = (!empty($data['widget_dashboard_id'])) ? $data['widget_dashboard_id'] : (int) $this->getState('widget.widget_dashboard_id');
+		$widget = TjdashboardWidget::getInstance($pk);
 
 		// Bind the data.
 		if (!$widget->bind($data))

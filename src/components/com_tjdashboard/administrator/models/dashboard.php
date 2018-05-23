@@ -86,7 +86,8 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		$dashboard = TjdashboardDashboard::getInstance();
+		$pk   = (!empty($data['dashboard_id'])) ? $data['dashboard_id'] : (int) $this->getState('dashboard.dashboard_id');
+		$dashboard = TjdashboardDashboard::getInstance($pk);
 
 		// Bind the data.
 		if (!$dashboard->bind($data))
