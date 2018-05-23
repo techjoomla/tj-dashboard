@@ -44,11 +44,8 @@ class DashboardHelper
 		{
 			$client = JFactory::getApplication()->input->get('client', '', 'STRING');
 
-			$full_client = $client;
-
 			// Set ordering.
-			$mainframe = JFactory::getApplication();
-			$full_client = explode('.', $full_client);
+			$full_client = explode('.', $client);
 
 			// Eg com_jgive
 			$component = $full_client[0];
@@ -76,7 +73,7 @@ class DashboardHelper
 						|| $lang->load($component, JPath::clean(JPATH_ADMINISTRATOR . '/components/' . $component), $lang->getDefault(), false, false);
 
 						// Call_user_func(array($cName, 'addSubmenu'), 'categories' . (isset($section) ? '.' . $section : ''));
-						call_user_func(array($cName, 'addSubmenu'), $vName . (isset($section) ? '.' . $section : ''));
+						call_user_func(array($cName, 'addSubmenu'), $vName);
 					}
 				}
 			}
@@ -92,7 +89,7 @@ class DashboardHelper
 	 *
 	 * @return  JObject
 	 *
-	 * @since   3.2
+	 * @since   1.0.0
 	 */
 	public static function getActions($component = 'com_tjdashboard', $section = '', $id = 0)
 	{
@@ -127,11 +124,11 @@ class DashboardHelper
 
 		if (JFile::exists($override))
 		{
-			return $view = $override;
+			return $override;
 		}
 		else
 		{
-			return $view = $useViewpath . '/' . 'components' . '/' . $component . '/' . 'views' . '/' . $viewname . '/' . 'tmpl' . '/' . $layoutname;
+			return $useViewpath . '/' . 'components' . '/' . $component . '/' . 'views' . '/' . $viewname . '/' . 'tmpl' . '/' . $layoutname;
 		}
 	}
 }
