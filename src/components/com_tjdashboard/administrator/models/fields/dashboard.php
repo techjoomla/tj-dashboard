@@ -84,8 +84,6 @@ class JFormFieldModal_Dashboard extends JFormField
 
 		$urlSelect = $linkDashboards . '&amp;function=jSelectDashboard_' . $this->id;
 
-		$urlNew    = $linkdashboard . '&amp;task=dashboard.add';
-
 		if ($value)
 		{
 			$db    = JFactory::getDbo();
