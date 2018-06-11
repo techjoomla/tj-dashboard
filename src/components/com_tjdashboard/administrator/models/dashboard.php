@@ -113,27 +113,19 @@ class TjdashboardModelDashboard extends JModelAdmin
 	}
 
 	/**
-	 * Method to get dashboard data.
+	 * Method to auto-populate the model state.
 	 *
-	 * @param   integer  $itemId  The id of the dashboard.
+	 * Note. Calling getState in this method will result in recursion.
 	 *
-	 * @return  mixed  Content item data object on success, false on failure.
+	 * @return   void
+	 *
+	 * @since    1.6
 	 */
 
-	public function getItem($itemId = null)
+	protected function populateState()
 	{
 		$jinput = JFactory::getApplication()->input;
-		$id = ($itemId)?$itemId:$jinput->get('id');
-
-		if (!empty($id))
-		{
-			$data = parent::getItem($id);
-		}
-		else
-		{
-			$data = parent::getItem();
-		}
-
-		return $data;
+		$id = $jinput->get('id');
+		$this->setState('dashboard.dashboard_id', $id);
 	}
 }
