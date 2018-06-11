@@ -18,8 +18,6 @@ JHtml::_('behavior.keepalive');
 $app = JFactory::getApplication();
 $input = $app->input;
 $document = JFactory::getDocument();
-$script = 'var root_url = "' . Juri::root() . '";';
-$document->addScriptDeclaration($script, 'text/javascript');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
 

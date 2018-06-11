@@ -97,14 +97,43 @@ class TjdashboardModelDashboard extends JModelAdmin
 			return false;
 		}
 
+		$result = $dashboard->save();
+
 		// Store the data.
-		if (!$dashboard->save())
+		if (!$result)
 		{
 			$this->setError($dashboard->getError());
 
 			return false;
 		}
 
-		return $dashboard->dashboard_id;
+		$this->setState('dashboard.dashboard_id', $result);
+
+		return $result;
+	}
+
+	/**
+	 * Method to get dashboard data.
+	 *
+	 * @param   integer  $itemId  The id of the dashboard.
+	 *
+	 * @return  mixed  Content item data object on success, false on failure.
+	 */
+
+	public function getItem($itemId = null)
+	{
+		$jinput = JFactory::getApplication()->input;
+		$id = ($itemId)?$itemId:$jinput->get('id');
+
+		if (!empty($id))
+		{
+			$data = parent::getItem($id);
+		}
+		else
+		{
+			$data = parent::getItem();
+		}
+
+		return $data;
 	}
 }
