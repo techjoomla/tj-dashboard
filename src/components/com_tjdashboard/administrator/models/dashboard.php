@@ -125,7 +125,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	protected function populateState()
 	{
 		$jinput = JFactory::getApplication()->input;
-		$id = $jinput->get('id');
+		$id = ($jinput->get('id'))?$jinput->get('id'):$jinput->get('dashboard_id');
 		$this->setState('dashboard.dashboard_id', $id);
 	}
 }
