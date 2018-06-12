@@ -1,10 +1,9 @@
 <?php
 /**
- * @package     Joomla.Administrator
- * @subpackage  com_contact
- *
- * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @package    Com_Tjdashboard
+ * @author     Techjoomla <extensions@techjoomla.com>
+ * @copyright  2017 Techjoomla
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('JPATH_BASE') or die;
@@ -12,7 +11,7 @@ defined('JPATH_BASE') or die;
 /**
  * Supports a modal contact picker.
  *
- * @since  1.6
+ * @since  1.0
  */
 class JFormFieldModal_Dashboard extends JFormField
 {
