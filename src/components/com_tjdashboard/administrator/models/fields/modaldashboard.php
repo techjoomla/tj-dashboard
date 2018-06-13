@@ -49,26 +49,14 @@ class JFormFieldModaldashboard extends JFormField
 		JHtml::_('script', 'system/modal-fields.js', array('version' => 'auto', 'relative' => true));
 
 		// Script to proxy the select modal function to the modal-fields.js file.
-		if ($allowSelect)
-		{
-			static $scriptSelect = null;
-
-			if (is_null($scriptSelect))
-			{
-				$scriptSelect = array();
-			}
-
-			if (!isset($scriptSelect[$this->id]))
-			{
-				JFactory::getDocument()->addScriptDeclaration("
-				function jSelectDashboard_" . $this->id . "(id, title, object) {
-					window.processModalSelect('Dashboard', '" . $this->id . "', id, title, '', object);
-				}
-				");
-
-				$scriptSelect[$this->id] = true;
-			}
+		$scriptSelect = array();
+		JFactory::getDocument()->addScriptDeclaration("
+		function jSelectDashboard_" . $this->id . "(id, title, object) {
+			window.processModalSelect('Dashboard', '" . $this->id . "', id, title, '', object);
 		}
+		");
+
+		$scriptSelect[$this->id] = true;
 
 		// Setup variables for display.
 		$linkDashboards = 'index.php?option=com_tjdashboard&amp;view=dashboards&amp;layout=modal&amp;tmpl=component&amp;' . JSession::getFormToken() . '=1';
@@ -87,9 +75,9 @@ class JFormFieldModaldashboard extends JFormField
 		{
 			$db    = JFactory::getDbo();
 			$query = $db->getQuery(true)
-				->select($db->quoteName('name'))
-				->from($db->quoteName('#__dashboard_details'))
-				->where($db->quoteName('id') . ' = ' . (int) $value);
+				->select($db->quoteName('title'))
+				->from($db->quoteName('#__tj_dashboards'))
+				->where($db->quoteName('dashboard_id') . ' = ' . (int) $value);
 			$db->setQuery($query);
 
 			try
