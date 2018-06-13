@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * Dashboards view
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardViewDashboards extends JViewLegacy
 {

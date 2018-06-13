@@ -12,7 +12,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
 /**
  * Tj-Dashboard dashboard table class
  *
- * @since  1.0
+ * @since  1.0.0
  */
 class TjdashboardTableDashboards extends JTable
 {
@@ -21,7 +21,7 @@ class TjdashboardTableDashboards extends JTable
 	 *
 	 * @param   JDatabaseDriver  &$db  Database object
 	 *
-	 * @since  1.0
+	 * @since  1.0.0
 	 */
 	public function __construct(&$db)
 	{

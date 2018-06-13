@@ -13,7 +13,7 @@ use Joomla\Utilities\ArrayHelper;
 /**
  * Dashboards list controller class.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjDashboardControllerDashboards extends JControllerAdmin
 {

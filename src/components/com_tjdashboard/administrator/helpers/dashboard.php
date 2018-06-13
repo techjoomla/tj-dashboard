@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * TjDashboard helper.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class DashboardHelper
 {
@@ -78,23 +78,5 @@ class DashboardHelper
 				}
 			}
 		}
-	}
-
-	/**
-	 * Gets a list of the actions that can be performed.
-	 *
-	 * @param   string   $component  The component name.
-	 * @param   string   $section    The access section name.
-	 * @param   integer  $id         The item ID.
-	 *
-	 * @return  JObject
-	 *
-	 * @since   1.0.0
-	 */
-	public static function getActions($component = 'com_tjdashboard', $section = '', $id = 0)
-	{
-		$result = parent::getActions($component, $section, $id);
-
-		return $result;
 	}
 }

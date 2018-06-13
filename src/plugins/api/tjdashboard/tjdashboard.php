@@ -18,7 +18,7 @@ JLoader::import('components.com_tjdashboard.libraries.widget', JPATH_ADMINISTRAT
 /**
  * Tjdashboard API plugin
  *
- * @since  1.0
+ * @since  1.0.0
  */
 class PlgAPITjdashboard extends ApiPlugin
 {
@@ -28,7 +28,7 @@ class PlgAPITjdashboard extends ApiPlugin
 	 * @param   STRING  &$subject  subject
 	 * @param   array   $config    config
 	 *
-	 * @since 1.0
+	 * @since 1.0.0
 	 */
 	public function __construct(&$subject, $config = array())
 	{

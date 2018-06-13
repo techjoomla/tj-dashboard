@@ -22,7 +22,7 @@ class TjdashboardModelWidgets extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see     JModelList
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public function __construct($config = array())
 	{
@@ -44,7 +44,7 @@ class TjdashboardModelWidgets extends JModelList
 	 *
 	 * @return  JDatabaseQuery
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	protected function getListQuery()
 	{

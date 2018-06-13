@@ -14,7 +14,7 @@ JFormHelper::loadFieldClass('plugins');
 /**
  * Form Field class for the Joomla Framework.
  *
- * @since  11.4
+ * @since  1.0.0
  */
 class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 {
@@ -22,7 +22,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	 * The field type.
 	 *
 	 * @var    string
-	 * @since  11.4
+	 * @since 1.0.0
 	 */
 	protected $type = 'tjdashboardsourceplugins';
 
@@ -30,7 +30,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	 * The path to folder for plugins.
 	 *
 	 * @var    string
-	 * @since  3.2
+	 * @since  1.0.0
 	 */
 	protected $folder;
 
@@ -41,7 +41,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	 *
 	 * @return  mixed  The property value or null.
 	 *
-	 * @since   3.2
+	 * @since   1.0.0
 	 */
 	public function __get($name)
 	{
@@ -62,7 +62,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	 *
 	 * @return  void
 	 *
-	 * @since   3.2
+	 * @since   1.0.0
 	 */
 	public function __set($name, $value)
 	{
@@ -89,7 +89,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	 * @return  boolean  True on success.
 	 *
 	 * @see     JFormField::setup()
-	 * @since   3.2
+	 * @since   1.0.0
 	 */
 	public function setup(SimpleXMLElement $element, $value, $group = null)
 	{
@@ -108,7 +108,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 	 *
 	 * @return	array  An array of JHtml options.
 	 *
-	 * @since   11.4
+	 * @since   1.0.0
 	 */
 	protected function getOptions()
 	{

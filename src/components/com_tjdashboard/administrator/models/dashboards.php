@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * Methods supporting a list of records.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardModelDashboards extends JModelList
 {
@@ -23,7 +23,7 @@ class TjdashboardModelDashboards extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see        JController
-	 * @since      1.6
+	 * @since      1.0.0
 	 */
 	public function __construct($config = array())
 	{
@@ -46,7 +46,7 @@ class TjdashboardModelDashboards extends JModelList
 	 *
 	 * @return   JDatabaseQuery
 	 *
-	 * @since    1.6
+	 * @since    1.0.0
 	 */
 	protected function getListQuery()
 	{

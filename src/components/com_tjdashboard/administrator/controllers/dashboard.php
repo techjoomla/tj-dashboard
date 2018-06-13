@@ -13,7 +13,7 @@ use Joomla\Utilities\ArrayHelper;
 /**
  * The dashboard controller
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjDashboardControllerDashboard extends JControllerForm
 {

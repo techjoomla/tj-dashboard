@@ -16,7 +16,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
 /**
  * Item Model for an Dashboard.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardModelDashboard extends JModelAdmin
 {
@@ -28,7 +28,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 *
 	 * @return  JForm|boolean  A JForm object on success, false on failure
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
@@ -82,7 +82,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 * @return bool
 	 *
 	 * @throws Exception
-	 * @since 1.6
+	 * @since 1.0.0
 	 */
 	public function save($data)
 	{
@@ -119,7 +119,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 *
 	 * @return   void
 	 *
-	 * @since    1.6
+	 * @since    1.0.0
 	 */
 
 	protected function populateState()

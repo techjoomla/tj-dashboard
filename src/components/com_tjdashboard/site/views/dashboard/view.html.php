@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 /**
  * View to edit
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardViewDashboard extends JViewLegacy
 {

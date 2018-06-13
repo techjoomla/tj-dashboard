@@ -14,7 +14,7 @@ JLoader::load(JPATH_COMPONENT_ADMINISTRATOR . '/includes/tjdashboard');
 /**
  * Class TjdashboardController
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardController extends JControllerLegacy
 {
@@ -26,7 +26,7 @@ class TjdashboardController extends JControllerLegacy
 	 *
 	 * @return  JController   This object to support chaining.
 	 *
-	 * @since    1.5
+	 * @since    1.0.0
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{

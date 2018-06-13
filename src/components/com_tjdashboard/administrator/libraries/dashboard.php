@@ -10,7 +10,7 @@ defined('_JEXEC') or die('Unauthorized Access');
 /**
  * Dashboard class.  Handles all application interaction with a Dashboard
  *
- * @since  11.1
+ * @since  1.0.0
  */
 class TjdashboardDashboard extends JObject
 {
@@ -55,7 +55,7 @@ class TjdashboardDashboard extends JObject
 	 *
 	 * @param   int  $id  The unique event key to load.
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public function __construct($id = 0)
 	{
@@ -72,7 +72,7 @@ class TjdashboardDashboard extends JObject
 	 *
 	 * @return  TjdashboardDashboard  The Dashboard object.
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public static function getInstance($id = 0)
 	{
@@ -98,7 +98,7 @@ class TjdashboardDashboard extends JObject
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   11.1
+	 * @since 1.0.0
 	 */
 	public function load($id)
 	{
@@ -122,7 +122,7 @@ class TjdashboardDashboard extends JObject
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 * @throws  \RuntimeException
 	 */
 	public function save()
@@ -187,7 +187,7 @@ class TjdashboardDashboard extends JObject
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   11.1
+	 * @since 1.0.0
 	 */
 	public function bind(&$array)
 	{

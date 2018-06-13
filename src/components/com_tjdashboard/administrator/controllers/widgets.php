@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * Widgets controller class.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardControllerWidgets extends JControllerAdmin
 {
@@ -28,8 +28,6 @@ class TjdashboardControllerWidgets extends JControllerAdmin
 	 */
 	public function getModel($name = 'Widget', $prefix = 'TjdashboardModel')
 	{
-		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
-
-		return $model;
+		return parent::getModel($name, $prefix, array('ignore_request' => true));
 	}
 }
