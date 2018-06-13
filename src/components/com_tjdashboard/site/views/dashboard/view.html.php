@@ -20,6 +20,8 @@ class TjdashboardViewDashboard extends JViewLegacy
 {
 	protected $item;
 
+	protected $state;
+
 	/**
 	 * Display the view
 	 *
