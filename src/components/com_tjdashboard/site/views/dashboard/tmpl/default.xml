@@ -13,7 +13,7 @@
         >
             <field
                 name="id"
-                type="modal_dashboard"
+                type="modaldashboard"
                 label="COM_TJDASHBOARD_FIELDSET_ITEM_ID_SELECT_LABEL"
                 description="COM_TJDASHBOARD_FIELDSET_ITEM_ID_SELECT_LABEL"
                 required="true"
