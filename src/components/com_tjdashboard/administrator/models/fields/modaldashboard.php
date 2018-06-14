@@ -82,7 +82,7 @@ class JFormFieldModaldashboard extends JFormField
 			{
 				$title = $obj->title;
 			}
-			catch (Exception $e)
+			catch (\Exception $e)
 			{
 				// Get a handle to the Joomla! application object
 				$application = JFactory::getApplication();
