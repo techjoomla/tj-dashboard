@@ -8,6 +8,8 @@
 
 defined('JPATH_BASE') or die;
 
+JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
+
 /**
  * Supports a modal dashboard picker.
  *
@@ -73,20 +75,20 @@ class JFormFieldModaldashboard extends JFormField
 
 		if ($value)
 		{
-			$db    = JFactory::getDbo();
-			$query = $db->getQuery(true)
-				->select($db->quoteName('title'))
-				->from($db->quoteName('#__tj_dashboards'))
-				->where($db->quoteName('dashboard_id') . ' = ' . (int) $value);
-			$db->setQuery($query);
+			$obj = new TjdashboardDashboard;
+			$obj->load($value);
 
 			try
 			{
-				$title = $db->loadResult();
+				$title = $obj->title;
 			}
 			catch (RuntimeException $e)
 			{
-				JError::raiseWarning(500, $e->getMessage());
+				// Get a handle to the Joomla! application object
+				$application = JFactory::getApplication();
+
+				// Add a message to the message queue
+				$application->enqueueMessage($e->getMessage(), 'error');
 			}
 		}
 
