@@ -76,7 +76,7 @@ class JFormFieldModaldashboard extends JFormField
 		if ($value)
 		{
 			$obj = new TjdashboardDashboard;
-			$obj->load($value);
+			$obj->getInstance($value);
 
 			try
 			{
