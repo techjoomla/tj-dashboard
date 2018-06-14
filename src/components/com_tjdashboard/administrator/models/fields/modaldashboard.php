@@ -41,7 +41,7 @@ class JFormFieldModaldashboard extends JFormField
 		JFactory::getLanguage()->load('com_tjdashboard', JPATH_ADMINISTRATOR);
 
 		// The active dashboard id field.
-		$value = (int) $this->value > 0 ? (int) $this->value : '';
+		$value = (int) ($this->value > 0 ? (int) $this->value : 0);
 
 		// Create the modal id.
 		$modalId = 'Dashboard_' . $this->id;
@@ -82,7 +82,7 @@ class JFormFieldModaldashboard extends JFormField
 			{
 				$title = $obj->title;
 			}
-			catch (RuntimeException $e)
+			catch (Exception $e)
 			{
 				// Get a handle to the Joomla! application object
 				$application = JFactory::getApplication();
