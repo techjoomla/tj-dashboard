@@ -127,5 +127,6 @@ class TjdashboardModelDashboard extends JModelAdmin
 		$jinput = JFactory::getApplication()->input;
 		$id = ($jinput->get('id'))?$jinput->get('id'):$jinput->get('dashboard_id');
 		$this->setState('dashboard.dashboard_id', $id);
+		$this->setState('dashboard.id', $id);
 	}
 }
