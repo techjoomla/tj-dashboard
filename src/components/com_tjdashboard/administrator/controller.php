@@ -2,9 +2,10 @@
 /**
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 // No direct access
 defined('_JEXEC') or die;
 
@@ -14,7 +15,7 @@ JLoader::load(JPATH_COMPONENT_ADMINISTRATOR . '/includes/tjdashboard');
 /**
  * Class TjdashboardController
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardController extends JControllerLegacy
 {
@@ -26,7 +27,7 @@ class TjdashboardController extends JControllerLegacy
 	 *
 	 * @return  JController   This object to support chaining.
 	 *
-	 * @since    1.5
+	 * @since    1.0.0
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{

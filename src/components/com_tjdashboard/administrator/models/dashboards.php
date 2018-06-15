@@ -1,9 +1,8 @@
 <?php
 /**
- * @package    Com_TjDashboard
- *
- * @author     Techjoomla <contact@techjoomla.com>
- * @copyright  2017 Techjoomla
+ * @package    Com_Tjdashboard
+ * @author     Techjoomla <extensions@techjoomla.com>
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -13,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * Methods supporting a list of records.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardModelDashboards extends JModelList
 {
@@ -23,7 +22,7 @@ class TjdashboardModelDashboards extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see        JController
-	 * @since      1.6
+	 * @since      1.0.0
 	 */
 	public function __construct($config = array())
 	{
@@ -46,7 +45,7 @@ class TjdashboardModelDashboards extends JModelList
 	 *
 	 * @return   JDatabaseQuery
 	 *
-	 * @since    1.6
+	 * @since    1.0.0
 	 */
 	protected function getListQuery()
 	{

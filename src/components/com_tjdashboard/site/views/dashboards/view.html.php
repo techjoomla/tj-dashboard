@@ -2,7 +2,7 @@
 /**
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * Dashboards view
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardViewDashboards extends JViewLegacy
 {

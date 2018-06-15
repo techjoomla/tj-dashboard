@@ -21,7 +21,7 @@ class PlgTjdashboardRendererChartjs
 	 *
 	 * @return	Array JS files paths
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public function getJS()
 	{
@@ -37,7 +37,7 @@ class PlgTjdashboardRendererChartjs
 	 *
 	 * @return	Array CSS files paths
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public function getCSS()
 	{

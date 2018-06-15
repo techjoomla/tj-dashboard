@@ -1,11 +1,11 @@
 <?php
-
 /**
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 // No direct access
 defined('_JEXEC') or die;
 
@@ -14,7 +14,7 @@ JLoader::registerPrefix('Tjdashboard', JPATH_SITE . '/components/com_tjdashboard
 /**
  * Class TjdashboardRouter
  *
- * @since  3.3
+ * @since  1.0.0
  */
 class TjdashboardRouter extends JComponentRouterBase
 {
@@ -27,7 +27,7 @@ class TjdashboardRouter extends JComponentRouterBase
 	 *
 	 * @return  array  The URL arguments to use to assemble the subsequent URL.
 	 *
-	 * @since   3.3
+	 * @since   1.0.0
 	 */
 	public function build(&$query)
 	{
@@ -76,7 +76,7 @@ class TjdashboardRouter extends JComponentRouterBase
 	 *
 	 * @return  array  The URL attributes to be used by the application.
 	 *
-	 * @since   3.3
+	 * @since   1.0.0
 	 */
 	public function parse(&$segments)
 	{

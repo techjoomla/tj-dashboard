@@ -21,7 +21,7 @@ class PlgTjdashboardRendererNumbercardbox
 	 *
 	 * @return	Array JS files paths
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public function getJS()
 	{
@@ -35,7 +35,7 @@ class PlgTjdashboardRendererNumbercardbox
 	 *
 	 * @return	Array CSS files paths
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public function getCSS()
 	{

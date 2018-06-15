@@ -2,7 +2,7 @@
 /**
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -16,7 +16,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
 /**
  * Item Model for an Dashboard.
  *
- * @since  1.6
+ * @since  1.0.0
  */
 class TjdashboardModelDashboard extends JModelAdmin
 {
@@ -28,7 +28,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 *
 	 * @return  JForm|boolean  A JForm object on success, false on failure
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
@@ -82,7 +82,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 * @return bool
 	 *
 	 * @throws Exception
-	 * @since 1.6
+	 * @since 1.0.0
 	 */
 	public function save($data)
 	{
@@ -97,14 +97,36 @@ class TjdashboardModelDashboard extends JModelAdmin
 			return false;
 		}
 
+		$result = $dashboard->save();
+
 		// Store the data.
-		if (!$dashboard->save())
+		if (!$result)
 		{
 			$this->setError($dashboard->getError());
 
 			return false;
 		}
 
-		return $dashboard->dashboard_id;
+		$this->setState('dashboard.dashboard_id', $result);
+
+		return true;
+	}
+
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @return   void
+	 *
+	 * @since    1.0.0
+	 */
+
+	protected function populateState()
+	{
+		$jinput = JFactory::getApplication()->input;
+		$id = ($jinput->get('id'))?$jinput->get('id'):$jinput->get('dashboard_id');
+		$this->setState('dashboard.dashboard_id', $id);
+		$this->setState('dashboard.id', $id);
 	}
 }

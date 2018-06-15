@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * Dashboards view
  *
- * @since  1.6
+ * @since 1.0.0
  */
 class TjdashboardViewWidgets extends JViewLegacy
 {
@@ -148,7 +148,7 @@ class TjdashboardViewWidgets extends JViewLegacy
 	 *
 	 * @return void
 	 *
-	 * @since    1.6
+	 * @since    1.0.0
 	 */
 	protected function addToolbar()
 	{

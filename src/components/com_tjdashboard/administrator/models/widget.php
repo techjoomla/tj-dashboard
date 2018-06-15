@@ -2,7 +2,7 @@
 /**
  * @package    Com_Tjdashboard
  * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
@@ -18,7 +18,7 @@ class TjdashboardModelWidget extends JModelAdmin
 {
 	/**
 	 * @var		object	The widget data.
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	protected $data;
 
@@ -29,7 +29,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	 *
 	 * @return  mixed  	Data object on success, false on failure.
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public function getItem($pk = null)
 	{
@@ -71,7 +71,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	 *
 	 * @return  JForm  A JForm object on success, false on failure
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
@@ -86,7 +86,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	 *
 	 * @return  mixed  The data for the form.
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	protected function loadFormData()
 	{
@@ -101,7 +101,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	 * @return bool
 	 *
 	 * @throws Exception
-	 * @since 1.6
+	 * @since 1.0.0
 	 */
 	public function save($data)
 	{

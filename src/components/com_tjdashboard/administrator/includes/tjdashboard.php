@@ -15,7 +15,7 @@ JLoader::discover("Tjdashboard", JPATH_ADMINISTRATOR . '/components/com_tjdashbo
  *
  * This class perform the helpful operation for truck app
  *
- * @since  1.0
+ * @since  1.0.0
  */
 class TjdashboardFactory
 {
@@ -26,7 +26,7 @@ class TjdashboardFactory
 	 *
 	 * @return	JTable object
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public static function table($name)
 	{
@@ -48,7 +48,7 @@ class TjdashboardFactory
 	 *
 	 * @return	JModel object
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public static function model($name, $config = array())
 	{

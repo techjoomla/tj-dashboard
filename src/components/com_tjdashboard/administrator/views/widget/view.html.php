@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 /**
  * View to edit
  *
- * @since  1.6
+ * @since 1.0.0
  */
 class TjdashboardViewWidget extends JViewLegacy
 {
@@ -78,7 +78,7 @@ class TjdashboardViewWidget extends JViewLegacy
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.0
 	 */
 	protected function addToolbar()
 	{

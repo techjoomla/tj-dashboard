@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 /**
  * Tj-Dashboard widgets table class
  *
- * @since  1.0
+ * @since  1.0.0
  */
 class TjdashboardTableWidgets extends JTable
 {
@@ -21,7 +21,7 @@ class TjdashboardTableWidgets extends JTable
 	 *
 	 * @param   JDatabaseDriver  &$db  Database object
 	 *
-	 * @since  1.0
+	 * @since  1.0.0
 	 */
 	public function __construct(&$db)
 	{

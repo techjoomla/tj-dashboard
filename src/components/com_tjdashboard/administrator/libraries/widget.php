@@ -10,7 +10,7 @@ defined('_JEXEC') or die('Unauthorized Access');
 /**
  * Widget class.  Handles all application interaction with a Widget
  *
- * @since  11.1
+ * @since  1.0.0
  */
 class TjdashboardWidget extends JObject
 {
@@ -55,7 +55,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @param   int  $id  The unique event key to load.
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public function __construct($id = 0)
 	{
@@ -72,7 +72,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return  Object  Widget object.
 	 *
-	 * @since   1.0
+	 * @since   1.0.0
 	 */
 	public static function getInstance($id = 0)
 	{
@@ -101,7 +101,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   11.1
+	 * @since 1.0.0
 	 */
 	public function load($id)
 	{
@@ -125,7 +125,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   11.1
+	 * @since 1.0.0
 	 * @throws  \RuntimeException
 	 */
 	public function save()
@@ -170,7 +170,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return	Array
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	protected function getWidgetData($id)
 	{
@@ -194,7 +194,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @since   11.1
+	 * @since 1.0.0
 	 */
 	public function bind(&$array)
 	{
@@ -226,7 +226,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return	Array JS files paths
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	protected function getWidgetJS($id)
 	{
@@ -251,7 +251,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return	Array CSS files paths
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	protected function getWidgetCSS($id)
 	{
@@ -277,7 +277,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return	Array
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	protected function getWidgetRendererData($widgetDetails)
 	{
@@ -314,7 +314,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return	string
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public function getClassNameForDataPlugin($dataPlugin)
 	{
@@ -333,7 +333,7 @@ class TjdashboardWidget extends JObject
 	 *
 	 * @return	string
 	 *
-	 * @since 	1.0
+	 * @since 	1.0.0
 	 **/
 	public function getMethodNameForRenderer($renderPlugin)
 	{
