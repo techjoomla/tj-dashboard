@@ -14,7 +14,7 @@
 
 	<files folder="packages">
 		<file type="component" id="com_api">com_api.zip</file>
-		<file type="component" id="tjdashboard">tjdashboard.zip</file>
+		<file type="component" id="tjdashboard">com_tjdashboard.zip</file>
 	</files>
 
 </extension>

@@ -34,13 +34,18 @@ var TJDashboardUI = {
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
 				var colorClass = "panel-default";
-				if(value.color.length!=0){
-					colorClass="panel-"+value.color;
+
+				if(value.params){
+					value.params = JSON.parse(value.params);
+				}
+
+				if(value.params.color!=undefined && value.params.color.length!=0){
+					colorClass=value.params.color;
 				}
 
 				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
 
-				TJDashboardUI.initWidget(value.dashboard_widget_id);
+				TJDashboardUI.initWidget(value);
 				i++;
 				divSpan = parseInt(divSpan) + parseInt(value.size);
 
@@ -61,9 +66,9 @@ var TJDashboardUI = {
 		});
 	},
 
-	initWidget : function(id){
+	initWidget : function(widget_data){
 		/** global: TJDashboardService */
-		var promise = TJDashboardService.getWidget(id);
+		var promise = TJDashboardService.getWidget(widget_data.dashboard_widget_id);
 		promise.done(function(response) {
 
 
@@ -83,6 +88,8 @@ var TJDashboardUI = {
 			var sourceData = [];
 			sourceData['element'] = 'dashboard-widget-'+response.data.dashboard_widget_id;
 			sourceData['data'] = response.data.widget_render_data;
+			sourceData['params'] = widget_data.params;
+
 			var redererDetail = response.data.renderer_plugin.split(".");
 			var library = redererDetail[0];
 			var method = redererDetail[1];

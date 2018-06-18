@@ -156,9 +156,8 @@ class TjdashboardDashboard extends JObject
 
 			return false;
 		}
-		$this->dashboard_id = $table->dashboard_id;
 
-		return $this->dashboard_id;
+		return $table->dashboard_id;
 	}
 
 	/**
@@ -174,6 +173,7 @@ class TjdashboardDashboard extends JObject
 		{
 			$widgetModel = TjdashboardFactory::model("widgets", array("ignore_request" => 1));
 			$widgetModel->setState('filter.dashboard_id', $this->dashboard_id);
+			$widgetModel->setState('filter.state', 1);
 			$widgetData = $widgetModel->getItems();
 
 			return $widgetData;
