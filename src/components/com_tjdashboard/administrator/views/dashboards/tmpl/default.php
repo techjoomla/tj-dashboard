@@ -63,6 +63,7 @@ if ( $saveOrder )
 					<table class="table table-striped" id="dashboardsList">
 						<thead>
 							<tr>
+								<th width="1%" class="nowrap center hidden-phone"></th>
 								<th width="1%" class="nowrap center hidden-phone">
 									<?php echo JHtml::_('searchtools.sort', '', 'dash.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
 								</th>
