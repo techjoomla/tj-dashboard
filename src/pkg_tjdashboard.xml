@@ -12,7 +12,7 @@
 	<description></description>
 	<scriptfile>script.pkg_tjdashboard.php</scriptfile>
 
-	<files folder="packages">
+	<files folder="components">
 		<file type="component" id="com_api">com_api.zip</file>
 		<file type="component" id="tjdashboard">com_tjdashboard.zip</file>
 	</files>
