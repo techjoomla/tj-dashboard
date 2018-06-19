@@ -66,9 +66,9 @@ var TJDashboardUI = {
 		});
 	},
 
-	initWidget : function(widget_data){
+	initWidget : function(widgetData){
 		/** global: TJDashboardService */
-		var promise = TJDashboardService.getWidget(widget_data.dashboard_widget_id);
+		var promise = TJDashboardService.getWidget(widgetData.dashboard_widget_id);
 		promise.done(function(response) {
 
 
@@ -88,7 +88,7 @@ var TJDashboardUI = {
 			var sourceData = [];
 			sourceData['element'] = 'dashboard-widget-'+response.data.dashboard_widget_id;
 			sourceData['data'] = response.data.widget_render_data;
-			sourceData['params'] = widget_data.params;
+			sourceData['params'] = widgetData.params;
 
 			var redererDetail = response.data.renderer_plugin.split(".");
 			var library = redererDetail[0];
