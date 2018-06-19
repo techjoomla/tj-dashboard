@@ -83,11 +83,11 @@ if ($saveOrder)
 								</th>
 
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN', 'wid.data_plugin', $listDirn, $listOrder); ?>
+									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN', 'wid.renderer_plugin', $listDirn, $listOrder); ?>
 								</th>
 
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN', 'wid.renderer_plugin', $listDirn, $listOrder); ?>
+									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN', 'wid.data_plugin', $listDirn, $listOrder); ?>
 								</th>
 
 								<th>

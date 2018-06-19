@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.0.0" type="plugin" group="api" method="upgrade">
     <name>Tj-Dashboard</name>
-    <version>1.6</version>
-    <creationDate>20 September 2017</creationDate>
-    <author></author>
+    <author>Techjoomla</author>
+    <authorUrl>www.techjoomla.com</authorUrl>
+    <copyright>Copyright(C)2012-17 TechJoomla</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <description>Tj-Dashboard API plugin</description>
     <files>
         <filename plugin="tjdashboard">tjdashboard.php</filename>
-        <folder>tjdashboard</folder>
+        <folder>resources</folder>
+        <folder>language</folder>
     </files>
     <languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.plg_api_tjdashboard.ini</language>

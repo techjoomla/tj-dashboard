@@ -15,7 +15,9 @@
 		<folder>assets</folder>
 	</files>
 
-	<languages>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_numbercardbox.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_numbercardbox.sys.ini</language>
 	</languages>
 
 </extension>
