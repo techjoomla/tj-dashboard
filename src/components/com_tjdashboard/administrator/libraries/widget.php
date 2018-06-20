@@ -301,7 +301,7 @@ class TjdashboardWidget extends JObject
 		catch (Exception $e)
 		{
 			$response['status'] = 0;
-			$response['msg'] = JText::_("Something went wrong");
+			$response['msg'] = JText::_("COM_TJDASHBOARD_FAILURE_TEXT");
 		}
 
 		return $response;
