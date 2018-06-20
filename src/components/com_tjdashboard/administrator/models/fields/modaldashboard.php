@@ -107,7 +107,7 @@ class JFormFieldModaldashboard extends JFormField
 				. ' data-toggle="modal"'
 				. ' role="button"'
 				. ' href="#ModalSelect' . $modalId . '"'
-				. ' title="' . JHtml::tooltipText('COM_DASHBOARD_CHANGE_DASHBOARD') . '">'
+				. ' title="' . JHtml::tooltipText('COM_TJDASHBOARD_CHANGE_DASHBOARD') . '">'
 				. '<span class="icon-file" aria-hidden="true"></span> ' . JText::_('JSELECT')
 				. '</a>';
 		}

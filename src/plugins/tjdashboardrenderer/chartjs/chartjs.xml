@@ -18,8 +18,8 @@
 	</files>
 
 	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_chartjs.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_chartjs.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardrenderer_chartjs.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardrenderer_chartjs.sys.ini</language>
 	</languages>
 
 </extension>
