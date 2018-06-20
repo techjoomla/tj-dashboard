@@ -14,6 +14,9 @@ jimport('joomla.application.component.controller');
 JLoader::registerPrefix('Tjdashboard', JPATH_COMPONENT);
 JLoader::register('TjdashboardController', JPATH_COMPONENT . '/controller.php');
 
+$document = JFactory::getDocument();
+$script  = 'const root_url = "' . Juri::root() . '";';
+$document->addScriptDeclaration($script, 'text/javascript');
 
 // Execute the task.
 $controller = JControllerLegacy::getInstance('Tjdashboard');
