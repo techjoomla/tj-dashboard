@@ -139,7 +139,8 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 		{
 			$source    = JPATH_PLUGINS . '/' . $folder . '/' . $item->value . '/' . $item->value;
 			$extension = 'plg_' . $folder . '_' . $item->value;
-			$lang->load($extension . '.sys', JPATH_ADMINISTRATOR, null, false, true) || $lang->load($extension . '.sys', $source, null, false, true);
+
+			$lang->load($extension, JPATH_PLUGINS . '/' . $folder . '/' . $item->value, null, false, true);
 
 			// @Todo : Need to improve this code, Can be Move to Model
 			$dataSources = array_diff(scandir($source), array('..', '.'));
@@ -150,7 +151,7 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 				$className = ucfirst($item->value) . ucfirst(str_replace('.php', '', $dataSourceFile)) . 'Datasource';
 				require_once $source . '/' . $dataSourceFile;
 				$dataSourceClassObject = new $className;
-				$dataSourceName 	 = $item->value . ' ' . $dataSourceClassObject->dataSourceName;
+				$dataSourceName 	 = $item->value . ' ' . JText::_($dataSourceClassObject->dataSourceName);
 				$dataSourceNameValue = strtolower(trim($item->value)) . '.' . strtolower(str_replace(' ', '', $dataSourceClassObject->dataSourceName));
 				$tjDashboardSourcePlugins[$j]['text']   = $dataSourceName;
 				$tjDashboardSourcePlugins[$j]['value']  = $dataSourceNameValue;
