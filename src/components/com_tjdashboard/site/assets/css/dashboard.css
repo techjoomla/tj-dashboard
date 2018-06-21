@@ -1,0 +1,10 @@
+.numbercardbox{
+	text-align: right;
+	word-wrap: break-word;
+}
+
+.number{
+    font-size: 1.4em;
+    font-weight: bold;
+    line-height: 25px;
+}

@@ -14,7 +14,8 @@ $document = JFactory::getDocument();
 
 $document->addScript(Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js');
 $document->addStyleSheet(JUri::root() . '/media/techjoomla_strapper/bs3/css/bootstrap.css');
-$document->addStyleSheet(JUri::root() . 'media/com_tjdashboard/css/font-awesome.min.css');
+$document->addStyleSheet(JUri::root() . 'media/com_tjlms/font-awesome/css/font-awesome.min.css');
+$document->addStyleSheet(JUri::root() . 'media/com_tjlms/css/tjlms_backend.css');
 $document->addStylesheet(Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/tabulator_semantic-ui.min.css');
 $document->addStylesheet(Juri::root() . 'components/com_tjdashboard/assets/css/dashboard.css');
 $document->addStylesheet(Juri::root() . 'plugins/tjdashboardrenderer/countbox/assets/css/countbox.css');
