@@ -18,8 +18,8 @@
 	</files>
 
 	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_tabulator.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_tabulator.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardrenderer_tabulator.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardrenderer_tabulator.sys.ini</language>
 	</languages>
 
 </extension>

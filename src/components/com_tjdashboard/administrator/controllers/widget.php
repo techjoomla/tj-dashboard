@@ -36,6 +36,16 @@ class TjDashboardControllerWidget extends JControllerForm
 			$className = ucfirst($dataPlugin[0]) . ucfirst($pluginFileName) . 'Datasource';
 			$dataSourceObject = new $className;
 			$renderers = $dataSourceObject->getSupportedRenderers();
+			$lang      = JFactory::getLanguage();
+
+			foreach ($renderers as $key => &$value)
+			{
+				$rendererName = explode(".", $key);
+				$languageFilePath = JPATH_PLUGINS . '/tjdashboardrenderer/' . $rendererName[0];
+				$lang->load("plg_tjdashboardrenderer_" . $rendererName[0], $languageFilePath, null, false, true);
+				$value = JText::_($value);
+			}
+
 			echo new JResponseJson($renderers);
 			jexit();
 		}

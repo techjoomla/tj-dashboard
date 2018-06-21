@@ -17,8 +17,8 @@
 	</files>
 
 	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_countbox.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_tjdashboard_countbox.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardrenderer_countbox.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardrenderer_countbox.sys.ini</language>
 	</languages>
 
 </extension>
