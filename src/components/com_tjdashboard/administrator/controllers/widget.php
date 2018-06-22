@@ -42,7 +42,8 @@ class TjDashboardControllerWidget extends JControllerForm
 			{
 				$rendererName = explode(".", $key);
 				$languageFilePath = JPATH_PLUGINS . '/tjdashboardrenderer/' . $rendererName[0];
-				$lang->load("plg_tjdashboardrenderer_" . $rendererName[0], $languageFilePath, null, false, true);
+				$lang->load("plg_tjdashboardrenderer_" . $rendererName[0], $languageFilePath, null, false, true)
+				|| $lang->load("plg_tjdashboardrenderer_" . $rendererName[0], JPATH_ADMINISTRATOR, null, false, true);
 				$value = JText::_($value);
 			}
 
