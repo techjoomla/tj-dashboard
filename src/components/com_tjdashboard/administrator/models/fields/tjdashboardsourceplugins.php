@@ -140,7 +140,8 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 			$source_path    = JPATH_PLUGINS . '/' . $folder . '/' . $item->value . '/' . $item->value;
 			$extension = 'plg_' . $folder . '_' . $item->value;
 
-			$lang->load($extension, JPATH_PLUGINS . '/' . $folder . '/' . $item->value, null, false, true);
+			$lang->load($extension, JPATH_PLUGINS . '/' . $folder . '/' . $item->value, null, false, true) ||
+			$lang->load($extension, JPATH_ADMINISTRATOR, null, false, true);
 
 			// @Todo : Need to improve this code, Can be Move to Model
 			$dataSources = array_diff(scandir($source_path), array('..', '.'));
