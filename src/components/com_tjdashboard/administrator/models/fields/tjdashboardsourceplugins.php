@@ -137,19 +137,20 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 
 		foreach ($options as $item)
 		{
-			$source    = JPATH_PLUGINS . '/' . $folder . '/' . $item->value . '/' . $item->value;
+			$sourcePath    = JPATH_PLUGINS . '/' . $folder . '/' . $item->value . '/' . $item->value;
 			$extension = 'plg_' . $folder . '_' . $item->value;
 
-			$lang->load($extension, JPATH_PLUGINS . '/' . $folder . '/' . $item->value, null, false, true);
+			$lang->load($extension, JPATH_PLUGINS . '/' . $folder . '/' . $item->value, null, false, true) ||
+			$lang->load($extension, JPATH_ADMINISTRATOR, null, false, true);
 
 			// @Todo : Need to improve this code, Can be Move to Model
-			$dataSources = array_diff(scandir($source), array('..', '.'));
+			$dataSources = array_diff(scandir($sourcePath), array('..', '.'));
 
 			foreach ($dataSources as $dataSourceFile)
 			{
 				$j++;
 				$className = ucfirst($item->value) . ucfirst(str_replace('.php', '', $dataSourceFile)) . 'Datasource';
-				require_once $source . '/' . $dataSourceFile;
+				require_once $sourcePath . '/' . $dataSourceFile;
 				$dataSourceClassObject = new $className;
 				$dataSourceName 	 = $item->value . ' ' . JText::_($dataSourceClassObject->dataSourceName);
 				$dataSourceNameValue = strtolower(trim($item->value)) . '.' . strtolower(str_replace(' ', '', JText::_($dataSourceClassObject->dataSourceName)));
