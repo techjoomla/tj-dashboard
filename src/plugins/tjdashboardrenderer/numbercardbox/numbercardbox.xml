@@ -8,7 +8,7 @@
 	<creationDate>19th June 2018</creationDate>
 	<authorUrl>www.techjoomla.com</authorUrl>
 	<version>1.0</version>
-	<description>PLG_TJDASHBOARDRENDERER_CHARTJS_DESC</description>
+	<description>PLG_TJDASHBOARDRENDERER_NUMBERCARDBOX_DESC</description>
 
 	<files>
 		<filename plugin="numbercardbox">numbercardbox.php</filename>
