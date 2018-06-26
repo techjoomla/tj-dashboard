@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="plugin" group="tjdashboardrenderer" method="upgrade">
 	<name>PLG_TJDASHBOARDRENDERER_COUNTBOX</name>
+	<author>Techjoomla</author>
 	<authorUrl>https://techjoomla.com</authorUrl>
 	<copyright>Copyright (c) 2009-2018 Techjoomla. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
