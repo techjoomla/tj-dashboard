@@ -73,14 +73,12 @@ JFactory::getDocument()->addScriptDeclaration('
 			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php if ($this->canDo->get('core.admin')) : ?>
+		<?php /*if ($this->canDo->get('core.admin')) : ?>
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('COM_TJDASHBOARD_FIELDSET_RULES')); ?>
 				<?php echo $this->form->getInput('rules'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php endif; ?>
-		<?php
-				//echo $this->form->renderFieldset();
-		?>
+		<?php endif;*/ ?>
+
 		<input type="hidden" name="task" value="" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
