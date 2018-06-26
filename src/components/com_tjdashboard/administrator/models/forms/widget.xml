@@ -65,6 +65,7 @@
 		<field
 			name="autorefresh"
 			type="number"
+			min="0"
 			label="COM_TJDASHBOARD_WIDGET_FORM_LBL_AUTOREFRESH"
 			description="COM_TJDASHBOARD_WIDGET_FORM_DESC_AUTOREFRESH"
 			class="inputbox"
