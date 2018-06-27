@@ -72,15 +72,12 @@ $onclick   = $this->escape($function);
 				<?php foreach ($this->items as $i => $item) : ?>
 					<tr class="row<?php echo $i % 2; ?>">
 						<td class="center">
-							<span class="<?php echo $iconStates[$this->escape($item->published)]; ?>" aria-hidden="true"></span>
+							<span class="<?php echo $iconStates[$this->escape($item->state)]; ?>" aria-hidden="true"></span>
 						</td>
 						<td>
-							<a class="select-link" href="javascript:void(0)" data-function="<?php echo $this->escape($onclick); ?>" data-id="<?php echo $item->dashboard_id; ?>" data-title="<?php echo $this->escape(addslashes($item->title)); ?>" data-uri="index.php?option=com_tjdashboard&amp;view=dashboard&amp;dashboard_id=<?php echo $item->dashboard_id;?>" data-language="<?php echo $this->escape($lang); ?>">
+							<a class="select-link" href="javascript:void(0)" data-function="<?php echo $onclick; ?>" data-id="<?php echo $item->dashboard_id; ?>" data-title="<?php echo addslashes($item->title); ?>" data-uri="index.php?option=com_tjdashboard&amp;view=dashboard&amp;dashboard_id=<?php echo $item->dashboard_id;?>" >
 								<?php echo $this->escape($item->title); ?>
 							</a>
-						</td>
-						<td class="small hidden-phone">
-							<?php echo JLayoutHelper::render('joomla.content.language', $item); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>
