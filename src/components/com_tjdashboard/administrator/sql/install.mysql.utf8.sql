@@ -27,7 +27,7 @@ ALTER TABLE `#__tj_dashboards`
   ADD KEY `idx_checkout` (`checked_out`),
   ADD KEY `idx_state` (`state`),
   ADD KEY `idx_createdby` (`created_by`),
-  ADD UNIQUE KEY `unqk_alias` (`alias`);
+  ADD KEY `idx_alias` (`alias`(191));
 
 CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   `dashboard_widget_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
