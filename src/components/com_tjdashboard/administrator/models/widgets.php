@@ -29,9 +29,16 @@ class TjdashboardModelWidgets extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'dashboard_id',
-				'dashboard_widget_id',
-				'size'
+				'dashboard_widget_id', 'wid.dashboard_widget_id',
+				'dashboard_id', 'dash.dashboard_id',
+				'state', 'wid.state',
+				'title', 'wid.title',
+				'dashboard_name','dashboard_name',
+				'renderer_plugin','wid.renderer_plugin',
+				'data_plugin','wid.data_plugin',
+				'created_by', 'wid.created_by',
+				'ordering', 'wid.ordering',
+				'size','wid.size'
 				);
 		}
 
@@ -101,6 +108,15 @@ class TjdashboardModelWidgets extends JModelList
 		if (!empty($size))
 		{
 			$query->where($db->quoteName('wid.size') . ' = ' . (int) $size);
+		}
+
+		// Add the list ordering clause.
+		$orderCol  = $this->state->get('list.ordering');
+		$orderDirn = $this->state->get('list.direction');
+
+		if ($orderCol && $orderDirn)
+		{
+			$query->order($db->escape($orderCol . ' ' . $orderDirn));
 		}
 
 		return $query;
