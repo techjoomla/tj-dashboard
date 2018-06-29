@@ -8,8 +8,8 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 $document = JFactory::getDocument();
-$document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.js');
-$document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.js');
+$document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
+$document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 JHtml::_('bootstrap.tooltip');
@@ -79,7 +79,7 @@ if ($saveOrder)
 									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_TITLE', 'wid.title', $listDirn, $listOrder); ?>
 								</th>
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_DASHBOARD', 'dash.dashboard_name', $listDirn, $listOrder); ?>
+									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_DASHBOARD', 'dashboard_name', $listDirn, $listOrder); ?>
 								</th>
 
 								<th>
