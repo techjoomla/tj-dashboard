@@ -32,8 +32,8 @@ jQuery(document).ready(function() {
 
 <div class="row-fluid">
 	<div class="col-xs-12 tjdashboard" style="margin-left:10px;">
-		<h1>
-			<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo $this->item->title;?></div>
-		</h1>
+		<h3>
+			<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
+		</h3>
 	</div>
 </div>
