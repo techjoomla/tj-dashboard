@@ -26,7 +26,7 @@ $document->addStylesheet('media/com_tjdashboard/css/tjdashboard-sb-admin.css');
 
 <script>
 jQuery(document).ready(function() {
-		TJDashboardUI.initDashboard(<?php echo $this->item->dashboard_id; ?>);
+		TJDashboardUI.initDashboard(<?php echo ($this->item->state == 1? $this->item->dashboard_id : 0); ?>);
 	});
 </script>
 
