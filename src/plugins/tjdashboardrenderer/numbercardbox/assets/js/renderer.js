@@ -7,7 +7,7 @@ var TJDashboardNumbercardbox = {
 	{
 		var renderData = JSON.parse(sourceData.data);
 		var link = "#";
-		var icon = "fa-book";
+		var icon = renderData.data.icon;
 		var title = renderData.data.title;
 		if (sourceData.params!=undefined){
 			var params = sourceData.params;
