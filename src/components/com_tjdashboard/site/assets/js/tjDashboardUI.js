@@ -19,8 +19,6 @@ var TJDashboardUI = {
 				return false;
 			}
 
-			jQuery('<h1><div data-dashboard-id="'+response.data.dashboard_id+'" class="tjdashboard-title">' + response.data.title + '</div></h1>').appendTo('.tjdashboard');
-
 			if (response.data.widget_data.length <= 0)
 			{
 				jQuery('<div class="alert alert-info"> No widgets found to show</div>').appendTo('.tjdashboard');
