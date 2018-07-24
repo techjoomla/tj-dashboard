@@ -62,6 +62,7 @@
 				<option value="3">COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH</option>
 		</field>
 
+<!--
 		<field
 			name="autorefresh"
 			type="number"
@@ -71,6 +72,7 @@
 			class="inputbox"
 			required="true">
 		</field>
+-->
 
 		<field
 			name="state"
