@@ -55,6 +55,25 @@ class TjdashboardModelWidgets extends JModelList
 	 */
 	protected function getListQuery()
 	{
+		// Get ALL the enabled Data plugins
+		$enabledDataPlugins = JPluginHelper::getPlugin("tjdashboardsource");
+
+		// Get ALL the enabled Renderer plugins
+		$enabledRendererPlugins = JPluginHelper::getPlugin("tjdashboardrenderer");
+
+		$regDataEx = array();
+		$regRendererEx = array();
+
+		foreach ($enabledDataPlugins as $plug)
+		{
+			$regDataEx[] = "^" . $plug->name;
+		}
+
+		foreach ($enabledRendererPlugins as $replug)
+		{
+			$regRendererEx[] = "^" . $replug->name;
+		}
+
 		// Initialize variables.
 		$db    = $this->getDbo();
 		$query = $db->getQuery(true);
@@ -100,7 +119,7 @@ class TjdashboardModelWidgets extends JModelList
 		}
 		elseif ($published === '')
 		{
-			$query->where($db->quoteName('wid.state') . ' = 0 OR ' . $db->quoteName('wid.state') . ' = 1');
+			$query->where($db->quoteName('wid.state') . ' IN (0,1) ');
 		}
 
 		// Filter by size
@@ -109,6 +128,24 @@ class TjdashboardModelWidgets extends JModelList
 		if (!empty($size))
 		{
 			$query->where($db->quoteName('wid.size') . ' = ' . (int) $size);
+		}
+
+		if (!empty($regDataEx))
+		{
+			$query->where($db->quoteName('wid.data_plugin') . " REGEXP '" . implode("|", $regDataEx) . "'");
+		}
+		else
+		{
+			$query->where($db->quoteName('wid.data_plugin') . " = ''");
+		}
+
+		if (!empty($regRendererEx))
+		{
+			$query->where($db->quoteName('wid.renderer_plugin') . " REGEXP '" . implode("|", $regRendererEx) . "'");
+		}
+		else
+		{
+			$query->where($db->quoteName('wid.renderer_plugin') . " = ''");
 		}
 
 		// Add the list ordering clause.
