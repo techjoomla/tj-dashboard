@@ -100,7 +100,7 @@ class TjdashboardModelWidgets extends JModelList
 		}
 		elseif ($published === '')
 		{
-			$query->where($db->quoteName('wid.state') . ' = 0 OR ' . $db->quoteName('wid.state') . ' = 1');
+			$query->where($db->quoteName('wid.state') . ' IN (0,1) ');
 		}
 
 		// Filter by size
