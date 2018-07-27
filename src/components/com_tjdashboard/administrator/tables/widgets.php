@@ -8,6 +8,7 @@
  */
 
 defined('_JEXEC') or die;
+JLoader::import('components.com_tjdashboard.includes.widget', JPATH_ADMINISTRATOR);
 
 /**
  * Tj-Dashboard widgets table class
@@ -59,7 +60,7 @@ class TjdashboardTableWidgets extends JTable
 	/**
 	 * Method to delete a Widget.
 	 *
-	 * @param   mixed  $pk  Primary key value to delete. Optional
+	 * @param   int  $pk  Primary key value to delete. Optional
 	 * 
 	 * @return  boolean  True on success.
 	 *
@@ -67,33 +68,26 @@ class TjdashboardTableWidgets extends JTable
 	 */
 	public function delete($pk = null)
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-		$result = 0;
-
-		if (!empty($pk))
+		try
 		{
-			try
+			$widget = TjdashboardWidget::getInstance($pk);
+
+			if ($widget->load(array('dashboard_widget_id' => $pk)) && ($widget->core != 1))
 			{
-				$db = JFactory::getDbo();
-
-				// Check if widget is not default
-				$table = JTable::getInstance('widgets', 'TjdashboardTable', array('dbo', $db));
-
-				if ($table->load(array('dashboard_widget_id' => $pk)) && ($table->core != 1))
-				{
-					$result = parent::delete($pk);
-				}
-				elseif ($table->load(array('dashboard_widget_id' => $pk)) && ($table->core == 1))
-				{
-					JFactory::getApplication()->enqueueMessage(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'), 'error');
-				}
-
-				return $result;
+				$result = parent::delete($pk);
 			}
-			catch (Exception $e)
+			elseif ($widget->load(array('dashboard_widget_id' => $pk)) && ($widget->core == 1))
 			{
-				JFactory::getApplication()->enqueueMessage(JText::_('COM_TJDASHBOARD_WIDGETS_DELETE_ERROR_MESSAGE'), 'error');
+				$this->setError(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'));
 			}
+
+			return $result;
+		}
+		catch (Exception $e)
+		{
+			$this->setError(JText::_('COM_TJDASHBOARD_WIDGETS_DELETE_ERROR_MESSAGE'));
+
+			return false;
 		}
 	}
 }
