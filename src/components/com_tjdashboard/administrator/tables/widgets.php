@@ -79,11 +79,11 @@ class TjdashboardTableWidgets extends JTable
 				// Check if widget is not default
 				$table = JTable::getInstance('widgets', 'TjdashboardTable', array('dbo', $db));
 
-				if ($table->load(array('dashboard_widget_id' => $pk)) && ($table->default_widget != 1))
+				if ($table->load(array('dashboard_widget_id' => $pk)) && ($table->core != 1))
 				{
 					$result = parent::delete($pk);
 				}
-				elseif ($table->load(array('dashboard_widget_id' => $pk)) && ($table->default_widget == 1))
+				elseif ($table->load(array('dashboard_widget_id' => $pk)) && ($table->core == 1))
 				{
 					JFactory::getApplication()->enqueueMessage(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'), 'error');
 				}
