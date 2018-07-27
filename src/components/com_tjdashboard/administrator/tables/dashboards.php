@@ -96,7 +96,7 @@ class TjdashboardTableDashboards extends JTable
 	/**
 	 * Method to delete a dashboard.
 	 * 
-	 * @param   mixed  $pk  Primary key value to delete. Optional
+	 * @param   int  $pk  Primary key value to delete. Optional
 	 * 
 	 * @return  boolean  True on success.
 	 *
