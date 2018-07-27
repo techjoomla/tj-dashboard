@@ -33,26 +33,4 @@ class TjDashboardControllerDashboards extends JControllerAdmin
 
 		return $model;
 	}
-
-	/**
-	 * Method to delete a dashboard.
-	 *
-	 * @return  boolean  True on success.
-	 *
-	 * @since   1.0.0
-	 */
-	public function delete()
-	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-
-		try
-		{
-			return parent::delete();
-		}
-		catch (Exception $e)
-		{
-			JFactory::getApplication()->enqueueMessage(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'), 'error');
-			$this->setRedirect('index.php?option=com_tjdashboard&view=dashboards');
-		}
-	}
 }

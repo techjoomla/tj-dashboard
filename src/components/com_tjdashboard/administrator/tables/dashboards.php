@@ -92,4 +92,30 @@ class TjdashboardTableDashboards extends JTable
 
 		return parent::check();
 	}
+
+	/**
+	 * Method to delete a dashboard.
+	 * 
+	 * @param   mixed  $pk  Primary key value to delete. Optional
+	 * 
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.0.0
+	 */
+	public function delete($pk = null)
+	{
+		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		try
+		{
+			$this->load($pk);
+			$result = parent::delete($pk);
+
+			return $result;
+		}
+		catch (Exception $e)
+		{
+			JFactory::getApplication()->enqueueMessage(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'), 'error');
+		}
+	}
 }
