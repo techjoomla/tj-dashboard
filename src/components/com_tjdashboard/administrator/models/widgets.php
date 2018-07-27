@@ -60,7 +60,8 @@ class TjdashboardModelWidgets extends JModelList
 		$query = $db->getQuery(true);
 
 		// Create the base select statement.
-		$query->select(['wid.*','dash.title as dashboard_name','users.name']);
+		$query->select('wid.*');
+		$query->select(array($db->quoteName('dash.title', 'dashboard_name'), $db->quoteName('users.name')));
 		$query->from($db->quoteName('#__tj_dashboard_widgets', 'wid'));
 		$query->join('LEFT',
 			$db->quoteName('#__tj_dashboards', 'dash') . ' ON (' . $db->quoteName('wid.dashboard_id') . ' = ' . $db->quoteName('dash.dashboard_id') . ')');
@@ -73,7 +74,7 @@ class TjdashboardModelWidgets extends JModelList
 		{
 			if (stripos($search, 'id:') === 0)
 			{
-				$query->where('wid.dashboard_widget_id = ' . (int) substr($search, 3));
+				$query->where($db->quoteName('wid.dashboard_widget_id') . ' = ' . (int) substr($search, 3));
 			}
 			else
 			{
@@ -95,11 +96,11 @@ class TjdashboardModelWidgets extends JModelList
 
 		if (is_numeric($published))
 		{
-			$query->where('wid.state = ' . (int) $published);
+			$query->where($db->quoteName('wid.state') . ' = ' . (int) $published);
 		}
 		elseif ($published === '')
 		{
-			$query->where('(wid.state = 0 OR wid.state = 1)');
+			$query->where($db->quoteName('wid.state') . ' IN (0,1) ');
 		}
 
 		// Filter by size
@@ -117,6 +118,10 @@ class TjdashboardModelWidgets extends JModelList
 		if ($orderCol && $orderDirn)
 		{
 			$query->order($db->escape($orderCol . ' ' . $orderDirn));
+		}
+		else
+		{
+			$query->order(array($db->quoteName('wid.dashboard_id'),$db->quoteName('wid.ordering')));
 		}
 
 		return $query;
