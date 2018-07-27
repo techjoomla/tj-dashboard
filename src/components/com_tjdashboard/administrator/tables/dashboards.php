@@ -104,18 +104,17 @@ class TjdashboardTableDashboards extends JTable
 	 */
 	public function delete($pk = null)
 	{
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-
 		try
 		{
-			$this->load($pk);
 			$result = parent::delete($pk);
 
 			return $result;
 		}
 		catch (Exception $e)
 		{
-			JFactory::getApplication()->enqueueMessage(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'), 'error');
+			$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'));
+
+			return false;
 		}
 	}
 }
