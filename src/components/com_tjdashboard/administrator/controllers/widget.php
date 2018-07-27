@@ -57,4 +57,28 @@ class TjDashboardControllerWidget extends JControllerForm
 			echo new JResponseJson($e);
 		}
 	}
+
+	/**
+	 * Function to get the params of respective data source
+	 *
+	 * @return  mixed  object
+	 */
+	public function getWidgetParams()
+	{
+		try
+		{
+			$app          = JFactory::getApplication();
+			$jinput       = $app->input;
+			$pluginName   = $jinput->post->get('pluginName', '', 'string');
+
+			$model 		  = $this->getModel('Widget');
+			$paramsObject = $model->getWidgetParams($pluginName);
+			echo new JResponseJson($paramsObject);
+			jexit();
+		}
+		catch (Exception $e)
+		{
+			echo new JResponseJson($e);
+		}
+	}
 }

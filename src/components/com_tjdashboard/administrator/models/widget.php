@@ -107,6 +107,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	{
 		$pk   = (!empty($data['widget_dashboard_id'])) ? $data['widget_dashboard_id'] : (int) $this->getState('widget.widget_dashboard_id');
 		$widget = TjdashboardWidget::getInstance($pk);
+		$data['title'] = ucwords($data['title']);
 
 		// Bind the data.
 		if (!$widget->bind($data))
@@ -127,5 +128,33 @@ class TjdashboardModelWidget extends JModelAdmin
 		$this->setState('widget.dashboard_widget_id', $widget->dashboard_widget_id);
 
 		return true;
+	}
+
+	/**
+	 * Method to to get the params of respective data source
+	 *
+	 * @param   string  $pluginName  The plugin name
+	 * 
+	 * @return mixed
+	 *
+	 * @throws Exception
+	 * @since 1.0.0
+	 */
+	public function getWidgetParams($pluginName)
+	{
+		// Initialize variables.
+		$db    = $this->getDbo();
+		$query = $db->getQuery(true);
+
+		// Create the base select statement.
+		$query->select($db->quoteName('params'));
+		$query->from($db->quoteName('#__tj_dashboard_widgets'));
+		$query->where($db->quoteName('data_plugin') . ' = ' . $db->q($pluginName));
+		$query->where($db->quoteName('params') . ' <> "" ');
+		$query->limit(1);
+		$db->setQuery($query);
+		$params = $db->loadResult();
+
+		return $params;
 	}
 }

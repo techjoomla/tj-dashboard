@@ -149,9 +149,10 @@ var TJDashboardUI = {
 		var defaultValue = jQuery('#jform_renderer_plugin').val();
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
-		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">Select renderer plugin</option></select>');
+		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">Select Renderer</option></select>');
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
 		promise.done(function(response) {
+
 			// Append option to plugin dropdown list.
 			var list = jQuery("#jform_renderer_plugin");
 			/** global: Option */
@@ -159,6 +160,11 @@ var TJDashboardUI = {
 				list.append(new Option(item,index));
 			});
 			jQuery('#jform_renderer_plugin').val(defaultValue);
+		});
+		
+		var promiseParams = TJDashboardService.getWidgetParams(selectedDataPlugin);
+		promiseParams.done(function(response) {
+			jQuery('#jform_params').val(response.data);
 		});
 	},
 
