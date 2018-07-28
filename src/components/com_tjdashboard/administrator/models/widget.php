@@ -135,7 +135,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	 *
 	 * @param   string  $pluginName  The plugin name
 	 * 
-	 * @return mixed
+	 * @return string
 	 *
 	 * @throws Exception
 	 * @since 1.0.0

@@ -61,7 +61,7 @@ class TjDashboardControllerWidget extends JControllerForm
 	/**
 	 * Function to get the params of respective data source
 	 *
-	 * @return  mixed  object
+	 * @return  object  object
 	 */
 	public function getWidgetParams()
 	{

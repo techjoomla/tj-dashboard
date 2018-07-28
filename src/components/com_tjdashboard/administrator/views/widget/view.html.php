@@ -69,6 +69,7 @@ class TjdashboardViewWidget extends JViewLegacy
 		}
 
 		$this->addToolbar();
+		$this->getLanguageConstant();
 
 		parent::display($tpl);
 	}
@@ -158,5 +159,25 @@ class TjdashboardViewWidget extends JViewLegacy
 	protected function isCheckedOut($userId)
 	{
 		return !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
+	}
+
+	/**
+	 * Get all jtext for javascript
+	 *
+	 * @return   void
+	 *
+	 * @since   1.0
+	 */
+	public static function getLanguageConstant()
+	{
+		JText::script('COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE');
+		JText::script('COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN');
+		JText::script('COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH');
+		JText::script('COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH');
+		JText::script('COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH');
+		JText::script('COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH');
+		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
+		JText::script('COM_TJDASHBOARD_WIDGETS_NO_RENDERER_DATA_ERROR_MESSAGE');
+		JText::script('COM_TJDASHBOARD_WIDGETS_NO_DATA_ERROR_MESSAGE');
 	}
 }
