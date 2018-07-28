@@ -72,11 +72,11 @@ class TjdashboardTableWidgets extends JTable
 		{
 			$widget = TjdashboardWidget::getInstance($pk);
 
-			if ($widget->load(array('dashboard_widget_id' => $pk)) && ($widget->core != 1))
+			if ($widget->core != 1)
 			{
 				$result = parent::delete($pk);
 			}
-			elseif ($widget->load(array('dashboard_widget_id' => $pk)) && ($widget->core == 1))
+			elseif ($widget->core == 1)
 			{
 				$this->setError(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'));
 			}
