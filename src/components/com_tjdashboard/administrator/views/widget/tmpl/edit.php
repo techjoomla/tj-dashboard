@@ -35,8 +35,7 @@ JFactory::getDocument()->addScriptDeclaration('
 			if (task != "widget.cancel" && jQuery("#jform_params").val())
 			{
 				try{
-					var params = JSON.stringify(JSON.parse(jQuery("#jform_params").val()));
-					jQuery("#jform_params").val(params)
+					JSON.stringify(JSON.parse(jQuery("#jform_params").val()));
 				}catch(e){
 					alert(Joomla.JText._("COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE"));
 					return false;
