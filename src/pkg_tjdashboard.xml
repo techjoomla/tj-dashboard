@@ -7,7 +7,7 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<creationDate>5th December 2017</creationDate>
 	<packagename>TJDashboard</packagename>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<packager>Techjoomla Team</packager>
 	<description></description>
 	<scriptfile>script.pkg_tjdashboard.php</scriptfile>
