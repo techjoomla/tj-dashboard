@@ -32,7 +32,7 @@ jQuery(document).ready(function() {
 <div class="<?php echo COM_TJDASHBOARD_WRAPPER_DIV; ?> tjBs3">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-xs-12 tjdashboard" style="margin-left:10px;">
+			<div class="col-xs-12 tjdashboard">
 				<h3>
 					<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
 				</h3>
