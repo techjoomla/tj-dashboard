@@ -29,11 +29,11 @@ jQuery(document).ready(function() {
 		TJDashboardUI.initDashboard(<?php echo ($this->item->state == 1? $this->item->dashboard_id : 0); ?>);
 	});
 </script>
-
-<div class="row-fluid">
-	<div class="col-xs-12 tjdashboard" style="margin-left:10px;">
-		<h3>
-			<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
-		</h3>
+<div class="<?php echo COM_TJDASHBOARD_WRAPPER_DIV; ?> tjBs3">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 tjdashboard" style="margin-left:10px;">
+			</div>
+		</div>
 	</div>
 </div>
