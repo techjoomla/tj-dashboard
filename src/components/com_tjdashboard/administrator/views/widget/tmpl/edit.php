@@ -32,6 +32,15 @@ JFactory::getDocument()->addScriptDeclaration('
 	{
 		if (task == "widget.cancel" || document.formvalidator.isValid(document.getElementById("widget-form")))
 		{
+			if (task != "widget.cancel" && jQuery("#jform_params").val())
+			{
+				try{
+					JSON.parse(jQuery("#jform_params").val());
+				}catch(e){
+					alert(Joomla.JText._("COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE"));
+					return false;
+				}
+			}
 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
 			Joomla.submitform(task, document.getElementById("widget-form"));
 		}
