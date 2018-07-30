@@ -52,14 +52,15 @@ JFactory::getDocument()->addScriptDeclaration('
 	' . (int) $this->item->dashboard_widget_id, false
 	);?>" method="post" enctype="multipart/form-data" name="adminForm" id="widget-form" class="form-validate tjdashForm">
 		<div class="form-horizontal">
-		<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
-		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
 		<div class="row-fluid">
 			<div class="span9">
 				<fieldset class="adminform">
 					<?php
+						echo $this->form->renderField('title');
+						
 						echo $this->form->renderField('dashboard_id');
+
 						echo $this->form->renderField('state');
 
 						echo $this->form->renderField('data_plugin');
