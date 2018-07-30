@@ -201,8 +201,6 @@ class TjdashboardViewDashboard extends JViewLegacy
 	public static function getLanguageConstant()
 	{
 		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
-		JText::script('COM_TJDASHBOARD_WIDGETS_NO_RENDERER_DATA_ERROR_MESSAGE');
-		JText::script('COM_TJDASHBOARD_WIDGETS_NO_DATA_ERROR_MESSAGE');
 		JText::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
 	}
 }
