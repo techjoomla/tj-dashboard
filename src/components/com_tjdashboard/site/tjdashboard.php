@@ -29,14 +29,8 @@ if ($tjdashboardparams->get('load_bootstrap') == 1)
 	JHtml::_('bootstrap.framework');
 }
 
-if (JVERSION < '3.0')
-{
-	define('COM_TJDASHBOARD_WRAPPER_DIV', 'techjoomla-bootstrap tjlms-wrapper');
-}
-else
-{
-	define('COM_TJDASHBOARD_WRAPPER_DIV', 'tjlms-wrapper');
-}
+define('COM_TJDASHBOARD_WRAPPER_DIV', 'tjBs3');
+
 
 // Execute the task.
 $controller = JControllerLegacy::getInstance('Tjdashboard');
