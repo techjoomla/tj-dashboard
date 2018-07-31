@@ -30,14 +30,10 @@ jQuery(document).ready(function() {
 	});
 </script>
 
-<div class="<?php echo COM_TJDASHBOARD_WRAPPER_DIV;?>">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-12 tjdashboard">
-				<h3>
-					<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
-				</h3>
-			</div>
-		</div>
+<div class="row-fluid">
+	<div class="col-xs-12 tjdashboard" style="margin-left:10px;">
+		<h3>
+			<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
+		</h3>
 	</div>
 </div>
