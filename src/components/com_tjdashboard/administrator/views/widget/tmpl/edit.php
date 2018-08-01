@@ -32,6 +32,15 @@ JFactory::getDocument()->addScriptDeclaration('
 	{
 		if (task == "widget.cancel" || document.formvalidator.isValid(document.getElementById("widget-form")))
 		{
+			if (task != "widget.cancel" && jQuery("#jform_params").val())
+			{
+				try{
+					JSON.parse(jQuery("#jform_params").val());
+				}catch(e){
+					alert(Joomla.JText._("COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE"));
+					return false;
+				}
+			}
 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
 			Joomla.submitform(task, document.getElementById("widget-form"));
 		}
@@ -43,14 +52,15 @@ JFactory::getDocument()->addScriptDeclaration('
 	' . (int) $this->item->dashboard_widget_id, false
 	);?>" method="post" enctype="multipart/form-data" name="adminForm" id="widget-form" class="form-validate tjdashForm">
 		<div class="form-horizontal">
-		<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
-		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
 		<div class="row-fluid">
 			<div class="span9">
 				<fieldset class="adminform">
 					<?php
+						echo $this->form->renderField('title');
+						
 						echo $this->form->renderField('dashboard_id');
+
 						echo $this->form->renderField('state');
 
 						echo $this->form->renderField('data_plugin');
