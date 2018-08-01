@@ -8,7 +8,6 @@
  */
 
 defined('_JEXEC') or die;
-JLoader::import('components.com_tjdashboard.includes.widget', JPATH_ADMINISTRATOR);
 
 /**
  * Tj-Dashboard widgets table class
@@ -82,13 +81,15 @@ class TjdashboardTableWidgets extends JTable
 			if ($widget->core != 1)
 			{
 				$result = parent::delete($pk);
+
+				return $result;
 			}
 			elseif ($widget->core == 1)
 			{
 				$this->setError(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'));
-			}
 
-			return $result;
+				return false;
+			}
 		}
 		catch (Exception $e)
 		{
