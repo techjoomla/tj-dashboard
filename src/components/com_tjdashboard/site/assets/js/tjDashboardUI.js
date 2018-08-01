@@ -21,13 +21,14 @@ var TJDashboardUI = {
 
 			if (response.data.widget_data.length <= 0)
 			{
-				jQuery('<div class="alert alert-info"> No widgets found to show</div>').appendTo('.tjdashboard');
+				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE") + '</div>').appendTo('.tjdashboard');
 				return false;
 			}
 
 			var divSpan = 0;
 			var i = 0;
 			var j = 1;
+			var icon = "";
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
@@ -41,7 +42,11 @@ var TJDashboardUI = {
 					colorClass=value.params.color;
 				}
 
-				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
+				if(value.params.icon!=undefined && value.params.icon.length!=0){
+					icon = value.params.icon;
+				}
+
+				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
 
 				TJDashboardUI.initWidget(value);
 				i++;
@@ -72,13 +77,14 @@ var TJDashboardUI = {
 
 			if(!response.data.dashboard_widget_id)
 			{
-				alert("no data");
+				var msg = Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE");
+				alert(msg);
 				return false;
 			}
 
 			if (!TJDashboardUI._validWidget(response.data.widget_render_data) || response.data.widget_render_data.length==0)
 			{
-				jQuery('<div class="alert alert-info">No data to render</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
+				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE") + '</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
 				return false;
 			}
 
@@ -95,6 +101,21 @@ var TJDashboardUI = {
 			if ((!sourceData) && (!response.data.renderer_plugin))
 			{
 				return false;
+			}
+			var linkArray  =  [];
+			var linkArrayCount = 0;
+			var renderData = JSON.parse(sourceData['data']);
+			var showLinks ='';
+			
+			if (renderData.links !='' && renderData.links!=undefined)
+			{
+				linkArrayCount = renderData.links.length;
+				linkArray  = renderData.links;
+				for(var cnt=0;cnt<linkArrayCount;cnt++)
+				{
+					 showLinks = showLinks + ' <a href="'+linkArray[cnt].link +'">'+linkArray[cnt].title+'</a> ';
+				}
+				jQuery("#view-all-"+response.data.dashboard_widget_id).replaceWith('<span id="view-all-'+response.data.dashboard_widget_id+'" class="pull-right">'+showLinks+'</span>');
 			}
 
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
@@ -149,7 +170,7 @@ var TJDashboardUI = {
 		var defaultValue = jQuery('#jform_renderer_plugin').val();
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
-		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">Select renderer plugin</option></select>');
+		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN") + '</option></select>');
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
 		promise.done(function(response) {
 			// Append option to plugin dropdown list.
@@ -164,7 +185,7 @@ var TJDashboardUI = {
 
 	_setSize:function() {
 		var defaultValue = jQuery('#jform_size').val();
-		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH</option><option value="6">COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH</option><option value="4">COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH</option><option value="3">COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH</option></select>');
+		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH") + '</option><option value="6">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH") + '</option><option value="4">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH") + '</option><option value="3">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH") +'</option></select>');
 		jQuery('#jform_size').val(defaultValue);
 	}
 
