@@ -112,7 +112,20 @@ class TjdashboardTableDashboards extends JTable
 		}
 		catch (Exception $e)
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'));
+			if ($e->getCode() == 1451)
+			{
+				$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'));
+			}
+			else
+			{
+				$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
+			}
+
+			return false;
+		}
+		catch (JDatabaseExceptionExecuting $e)
+		{
+			$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
 
 			return false;
 		}
