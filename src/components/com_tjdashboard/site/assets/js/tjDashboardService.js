@@ -9,8 +9,8 @@
 var TJDashboardService = {
 	api_dashboard_url : 'index.php?option=com_api&app=tjdashboard&resource=dashboard&id=',
 	api_widget_url : 'index.php?option=com_api&app=tjdashboard&resource=widget&id=',
-	get_renderers_url : 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers',
-	get_widget_params : 'administrator/index.php?option=com_tjdashboard&task=widget.getWidgetParams',
+	get_renderers_url : 'index.php?option=com_tjdashboard&task=widget.getSupportedRenderers',
+	get_widget_params : 'index.php?option=com_tjdashboard&task=widget.getWidgetParams',
 
 	postData: function(url, params, formData) {
 
