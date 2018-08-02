@@ -42,6 +42,8 @@ class TjdashboardWidget extends JObject
 
 	public $modified_by = 0;
 
+	public $core = 0;
+
 	public $widget_render_data = array();
 
 	public $widget_js = array();
