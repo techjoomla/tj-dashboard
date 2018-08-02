@@ -77,8 +77,7 @@ var TJDashboardUI = {
 
 			if(!response.data.dashboard_widget_id)
 			{
-				var msg = Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE");
-				alert(msg);
+				alert(Joomla.JText._("COM_TJDASHBOARD_WIDGETS_NO_DATA_ERROR_MESSAGE"));
 				return false;
 			}
 
@@ -173,6 +172,7 @@ var TJDashboardUI = {
 		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN") + '</option></select>');
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
 		promise.done(function(response) {
+
 			// Append option to plugin dropdown list.
 			var list = jQuery("#jform_renderer_plugin");
 			/** global: Option */
@@ -180,6 +180,11 @@ var TJDashboardUI = {
 				list.append(new Option(item,index));
 			});
 			jQuery('#jform_renderer_plugin').val(defaultValue);
+		});
+		
+		var promiseParams = TJDashboardService.getWidgetParams(selectedDataPlugin);
+		promiseParams.done(function(response) {
+			jQuery('#jform_params').val(response.data);
 		});
 	},
 
