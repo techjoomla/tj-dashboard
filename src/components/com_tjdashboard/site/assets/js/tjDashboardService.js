@@ -9,7 +9,8 @@
 var TJDashboardService = {
 	api_dashboard_url : 'index.php?option=com_api&app=tjdashboard&resource=dashboard&id=',
 	api_widget_url : 'index.php?option=com_api&app=tjdashboard&resource=widget&id=',
-	get_renderers_url : 'administrator/index.php?option=com_tjdashboard&task=widget.getSupportedRenderers',
+	get_renderers_url : 'index.php?option=com_tjdashboard&task=widget.getSupportedRenderers',
+	get_widget_params : 'index.php?option=com_tjdashboard&task=widget.getWidgetParams',
 
 	postData: function(url, params, formData) {
 
@@ -44,5 +45,13 @@ var TJDashboardService = {
 		formData.pluginName = selectedDataPlugin;
 		/** global: root_url */
 		return this.postData(root_url + this.get_renderers_url, params, formData);
+	},
+
+	getWidgetParams : function (selectedDataPlugin) {
+		var formData = {};
+		var params = {};
+		formData.pluginName = selectedDataPlugin;
+		/** global: root_url */
+		return this.postData(root_url + this.get_widget_params, params, formData);		
 	}
 }
