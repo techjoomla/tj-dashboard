@@ -92,4 +92,42 @@ class TjdashboardTableDashboards extends JTable
 
 		return parent::check();
 	}
+
+	/**
+	 * Method to delete a dashboard.
+	 * 
+	 * @param   int  $pk  Primary key value to delete. Optional
+	 * 
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.0.0
+	 */
+	public function delete($pk = null)
+	{
+		try
+		{
+			$result = parent::delete($pk);
+
+			return $result;
+		}
+		catch (Exception $e)
+		{
+			if ($e->getCode() == 1451)
+			{
+				$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'));
+			}
+			else
+			{
+				$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
+			}
+
+			return false;
+		}
+		catch (JDatabaseExceptionExecuting $e)
+		{
+			$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
+
+			return false;
+		}
+	}
 }
