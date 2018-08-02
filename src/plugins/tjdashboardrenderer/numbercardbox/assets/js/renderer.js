@@ -15,11 +15,11 @@ var TJDashboardNumbercardbox = {
 				var link = params.link;
 			}
 
-			if (params.icon!=undefined) {
+			if (params.icon!=undefined && params.icon!='') {
 				var icon = params.icon;
 			}
 
-			if (params.primary_text!=undefined) {
+			if (params.primary_text!=undefined && params.primary_text!='') {
 				var title = params.primary_text;
 			}
 		}

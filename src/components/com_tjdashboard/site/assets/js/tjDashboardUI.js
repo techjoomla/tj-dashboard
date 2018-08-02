@@ -28,6 +28,7 @@ var TJDashboardUI = {
 			var divSpan = 0;
 			var i = 0;
 			var j = 1;
+			var icon = "";
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
@@ -41,7 +42,11 @@ var TJDashboardUI = {
 					colorClass=value.params.color;
 				}
 
-				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><b>'+value.title+'</b></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
+				if(value.params.icon!=undefined && value.params.icon.length!=0){
+					icon = value.params.icon;
+				}
+
+				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
 
 				TJDashboardUI.initWidget(value);
 				i++;
@@ -72,14 +77,13 @@ var TJDashboardUI = {
 
 			if(!response.data.dashboard_widget_id)
 			{
-				var msg = Joomla.JText._("COM_TJDASHBOARD_WIDGETS_NO_DATA_ERROR_MESSAGE");
-				alert(msg);
+				alert(Joomla.JText._("COM_TJDASHBOARD_WIDGETS_NO_DATA_ERROR_MESSAGE"));
 				return false;
 			}
 
 			if (!TJDashboardUI._validWidget(response.data.widget_render_data) || response.data.widget_render_data.length==0)
 			{
-				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_WIDGETS_NO_RENDERER_DATA_ERROR_MESSAGE") + '</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
+				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE") + '</div>').appendTo('#dashboard-widget-'+response.data.dashboard_widget_id);
 				return false;
 			}
 
@@ -96,6 +100,21 @@ var TJDashboardUI = {
 			if ((!sourceData) && (!response.data.renderer_plugin))
 			{
 				return false;
+			}
+			var linkArray  =  [];
+			var linkArrayCount = 0;
+			var renderData = JSON.parse(sourceData['data']);
+			var showLinks ='';
+			
+			if (renderData.links !='' && renderData.links!=undefined)
+			{
+				linkArrayCount = renderData.links.length;
+				linkArray  = renderData.links;
+				for(var cnt=0;cnt<linkArrayCount;cnt++)
+				{
+					 showLinks = showLinks + ' <a href="'+linkArray[cnt].link +'">'+linkArray[cnt].title+'</a> ';
+				}
+				jQuery("#view-all-"+response.data.dashboard_widget_id).replaceWith('<span id="view-all-'+response.data.dashboard_widget_id+'" class="pull-right">'+showLinks+'</span>');
 			}
 
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
