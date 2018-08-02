@@ -62,4 +62,38 @@ class TjdashboardTableWidgets extends JTable
 
 		return parent::check();
 	}
+
+	/**
+	 * Method to delete a Widget.
+	 *
+	 * @param   int  $pk  Primary key value to delete. Optional
+	 * 
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.0.0
+	 */
+	public function delete($pk = null)
+	{
+		try
+		{
+			$widget = TjdashboardWidget::getInstance($pk);
+
+			if ($widget->core != 1)
+			{
+				return(parent::delete($pk));
+			}
+			elseif ($widget->core == 1)
+			{
+				$this->setError(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'));
+
+				return false;
+			}
+		}
+		catch (Exception $e)
+		{
+			$this->setError(JText::_('COM_TJDASHBOARD_WIDGETS_DELETE_ERROR_MESSAGE'));
+
+			return false;
+		}
+	}
 }

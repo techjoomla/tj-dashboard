@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   `params` text NOT NULL,
   `size` int(11) NOT NULL COMMENT 'Screen size for widget (col-span-3/6/9/12)',
   `autorefresh` int(11) NOT NULL COMMENT 'Widget refresh time span in second',
+  `core` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`dashboard_widget_id`),
   FOREIGN KEY (`dashboard_id`) REFERENCES `#__tj_dashboards` (`dashboard_id`)
 );
