@@ -106,7 +106,7 @@ class TjdashboardTableDashboards extends JTable
 	{
 		try
 		{
-			return(parent::delete($pk));
+			return parent::delete($pk);
 		}
 		catch (JDatabaseExceptionExecuting $e)
 		{
