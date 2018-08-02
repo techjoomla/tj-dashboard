@@ -134,6 +134,8 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 		$options   = $db->setQuery($query)->loadObjectList();
 		$lang      = JFactory::getLanguage();
 		$j = 0;
+		$tjDashboardSourcePlugins[$j]['text']   = JText::_('COM_TJDASHBOARD_WIDGET_FORM_DATA_PLUGIN');
+		$tjDashboardSourcePlugins[$j]['value']  = '';
 
 		foreach ($options as $item)
 		{
