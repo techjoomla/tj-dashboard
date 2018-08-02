@@ -80,7 +80,7 @@ class TjdashboardTableWidgets extends JTable
 
 			if ($widget->core != 1)
 			{
-				return(parent::delete($pk));
+				return parent::delete($pk);
 			}
 			elseif ($widget->core == 1)
 			{
