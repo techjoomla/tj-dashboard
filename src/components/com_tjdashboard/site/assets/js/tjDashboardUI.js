@@ -28,22 +28,31 @@ var TJDashboardUI = {
 			var divSpan = 0;
 			var i = 0;
 			var j = 1;
-			var icon = "";
+
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
 				var colorClass = "panel-default";
+				var icon = "";
 
-				if(value.params){
-					value.params = JSON.parse(value.params);
-				}
+				if(value.params)
+				{
+					try
+					{
+							value.params = JSON.parse(value.params);
 
-				if(value.params.color){
-					colorClass=value.params.color;
-				}
+							if(value.params.color){
+								colorClass=value.params.color;
+							}
 
-				if(value.params.icon){
-					icon = value.params.icon;
+							if(value.params.icon){
+								icon = value.params.icon;
+							}
+					  }
+					  catch(e)
+					  {
+							value.params = {};
+					  }
 				}
 
 				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
@@ -71,14 +80,13 @@ var TJDashboardUI = {
 
 	initWidget : function(widgetData){
 		/** global: TJDashboardService */
+
 		var promise = TJDashboardService.getWidget(widgetData.dashboard_widget_id);
 		promise.done(function(response) {
 
-
 			if(!response.data.dashboard_widget_id)
 			{
-				var msg = Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE");
-				alert(msg);
+				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE") + '</div>').appendTo('#dashboard-widget-'+widgetData.dashboard_widget_id);
 				return false;
 			}
 
