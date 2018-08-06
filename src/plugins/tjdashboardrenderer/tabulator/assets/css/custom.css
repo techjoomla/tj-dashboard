@@ -1,0 +1,7 @@
+.tabulator-table div[tabulator-field="completionPercent"] div:first-child{
+	left:15px !important;
+}
+.tabulator-table div[tabulator-field="completionPercent"] {
+	height:35px !important;
+}
+
