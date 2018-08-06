@@ -12,6 +12,7 @@ var TJDashboardTabulator = {
 			addRowPos:"top",
 			placeholder:Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE"),
 			columns:renderData.columns,
+			selectable:false
 		});
 
 		if (renderData.columns.length==1) {
