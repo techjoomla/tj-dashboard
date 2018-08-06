@@ -11,15 +11,15 @@ var TJDashboardNumbercardbox = {
 		var title = renderData.data.title;
 		if (sourceData.params!=undefined){
 			var params = sourceData.params;
-			if (params.link!=undefined) {
+			if (params.link) {
 				var link = params.link;
 			}
 
-			if (params.icon!=undefined) {
+			if (params.icon) {
 				var icon = params.icon;
 			}
 
-			if (params.primary_text!=undefined) {
+			if (params.primary_text) {
 				var title = params.primary_text;
 			}
 		}
