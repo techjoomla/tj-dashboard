@@ -41,6 +41,8 @@ class PlgTjdashboardRendererTabulator
 	 **/
 	public function getCSS()
 	{
-		return array(Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/tabulator.min.css');
+		$CS1 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/tabulator_semantic-ui.min.css';
+		$CS2 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/custom.css';
+		return array($CS1,$CS2);
 	}
 }
