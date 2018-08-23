@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
     <name>com_tjdashboard</name>
-    <creationDate>2017-09-15</creationDate>
+    <creationDate>23rd August 2018</creationDate>
     <copyright>2017 Techjoomla</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <author>Techjoomla</author>
