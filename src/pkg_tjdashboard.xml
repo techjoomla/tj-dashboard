@@ -5,9 +5,9 @@
 	<authorUrl>www.techjoomla.com</authorUrl>
 	<copyright>Copyright(C)2012-17 TechJoomla</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<creationDate>5th December 2017</creationDate>
+	<creationDate>23rd August 2018</creationDate>
 	<packagename>TJDashboard</packagename>
-	<version>0</version>
+	<version>1.1.0</version>
 	<packager>Techjoomla Team</packager>
 	<description></description>
 	<scriptfile>script.pkg_tjdashboard.php</scriptfile>
