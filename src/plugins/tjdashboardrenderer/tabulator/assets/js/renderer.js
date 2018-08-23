@@ -10,8 +10,9 @@ var TJDashboardTabulator = {
 		jQuery("#"+sourceData.element).tabulator({
 			layout:"fitColumns",
 			addRowPos:"top",
-			placeholder:"No Data Available",
+			placeholder:Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE"),
 			columns:renderData.columns,
+			selectable:false
 		});
 
 		if (renderData.columns.length==1) {
@@ -19,7 +20,7 @@ var TJDashboardTabulator = {
 		}
 
 		if (renderData.data.length==0) {
-			jQuery("#"+sourceData.element).html('<div class="alert alert-info"> No data Available</div>');
+			jQuery("#"+sourceData.element).html('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE") + '</div>');
 		}
 
 		jQuery("#"+sourceData.element).removeClass('panel-body');

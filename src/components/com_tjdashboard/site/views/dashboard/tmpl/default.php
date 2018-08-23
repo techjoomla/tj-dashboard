@@ -14,10 +14,7 @@ JHTML::_('behavior.modal');
 
 $document = JFactory::getDocument();
 
-$document->addScript('plugins/tjdashboardrenderer/tabulator/assets/js/jquery-ui.min.js');
-$document->addStylesheet('plugins/tjdashboardrenderer/tabulator/assets/css/tabulator_semantic-ui.min.css');
 $document->addStylesheet('components/com_tjdashboard/assets/css/dashboard.css');
-$document->addStylesheet('plugins/tjdashboardrenderer/countbox/assets/css/countbox.css');
 $document->addStylesheet('media/techjoomla_strapper/css/bootstrap.j3.min.css');
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.min.js');
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.min.js');
@@ -30,10 +27,14 @@ jQuery(document).ready(function() {
 	});
 </script>
 
-<div class="row-fluid">
-	<div class="col-xs-12 tjdashboard" style="margin-left:10px;">
-		<h3>
-			<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
-		</h3>
+<div class="<?php echo COM_TJDASHBOARD_WRAPPER_DIV;?>">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-12 tjdashboard">
+				<h3>
+					<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
+				</h3>
+			</div>
+		</div>
 	</div>
 </div>
