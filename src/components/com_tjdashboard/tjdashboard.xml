@@ -31,6 +31,7 @@
         <filename>tjdashboard.php</filename>
         <filename>controller.php</filename>
         <filename>router.php</filename>
+        <folder>controllers</folder>
         <folder>views</folder>
         <folder>models</folder>
         <folder>assets</folder>
