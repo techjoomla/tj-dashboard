@@ -17,6 +17,7 @@ $document->addStylesheet(Juri::root() . 'components/com_tjdashboard/assets/css/d
 
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.min.js');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.min.js');
+$document->addStylesheet(Juri::root() . 'media/com_tjdashboard/css/tjdashboard-sb-admin.css');
 ?>
 
 <script>
