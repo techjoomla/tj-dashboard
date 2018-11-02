@@ -1,13 +1,10 @@
 <?php
 /**
- * @version    SVN: <svn_id>
- * @package    Com_Tjlms
- * @copyright  Copyright (C) 2005 - 2014. All rights reserved.
+ * @package    Com.TjDashboard
+ *
+ * @author     Techjoomla <extensions@techjoomla.com>
+ * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * Shika is free software. This version may have been modified pursuant
- * to the GNU General Public License, and as distributed it includes or
- * is derivative of works licensed under the GNU General Public License or
- * other free or open source software licenses.
  */
 
 // No direct access
@@ -17,22 +14,19 @@ jimport('joomla.filesystem.folder');
 jimport('joomla.filesystem.file');
 jimport('joomla.application.component.controller');
 
-if (!defined('DS'))
+if (! defined('DS'))
 {
-	define('DS', '/');
+	define('DS', DIRECTORY_SEPARATOR);
 }
 
 /**
- * Tjlms Installer
+ * TjDashboard Installer
  *
  * @since  1.0.0
  */
 class Pkg_TjdashboardInstallerScript
 {
-	/** @var array The list of extra modules and plugins to install */
-	private $oldversion = "";
-
-	private $installation_queue = array(
+	private $installationQueue = array(
 									'plugins' => array(
 											'tjdashboardrenderer' => array(
 																		'chartjs' => 1,
@@ -44,7 +38,7 @@ class Pkg_TjdashboardInstallerScript
 										),
 									);
 
-	private $uninstall_queue = array(
+	private $uninstallQueue = array(
 		'plugins' => array(
 						'tjdashboardrenderer' => array(
 														'chartjs' => 1,
@@ -55,6 +49,16 @@ class Pkg_TjdashboardInstallerScript
 						'api' => array('tjdashboard' => 1),
 					)
 				);
+
+	/**
+	 * Obsolete files and folders to remove.
+	 *
+	 * @var   array
+	 */
+	protected $deprecatedFiles = array(
+			'files'   => array(),
+			'folders' => array()
+	);
 
 	/**
 	 * method to run before an install/update/uninstall method
@@ -91,64 +95,10 @@ class Pkg_TjdashboardInstallerScript
 	public function postflight($type, $parent)
 	{
 		// Install subextensions
-		$status = $this->_installSubextensions($parent);
-
-		// Install Techjoomla Straper
-		$straperStatus = $this->_installStraper($parent);
-
-		$document = JFactory::getDocument();
-		$document->addStyleSheet(JURI::root() . '/media/techjoomla_strapper/css/bootstrap.min.css');
-
-		$this->_removeFiles();
-
-		// Show the post-installation page
-		$this->_renderPostInstallation($status, $straperStatus, $parent);
+		$status = $this->installSubextensions($parent);
+		$this->removeFilesAndFolders($this->deprecatedFiles);
 	}
 
-	/**
-	 * Remove Files
-	 *
-	 * @return  void
-	 */
-	public function _removeFiles()
-	{
-		$file1 = JPATH_SITE . '/components/com_tjlms/views/coupon/default.xml';
-		$file2 = JPATH_SITE . '/components/com_tjlms/views/coupon/tmpl/default.xml';
-
-		if (JFile::exists($file1))
-		{
-			JFile::delete($file1);
-		}
-
-		if (JFile::exists($file2))
-		{
-			JFile::delete($file2);
-		}
-	}
-
-	/**
-	 * Install strappers
-	 *
-	 * @param   JInstaller  $parent  parent
-	 *
-	 * @return  void
-	 */
-	private function _installStraper($parent)
-	{
-	}
-
-	/**
-	 * Renders the post-installation message
-	 *
-	 * @param   JInstaller  $status         parent
-	 * @param   JInstaller  $straperStatus  parent
-	 * @param   JInstaller  $parent         parent
-	 *
-	 * @return  void
-	 */
-	private function _renderPostInstallation($status, $straperStatus, $parent)
-	{
-	}
 	/**
 	 * Installs subextensions (modules, plugins) bundled with the main extension
 	 *
@@ -156,7 +106,7 @@ class Pkg_TjdashboardInstallerScript
 	 *
 	 * @return  JObject The subextension installation status
 	 */
-	private function _installSubextensions($parent)
+	private function installSubextensions($parent)
 	{
 		$src = $parent->getParent()->getPath('source');
 
@@ -165,11 +115,10 @@ class Pkg_TjdashboardInstallerScript
 		$status          = new JObject;
 		$status->plugins = array();
 
-
 		// Plugins installation
-		if (count($this->installation_queue['plugins']))
+		if (count($this->installationQueue['plugins']))
 		{
-			foreach ($this->installation_queue['plugins'] as $folder => $plugins)
+			foreach ($this->installationQueue['plugins'] as $folder => $plugins)
 			{
 				if (count($plugins))
 				{
@@ -260,7 +209,7 @@ class Pkg_TjdashboardInstallerScript
 	 *
 	 * @return  JObject The subextension uninstallation status
 	 */
-	private function _uninstallSubextensions($parent)
+	private function uninstallSubextensions($parent)
 	{
 		jimport('joomla.installer.installer');
 
@@ -273,9 +222,9 @@ class Pkg_TjdashboardInstallerScript
 		$src = $parent->getParent()->getPath('source');
 
 		// Plugins uninstallation
-		if (count($this->uninstall_queue['plugins']))
+		if (count($this->uninstallQueue['plugins']))
 		{
-			foreach ($this->uninstall_queue['plugins'] as $folder => $plugins)
+			foreach ($this->uninstallQueue['plugins'] as $folder => $plugins)
 			{
 				if (count($plugins))
 				{
@@ -309,7 +258,7 @@ class Pkg_TjdashboardInstallerScript
 	}
 
 	/**
-	 * _renderPostUninstallation
+	 * renderPostUninstallation
 	 *
 	 * @param   STRING  $status  status of installed extensions
 	 * @param   ARRAY   $parent  parent item
@@ -318,113 +267,8 @@ class Pkg_TjdashboardInstallerScript
 	 *
 	 * @since  1.0.0
 	 */
-	private function _renderPostUninstallation($status, $parent)
+	private function renderPostUninstallation($status, $parent)
 	{
-?>
-	   <?php
-		$rows = 0;
-?>
-	   <h2><?php
-		echo JText::_('TjLMS Uninstallation Status');
-?></h2>
-		<table class="adminlist">
-			<thead>
-				<tr>
-					<th class="title" colspan="2"><?php
-		echo JText::_('Extension');
-?></th>
-					<th width="30%"><?php
-		echo JText::_('Status');
-?></th>
-				</tr>
-			</thead>
-			<tfoot>
-				<tr>
-					<td colspan="3"></td>
-				</tr>
-			</tfoot>
-			<tbody>
-				<tr class="row0">
-					<td class="key" colspan="2"><?php
-		echo 'TjLMS ' . JText::_('Component');
-?></td>
-					<td><strong style="color: green"><?php
-		echo JText::_('Removed');
-?></strong></td>
-				</tr>
-				<?php
-		if (count($status->modules))
-		{
-?>
-			   <tr>
-					<th><?php
-			echo JText::_('Module');
-?></th>
-					<th><?php
-			echo JText::_('Client');
-?></th>
-					<th></th>
-				</tr>
-				<?php
-			foreach ($status->modules as $module)
-			{
-?>
-			   <tr class="row<?php echo ++$rows % 2;?>">
-					<td class="key"><?php echo $module['name'];?></td>
-					<td class="key"><?php echo ucfirst($module['client']);?></td>
-					<td>
-						<strong style="color: <?php echo $module['result'] ? "green" : "red";?>">
-							<?php echo $module['result'] ? JText::_('Removed') : JText::_('Not removed');?>
-						</strong>
-					</td>
-				</tr>
-				<?php
-			}
-?>
-			   <?php
-		}
-?>
-			   <?php
-		if (count($status->plugins))
-		{
-?>
-			   <tr>
-					<th><?php
-			echo JText::_('Plugin');
-?></th>
-					<th><?php
-			echo JText::_('Group');
-?></th>
-					<th></th>
-				</tr>
-				<?php
-			foreach ($status->plugins as $plugin)
-			{
-?>
-			   <tr class="row<?php
-				echo ++$rows % 2;
-?>">
-					<td class="key"><?php
-				echo ucfirst($plugin['name']);
-?></td>
-					<td class="key"><?php
-				echo ucfirst($plugin['group']);
-?></td>
-					<td><strong style="color: <?php
-				echo $plugin['result'] ? "green" : "red";
-?>"><?php
-				echo $plugin['result'] ? JText::_('Removed') : JText::_('Not removed');
-?></strong></td>
-				</tr>
-
-	<?php
-			}
-		}
-
-		?>
-		   </tbody>
-		</table>
-		<?php
 	}
 
 	/**
@@ -439,10 +283,10 @@ class Pkg_TjdashboardInstallerScript
 	public function uninstall($parent)
 	{
 		// Uninstall subextensions
-		$status = $this->_uninstallSubextensions($parent);
+		$status = $this->uninstallSubextensions($parent);
 
 		// Show the post-uninstallation page
-		$this->_renderPostUninstallation($status, $parent);
+		$this->renderPostUninstallation($status, $parent);
 	}
 
 	/**
@@ -454,25 +298,47 @@ class Pkg_TjdashboardInstallerScript
 	 */
 	public function update($parent)
 	{
-		$db     = JFactory::getDBO();
-		$config = JFactory::getConfig();
+	}
 
-		if (JVERSION >= 3.0)
+	/**
+	 * Removes obsolete files and folders
+	 *
+	 * @param   array  $removeList  The files and directories to remove
+	 *
+	 * @return  void
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected function removeFilesAndFolders($removeList)
+	{
+		if (isset($removeList['files']) && !empty($removeList['files']))
 		{
-			$configdb = $config->get('db');
+			foreach ($removeList['files'] as $file)
+			{
+				$file = JPATH_ROOT . '/' . $file;
+
+				if (!JFile::exists($file))
+				{
+					continue;
+				}
+
+				JFile::delete($file);
+			}
 		}
-		else
+
+		if (isset($removeList['folders']) && !empty($removeList['folders']))
 		{
-			$configdb = $config->getValue('config.db');
-		}
-		// Get dbprefix
-		if (JVERSION >= 3.0)
-		{
-			$dbprefix = $config->get('dbprefix');
-		}
-		else
-		{
-			$dbprefix = $config->getValue('config.dbprefix');
+			foreach ($removeList['folders'] as $folder)
+			{
+				$folder = JPATH_ROOT . '/' . $folder;
+
+				if (!JFolder::exists($folder))
+				{
+					continue;
+				}
+
+				JFolder::delete($folder);
+			}
 		}
 	}
 }
