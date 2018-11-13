@@ -311,7 +311,7 @@ class Pkg_TjdashboardInstallerScript
 	 */
 	protected function removeFilesAndFolders($removeList)
 	{
-		if (isset($removeList['files']) && !empty($removeList['files']))
+		if (!empty($removeList['files']) && count($removeList['files']))
 		{
 			foreach ($removeList['files'] as $file)
 			{
@@ -326,7 +326,7 @@ class Pkg_TjdashboardInstallerScript
 			}
 		}
 
-		if (isset($removeList['folders']) && !empty($removeList['folders']))
+		if (!empty($removeList['folders']) && count($removeList['folders']))
 		{
 			foreach ($removeList['folders'] as $folder)
 			{
