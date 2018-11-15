@@ -107,7 +107,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 			return false;
 		}
 
-		$this->setState('dashboard.dashboard_id', $dashboard->dashboard_id);
+		$this->setState('dashboard.id', $dashboard->dashboard_id);
 
 		return true;
 	}

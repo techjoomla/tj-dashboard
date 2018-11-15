@@ -162,6 +162,8 @@ class TjdashboardWidget extends JObject
 			return false;
 		}
 
+		$this->dashboard_widget_id = $table->dashboard_widget_id;
+
 		return $result;
 	}
 
