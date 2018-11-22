@@ -1,12 +1,13 @@
 <?php
 /**
- * @version    CVS: 1.0.0
- * @package    Plg_Tjdash
- * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     TJDashboard
+ * @subpackage  com_tjdashboard
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-// No direct access
+
 defined('_JEXEC') or die('Restricted access');
 
 /**

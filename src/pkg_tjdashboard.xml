@@ -2,10 +2,10 @@
 	<extension type="package" version="3.0" method="upgrade">
 	<name>TJ Dashboard Package</name>
 	<author>Techjoomla</author>
-	<authorUrl>www.techjoomla.com</authorUrl>
-	<copyright>Copyright(C)2012-17 TechJoomla</copyright>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<copyright>Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<creationDate>23rd August 2018</creationDate>
+	<creationDate>22nd Nov 2018</creationDate>
 	<packagename>TJDashboard</packagename>
 	<version>1.1.0</version>
 	<packager>Techjoomla Team</packager>
