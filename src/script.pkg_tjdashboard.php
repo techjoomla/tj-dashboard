@@ -307,7 +307,7 @@ class Pkg_TjdashboardInstallerScript
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.1.0
 	 */
 	protected function removeFilesAndFolders($removeList)
 	{
