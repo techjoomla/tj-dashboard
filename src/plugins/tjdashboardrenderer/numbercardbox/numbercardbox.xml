@@ -3,12 +3,12 @@
 	<name>PLG_TJDASHBOARDRENDERER_NUMBERCARDBOX</name>
 	<author>Techjoomla</author>
 	<authorUrl>https://techjoomla.com</authorUrl>
-	<copyright>Copyright (c) 2009-2018 Techjoomla. All rights reserved.</copyright>
+	<copyright>Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.</copyright>
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-	<authorEmail>contact@techjoomla.com</authorEmail>
-	<creationDate>19th June 2018</creationDate>
-	<authorUrl>www.techjoomla.com</authorUrl>
-	<version>1.0</version>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<creationDate>23rd Nov 2018</creationDate>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<version>1.1.0</version>
 	<description>PLG_TJDASHBOARDRENDERER_NUMBERCARDBOX_DESC</description>
 
 	<files>

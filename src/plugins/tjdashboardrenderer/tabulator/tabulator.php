@@ -1,12 +1,13 @@
 <?php
 /**
- * @version    CVS: 1.0.0
- * @package    Plg_Tjdash
- * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     TJDashboard
+ * @subpackage  com_tjdashboard
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
-// No direct access
+
 defined('_JEXEC') or die('Restricted access');
 
 /**
@@ -41,6 +42,9 @@ class PlgTjdashboardRendererTabulator
 	 **/
 	public function getCSS()
 	{
-		return array(Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/tabulator.min.css');
+		$CS1 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/tabulator_semantic-ui.min.css';
+		$CS2 = Juri::root() . 'plugins/tjdashboardrenderer/tabulator/assets/css/custom.css';
+
+		return array($CS1,$CS2);
 	}
 }

@@ -1,9 +1,11 @@
 <?php
 /**
- * @package    Com_Tjdashboard
- * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     TJDashboard
+ * @subpackage  com_tjdashboard
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 defined('_JEXEC') or die;
@@ -17,6 +19,20 @@ JLoader::register('TjdashboardController', JPATH_COMPONENT . '/controller.php');
 $document = JFactory::getDocument();
 $script  = 'const root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
+
+// Get Tjdashboard params
+$tjdashboardparams = JComponentHelper::getParams('com_tjdashboard');
+
+if ($tjdashboardparams->get('load_bootstrap') == 1)
+{
+	// Load bootstrap CSS and JS.
+	JHtml::stylesheet('media/techjoomla_strapper/bs3/css/bootstrap.css');
+
+	JHtml::_('bootstrap.framework');
+}
+
+define('COM_TJDASHBOARD_WRAPPER_DIV', 'tjBs3');
+
 
 // Execute the task.
 $controller = JControllerLegacy::getInstance('Tjdashboard');

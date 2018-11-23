@@ -1,9 +1,11 @@
 <?php
 /**
- * @package    Com_Tjdashboard
- * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     TJDashboard
+ * @subpackage  com_tjdashboard
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
@@ -37,7 +39,22 @@ class TjdashboardViewDashboard extends JViewLegacy
 		$this->state = $this->get('State');
 		$this->item->dashboard_id = $this->state->get('dashboard.dashboard_id');
 
+		$this->getLanguageConstant();
+
 		// @Todo - Add permission based view accessing code
 		parent::display($tpl);
+	}
+
+	/**
+	 * Get all jtext for javascript
+	 *
+	 * @return   void
+	 *
+	 * @since   1.0
+	 */
+	public static function getLanguageConstant()
+	{
+		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
+		JText::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
 	}
 }

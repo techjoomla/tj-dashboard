@@ -2,10 +2,12 @@
 <extension version="3.0.0" type="plugin" group="api" method="upgrade">
     <name>Tj-Dashboard</name>
     <author>Techjoomla</author>
-    <authorUrl>www.techjoomla.com</authorUrl>
-    <copyright>Copyright(C)2012-17 TechJoomla</copyright>
+    <authorUrl>https://techjoomla.com</authorUrl>
+    <copyright>Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.</copyright>
+    <creationDate>23rd Nov 2018</creationDate>
     <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
     <description>Tj-Dashboard API plugin</description>
+    <version>1.1.0</version>
     <files>
         <filename plugin="tjdashboard">tjdashboard.php</filename>
         <folder>resources</folder>

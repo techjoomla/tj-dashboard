@@ -1,10 +1,13 @@
 <?php
 /**
- * @package    Com_Tjdashboard
- * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     TJDashboard
+ * @subpackage  com_tjdashboard
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 // No direct access
 defined('_JEXEC') or die;
 
@@ -75,6 +78,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 		}
 
 		$this->addToolbar();
+		$this->getLanguageConstant();
 
 		parent::display($tpl);
 	}
@@ -188,5 +192,18 @@ class TjdashboardViewDashboard extends JViewLegacy
 	protected function isCheckedOut($userId)
 	{
 		return !($this->item->checked_out == 0 || $this->item->checked_out == $userId);
+	}
+
+	/**
+	 * Get all jtext for javascript
+	 *
+	 * @return   void
+	 *
+	 * @since   1.0
+	 */
+	public static function getLanguageConstant()
+	{
+		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
+		JText::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
 	}
 }

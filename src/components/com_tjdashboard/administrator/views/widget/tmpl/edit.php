@@ -1,11 +1,13 @@
 <?php
 /**
- * @version    CVS: 1.0.0
- * @package    Com_Tjdashboard
- * @author     Techjoomla <extensions@techjoomla.com>
- * @copyright  2017 Techjoomla
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @package     TJDashboard
+ * @subpackage  com_tjdashboard
+ *
+ * @author      Techjoomla <extensions@techjoomla.com>
+ * @copyright   Copyright (C) 2009 - 2018 Techjoomla. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
+
 // No direct access
 defined('_JEXEC') or die;
 
@@ -32,6 +34,15 @@ JFactory::getDocument()->addScriptDeclaration('
 	{
 		if (task == "widget.cancel" || document.formvalidator.isValid(document.getElementById("widget-form")))
 		{
+			if (task != "widget.cancel" && jQuery("#jform_params").val())
+			{
+				try{
+					JSON.parse(jQuery("#jform_params").val());
+				}catch(e){
+					alert(Joomla.JText._("COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE"));
+					return false;
+				}
+			}
 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
 			Joomla.submitform(task, document.getElementById("widget-form"));
 		}
@@ -43,14 +54,15 @@ JFactory::getDocument()->addScriptDeclaration('
 	' . (int) $this->item->dashboard_widget_id, false
 	);?>" method="post" enctype="multipart/form-data" name="adminForm" id="widget-form" class="form-validate tjdashForm">
 		<div class="form-horizontal">
-		<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
-		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
 		<div class="row-fluid">
 			<div class="span9">
 				<fieldset class="adminform">
 					<?php
+						echo $this->form->renderField('title');
+						
 						echo $this->form->renderField('dashboard_id');
+
 						echo $this->form->renderField('state');
 
 						echo $this->form->renderField('data_plugin');
