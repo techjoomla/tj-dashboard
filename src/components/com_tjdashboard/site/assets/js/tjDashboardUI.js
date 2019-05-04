@@ -14,6 +14,7 @@ var TJDashboardUI = {
 	var promise = TJDashboardService.getDashboard(id);
 
 	promise.done(function(response) {
+			jQuery('.tjdashboardloadingwidget').hide();
 			if(!response.data.dashboard_id)
 			{
 				return false;
@@ -55,7 +56,7 @@ var TJDashboardUI = {
 					  }
 				}
 
-				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
+				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""><div class="tjdashboardloading"></div></div></div></div>').appendTo('.dashboard-widget-row-'+j);
 
 				TJDashboardUI.initWidget(value);
 				i++;
@@ -83,7 +84,7 @@ var TJDashboardUI = {
 
 		var promise = TJDashboardService.getWidget(widgetData.dashboard_widget_id);
 		promise.done(function(response) {
-
+			jQuery('#dashboard-widget-'+response.data.dashboard_widget_id+' .tjdashboardloadingwidget').hide();
 			if(!response.data.dashboard_widget_id)
 			{
 				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE") + '</div>').appendTo('#dashboard-widget-'+widgetData.dashboard_widget_id);
