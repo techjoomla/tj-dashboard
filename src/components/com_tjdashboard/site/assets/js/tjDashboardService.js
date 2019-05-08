@@ -28,7 +28,7 @@ var TJDashboardService = {
 		var params = {};
 		params.method = 'GET';
 		/** global: root_url */
-
+		jQuery('.tjdashboard').before('<div class="tjdashboard-loader"></div>');
 		return this.postData(root_url + this.api_dashboard_url + id, params);
 	},
 

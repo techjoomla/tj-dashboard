@@ -1,81 +1,247 @@
-.numbercardbox{
-	text-align: right;
-	word-wrap: break-word;
+.numbercardbox {
+  text-align: right;
+  word-wrap: break-word;
 }
 
-.number{
-    font-size: 1.4em;
-    font-weight: bold;
-    line-height: 25px;
+.number {
+  font-size: 1.4em;
+  font-weight: bold;
+  line-height: 25px;
 }
 
-.tjdashboardloadingwidget {
-    margin: 150px auto;
-    width: 70px;
-    text-align: center;
-}    
-.tjdashboardloadingwidget > div {
-    width: 20px;
-    height: 20px;
-    background-color: #d67d42;
-    border-radius: 100%;
-    display: inline-block;
-    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-}
-.tjdashboardloadingwidget .bounce1 {
-    -webkit-animation-delay: -0.32s;
-    animation-delay: -0.32s;
-}
-.tjdashboardloadingwidget .bounce2 {
-    -webkit-animation-delay: -0.16s;
-    animation-delay: -0.16s;
-}
-      
-@-webkit-keyframes sk-bouncedelay {
-    0%, 80%, 100% { -webkit-transform: scale(0) }
-    40% { -webkit-transform: scale(1.0) }
-}
-      
-@keyframes sk-bouncedelay {
-    0%, 80%, 100% { 
-        -webkit-transform: scale(0);
-        transform: scale(0);
-    } 
-    40% { 
-        -webkit-transform: scale(1.0);
-        transform: scale(1.0);
-    }
-}
-
-.tjdashboardloading  {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 90px;
-  background-repeat: repeat-y;
+.tjdashboard-loader {
+  height: 100vh;
+  margin: 15px;
+  background-repeat: no-repeat;
   background-image:
-    linear-gradient( lightgray 70px, transparent 0 );
-    background-position:
-        0 10px;
-    }
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 35px, transparent 0),
+    linear-gradient(#eee 165px, transparent 0),
+    linear-gradient(#eee 35px, transparent 0),
 
-.tjdashboardloading:before,
-.tjdashboardloading::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 40%;
-    height: 70px;
-    background: linear-gradient(90deg, #ccc, #dedede, #ccc);
-    animation: progress 1s ease-in-out infinite;
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 35px, transparent 0),
+    linear-gradient(#eee 165px, transparent 0),
+    linear-gradient(#eee 35px, transparent 0),
+
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 35px, transparent 0),
+    linear-gradient(#eee 165px, transparent 0),
+    linear-gradient(#eee 35px, transparent 0),
+
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 35px, transparent 0),
+    linear-gradient(#eee 165px, transparent 0),
+    linear-gradient(#eee 35px, transparent 0),
+
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 35px, transparent 0),
+    linear-gradient(#eee 165px, transparent 0),
+    linear-gradient(#eee 35px, transparent 0),
+
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 35px, transparent 0),
+    linear-gradient(#eee 165px, transparent 0),
+    linear-gradient(#eee 35px, transparent 0);
+  background-size:
+    20px 165px, 
+    49% 300px,
+    49% 300px,
+    49% 300px,
+
+    20px 165px,
+    49% 300px,
+    49% 300px,
+    49% 300px,
+
+    20px 165px, 
+    49% 300px,
+    49% 300px,
+    49% 300px,
+
+    20px 165px,
+    49% 300px,
+    49% 300px,
+    49% 300px,
+    
+    20px 165px, 
+    49% 300px,
+    49% 300px,
+    49% 300px,
+
+    20px 165px,
+    49% 300px,
+    49% 300px,
+    49% 300px;
+  animation: tjdashboard-loader-animation 1s infinite;
 }
-@keyframes progress {
-  0% {
-    transform: translate3d(-100%, 0, 0);
+
+@keyframes tjdashboard-loader-animation {
+  from {
+    background-position:
+      0 45px,
+      0 0,
+      0 45px,
+      0 220px,
+
+      60% 45px,
+      100% 0,
+      100% 45px,
+      100% 220px,
+
+      0 340px,
+      0 295px,
+      0 340px,
+      0 515px,
+
+      60% 340px,
+      100% 295px,
+      100% 340px,
+      100% 515px,
+
+      0 635px,
+      0 590px,
+      0 635px,
+      0 810px,
+
+      60% 635px,
+      100% 590px,
+      100% 635px,
+      100% 810px;
   }
-  100% {
-    transform: translate3d(100%, 0, 0);
+  to {
+    background-position:
+      45% 45px,
+      0 0,
+      0 45px,
+      0 220px,
+
+      100% 45px,
+      100% 0,
+      100% 45px,
+      100% 220px,
+
+      45% 340px,
+      0 295px,
+      0 340px,
+      0 515px,
+
+      100% 340px,
+      100% 295px,
+      100% 340px,
+      100% 515px,
+
+      45% 635px,
+      0 590px,
+      0 635px,
+      0 810px,
+
+      100% 635px,
+      100% 590px,
+      100% 635px,
+      100% 810px;
+  }
+}
+
+.tjloader--default:empty {
+  height: 85px;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient( 100deg, transparent 0,rgba(255,255,255,0.25) 50% , transparent 100% ),
+    linear-gradient(#eee 165px, transparent 0);
+  background-size:
+    20px 85px, 
+    100% 85px;
+  animation: tjloader-default-animation 1s infinite;
+  transition: all 2s;
+}
+
+@keyframes tjloader-default-animation {
+  from {
+    background-position:
+      2.5% 0,
+      0 0;
+  }
+  to {
+    background-position:
+      100% 0,
+      0 0;
+  }
+}
+
+.tjloader--chart:empty {
+  height: 375px;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(#eee 100%, transparent 0),
+    linear-gradient(#eee 100%, transparent 0),
+    linear-gradient(#eee 100%, transparent 0),
+    linear-gradient(#eee 100%, transparent 0),
+    linear-gradient(#eee 100%, transparent 0),
+    linear-gradient(#eee 100%, transparent 0);
+  background-size: 
+    45px 300px,
+    45px 100px,
+    45px 200px,
+    45px 300px,
+    45px 100px,
+    45px 300px;
+  background-position:
+    40px 45px,
+    130px 245px,
+    220px 145px,
+    310px 45px,
+    400px 245px,
+    490px 45px;
+  animation: tjloader-chart-animation 1s infinite;
+}
+
+@keyframes tjloader-chart-animation {
+  to {
+    background-size: 
+      45px 100px,
+      45px 300px,
+      45px 45px,
+      45px 10px,
+      45px 300px,
+      45px 100px;
+    background-position:
+      40px 245px,
+      130px 45px,
+      220px 300px,
+      310px 335px,
+      400px 45px,
+      490px 245px;
+  }
+}
+
+.tjloader--tabulator:empty{
+  height: 375px;
+  background-repeat: repeat;
+  background-image:
+    linear-gradient( #eeeeee 1px, transparent 0 ),
+    linear-gradient(90deg, #eeeeee 1px, transparent 0 ),
+    linear-gradient( 90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 15%, rgba(255, 255, 255, 0) 30% ),
+    linear-gradient( #f0f0f0 35px, transparent 0 );
+  background-size: 
+    1px 35px,
+    calc(100% * 0.1666666666) 1px,
+    30% 100%,
+    2px 70px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+  animation: tjloader-table-animation 1s infinite;
+}
+
+@keyframes tjloader-table-animation {
+  to {
+    background-position:
+      0 0,
+      0 0,
+      40% 0,
+      0 0;
   }
 }
