@@ -33,7 +33,7 @@ var TJDashboardUI = {
 			var divSpan = 0;
 			var i = 0;
 			var j = 1;
-			var loaderClass = '';
+			var loaderClass = "";
 
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
