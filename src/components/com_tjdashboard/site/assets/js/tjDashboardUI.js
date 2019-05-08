@@ -17,7 +17,7 @@ var TJDashboardUI = {
 
 			/* hide loader after response arrival */
 
-			jQuery('.tjdashboard-loader').hide();
+			jQuery(".tjdashboard-loader").hide();
 
 			if(!response.data.dashboard_id)
 			{
