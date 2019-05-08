@@ -99,7 +99,6 @@ var TJDashboardUI = {
 
 		var promise = TJDashboardService.getWidget(widgetData.dashboard_widget_id);
 		promise.done(function(response) {
-			
 			if(!response.data.dashboard_widget_id)
 			{
 				jQuery('<div class="alert alert-info">' + Joomla.JText._("COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE") + '</div>').appendTo('#dashboard-widget-'+widgetData.dashboard_widget_id);
