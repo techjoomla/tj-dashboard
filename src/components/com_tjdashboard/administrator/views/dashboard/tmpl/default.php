@@ -44,7 +44,7 @@ jQuery(document).ready(function() {
 		<?php
 		}
 		?>
-				<div class="tjdashboard">
+				<div class="tjdashboard" >
 				</div>
 			</div>
 	</div>
