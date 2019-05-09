@@ -16,8 +16,6 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboards` (
   `context` varchar(255) NOT NULL COMMENT 'Dashboard context',
   `parent` int(11) NOT NULL COMMENT 'dashboard id of parent dashboard',
   PRIMARY KEY (`dashboard_id`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
   KEY `idx_createdby` (`created_by`),
   KEY `idx_alias` (`alias`(191))
 ) DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
@@ -43,8 +41,6 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   PRIMARY KEY (`dashboard_widget_id`),
   FOREIGN KEY (`dashboard_id`) REFERENCES `#__tj_dashboards` (`dashboard_id`),
   KEY `idx_dashboard_id` (`dashboard_id`),
-  KEY `idx_checkout` (`checked_out`),
-  KEY `idx_state` (`state`),
   KEY `idx_createdby` (`created_by`)
 ) DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
