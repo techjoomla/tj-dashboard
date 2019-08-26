@@ -114,8 +114,8 @@ if ($saveOrder)
 
 						$canChange  = $this->canChangeStatus;
 						?>
-						<tr class="row<?php echo $i % 2; ?>" sortable-group-id="
-							<?php echo $item->dashboard_id; ?>">
+						<tr class="row<?php echo $i % 2; ?>"
+							sortable-group-id="<?php echo $item->dashboard_id; ?>">
 						<td class="order nowrap center hidden-phone">
 							<?php
 							$iconClass = '';
