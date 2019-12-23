@@ -29,6 +29,15 @@ var TJDashboardUI = {
 			var i = 0;
 			var j = 1;
 
+			// Check global config for Widget Icon & Title
+			var widgetHeading = true;
+			var widgetHeadingHtml = '';
+
+			if ((tjDashWidgetIcon == '' || tjDashWidgetIcon == '0') && (tjDashWidgetTitle == '' || tjDashWidgetTitle == '0'))
+			{
+				widgetHeading = false;
+			}
+
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
@@ -55,7 +64,24 @@ var TJDashboardUI = {
 					  }
 				}
 
-				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
+				if (widgetHeading == true)
+				{
+					widgetHeadingHtml = '<div class="widget-title panel-heading">';
+
+					if (tjDashWidgetIcon == '1')
+					{
+						widgetHeadingHtml += '<span class="' + icon + '" aria-hidden="true"></span> ';
+					}
+
+					if (tjDashWidgetTitle == '1')
+					{
+						widgetHeadingHtml += '<b>' + value.title + '</b>';
+					}
+
+					widgetHeadingHtml += '<span id="view-all-' + value.dashboard_widget_id + '" class="pull-right"></span></div>';
+				}
+
+				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'">' + widgetHeadingHtml + '<div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
 
 				TJDashboardUI.initWidget(value);
 				i++;
@@ -114,7 +140,7 @@ var TJDashboardUI = {
 			var linkArrayCount = 0;
 			var renderData = JSON.parse(sourceData['data']);
 			var showLinks ='';
-			
+
 			if (renderData.links)
 			{
 				linkArrayCount = renderData.links.length;
@@ -190,7 +216,7 @@ var TJDashboardUI = {
 			});
 			jQuery('#jform_renderer_plugin').val(defaultValue);
 		});
-		
+
 		var promiseParams = TJDashboardService.getWidgetParams(selectedDataPlugin);
 		promiseParams.done(function(response) {
 			jQuery('#jform_params').val(response.data);
