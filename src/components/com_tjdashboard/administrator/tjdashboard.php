@@ -10,25 +10,18 @@
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Factory;
-use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Component\ComponentHelper;
-
 // Include dependancies
 jimport('joomla.application.component.controller');
 
-$document = Factory::getDocument();
-$script  = 'const root_url = "' . Uri::root() . '";';
+$document = JFactory::getDocument();
+$script  = 'const root_url = "' . Juri::root() . '";';
 $document->addScriptDeclaration($script, 'text/javascript');
-
-$tjdashboardParams = ComponentHelper::getParams('com_tjdashboard');
-$document->addScriptDeclaration("var tjDashWidgetIcon = '{$tjdashboardParams->get('show_widget_icon')}';");
-$document->addScriptDeclaration("var tjDashWidgetTitle = '{$tjdashboardParams->get('show_widget_title')}';");
 
 JLoader::registerPrefix('Tjdashboard', JPATH_ADMINISTRATOR);
 JLoader::register('TjdashboardController', JPATH_ADMINISTRATOR . '/controller.php');
 
+
 // Execute the task.
 $controller = JControllerLegacy::getInstance('Tjdashboard');
-$controller->execute(Factory::getApplication()->input->get('task'));
+$controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();

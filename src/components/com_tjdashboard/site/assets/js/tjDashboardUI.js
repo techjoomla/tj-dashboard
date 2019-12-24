@@ -29,34 +29,32 @@ var TJDashboardUI = {
 			var i = 0;
 			var j = 1;
 
-			// Check global config for Widget Icon & Title
-			var widgetHeading = true;
-			var widgetHeadingHtml = '';
-
-			if ((tjDashWidgetIcon == '' || tjDashWidgetIcon == '0') && (tjDashWidgetTitle == '' || tjDashWidgetTitle == '0'))
-			{
-				widgetHeading = false;
-			}
-
 			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
 				var colorClass = "panel-default";
 				var icon = "";
+				var showTitle = true;
+				var widgetHeadingHtml = '';
 
 				if(value.params)
 				{
 					try
 					{
-							value.params = JSON.parse(value.params);
+						value.params = JSON.parse(value.params);
 
-							if(value.params.color){
-								colorClass=value.params.color;
-							}
+						if(value.params.color){
+							colorClass=value.params.color;
+						}
 
-							if(value.params.icon){
-								icon = value.params.icon;
-							}
+						if(value.params.icon){
+							icon = value.params.icon;
+						}
+
+						if (typeof(value.params.show_title) !== "undefined")
+						{
+							showTitle = value.params.show_title;
+						}
 					  }
 					  catch(e)
 					  {
@@ -64,16 +62,16 @@ var TJDashboardUI = {
 					  }
 				}
 
-				if (widgetHeading == true)
+				if (icon != '' || showTitle == true)
 				{
 					widgetHeadingHtml = '<div class="widget-title panel-heading">';
 
-					if (tjDashWidgetIcon == '1')
+					if (icon != '')
 					{
 						widgetHeadingHtml += '<span class="' + icon + '" aria-hidden="true"></span> ';
 					}
 
-					if (tjDashWidgetTitle == '1')
+					if (showTitle == true)
 					{
 						widgetHeadingHtml += '<b>' + value.title + '</b>';
 					}

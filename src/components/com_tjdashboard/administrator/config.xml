@@ -5,14 +5,6 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
-		<field name="show_widget_icon" type="radio" default="1" label="COM_TJDASHBOARD_SHOW_WIDGET_ICON" description="COM_TJDASHBOARD_SHOW_WIDGET_ICON_DESC"  class="btn-group">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-		<field name="show_widget_title" type="radio" default="1" label="COM_TJDASHBOARD_SHOW_WIDGET_TITLE" description="COM_TJDASHBOARD_SHOW_WIDGET_TITLE_DESC"  class="btn-group">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
     </fieldset>
     <fieldset name="permissions" description="JCONFIG_PERMISSIONS_DESC" label="JCONFIG_PERMISSIONS_LABEL">
         <field name="rules" type="rules" component="com_tjdashboard" class="inputbox" filter="rules" validate="rules" label="JCONFIG_PERMISSIONS_LABEL" section="component" />
