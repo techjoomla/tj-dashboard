@@ -14,6 +14,7 @@ var TJDashboardUI = {
 	var promise = TJDashboardService.getDashboard(id);
 
 	promise.done(function(response) {
+
 			if(!response.data.dashboard_id)
 			{
 				return false;
@@ -29,42 +30,86 @@ var TJDashboardUI = {
 			var i = 0;
 			var j = 1;
 
-			jQuery('<div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+			jQuery('<div class="widget-boxes row dashboard-filter	dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
 				var colorClass = "panel-default";
 				var icon = "";
+				var filterClass  = "";
+				var groupHeadClass  = "";
+				var titleLink  = "";
 
 				if(value.params)
 				{
 					try
 					{
-							value.params = JSON.parse(value.params);
+						value.params = JSON.parse(value.params);
 
-							if(value.params.color){
-								colorClass=value.params.color;
-							}
+						if(value.params.color){
+							colorClass=value.params.color;
+						}
 
-							if(value.params.icon){
-								icon = value.params.icon;
-							}
-					  }
-					  catch(e)
-					  {
-							value.params = {};
-					  }
+						if(value.params.icon){
+							icon = value.params.icon;
+						}
+
+						if(value.params.filter!=undefined && (value.params.filter == true))
+						{
+							filterClass = " filter-widget";
+						}
+
+						if(value.params.grouping!=undefined && (value.params.grouping == true))
+						{
+							groupHeadClass = " dashboard-widget-label";
+						}
+
+						if(value.params.titlelink!=undefined && (value.params.titlelink !== ''))
+						{
+							titleLink = value.params.titlelink;
+						}
+					}
+					catch(e)
+					{
+						value.params = {};
+					}
 				}
 
-				jQuery('<div class="col-xs-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="'+ icon + '" aria-hidden="true"></span> <b>'+value.title+'</b><span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class=""></div></div></div>').appendTo('.dashboard-widget-row-'+j);
+				if (parseInt(value.size) === 12 && j > 1)
+				{
+					j++;
+					jQuery('</div><div class="widget-boxes row '+groupHeadClass+' dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+					divSpan = 0;
+				}
+
+				var widgetPanel = '<div class="col-sm-' +value.size+'"><div class="widget-data panel '+colorClass+'"><div class="widget-title panel-heading"><span class="fs-20 pr-5 '+ icon + '" aria-hidden="true"></span>';
+
+				if (jQuery.trim(titleLink) !='')
+				{
+					widgetPanel += '<a class="text-white title-link-'+value.dashboard_widget_id+'" href="'+ Joomla.getOptions('system.paths').base + '/' + titleLink + '" target="_blank">';
+				}
+
+				widgetPanel += '<span class="ml-10 fs-18 font-600">' + value.title + '</span>';
+
+				if (jQuery.trim(titleLink) !='')
+				{
+					widgetPanel += '</a>';
+				}
+
+				widgetPanel += '<span id="view-all-'+value.dashboard_widget_id+'" class="pull-right"></span></div><div data-dashboard-widget-id="'+value.dashboard_widget_id+'" id="dashboard-widget-'+value.dashboard_widget_id+'" class="'+filterClass+'"></div></div></div>';
+
+				jQuery(widgetPanel).appendTo('.dashboard-widget-row-'+j);
+
+				// To display loader
+				jQuery('#dashboard-widget-'+value.dashboard_widget_id).html('<span class="loader-spin-blue"></span>');
 
 				TJDashboardUI.initWidget(value);
 				i++;
 				divSpan = parseInt(divSpan) + parseInt(value.size);
 
-				if (divSpan === 12 && response.data.widget_data.length !== i)
+				if (divSpan >= 12 && response.data.widget_data.length !== i)
 				{
 					j++;
-					jQuery('</div><div class="row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+					jQuery('</div><div class="widget-boxes row dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 					divSpan = 0;
 				}
 
@@ -78,10 +123,10 @@ var TJDashboardUI = {
 		});
 	},
 
-	initWidget : function(widgetData){
+	initWidget : function(widgetData, extraParams = null){
 		/** global: TJDashboardService */
 
-		var promise = TJDashboardService.getWidget(widgetData.dashboard_widget_id);
+		var promise = TJDashboardService.getWidget(widgetData.dashboard_widget_id, extraParams);
 		promise.done(function(response) {
 
 			if(!response.data.dashboard_widget_id)
@@ -114,7 +159,7 @@ var TJDashboardUI = {
 			var linkArrayCount = 0;
 			var renderData = JSON.parse(sourceData['data']);
 			var showLinks ='';
-			
+
 			if (renderData.links)
 			{
 				linkArrayCount = renderData.links.length;
@@ -153,7 +198,7 @@ var TJDashboardUI = {
 	_addJsFiles: function(jsObj,method,sourceData,libraryClassName){
 		jQuery.each(jsObj,function(index,value){
 			jQuery.getScript(value, function() {
-			   window[libraryClassName].renderData(method,sourceData);
+				window[libraryClassName].renderData(method,sourceData);
 			});
 		});
 	},
@@ -190,7 +235,7 @@ var TJDashboardUI = {
 			});
 			jQuery('#jform_renderer_plugin').val(defaultValue);
 		});
-		
+
 		var promiseParams = TJDashboardService.getWidgetParams(selectedDataPlugin);
 		promiseParams.done(function(response) {
 			jQuery('#jform_params').val(response.data);
@@ -201,6 +246,27 @@ var TJDashboardUI = {
 		var defaultValue = jQuery('#jform_size').val();
 		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH") + '</option><option value="6">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH") + '</option><option value="4">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH") + '</option><option value="3">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH") +'</option></select>');
 		jQuery('#jform_size').val(defaultValue);
-	}
+	},
 
+	widgetListener: function(){
+		var widgetData = {'dashboard_widget_id':0,'params':''};
+		var formData = jQuery(".widget-filters").serialize();
+		var widgetIds = [];
+		var id = '';
+		jQuery(".filter-widget").each(function() {
+			id = jQuery(this).data('dashboard-widget-id');
+			if (jQuery.inArray(id, widgetIds) == -1)
+			{
+				jQuery('#dashboard-widget-'+id).html('<span class="loader-spin-blue"></span>');
+
+				widgetIds.push(id);
+				widgetData.dashboard_widget_id = id;
+				TJDashboardUI.initWidget(widgetData, formData);
+			}
+		});
+	}
 }
+
+jQuery(document).on("change", ".widget-filters", function () {
+	TJDashboardUI.widgetListener();
+});

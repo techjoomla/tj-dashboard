@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="tjdashboardsource" method="upgrade">
+	<name>PLG_TJDASHBOARDSOURCE_DASHBOARD</name>
+	<author>Techjoomla</author>
+	<creationDate>9th Oct 2019</creationDate>
+	<copyright>Copyright (C) 2009 - 2019 Techjoomla. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>extensions@techjoomla.com</authorEmail>
+	<authorUrl>https://techjoomla.com</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_TJDASHBOARDSOURCE_DASHBOARD</description>
+
+	<files>
+		<filename plugin="dashboard">dashboard.php</filename>
+			<folder>dashboard</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardsource_dashboard.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_tjdashboardsource_dashboard.sys.ini</language>
+	</languages>
+
+</extension>
