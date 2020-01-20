@@ -30,7 +30,7 @@ var TJDashboardUI = {
 			var i = 0;
 			var j = 1;
 
-			jQuery('<div class="widget-boxes row dashboard-filter	dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
+			jQuery('<div class="widget-boxes row dashboard-filter dashboard-widget-row-'+j+'">').appendTo('.tjdashboard');
 			jQuery.each (response.data.widget_data, function(index, value)
 			{
 				var colorClass = "panel-default";
@@ -85,7 +85,7 @@ var TJDashboardUI = {
 
 				if (jQuery.trim(titleLink) !='')
 				{
-					widgetPanel += '<a class="text-white title-link-'+value.dashboard_widget_id+'" href="'+ Joomla.getOptions('system.paths').base + '/' + titleLink + '" target="_blank">';
+					widgetPanel += '<a class="text-white title-link-'+value.dashboard_widget_id+'" href="'+ Joomla.getOptions('system.paths').base + '/' + titleLink + '">';
 				}
 
 				widgetPanel += '<span class="ml-10 fs-18 font-600">' + value.title + '</span>';
