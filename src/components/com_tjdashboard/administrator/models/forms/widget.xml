@@ -57,6 +57,7 @@
 			required="true">
 				<option value=""></option>
 				<option value="12">COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH</option>
+				<option value="9">COM_TJDASHBOARD_WIDGET_FORM_THREE_FOURTH_WIDTH</option>
 				<option value="6">COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH</option>
 				<option value="4">COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH</option>
 				<option value="3">COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH</option>
