@@ -199,7 +199,7 @@ var TJDashboardUI = {
 
 	_setSize:function() {
 		var defaultValue = jQuery('#jform_size').val();
-		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH") + '</option><option value="6">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH") + '</option><option value="4">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH") + '</option><option value="3">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH") +'</option></select>');
+		jQuery('#jform_size').replaceWith('<select id="jform_size" name="jform[size]" class="inputbox required" required="required" aria-required="true"><option value="">Select Size</option><option value="12">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_THREE_FOURTH_WIDTH") + '</option><option value="9">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH") + '</option><option value="6">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH") + '</option><option value="4">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH") + '</option><option value="3">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH") +'</option></select>');
 		jQuery('#jform_size').val(defaultValue);
 	}
 
