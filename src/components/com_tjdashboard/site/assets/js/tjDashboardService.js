@@ -13,7 +13,6 @@ var TJDashboardService = {
 	get_widget_params : 'index.php?option=com_tjdashboard&task=widget.getWidgetParams',
 
 	postData: function(url, params, formData) {
-
 		params['url']		= url;
 		params['data'] 		= formData;
 		params['headers']	= {'x-auth':'session'};
@@ -52,6 +51,6 @@ var TJDashboardService = {
 		var params = {};
 		formData.pluginName = selectedDataPlugin;
 		/** global: root_url */
-		return this.postData(root_url + this.get_widget_params, params, formData);		
+		return this.postData(root_url + this.get_widget_params, params, formData);
 	}
 }

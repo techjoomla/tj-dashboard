@@ -114,7 +114,7 @@ var TJDashboardUI = {
 			var linkArrayCount = 0;
 			var renderData = JSON.parse(sourceData['data']);
 			var showLinks ='';
-			
+
 			if (renderData.links)
 			{
 				linkArrayCount = renderData.links.length;
@@ -126,35 +126,9 @@ var TJDashboardUI = {
 				jQuery("#view-all-"+response.data.dashboard_widget_id).replaceWith('<span id="view-all-'+response.data.dashboard_widget_id+'" class="pull-right">'+showLinks+'</span>');
 			}
 
+			/** Render the widget */
 			var libraryClassName = 'TJDashboard'+TJDashboardUI._jsUcFirst(library);
-			TJDashboardUI._addCssFiles(response.data.widget_css);
-
-			/*The rendering of the widget itself is done in the below
-			method. Later the rendering might be decoupled from
-			loading of the JS*/
-			TJDashboardUI._addJsFiles(response.data.widget_js,method,sourceData,libraryClassName);
-
-			return true;
-		});
-	},
-
-	_addCssFiles: function(cssObj){
-		jQuery.each(cssObj,function(index,value){
-			var style = document.createElement('link');
-			style.href = value;
-			style.type = 'text/css';
-			style.rel = 'stylesheet';
-			if(jQuery.find("link [href='"+value+"']").length==0){
-				jQuery('head').append(style);
-			}
-		});
-	},
-
-	_addJsFiles: function(jsObj,method,sourceData,libraryClassName){
-		jQuery.each(jsObj,function(index,value){
-			jQuery.getScript(value, function() {
-			   window[libraryClassName].renderData(method,sourceData);
-			});
+			window[libraryClassName].renderData(method,sourceData);
 		});
 	},
 
@@ -189,11 +163,11 @@ var TJDashboardUI = {
 				list.append(new Option(item,index));
 			});
 			jQuery('#jform_renderer_plugin').val(defaultValue);
-		});
-		
-		var promiseParams = TJDashboardService.getWidgetParams(selectedDataPlugin);
-		promiseParams.done(function(response) {
-			jQuery('#jform_params').val(response.data);
+
+			var promiseParams = TJDashboardService.getWidgetParams(selectedDataPlugin);
+			promiseParams.done(function(response) {
+				jQuery('#jform_params').val(response.data);
+			});
 		});
 	},
 
