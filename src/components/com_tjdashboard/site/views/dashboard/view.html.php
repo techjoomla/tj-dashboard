@@ -41,6 +41,29 @@ class TjdashboardViewDashboard extends JViewLegacy
 
 		$this->getLanguageConstant();
 
+		$dashboard = TjdashboardDashboard::getInstance($this->item->dashboard_id);
+		$this->jsFiles = array();
+		$this->cssFiles = array();
+
+		if (isset($dashboard->widget_data) && !empty($dashboard->widget_data))
+		{
+			foreach ($dashboard->widget_data as $widgetData)
+			{
+				$renderer = explode('.', $widgetData->renderer_plugin);
+				$rendererClass = 'PlgTjdashboardRenderer' . ucfirst($renderer[0]);
+				$path = "plugins.tjdashboardrenderer.";
+				$folderPath = $path . $renderer[0] . '.' . $renderer[0];
+				JLoader::import($folderPath, JPATH_SITE);
+				$rendererObj = new $rendererClass;
+
+				$this->jsFiles = array_merge($this->jsFiles, $rendererObj->getJS());
+				$this->jsFiles = array_unique($this->jsFiles);
+
+				$this->cssFiles = array_merge($this->cssFiles, $rendererObj->getCSS());
+				$this->cssFiles = array_unique($this->cssFiles);
+			}
+		}
+
 		// @Todo - Add permission based view accessing code
 		parent::display($tpl);
 	}
