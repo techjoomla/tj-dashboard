@@ -21,8 +21,8 @@ $document = JFactory::getDocument();
 
 $document->addStylesheet('components/com_tjdashboard/assets/css/dashboard.css');
 $document->addStylesheet('media/techjoomla_strapper/css/bootstrap.j3.min.css');
-$document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.js');
-$document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.js');
+$document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.min.js');
+$document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.min.js');
 $document->addStylesheet('media/com_tjdashboard/css/tjdashboard-sb-admin.css');
 ?>
 
