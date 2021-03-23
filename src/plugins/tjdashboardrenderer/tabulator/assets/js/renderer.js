@@ -15,6 +15,13 @@ var TJDashboardTabulator = {
 			selectable:false
 		});
 
+		// To regenerate table data on filter change
+		jQuery(document).on("change", ".widget-filters", function () {
+
+		 jQuery("#"+sourceData.element).tabulator("destroy");
+
+		});
+
 		if (renderData.columns.length==1) {
 			jQuery("#"+sourceData.element+" > .tabulator-header").addClass('hide');
 		}
