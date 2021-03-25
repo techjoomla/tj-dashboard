@@ -7,6 +7,8 @@ var TJDashboardTabulator = {
 	{
 		var renderData = JSON.parse(sourceData.data);
 
+
+
 		jQuery("#"+sourceData.element).tabulator({
 			layout:"fitColumns",
 			addRowPos:"top",
@@ -21,6 +23,7 @@ var TJDashboardTabulator = {
 		 jQuery("#"+sourceData.element).tabulator("destroy");
 
 		});
+
 
 		if (renderData.columns.length==1) {
 			jQuery("#"+sourceData.element+" > .tabulator-header").addClass('hide');
