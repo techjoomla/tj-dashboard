@@ -11,8 +11,11 @@
 // No direct access
 defined('_JEXEC') or die;
 
-JHTML::_('behavior.modal');
-
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+HTMLHelper::_('behavior.modal');
+HTMLHelper::_('formbehavior.chosen', 'select');
+HTMLHelper::_('jquery.token');
 
 $document = JFactory::getDocument();
 
@@ -33,9 +36,8 @@ jQuery(document).ready(function() {
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 tjdashboard">
-				<h3>
-					<div data-dashboard-id="<?php echo $this->item->dashboard_id;?>" class="tjdashboard-title"><?php echo htmlspecialchars($this->item->title);?></div>
-				</h3>
+
+					<h3 class="d-none" data-dashboard-id="<?php echo $this->item->dashboard_id;?>"><?php echo htmlspecialchars($this->item->title);?></h3>
 			</div>
 		</div>
 	</div>

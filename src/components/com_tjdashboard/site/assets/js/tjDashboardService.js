@@ -32,11 +32,11 @@ var TJDashboardService = {
 		return this.postData(root_url + this.api_dashboard_url + id, params);
 	},
 
-	getWidget: function(id) {
+	getWidget: function(id, extraParams=null) {
 		var params = {};
 		params.method = 'GET';
-		/** global: root_url */
-		return this.postData(root_url + this.api_widget_url + id, params);
+		/** global: root_url ; extraParams: to send extra parameters in URLs*/
+		return this.postData(root_url + this.api_widget_url + id, params, extraParams);
 	},
 
 	getRenderers: function(selectedDataPlugin) {
@@ -52,6 +52,6 @@ var TJDashboardService = {
 		var params = {};
 		formData.pluginName = selectedDataPlugin;
 		/** global: root_url */
-		return this.postData(root_url + this.get_widget_params, params, formData);		
+		return this.postData(root_url + this.get_widget_params, params, formData);
 	}
 }
