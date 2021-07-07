@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 /**
  * View to edit
  *
- * @since 1.0.0
+ * @since  1.0.0
  */
 class TjdashboardViewWidget extends JViewLegacy
 {
@@ -91,6 +91,7 @@ class TjdashboardViewWidget extends JViewLegacy
 
 		// Built the actions for new and existing records.
 		$canDo = $this->canDo;
+		$itemEditable = $this->isEditable($canDo, $userId);
 
 		JToolbarHelper::title(
 			JText::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_WIDGET' : ($isNew ? 'ADD_WIDGET' : 'EDIT_WIDGET'))),
@@ -98,9 +99,12 @@ class TjdashboardViewWidget extends JViewLegacy
 		);
 
 		// For new records, check the create permission.
-		if ($isNew)
+		if (!$checkedOut && $itemEditable)
 		{
-			JToolbarHelper::save('widget.save');
+			JToolBarHelper::apply('widget.apply');
+			JToolBarHelper::save('widget.save');
+			JToolBarHelper::save2new('widget.save2new');
+
 			JToolbarHelper::cancel('widget.cancel');
 		}
 		else
@@ -146,7 +150,7 @@ class TjdashboardViewWidget extends JViewLegacy
 	protected function isEditable($canDo, $userId)
 	{
 		// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
-		return $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+		return ($canDo->get('core.create') || $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId));
 	}
 
 	/**

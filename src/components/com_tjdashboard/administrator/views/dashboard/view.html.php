@@ -98,10 +98,13 @@ class TjdashboardViewDashboard extends JViewLegacy
 		JLoader::import('administrator.components.com_tjdashboard.helpers.dashboard', JPATH_SITE);
 
 		$this->tjdashboardHelper = new DashboardHelper;
+
+		// Check permission
+		$canDo = $this->canDo;
 		$checkedOut = $this->isCheckedOut($userId);
+		$itemEditable = $this->isEditable($canDo, $userId);
 
 		// Built the actions for new and existing records.
-		$canDo = $this->canDo;
 		$layout = JFactory::getApplication()->input->get("layout");
 
 		$this->sidebar = JHtmlSidebar::render();
@@ -116,17 +119,17 @@ class TjdashboardViewDashboard extends JViewLegacy
 				'pencil-2 dashboard-add'
 			);
 
-			if ($isNew)
+			// If not checked out, can save the item.
+			if (!$checkedOut && $itemEditable)
 			{
-				JToolbarHelper::save('dashboard.save');
+				JToolBarHelper::apply('dashboard.apply');
+				JToolBarHelper::save('dashboard.save');
+				JToolBarHelper::save2new('dashboard.save2new');
+
 				JToolbarHelper::cancel('dashboard.cancel');
 			}
 			else
 			{
-				$itemEditable = $this->isEditable($canDo, $userId);
-
-				// Can't save the record if it's checked out and editable
-				$this->canSave($checkedOut, $itemEditable);
 				JToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
 			}
 		}
@@ -179,7 +182,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	protected function isEditable($canDo, $userId)
 	{
 		// Since it's an existing record, check the edit permission, or fall back to edit own if the owner.
-		return $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId);
+		return ($canDo->get('core.create') || $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == $userId));
 	}
 
 	/**

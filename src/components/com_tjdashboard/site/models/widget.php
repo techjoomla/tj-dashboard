@@ -128,7 +128,7 @@ class TjdashboardModelWidget extends JModelAdmin
 			return false;
 		}
 
-		$this->setState('widget.dashboard_widget_id', $widget->dashboard_widget_id);
+		$this->setState('widget.id', $widget->dashboard_widget_id);
 
 		return true;
 	}
