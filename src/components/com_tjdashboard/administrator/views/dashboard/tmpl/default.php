@@ -11,6 +11,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
+JText::script('COM_TJDASHBOARD_DASHBOARD_WIDGETS_VIEW_DETAILS');
 
 $document = JFactory::getDocument();
 $document->addStyleSheet(JUri::root() . '/media/techjoomla_strapper/bs3/css/bootstrap.css');
