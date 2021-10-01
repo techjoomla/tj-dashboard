@@ -8,6 +8,11 @@
  */
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.view');
 
@@ -16,7 +21,7 @@ jimport('joomla.application.component.view');
  *
  * @since 1.0.0
  */
-class TjdashboardViewWidget extends JViewLegacy
+class TjdashboardViewWidget extends HtmlView
 {
 	/**
 	 * The JForm object
@@ -60,7 +65,7 @@ class TjdashboardViewWidget extends JViewLegacy
 		$this->state = $this->get('State');
 		$this->item  = $this->get('Item');
 		$this->form  = $this->get('Form');
-		$this->canDo = JHelperContent::getActions('com_tjdashboard', 'widget', $this->item->dashboard_widget_id);
+		$this->canDo = ContentHelper::getActions('com_tjdashboard', 'widget', $this->item->dashboard_widget_id);
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -83,8 +88,8 @@ class TjdashboardViewWidget extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		JFactory::getApplication()->input->set('hidemainmenu', true);
-		$user       = JFactory::getUser();
+		Factory::getApplication()->input->set('hidemainmenu', true);
+		$user       = Factory::getUser();
 		$userId     = $user->id;
 		$isNew      = ($this->item->dashboard_widget_id == 0);
 		$checkedOut = $this->isCheckedOut($userId);
@@ -92,16 +97,16 @@ class TjdashboardViewWidget extends JViewLegacy
 		// Built the actions for new and existing records.
 		$canDo = $this->canDo;
 
-		JToolbarHelper::title(
-			JText::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_WIDGET' : ($isNew ? 'ADD_WIDGET' : 'EDIT_WIDGET'))),
+		ToolbarHelper::title(
+			Text::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_WIDGET' : ($isNew ? 'ADD_WIDGET' : 'EDIT_WIDGET'))),
 			'pencil-2 dashboard-add'
 		);
 
 		// For new records, check the create permission.
 		if ($isNew)
 		{
-			JToolbarHelper::save('widget.save');
-			JToolbarHelper::cancel('widget.cancel');
+			ToolbarHelper::save('widget.save');
+			ToolbarHelper::cancel('widget.cancel');
 		}
 		else
 		{
@@ -111,10 +116,10 @@ class TjdashboardViewWidget extends JViewLegacy
 			// Can't save the record if it's checked out and editable
 			$this->canSave($checkedOut, $itemEditable);
 
-			JToolbarHelper::cancel('widget.cancel', 'JTOOLBAR_CLOSE');
+			ToolbarHelper::cancel('widget.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolbarHelper::divider();
+		ToolbarHelper::divider();
 	}
 
 	/**
@@ -130,7 +135,7 @@ class TjdashboardViewWidget extends JViewLegacy
 	{
 		if (!$checkedOut && $itemEditable)
 		{
-			JToolbarHelper::save('widget.save');
+			ToolbarHelper::save('widget.save');
 		}
 	}
 
@@ -170,12 +175,12 @@ class TjdashboardViewWidget extends JViewLegacy
 	 */
 	public static function getLanguageConstant()
 	{
-		JText::script('COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE');
-		JText::script('COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN');
-		JText::script('COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH');
-		JText::script('COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH');
-		JText::script('COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH');
-		JText::script('COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH');
-		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
+		Text::script('COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE');
+		Text::script('COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN');
+		Text::script('COM_TJDASHBOARD_WIDGET_FORM_FULL_WIDTH');
+		Text::script('COM_TJDASHBOARD_WIDGET_FORM_HALF_WIDTH');
+		Text::script('COM_TJDASHBOARD_WIDGET_FORM_ONE_THIRD_WIDTH');
+		Text::script('COM_TJDASHBOARD_WIDGET_FORM_ONE_FOURTH_WIDTH');
+		Text::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
 	}
 }

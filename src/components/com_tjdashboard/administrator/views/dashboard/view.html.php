@@ -10,6 +10,12 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Helper\ContentHelper;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Language\Text;
 
 jimport('joomla.application.component.view');
 /**
@@ -17,7 +23,7 @@ jimport('joomla.application.component.view');
  *
  * @since  1.0.0
  */
-class TjdashboardViewDashboard extends JViewLegacy
+class TjdashboardViewDashboard extends HtmlView
 {
 	/**
 	 * The JForm object
@@ -68,8 +74,8 @@ class TjdashboardViewDashboard extends JViewLegacy
 		$this->state = $this->get('State');
 		$this->item  = $this->get('Item');
 		$this->form  = $this->get('Form');
-		$this->input = JFactory::getApplication()->input;
-		$this->canDo = JHelperContent::getActions('com_tjdashboard', 'dashboard', $this->item->dashboard_id);
+		$this->input = Factory::getApplication()->input;
+		$this->canDo = ContentHelper::getActions('com_tjdashboard', 'dashboard', $this->item->dashboard_id);
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors')))
@@ -92,7 +98,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		$user       = JFactory::getUser();
+		$user       = Factory::getUser();
 		$userId     = $user->id;
 		$isNew      = ($this->item->dashboard_id == 0);
 		JLoader::import('administrator.components.com_tjdashboard.helpers.dashboard', JPATH_SITE);
@@ -102,24 +108,24 @@ class TjdashboardViewDashboard extends JViewLegacy
 
 		// Built the actions for new and existing records.
 		$canDo = $this->canDo;
-		$layout = JFactory::getApplication()->input->get("layout");
+		$layout = Factory::getApplication()->input->get("layout");
 
 		$this->sidebar = JHtmlSidebar::render();
 
 		// For new records, check the create permission.
 		if ($layout != "default")
 		{
-			JFactory::getApplication()->input->set('hidemainmenu', true);
+			Factory::getApplication()->input->set('hidemainmenu', true);
 
-			JToolbarHelper::title(
-				JText::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_DASHBOARD' : ($isNew ? 'ADD_DASHBOARD' : 'EDIT_DASHBOARD'))),
+			ToolbarHelper::title(
+				Text::_('COM_TJDASHBOARD_PAGE_' . ($checkedOut ? 'VIEW_DASHBOARD' : ($isNew ? 'ADD_DASHBOARD' : 'EDIT_DASHBOARD'))),
 				'pencil-2 dashboard-add'
 			);
 
 			if ($isNew)
 			{
-				JToolbarHelper::save('dashboard.save');
-				JToolbarHelper::cancel('dashboard.cancel');
+				ToolbarHelper::save('dashboard.save');
+				ToolbarHelper::cancel('dashboard.cancel');
 			}
 			else
 			{
@@ -127,16 +133,16 @@ class TjdashboardViewDashboard extends JViewLegacy
 
 				// Can't save the record if it's checked out and editable
 				$this->canSave($checkedOut, $itemEditable);
-				JToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
+				ToolbarHelper::cancel('dashboard.cancel', 'JTOOLBAR_CLOSE');
 			}
 		}
 		else
 		{
-			JToolbarHelper::title(
-				JText::_('COM_TJDASHBOARD_PAGE_VIEW_DASHBOARD')
+			ToolbarHelper::title(
+				Text::_('COM_TJDASHBOARD_PAGE_VIEW_DASHBOARD')
 			);
 
-			$app = JFactory::getApplication();
+			$app = Factory::getApplication();
 
 			JLoader::import('administrator.components.com_tjdashboard.helpers.dashboard', JPATH_SITE);
 			DashboardHelper::addSubmenu('dashboard');
@@ -147,7 +153,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 			}
 		}
 
-		JToolbarHelper::divider();
+		ToolbarHelper::divider();
 	}
 
 	/**
@@ -163,7 +169,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	{
 		if (!$checkedOut && $itemEditable)
 		{
-			JToolbarHelper::save('dashboard.save');
+			ToolbarHelper::save('dashboard.save');
 		}
 	}
 
@@ -203,7 +209,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 */
 	public static function getLanguageConstant()
 	{
-		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
-		JText::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
+		Text::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
+		Text::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
 	}
 }

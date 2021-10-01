@@ -10,6 +10,7 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\Component\Router\RouterBase;
 
 JLoader::registerPrefix('Tjdashboard', JPATH_SITE . '/components/com_tjdashboard/');
 
@@ -18,7 +19,7 @@ JLoader::registerPrefix('Tjdashboard', JPATH_SITE . '/components/com_tjdashboard
  *
  * @since  1.0.0
  */
-class TjdashboardRouter extends JComponentRouterBase
+class TjdashboardRouter extends RouterBase
 {
 	/**
 	 * Build method for URLs

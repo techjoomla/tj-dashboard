@@ -10,6 +10,11 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Language\Text;
 
 use Joomla\Registry\Registry;
 
@@ -18,7 +23,7 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select');
-$app = JFactory::getApplication();
+$app = Factory::getApplication();
 $input = $app->input;
 
 // In case of modal
@@ -39,12 +44,12 @@ JFactory::getDocument()->addScriptDeclaration('
 ');
 ?>
 <div class="">
-	<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_id=' . (int) $this->item->dashboard_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="dashboard-form" class="form-validate">
+	<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_id=' . (int) $this->item->dashboard_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="dashboard-form" class="form-validate">
 		<div class="form-horizontal">
-		<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
-		<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
+		<?php echo LayoutHelper::render('joomla.edit.title_alias', $this); ?>
+		<?php echo HTMLHelper::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
-		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'general', JText::_('COM_TJDASHBOARD_TITLE_DASHBOARD')); ?>
+		<?php echo HTMLHelper::_('bootstrap.addTab', 'myTab', 'general', Text::_('COM_TJDASHBOARD_TITLE_DASHBOARD')); ?>
 		<div class="row-fluid">
 			<div class="span9">
 				<fieldset class="adminform">
@@ -74,15 +79,15 @@ JFactory::getDocument()->addScriptDeclaration('
 				<?php echo $this->form->getInput('checked_out_time'); ?>
 			</div>
 		</div>
-		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 		<?php /*if ($this->canDo->get('core.admin')) : ?>
-			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'permissions', JText::_('COM_TJDASHBOARD_FIELDSET_RULES')); ?>
+			<?php echo HTMLHelper::_('bootstrap.addTab', 'myTab', 'permissions', Text::_('COM_TJDASHBOARD_FIELDSET_RULES')); ?>
 				<?php echo $this->form->getInput('rules'); ?>
-			<?php echo JHtml::_('bootstrap.endTab'); ?>
+			<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 		<?php endif;*/ ?>
 
 		<input type="hidden" name="task" value="" />
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 	</div>
 	</form>
 </div>
