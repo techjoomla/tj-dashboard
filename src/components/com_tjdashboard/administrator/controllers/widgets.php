@@ -10,13 +10,14 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Controller\AdminController;
 
 /**
  * Widgets controller class.
  *
  * @since  1.0.0
  */
-class TjdashboardControllerWidgets extends JControllerAdmin
+class TjdashboardControllerWidgets extends AdminController
 {
 	/**
 	 * Proxy for getModel.

@@ -10,6 +10,10 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Filesystem\Path;
 
 /**
  * TjDashboard helper.
@@ -27,24 +31,24 @@ class DashboardHelper
 	 */
 	public static function addSubmenu($vName = '')
 	{
-		$layout = JFactory::getApplication()->input->get('layout', '', 'STRING');
+		$layout = Factory::getApplication()->input->get('layout', '', 'STRING');
 
 		if ($layout != "default")
 		{
 			JHtmlSidebar::addEntry(
-				JText::_('COM_TJDASHBOARD_VIEW_DASHBOARDS'),
+				Text::_('COM_TJDASHBOARD_VIEW_DASHBOARDS'),
 				'index.php?option=com_tjdashboard&view=dashboards',
 				$vName == 'dashboards'
 			);
 			JHtmlSidebar::addEntry(
-				JText::_('COM_TJDASHBOARD_VIEW_WIDGETS'),
+				Text::_('COM_TJDASHBOARD_VIEW_WIDGETS'),
 				'index.php?option=com_tjdashboard&view=widgets',
 				$vName == 'widgets'
 			);
 		}
 		else
 		{
-			$client = JFactory::getApplication()->input->get('client', '', 'STRING');
+			$client = Factory::getApplication()->input->get('client', '', 'STRING');
 
 			// Set ordering.
 			$full_client = explode('.', $client);
@@ -52,7 +56,7 @@ class DashboardHelper
 			// Eg com_jgive
 			$component = $full_client[0];
 			$eName = str_replace('com_', '', $component);
-			$file = JPath::clean(JPATH_ADMINISTRATOR . '/components/' . $component . '/helpers/' . $eName . '.php');
+			$file = Path::clean(JPATH_ADMINISTRATOR . '/components/' . $component . '/helpers/' . $eName . '.php');
 
 			if (file_exists($file))
 			{
@@ -65,14 +69,14 @@ class DashboardHelper
 				{
 					if (is_callable(array($cName, 'addSubmenu')))
 					{
-						$lang = JFactory::getLanguage();
+						$lang = Factory::getLanguage();
 
 						// Loading language file from the administrator/language directory then
 						// Loading language file from the administrator/components/*extension*/language directory
 						$lang->load($component, JPATH_BASE, null, false, false)
-						|| $lang->load($component, JPath::clean(JPATH_ADMINISTRATOR . '/components/' . $component), null, false, false)
+						|| $lang->load($component, Path::clean(JPATH_ADMINISTRATOR . '/components/' . $component), null, false, false)
 						|| $lang->load($component, JPATH_BASE, $lang->getDefault(), false, false)
-						|| $lang->load($component, JPath::clean(JPATH_ADMINISTRATOR . '/components/' . $component), $lang->getDefault(), false, false);
+						|| $lang->load($component, Path::clean(JPATH_ADMINISTRATOR . '/components/' . $component), $lang->getDefault(), false, false);
 
 						// Call_user_func(array($cName, 'addSubmenu'), 'categories' . (isset($section) ? '.' . $section : ''));
 						call_user_func(array($cName, 'addSubmenu'), $vName);

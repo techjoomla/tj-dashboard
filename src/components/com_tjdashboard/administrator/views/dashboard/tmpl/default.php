@@ -10,10 +10,12 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 
-$document = JFactory::getDocument();
-$document->addStyleSheet(JUri::root() . '/media/techjoomla_strapper/bs3/css/bootstrap.css');
+$document = Factory::getDocument();
+$document->addStyleSheet(Uri::root() . '/media/techjoomla_strapper/bs3/css/bootstrap.css');
 $document->addStylesheet(Juri::root() . 'components/com_tjdashboard/assets/css/dashboard.css');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.min.js');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.min.js');

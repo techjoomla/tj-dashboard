@@ -10,11 +10,12 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
 
 JHTML::_('behavior.modal');
 
 
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 
 $document->addStylesheet('components/com_tjdashboard/assets/css/dashboard.css');
 $document->addStylesheet('media/techjoomla_strapper/css/bootstrap.j3.min.css');

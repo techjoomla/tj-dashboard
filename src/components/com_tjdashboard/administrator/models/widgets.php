@@ -10,13 +10,14 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Model\ListModel;
 
 /**
  * Tjdashboard model class for widgets
  *
  * @since  1.0.0
  */
-class TjdashboardModelWidgets extends JModelList
+class TjdashboardModelWidgets extends ListModel
 {
 	/**
 	 * Constructor.

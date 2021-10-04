@@ -9,6 +9,8 @@
  */
 
 defined('_JEXEC') or die();
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 JLoader::discover("Tjdashboard", JPATH_ADMINISTRATOR . '/components/com_tjdashboard/libraries');
 
@@ -34,10 +36,10 @@ class TjdashboardFactory
 	{
 		// @TODO Improve file loading with specific table file.
 
-		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/tables');
+		Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/tables');
 
 		// @TODO Add support for cache
-		$table = JTable::getInstance($name, 'TjdashboardTable');
+		$table = Table::getInstance($name, 'TjdashboardTable');
 
 		return $table;
 	}
@@ -54,10 +56,10 @@ class TjdashboardFactory
 	 **/
 	public static function model($name, $config = array())
 	{
-		JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/models');
+		BaseDatabaseModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/models');
 
 		// @TODO Add support for cache
-		$model = JModelLegacy::getInstance($name, 'TjdashboardModel', $config);
+		$model = BaseDatabaseModel::getInstance($name, 'TjdashboardModel', $config);
 
 		return $model;
 	}

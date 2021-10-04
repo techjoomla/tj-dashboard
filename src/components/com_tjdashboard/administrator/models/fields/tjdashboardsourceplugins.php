@@ -10,6 +10,10 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+use Joomla\CMS\Form\FormHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\Factory;
 
 JFormHelper::loadFieldClass('plugins');
 
@@ -18,7 +22,7 @@ JFormHelper::loadFieldClass('plugins');
  *
  * @since  1.0.0
  */
-class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
+class FormFieldTjdashboardSourcePlugins extends FormFieldPlugins
 {
 	/**
 	 * The field type.
@@ -119,13 +123,13 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 
 		if (empty($folder))
 		{
-			JLog::add(JText::_('JFRAMEWORK_FORM_FIELDS_PLUGINS_ERROR_FOLDER_EMPTY'), JLog::WARNING, 'jerror');
+			Log::add(Text::_('JFRAMEWORK_FORM_FIELDS_PLUGINS_ERROR_FOLDER_EMPTY'), Log::WARNING, 'jerror');
 
 			return array_merge($tjDashboardSourcePlugins);
 		}
 
 		// Get list of plugins
-		$db    = JFactory::getDbo();
+		$db    = Factory::getDbo();
 		$query = $db->getQuery(true)
 			->select('element AS value, name AS text')
 			->from('#__extensions')
@@ -134,9 +138,9 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 			->order('ordering, name');
 
 		$options   = $db->setQuery($query)->loadObjectList();
-		$lang      = JFactory::getLanguage();
+		$lang      = Factory::getLanguage();
 		$j = 0;
-		$tjDashboardSourcePlugins[$j]['text']   = JText::_('COM_TJDASHBOARD_WIDGET_FORM_DATA_PLUGIN');
+		$tjDashboardSourcePlugins[$j]['text']   = Text::_('COM_TJDASHBOARD_WIDGET_FORM_DATA_PLUGIN');
 		$tjDashboardSourcePlugins[$j]['value']  = '';
 
 		foreach ($options as $item)
@@ -156,8 +160,8 @@ class JFormFieldTjdashboardSourcePlugins extends JFormFieldPlugins
 				$className = ucfirst($item->value) . ucfirst(str_replace('.php', '', $dataSourceFile)) . 'Datasource';
 				require_once $sourcePath . '/' . $dataSourceFile;
 				$dataSourceClassObject = new $className;
-				$dataSourceName 	 = $item->value . ' ' . JText::_($dataSourceClassObject->dataSourceName);
-				$dataSourceNameValue = strtolower(trim($item->value)) . '.' . strtolower(str_replace(' ', '', JText::_($dataSourceClassObject->dataSourceName)));
+				$dataSourceName 	 = $item->value . ' ' . Text::_($dataSourceClassObject->dataSourceName);
+				$dataSourceNameValue = strtolower(trim($item->value)) . '.' . strtolower(str_replace(' ', '', Text::_($dataSourceClassObject->dataSourceName)));
 				$tjDashboardSourcePlugins[$j]['text']   = $dataSourceName;
 				$tjDashboardSourcePlugins[$j]['value']  = $dataSourceNameValue;
 			}

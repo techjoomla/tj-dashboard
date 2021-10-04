@@ -10,6 +10,7 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\MVC\Controller\AdminController;
 
 use Joomla\Utilities\ArrayHelper;
 /**
@@ -17,7 +18,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.0.0
  */
-class TjDashboardControllerDashboards extends JControllerAdmin
+class TjDashboardControllerDashboards extends AdminController
 {
 	/**
 	 * Proxy for getModel.

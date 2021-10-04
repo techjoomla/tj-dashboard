@@ -10,6 +10,10 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
 use Joomla\Registry\Registry;
 
@@ -17,9 +21,9 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
-$app = JFactory::getApplication();
+$app = Factory::getApplication();
 $input = $app->input;
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
 
@@ -39,7 +43,7 @@ JFactory::getDocument()->addScriptDeclaration('
 				try{
 					JSON.parse(jQuery("#jform_params").val());
 				}catch(e){
-					alert(Joomla.JText._("COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE"));
+					alert(Joomla.Text._("COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE"));
 					return false;
 				}
 			}
@@ -50,7 +54,7 @@ JFactory::getDocument()->addScriptDeclaration('
 ');
 ?>
 <div class="">
-	<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_widget_id=
+	<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_widget_id=
 	' . (int) $this->item->dashboard_widget_id, false
 	);?>" method="post" enctype="multipart/form-data" name="adminForm" id="widget-form" class="form-validate tjdashForm">
 		<div class="form-horizontal">
@@ -91,9 +95,9 @@ JFactory::getDocument()->addScriptDeclaration('
 				</fieldset>
 			</div>
 		</div>
-		<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+		<?php echo HTMLHelper::_('bootstrap.endTabSet'); ?>
 		<input type="hidden" id="task" name="task" />
-		<?php echo JHtml::_('form.token'); ?>
+		<?php echo HTMLHelper::_('form.token'); ?>
 	</div>
 	</form>
 </div>
