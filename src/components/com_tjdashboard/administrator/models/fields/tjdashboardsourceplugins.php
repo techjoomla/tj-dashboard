@@ -14,6 +14,8 @@ use Joomla\CMS\Form\FormHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Log\Log;
 use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Form\Field\PluginsField;
 
 JFormHelper::loadFieldClass('plugins');
 
@@ -22,7 +24,7 @@ JFormHelper::loadFieldClass('plugins');
  *
  * @since  1.0.0
  */
-class FormFieldTjdashboardSourcePlugins extends FormFieldPlugins
+class FormFieldTjdashboardSourcePlugins extends PluginsField
 {
 	/**
 	 * The field type.
