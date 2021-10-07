@@ -10,7 +10,12 @@
 
 // No direct access
 defined('_JEXEC') or die('Restricted access');
-$document = JFactory::getDocument();
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Router\Route;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Language\Text;
+$document = Factory::getDocument();
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
@@ -26,13 +31,13 @@ $saveOrder = $listOrder == 'wid.ordering';
 if ($saveOrder)
 {
 	$saveOrderingUrl = 'index.php?option=com_tjdashboard&task=widgets.saveOrderAjax&tmpl=component';
-	JHtml::_('sortablelist.sortable', 'widgetsList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+	HTMLHelper::_('sortablelist.sortable', 'widgetsList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 ?>
 
 <div class="tj-page">
 	<div class="row-fluid">
-		<form action="<?php echo JRoute::_('index.php?option=com_tjdashboard&view=widgets'); ?>" method="post" name="adminForm" id="adminForm">
+		<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=widgets'); ?>" method="post" name="adminForm" id="adminForm">
 			<?php
 			if (!empty( $this->sidebar))
 			{
@@ -50,13 +55,13 @@ if ($saveOrder)
 			<?php
 			}
 					// Search tools bar
-					echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this));
+					echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this));
 					?>
 					<?php if (empty($this->items))
 					{
 					?>
 						<div class="alert alert-no-items">
-							<?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
+							<?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
 						</div>
 					<?php
 					}
@@ -67,37 +72,37 @@ if ($saveOrder)
 						<thead>
 							<tr>
 								<th width="1%" class="nowrap center hidden-phone">
-									<?php echo JHtml::_('searchtools.sort', '', 'wid.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', '', 'wid.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
 								</th>
 
 								<th width="1%" class="center">
-									<?php echo JHtml::_('grid.checkall'); ?>
+									<?php echo HTMLHelper::_('grid.checkall'); ?>
 								</th>
 
 								<th width="1%" class="nowrap center">
-									<?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'wid.state', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'JSTATUS', 'wid.state', $listDirn, $listOrder); ?>
 								</th>
 
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_TITLE', 'wid.title', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_TITLE', 'wid.title', $listDirn, $listOrder); ?>
 								</th>
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_DASHBOARD', 'dashboard_name', $listDirn, $listOrder); ?>
-								</th>
-
-								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN', 'wid.renderer_plugin', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_DASHBOARD', 'dashboard_name', $listDirn, $listOrder); ?>
 								</th>
 
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN', 'wid.data_plugin', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_RENDERER_PLUGIN', 'wid.renderer_plugin', $listDirn, $listOrder); ?>
 								</th>
 
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_CREATEDBY', 'wid.created_by', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TJDASHBOARD_WIDGET_FORM_LBL_DATA_PLUGIN', 'wid.data_plugin', $listDirn, $listOrder); ?>
+								</th>
+
+								<th>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_CREATEDBY', 'wid.created_by', $listDirn, $listOrder); ?>
 								</th>
 								<th>
-									<?php echo JHtml::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_ID', 'wid.dashboard_widget_id', $listDirn, $listOrder); ?>
+									<?php echo HTMLHelper::_('searchtools.sort', 'COM_TJDASHBOARD_LIST_VIEW_ID', 'wid.dashboard_widget_id', $listDirn, $listOrder); ?>
 								</th>
 							</tr>
 						</thead>
@@ -130,7 +135,7 @@ if ($saveOrder)
 									}
 									elseif (!$saveOrder)
 									{
-										$iconClass = ' inactive tip-top hasTooltip" title="' . JHtml::_('tooltipText', 'JORDERINGDISABLED');
+										$iconClass = ' inactive tip-top hasTooltip" title="' . HTMLHelper::_('tooltipText', 'JORDERINGDISABLED');
 									}
 									?>
 									<span class="sortable-handler<?php echo $iconClass ?>">
@@ -145,13 +150,13 @@ if ($saveOrder)
 									?>
 								</td>
 								<td class="center">
-									<?php echo JHtml::_('grid.id', $i, $item->dashboard_widget_id); ?>
+									<?php echo HTMLHelper::_('grid.id', $i, $item->dashboard_widget_id); ?>
 								</td>
 								<?php if (isset($this->items[0]->state))
 								{
 								?>
 								<td class="center">
-									<?php echo JHtml::_('jgrid.published', $item->state, $i, 'widgets.', $canChange, 'cb'); ?>
+									<?php echo HTMLHelper::_('jgrid.published', $item->state, $i, 'widgets.', $canChange, 'cb'); ?>
 								</td>
 								<?php
 								}?>
@@ -160,7 +165,7 @@ if ($saveOrder)
 										<?php if ($item->checked_out)
 										{
 											?>
-										<?php echo JHtml::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'widgets.', $canCheckin); ?>
+										<?php echo HTMLHelper::_('jgrid.checkedout', $i, $item->checked_out, $item->checked_out_time, 'widgets.', $canCheckin); ?>
 										<?php
 										}
 										?>
@@ -168,8 +173,8 @@ if ($saveOrder)
 										{
 											?>
 											<a class="hasTooltip" href="
-											<?php echo JRoute::_('index.php?option=com_tjdashboard&task=widget.edit&dashboard_widget_id=' . $item->dashboard_widget_id); ?>" title="
-											<?php echo JText::_('JACTION_EDIT'); ?>">
+											<?php echo Route::_('index.php?option=com_tjdashboard&task=widget.edit&dashboard_widget_id=' . $item->dashboard_widget_id); ?>" title="
+											<?php echo Text::_('JACTION_EDIT'); ?>">
 											<?php echo $this->escape($item->title); ?></a>
 											<?php
 											}
@@ -199,7 +204,7 @@ if ($saveOrder)
 
 					<input type="hidden" name="task" value="" />
 					<input type="hidden" name="boxchecked" value="0" />
-					<?php echo JHtml::_('form.token'); ?>
+					<?php echo HTMLHelper::_('form.token'); ?>
 			</div>
 		</form>
 	</div>

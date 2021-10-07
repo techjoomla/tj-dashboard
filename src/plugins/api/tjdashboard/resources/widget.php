@@ -10,6 +10,8 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 
 /**
  * Tjdashboard API widgets class
@@ -25,7 +27,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 	 */
 	public function post()
 	{
-		$app      = JFactory::getApplication();
+		$app      = Factory::getApplication();
 		$jinput   = $app->input;
 		$formData = $jinput->post->getArray();
 		$widgetId = $jinput->getInt('id');
@@ -38,16 +40,16 @@ class TjdashboardApiResourceWidget extends ApiResource
 			if ($widget->save())
 			{
 				$renderObject->data   = $widget->dashboard_widget_id;
-				$renderObject->status = JText::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
+				$renderObject->status = Text::_("COM_TJDASHBOARD_DASHBOARD_DATA_SAVED_SUCCESSFULLY");
 			}
 			else
 			{
-				ApiError::raiseError(400, JText::_($widget->getError()));
+				ApiError::raiseError(400, Text::_($widget->getError()));
 			}
 		}
 		else
 		{
-				ApiError::raiseError(400, JText::_($widget->getError()));
+				ApiError::raiseError(400, Text::_($widget->getError()));
 		}
 
 		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $renderObject);
@@ -60,7 +62,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 	 */
 	public function get()
 	{
-		$app         = JFactory::getApplication();
+		$app         = Factory::getApplication();
 		$jinput      = $app->input;
 		$widget = new stdClass;
 		$widgetId = $jinput->getInt('id');
@@ -71,7 +73,7 @@ class TjdashboardApiResourceWidget extends ApiResource
 		}
 		else
 		{
-			ApiError::raiseError(400, JText::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
+			ApiError::raiseError(400, Text::_("COM_TJDASHBOARD_DASHBOARD_ID_NOT_SET"));
 		}
 
 		$this->plugin->setResponse(/** @scrutinizer ignore-type */ $widget);

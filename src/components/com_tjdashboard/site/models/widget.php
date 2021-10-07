@@ -10,6 +10,8 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\Table\Table;
 JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 
 /**
@@ -17,7 +19,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  *
  * @since  1.0.0
  */
-class TjdashboardModelWidget extends JModelAdmin
+class TjdashboardModelWidget extends AdminModel
 {
 	/**
 	 * @var		object	The widget data.
@@ -60,7 +62,7 @@ class TjdashboardModelWidget extends JModelAdmin
 	{
 		$this->addTablePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/tables');
 
-		return JTable::getInstance($type, $prefix, $config);
+		return Table::getInstance($type, $prefix, $config);
 	}
 
 	/**

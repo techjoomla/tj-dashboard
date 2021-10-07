@@ -10,13 +10,16 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 
 /**
  * Dashboards view
  *
  * @since  1.0.0
  */
-class TjdashboardViewDashboards extends JViewLegacy
+class TjdashboardViewDashboards extends HtmlView
 {
 	/**
 	 * An array of items
@@ -124,7 +127,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 		$this->activeFilters = $this->get('ActiveFilters');
 
 		// Get ACL actions
-		$this->user            = JFactory::getUser();
+		$this->user            = Factory::getUser();
 
 		$this->canCreate       = $this->user->authorise('core.content.create', 'com_tjdashboard');
 		$this->canEdit         = $this->user->authorise('core.content.edit', 'com_tjdashboard');
@@ -144,10 +147,10 @@ class TjdashboardViewDashboards extends JViewLegacy
 	protected function getSortFields()
 	{
 		return array(
-			'dash.dashboard_id' => JText::_('JGRID_HEADING_ID'),
-			'dash.title' => JText::_('COM_DASHBOARD_LIST_DASHBOARDS_TITLE'),
-			'dash.ordering' => JText::_('JGRID_HEADING_ORDERING'),
-			'dash.state' => JText::_('JSTATUS'),
+			'dash.dashboard_id' => Text::_('JGRID_HEADING_ID'),
+			'dash.title' => Text::_('COM_DASHBOARD_LIST_DASHBOARDS_TITLE'),
+			'dash.ordering' => Text::_('JGRID_HEADING_ORDERING'),
+			'dash.state' => Text::_('JSTATUS'),
 		);
 	}
 }

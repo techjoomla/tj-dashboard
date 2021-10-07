@@ -9,13 +9,15 @@
  */
 
 defined('_JEXEC') or die('Unauthorized Access');
+use Joomla\CMS\Object\CMSObject;
+use Joomla\CMS\Language\Text;
 
 /**
  * Dashboard class.  Handles all application interaction with a Dashboard
  *
  * @since  1.0.0
  */
-class TjdashboardDashboard extends JObject
+class TjdashboardDashboard extends CMSObject
 {
 	public $dashboard_id = null;
 
@@ -198,7 +200,7 @@ class TjdashboardDashboard extends JObject
 	{
 		if (empty ($array))
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_EMPTY_DATA'));
+			$this->setError(Text::_('COM_TJDASHBOARD_EMPTY_DATA'));
 
 			return false;
 		}
@@ -206,7 +208,7 @@ class TjdashboardDashboard extends JObject
 		// Bind the array
 		if (!$this->setProperties($array))
 		{
-			$this->setError(\JText::_('COM_TJDASHBOARD_BINDING_ERROR'));
+			$this->setError(\Text::_('COM_TJDASHBOARD_BINDING_ERROR'));
 
 			return false;
 		}

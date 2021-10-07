@@ -10,6 +10,8 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Controller\BaseController;
+use Joomla\CMS\Factory;
 
 jimport('joomla.application.component.controller');
 
@@ -19,7 +21,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  *
  * @since  1.0.0
  */
-class TjdashboardController extends JControllerLegacy
+class TjdashboardController extends BaseController
 {
 	/**
 	 * Method to display a view.
@@ -33,7 +35,7 @@ class TjdashboardController extends JControllerLegacy
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{
-		$app  = JFactory::getApplication();
+		$app  = Factory::getApplication();
 		$view = $app->input->getCmd('view', 'dashboards');
 		$app->input->set('view', $view);
 

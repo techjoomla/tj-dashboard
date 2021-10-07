@@ -9,13 +9,15 @@
  */
 
 defined('_JEXEC') or die('Unauthorized Access');
+use Joomla\CMS\Object\CMSObject;
+use Joomla\CMS\Language\Text;
 
 /**
  * Widget class.  Handles all application interaction with a Widget
  *
  * @since  1.0.0
  */
-class TjdashboardWidget extends JObject
+class TjdashboardWidget extends CMSObject
 {
 	public $dashboard_widget_id = null;
 
@@ -205,7 +207,7 @@ class TjdashboardWidget extends JObject
 	{
 		if (empty ($array))
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_EMPTY_DATA'));
+			$this->setError(Text::_('COM_TJDASHBOARD_EMPTY_DATA'));
 
 			return false;
 		}
@@ -213,7 +215,7 @@ class TjdashboardWidget extends JObject
 		// Bind the array
 		if (!$this->setProperties($array))
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_BINDING_ERROR'));
+			$this->setError(Text::_('COM_TJDASHBOARD_BINDING_ERROR'));
 
 			return false;
 		}
@@ -300,13 +302,13 @@ class TjdashboardWidget extends JObject
 			$pluginObj = new $dataPluginClass;
 			$widgetRealData = $pluginObj->$methodName();
 			$response['status'] = 1;
-			$response['msg'] = JText::_("COM_TJDASHBOARD_SUCCESS_TEXT");
+			$response['msg'] = Text::_("COM_TJDASHBOARD_SUCCESS_TEXT");
 			$response['data'] = $widgetRealData;
 		}
 		catch (Exception $e)
 		{
 			$response['status'] = 0;
-			$response['msg'] = JText::_("COM_TJDASHBOARD_FAILURE_TEXT");
+			$response['msg'] = Text::_("COM_TJDASHBOARD_FAILURE_TEXT");
 		}
 
 		return $response;

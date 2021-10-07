@@ -9,6 +9,9 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Model\AdminModel;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Factory;
 
 use Joomla\Registry\Registry;
 use Joomla\Utilities\ArrayHelper;
@@ -18,7 +21,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  *
  * @since  1.0.0
  */
-class TjdashboardModelDashboard extends JModelAdmin
+class TjdashboardModelDashboard extends AdminModel
 {
 	/**
 	 * Method to get the record form.
@@ -49,9 +52,9 @@ class TjdashboardModelDashboard extends JModelAdmin
 	 */
 	public function getTable($type = 'Dashboards', $prefix = 'TjdashboardTable', $config = array())
 	{
-		JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/tables');
+		Table::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_tjdashboard/tables');
 
-		return JTable::getInstance($type, $prefix, $config);
+		return Table::getInstance($type, $prefix, $config);
 	}
 
 	/**
@@ -64,7 +67,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_tjdashboard.edit.dashboard.data', array());
+		$data = Factory::getApplication()->getUserState('com_tjdashboard.edit.dashboard.data', array());
 
 		if (empty($data))
 		{
@@ -124,7 +127,7 @@ class TjdashboardModelDashboard extends JModelAdmin
 
 	protected function populateState()
 	{
-		$jinput = JFactory::getApplication()->input;
+		$jinput = Factory::getApplication()->input;
 		$id = ($jinput->get('id'))?$jinput->get('id'):$jinput->get('dashboard_id');
 		$this->setState('dashboard.dashboard_id', $id);
 		$this->setState('dashboard.id', $id);

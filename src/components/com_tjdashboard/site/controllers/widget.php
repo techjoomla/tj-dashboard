@@ -9,6 +9,10 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Controller\FormController;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Response\JsonResponse;
 
 use Joomla\Utilities\ArrayHelper;
 
@@ -17,7 +21,7 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.0.0
  */
-class TjDashboardControllerWidget extends JControllerForm
+class TjDashboardControllerWidget extends FormController
 {
 	/**
 	 * Function to get all the respective renderers for given data source
@@ -28,7 +32,7 @@ class TjDashboardControllerWidget extends JControllerForm
 	{
 		try
 		{
-			$app     = JFactory::getApplication();
+			$app     = Factory::getApplication();
 			$jinput  = $app->input;
 			$formData   = $jinput->post->get('pluginName', '', 'string');
 			$dataPlugin = explode('.', $formData);
@@ -38,7 +42,7 @@ class TjDashboardControllerWidget extends JControllerForm
 			$className = ucfirst($dataPlugin[0]) . ucfirst($pluginFileName) . 'Datasource';
 			$dataSourceObject = new $className;
 			$renderers = $dataSourceObject->getSupportedRenderers();
-			$lang      = JFactory::getLanguage();
+			$lang      = Factory::getLanguage();
 
 			foreach ($renderers as $key => $value)
 			{
@@ -48,15 +52,15 @@ class TjDashboardControllerWidget extends JControllerForm
 				// Loading renderer language files for loading list of renderers available
 				$lang->load("plg_tjdashboardrenderer_" . $rendererName[0], $languageFilePath, null, false, true) ||
 				$lang->load("plg_tjdashboardrenderer_" . $rendererName[0], JPATH_ADMINISTRATOR, null, false, true);
-				$renderers[$key] = JText::_($value);
+				$renderers[$key] = Text::_($value);
 			}
 
-			echo new JResponseJson($renderers);
+			echo new JsonResponse($renderers);
 			jexit();
 		}
 		catch (Exception $e)
 		{
-			echo new JResponseJson($e);
+			echo new JsonResponse($e);
 		}
 	}
 
@@ -69,18 +73,18 @@ class TjDashboardControllerWidget extends JControllerForm
 	{
 		try
 		{
-			$app          = JFactory::getApplication();
+			$app          = Factory::getApplication();
 			$jinput       = $app->input;
 			$pluginName   = $jinput->post->get('pluginName', '', 'string');
 
 			$model 		  = $this->getModel('Widget');
 			$paramsObject = $model->getWidgetParams($pluginName);
-			echo new JResponseJson($paramsObject);
+			echo new JsonResponse($paramsObject);
 			jexit();
 		}
 		catch (Exception $e)
 		{
-			echo new JResponseJson($e);
+			echo new JsonResponse($e);
 		}
 	}
 }
