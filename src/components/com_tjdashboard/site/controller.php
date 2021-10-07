@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\Factory;
 
-jimport('joomla.application.component.controller');
 
 JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 /**

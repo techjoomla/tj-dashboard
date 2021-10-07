@@ -15,10 +15,6 @@ use Joomla\CMS\Installer\Installer;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Folder;
 
-jimport('joomla.filesystem.folder');
-jimport('joomla.filesystem.file');
-jimport('joomla.application.component.controller');
-
 if (! defined('DS'))
 {
 	define('DS', DIRECTORY_SEPARATOR);
