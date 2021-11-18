@@ -31,17 +31,17 @@ $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout  = $isModal ? 'modal' : 'edit';
 $tmpl    = $isModal || $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 
-JFactory::getDocument()->addScriptDeclaration('
-	Joomla.submitbutton = function(task)
-	{
-		if (task == "dashboard.cancel" || document.formvalidator.isValid(document.getElementById("dashboard-form")))
-		{
-			jQuery("#permissions-sliders select").attr("disabled", "disabled");
-			' . $this->form->getField('description')->save() . '
-			Joomla.submitform(task, document.getElementById("dashboard-form"));
-		}
-	};
-');
+// JFactory::getDocument()->addScriptDeclaration('
+// 	Joomla.submitbutton = function(task)
+// 	{
+// 		if (task == "dashboard.cancel" || document.formvalidator.isValid(document.getElementById("dashboard-form")))
+// 		{
+// 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
+// 			' . $this->form->getField('description')->save() . '
+// 			Joomla.submitform(task, document.getElementById("dashboard-form"));
+// 		}
+// 	};
+// ');
 ?>
 <div class="">
 	<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_id=' . (int) $this->item->dashboard_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="dashboard-form" class="form-validate">
