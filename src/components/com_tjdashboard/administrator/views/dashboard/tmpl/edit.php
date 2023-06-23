@@ -26,6 +26,9 @@ HTMLHelper::_('formbehavior.chosen', 'select');
 $app = Factory::getApplication();
 $input = $app->input;
 
+$document = Factory::getDocument();
+$document->addStylesheet(JURI::root(true) . '/media/com_tjdashboard/css/tjdashboard-sb-admin.css');
+
 // In case of modal
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout  = $isModal ? 'modal' : 'edit';
@@ -50,13 +53,13 @@ $tmpl    = $isModal || $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=c
 		<?php echo HTMLHelper::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
 		<?php echo HTMLHelper::_('bootstrap.addTab', 'myTab', 'general', Text::_('COM_TJDASHBOARD_TITLE_DASHBOARD')); ?>
-		<div class="row-fluid">
-			<div class="span9">
+		<div class="row">
+			<div class="col-md-9">
 				<fieldset class="adminform">
 					<?php echo $this->form->getInput('description'); ?>
 				</fieldset>
 			</div>
-			<div class="span3">
+			<div class="col-md-3 dashboard-dropdown">
 				<?php echo $this->form->getLabel('created_by'); ?>
 				<?php echo $this->form->getInput('created_by'); ?>
 
