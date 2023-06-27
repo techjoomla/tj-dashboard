@@ -15,15 +15,17 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Language\Text;
-$document = Factory::getDocument();
-$document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
-$document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
-$document->addStylesheet(JURI::root(true) . '/media/com_tjdashboard/css/tjdashboard-sb-admin.css');
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+use Joomla\CMS\Uri\Uri;
 
-JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.multiselect');
-JHtml::_('formbehavior.chosen', 'select');
+$document = Factory::getDocument();
+$document->addScript(Uri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
+$document->addScript(Uri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
+$document->addStylesheet(Uri::root(true) . '/media/com_tjdashboard/css/tjdashboard-sb-admin.css');
+HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+
+HTMLHelper::_('bootstrap.tooltip');
+HTMLHelper::_('behavior.multiselect');
+HTMLHelper::_('formbehavior.chosen', 'select');
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
