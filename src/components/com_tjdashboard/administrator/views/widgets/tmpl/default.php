@@ -18,6 +18,7 @@ use Joomla\CMS\Language\Text;
 $document = Factory::getDocument();
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
 $document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
+$document->addStylesheet(JURI::root(true) . '/media/com_tjdashboard/css/tjdashboard-sb-admin.css');
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
 JHtml::_('bootstrap.tooltip');
@@ -36,16 +37,16 @@ if ($saveOrder)
 ?>
 
 <div class="tj-page">
-	<div class="row-fluid">
+	<div class="row">
 		<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=widgets'); ?>" method="post" name="adminForm" id="adminForm">
 			<?php
 			if (!empty( $this->sidebar))
 			{
 			?>
-				<div id="j-sidebar-container" class="span2">
+				<div id="j-sidebar-container" class="col-md-2">
 					<?php echo $this->sidebar; ?>
 				</div>
-				<div id="j-main-container" class="span10">
+				<div id="j-main-container" class="col-md-10">
 			<?php
 			}
 			else
@@ -68,6 +69,7 @@ if ($saveOrder)
 					else
 					{
 					?>
+					<div class="table-responsive">
 					<table class="table table-striped" id="widgetsList">
 						<thead>
 							<tr>
@@ -198,6 +200,7 @@ if ($saveOrder)
 							?>
 						<tbody>
 					</table>
+				    </div>
 					<?php
 					}
 					?>
@@ -209,4 +212,3 @@ if ($saveOrder)
 		</form>
 	</div>
 </div>
-

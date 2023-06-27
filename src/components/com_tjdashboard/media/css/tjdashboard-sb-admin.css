@@ -3,7 +3,19 @@
     width: 64px;
 }
 .dashboard-dropdown .chosen-container-single .chosen-single {
-
+ 
     padding:0.3rem 0.4rem!important;
     height: auto;
+
+}
+.view-widgets .chosen-container-single .chosen-single {
+ 
+    padding:0.3rem 0.4rem!important;
+    height: auto;
+
+}
+.view-widgets .container-main {
+ 
+   overflow: auto;
+
 }
