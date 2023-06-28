@@ -15,14 +15,17 @@ use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Language\Text;
-$document = Factory::getDocument();
-$document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
-$document->addScript(Juri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+use Joomla\CMS\Uri\Uri;
 
-JHtml::_('bootstrap.tooltip');
-JHtml::_('behavior.multiselect');
-JHtml::_('formbehavior.chosen', 'select');
+$document = Factory::getDocument();
+$document->addScript(Uri::root() . 'components/com_tjdashboard/assets/js/tjDashboardService.js');
+$document->addScript(Uri::root() . 'components/com_tjdashboard/assets/js/tjDashboardUI.js');
+$document->addStylesheet(Uri::root(true) . '/media/com_tjdashboard/css/tjdashboard-sb-admin.css');
+HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+
+HTMLHelper::_('bootstrap.tooltip');
+HTMLHelper::_('behavior.multiselect');
+HTMLHelper::_('formbehavior.chosen', 'select');
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
@@ -36,16 +39,16 @@ if ($saveOrder)
 ?>
 
 <div class="tj-page">
-	<div class="row-fluid">
+	<div class="row">
 		<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=widgets'); ?>" method="post" name="adminForm" id="adminForm">
 			<?php
 			if (!empty( $this->sidebar))
 			{
 			?>
-				<div id="j-sidebar-container" class="span2">
+				<div id="j-sidebar-container" class="col-md-2">
 					<?php echo $this->sidebar; ?>
 				</div>
-				<div id="j-main-container" class="span10">
+				<div id="j-main-container" class="col-md-10">
 			<?php
 			}
 			else
@@ -68,6 +71,7 @@ if ($saveOrder)
 					else
 					{
 					?>
+					<div class="table-responsive">
 					<table class="table table-striped" id="widgetsList">
 						<thead>
 							<tr>
@@ -198,6 +202,7 @@ if ($saveOrder)
 							?>
 						<tbody>
 					</table>
+				    </div>
 					<?php
 					}
 					?>
@@ -209,4 +214,3 @@ if ($saveOrder)
 		</form>
 	</div>
 </div>
-

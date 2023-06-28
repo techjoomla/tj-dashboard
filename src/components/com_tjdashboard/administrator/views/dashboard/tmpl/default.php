@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Uri\Uri;
 
-
 $document = Factory::getDocument();
 $document->addStyleSheet(Uri::root() . '/media/techjoomla_strapper/bs3/css/bootstrap.css');
 $document->addStylesheet(Juri::root() . 'components/com_tjdashboard/assets/css/dashboard.css');

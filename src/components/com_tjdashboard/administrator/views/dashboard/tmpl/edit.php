@@ -18,30 +18,33 @@ use Joomla\CMS\Language\Text;
 
 use Joomla\Registry\Registry;
 
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
+HTMLHelper::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
-JHtml::_('behavior.formvalidator');
-JHtml::_('behavior.keepalive');
-JHtml::_('formbehavior.chosen', 'select');
+HTMLHelper::_('behavior.formvalidator');
+HTMLHelper::_('behavior.keepalive');
+HTMLHelper::_('formbehavior.chosen', 'select');
 $app = Factory::getApplication();
 $input = $app->input;
+
+$document = Factory::getDocument();
+$document->addStylesheet(JURI::root(true) . '/media/com_tjdashboard/css/tjdashboard-sb-admin.css');
 
 // In case of modal
 $isModal = $input->get('layout') == 'modal' ? true : false;
 $layout  = $isModal ? 'modal' : 'edit';
 $tmpl    = $isModal || $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 
-JFactory::getDocument()->addScriptDeclaration('
-	Joomla.submitbutton = function(task)
-	{
-		if (task == "dashboard.cancel" || document.formvalidator.isValid(document.getElementById("dashboard-form")))
-		{
-			jQuery("#permissions-sliders select").attr("disabled", "disabled");
-			' . $this->form->getField('description')->save() . '
-			Joomla.submitform(task, document.getElementById("dashboard-form"));
-		}
-	};
-');
+// Factory::getDocument()->addScriptDeclaration('
+// 	Joomla.submitbutton = function(task)
+// 	{
+// 		if (task == "dashboard.cancel" || document.formvalidator.isValid(document.getElementById("dashboard-form")))
+// 		{
+// 			jQuery("#permissions-sliders select").attr("disabled", "disabled");
+// 			' . $this->form->getField('description')->save() . '
+// 			Joomla.submitform(task, document.getElementById("dashboard-form"));
+// 		}
+// 	};
+// ');
 ?>
 <div class="">
 	<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=dashboard&layout=edit&dashboard_id=' . (int) $this->item->dashboard_id, false);?>" method="post" enctype="multipart/form-data" name="adminForm" id="dashboard-form" class="form-validate">
@@ -50,13 +53,13 @@ JFactory::getDocument()->addScriptDeclaration('
 		<?php echo HTMLHelper::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>
 
 		<?php echo HTMLHelper::_('bootstrap.addTab', 'myTab', 'general', Text::_('COM_TJDASHBOARD_TITLE_DASHBOARD')); ?>
-		<div class="row-fluid">
-			<div class="span9">
+		<div class="row">
+			<div class="col-md-9">
 				<fieldset class="adminform">
 					<?php echo $this->form->getInput('description'); ?>
 				</fieldset>
 			</div>
-			<div class="span3">
+			<div class="col-md-3 dashboard-dropdown">
 				<?php echo $this->form->getLabel('created_by'); ?>
 				<?php echo $this->form->getInput('created_by'); ?>
 

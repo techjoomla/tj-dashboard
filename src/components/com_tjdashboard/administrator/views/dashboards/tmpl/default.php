@@ -70,7 +70,7 @@ if ( $saveOrder )
 					<table class="table table-striped" id="dashboardsList">
 						<thead>
 							<tr>
-								<th width="1%" class="nowrap center hidden-phone"></th>
+								<!-- <th width="1%" class="nowrap center hidden-phone"></th> -->
 								<th width="1%" class="nowrap center hidden-phone">
 									<?php echo HTMLHelper::_('searchtools.sort', '', 'dash.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING', 'icon-menu-2'); ?>
 								</th>
@@ -115,9 +115,7 @@ if ( $saveOrder )
 
 								$canChange  = $this->canChangeStatus;
 								?>
-								<tr class="row
-								<?php echo $i % 2; ?>" sortable-group-id="
-								<?php echo $item->dashboard_id; ?>">
+								<tr class="row<?php echo $i % 2; ?>" sortable-group-id="<?php echo $item->dashboard_id;?>">
 								<td class="order nowrap center hidden-phone">
 									<?php
 									$iconClass = '';

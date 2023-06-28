@@ -15,7 +15,7 @@
 			type="text"
 			filter="string"
 			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_ALIAS"
-			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_ALIAS"/>
+			/>
 
 		<field
 			name="description" 
@@ -23,7 +23,7 @@
 			filter="safehtml"
 			label="COM_TJDASHBOARD_FORM_DASHBOARD_LBL_DESCRIPTION"
 			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_DESCRIPTION"
-			width="300" />
+			 />
 
 		<field
 			name="state"
@@ -32,7 +32,7 @@
 			label="JSTATUS"
 			description=""
 			default="1"
-			class="inputbox"
+			class="inputbox form-control"
 			size="1">
 				<option value="1">JPUBLISHED</option>
 				<option value="0">JUNPUBLISHED</option>
@@ -45,7 +45,7 @@
 			type="accesslevel"
 			label="COM_TJDASHBOARD_DASHBOARD_FORM_LBL_ACCESSLEVEL"
 			description="COM_TJDASHBOARD_DASHBOARD_FORM_DESC_ACCESSLEVEL"
-			class="" />
+			class="form-control" />
 
 		<field
 			name="context"

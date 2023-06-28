@@ -11,9 +11,9 @@
 // No direct access
 defined('_JEXEC') or die;
 use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHTML::_('behavior.modal');
-
+HTMLHelper::_('bootstrap.renderModal', 'a.tjmodal');
 
 $document = Factory::getDocument();
 

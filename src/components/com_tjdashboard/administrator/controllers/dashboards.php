@@ -25,12 +25,13 @@ class TjDashboardControllerDashboards extends AdminController
 	 *
 	 * @param   STRING  $name    model name
 	 * @param   STRING  $prefix  model prefix
+	 * @param   STRING  $config  model options
 	 *
 	 * @return  void
 	 *
 	 * @since  1.0.0
 	 */
-	public function getModel($name = 'Dashboard', $prefix = 'TjdashboardModel')
+	public function getModel($name = 'Dashboard', $prefix = 'TjdashboardModel', $config = Array())
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 

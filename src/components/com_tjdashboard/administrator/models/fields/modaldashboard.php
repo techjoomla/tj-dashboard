@@ -22,7 +22,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  *
  * @since  1.0.0
  */
-class FormFieldModaldashboard extends FormField
+class JFormFieldModaldashboard extends FormField
 {
 	/**
 	 * The form field type.
@@ -57,15 +57,29 @@ class FormFieldModaldashboard extends FormField
 		HTMLHelper::_('jquery.framework');
 		HTMLHelper::_('script', 'system/modal-fields.js', array('version' => 'auto', 'relative' => true));
 
+		 /** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
+		 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+
+		 // Add the modal field script to the document head.
+		 $wa->useScript('field.modal-fields');
+ 
 		// Script to proxy the select modal function to the modal-fields.js file.
 		$scriptSelect = array();
-		Factory::getDocument()->addScriptDeclaration("
-		function jSelectDashboard_" . $this->id . "(id, title, object) {
-			window.processModalSelect('Dashboard', '" . $this->id . "', id, title, '', object);
-		}
-		");
+		
+		if (!isset($scriptSelect[$this->id])) {
+			$wa->addInlineScript(
+				"
+			window.jSelectDashboard_" . $this->id . " = function (id, title, catid, object, url, language) {
+				window.processModalSelect('Dashboard', '" . $this->id . "', id, title, catid, object, url, language);
+			}",
+				[],
+				['type' => 'module']
+			);
 
-		$scriptSelect[$this->id] = true;
+			Text::script('JGLOBAL_ASSOCIATIONS_PROPAGATE_FAILED');
+
+			$scriptSelect[$this->id] = true;
+		}
 
 		// Setup variables for display.
 		$linkDashboards = 'index.php?option=com_tjdashboard&amp;view=dashboards&amp;layout=modal&amp;tmpl=component&amp;' . Session::getFormToken() . '=1';
@@ -111,7 +125,7 @@ class FormFieldModaldashboard extends FormField
 			$html .= '<a'
 				. ' class="btn hasTooltip' . ($value ? ' hidden' : '') . '"'
 				. ' id="' . $this->id . '_select"'
-				. ' data-toggle="modal"'
+				. ' data-bs-toggle="modal"'
 				. ' role="button"'
 				. ' href="#ModalSelect' . $modalId . '"'
 				. ' title="' . HTMLHelper::tooltipText('COM_TJDASHBOARD_CHANGE_DASHBOARD') . '">'

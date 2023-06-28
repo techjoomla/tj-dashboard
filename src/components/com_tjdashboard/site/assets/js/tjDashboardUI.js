@@ -202,7 +202,7 @@ var TJDashboardUI = {
 		var defaultValue = jQuery('#jform_renderer_plugin').val();
 		/** global: TJDashboardService */
 		var promise = TJDashboardService.getRenderers(selectedDataPlugin);
-		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required" required="required" aria-required="true"><option value="">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN") + '</option></select>');
+		jQuery('#jform_renderer_plugin').replaceWith('<select id="jform_renderer_plugin" name="jform[renderer_plugin]" class="required form-control" required="required" aria-required="true"><option value="">' + Joomla.JText._("COM_TJDASHBOARD_WIDGET_FORM_RENDERER_PLUGIN") + '</option></select>');
 		jQuery('#jform_renderer_plugin').find('option').not(':first').remove();
 		promise.done(function(response) {
 
