@@ -147,7 +147,7 @@ class TjdashboardViewDashboard extends HtmlView
 			JLoader::import('administrator.components.com_tjdashboard.helpers.dashboard', JPATH_SITE);
 			DashboardHelper::addSubmenu('dashboard');
 
-			if ($app->isAdmin())
+			if ($app->isClient('administrator'))
 			{
 				$this->sidebar = JHtmlSidebar::render();
 			}
