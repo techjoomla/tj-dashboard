@@ -34,7 +34,7 @@ if ($saveOrder)
 ?>
 
 <div class="tj-page">
-	<div class="row-fluid">
+	<div class="row">
 		<form action="<?php echo Route::_('index.php?option=com_tjdashboard&view=dashboards'); ?>" method="post" name="adminForm" id="adminForm">
 			<?php
 			if (!empty( $this->sidebar))
@@ -118,7 +118,7 @@ if ($saveOrder)
 
 						$canChange  = $this->canChangeStatus;
 						?>
-						<tr class="row
+						<tr class="
 							<?php echo $i % 2; ?>" sortable-group-id="
 							<?php echo $item->dashboard_id; ?>">
 						<td class="order nowrap center hidden-phone">
