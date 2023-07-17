@@ -15,19 +15,10 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboards` (
   `modified_by` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `context` varchar(255) NOT NULL COMMENT 'Dashboard context',
   `parent` int(11) NOT NULL COMMENT 'dashboard id of parent dashboard',
-  PRIMARY KEY (`dashboard_id`)
+  PRIMARY KEY (`dashboard_id`),
+  KEY `idx_createdby` (`created_by`),
+  KEY `idx_alias` (`alias`(191))
 ) DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
-
---
--- Indexes for table `__tj_dashboards`
---
-
-ALTER TABLE `#__tj_dashboards`
-  -- ADD KEY `idx_access` (`access`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_createdby` (`created_by`),
-  ADD KEY `idx_alias` (`alias`(191));
 
 CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   `dashboard_widget_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -48,15 +39,8 @@ CREATE TABLE IF NOT EXISTS `#__tj_dashboard_widgets` (
   `autorefresh` int(11) NOT NULL COMMENT 'Widget refresh time span in second',
   `core` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`dashboard_widget_id`),
-  FOREIGN KEY (`dashboard_id`) REFERENCES `#__tj_dashboards` (`dashboard_id`)
+  FOREIGN KEY (`dashboard_id`) REFERENCES `#__tj_dashboards` (`dashboard_id`),
+  KEY `idx_dashboard_id` (`dashboard_id`),
+  KEY `idx_createdby` (`created_by`)
 ) DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
---
--- Indexes for table `#__tj_dashboard_widgets`
---
-
-ALTER TABLE `#__tj_dashboard_widgets`
-  ADD KEY `idx_dashboard_id` (`dashboard_id`),
-  ADD KEY `idx_checkout` (`checked_out`),
-  ADD KEY `idx_state` (`state`),
-  ADD KEY `idx_createdby` (`created_by`);

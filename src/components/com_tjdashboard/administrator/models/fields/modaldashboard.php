@@ -9,6 +9,11 @@
  */
 
 defined('JPATH_BASE') or die;
+use Joomla\CMS\Form\FormField;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Session\Session;
+use Joomla\CMS\Language\Text;
 
 JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 
@@ -17,7 +22,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  *
  * @since  1.0.0
  */
-class JFormFieldModaldashboard extends JFormField
+class JFormFieldModaldashboard extends FormField
 {
 	/**
 	 * The form field type.
@@ -40,7 +45,7 @@ class JFormFieldModaldashboard extends JFormField
 		$allowSelect = ((string) $this->element['select'] != 'false');
 
 		// Load language
-		JFactory::getLanguage()->load('com_tjdashboard', JPATH_ADMINISTRATOR);
+		Factory::getLanguage()->load('com_tjdashboard', JPATH_ADMINISTRATOR);
 
 		// The active dashboard id field.
 		$value = ($this->value > 0 ? (int) $this->value : '');
@@ -49,23 +54,37 @@ class JFormFieldModaldashboard extends JFormField
 		$modalId = 'Dashboard_' . $this->id;
 
 		// Add the modal field script to the document head.
-		JHtml::_('jquery.framework');
-		JHtml::_('script', 'system/modal-fields.js', array('version' => 'auto', 'relative' => true));
+		HTMLHelper::_('jquery.framework');
+		HTMLHelper::_('script', 'system/modal-fields.js', array('version' => 'auto', 'relative' => true));
 
+		 /** @var \Joomla\CMS\WebAsset\WebAssetManager $wa */
+		 $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+
+		 // Add the modal field script to the document head.
+		 $wa->useScript('field.modal-fields');
+ 
 		// Script to proxy the select modal function to the modal-fields.js file.
 		$scriptSelect = array();
-		JFactory::getDocument()->addScriptDeclaration("
-		function jSelectDashboard_" . $this->id . "(id, title, object) {
-			window.processModalSelect('Dashboard', '" . $this->id . "', id, title, '', object);
-		}
-		");
+		
+		if (!isset($scriptSelect[$this->id])) {
+			$wa->addInlineScript(
+				"
+			window.jSelectDashboard_" . $this->id . " = function (id, title, catid, object, url, language) {
+				window.processModalSelect('Dashboard', '" . $this->id . "', id, title, catid, object, url, language);
+			}",
+				[],
+				['type' => 'module']
+			);
 
-		$scriptSelect[$this->id] = true;
+			Text::script('JGLOBAL_ASSOCIATIONS_PROPAGATE_FAILED');
+
+			$scriptSelect[$this->id] = true;
+		}
 
 		// Setup variables for display.
-		$linkDashboards = 'index.php?option=com_tjdashboard&amp;view=dashboards&amp;layout=modal&amp;tmpl=component&amp;' . JSession::getFormToken() . '=1';
-		$linkDashboard  = 'index.php?option=com_tjdashboard&amp;view=dashboard&amp;' . JSession::getFormToken() . '=1';
-		$modalTitle   = JText::_('COM_TJDASHBOARD_CHANGE_DASHBOARD');
+		$linkDashboards = 'index.php?option=com_tjdashboard&amp;view=dashboards&amp;layout=modal&amp;tmpl=component&amp;' . Session::getFormToken() . '=1';
+		$linkDashboard  = 'index.php?option=com_tjdashboard&amp;view=dashboard&amp;' . Session::getFormToken() . '=1';
+		$modalTitle   = Text::_('COM_TJDASHBOARD_CHANGE_DASHBOARD');
 
 		if (isset($this->element['language']))
 		{
@@ -87,14 +106,14 @@ class JFormFieldModaldashboard extends JFormField
 			catch (\Exception $e)
 			{
 				// Get a handle to the Joomla! application object
-				$application = JFactory::getApplication();
+				$application = Factory::getApplication();
 
 				// Add a message to the message queue
 				$application->enqueueMessage($e->getMessage(), 'error');
 			}
 		}
 
-		$title = empty($title) ? JText::_('COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+		$title = empty($title) ? Text::_('COM_TJDASHBOARD_WIDGET_FORM_LBL_DASHBOARDID') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
 		// The current dashboard display field.
 		$html  = '<span class="input-append">';
@@ -106,11 +125,11 @@ class JFormFieldModaldashboard extends JFormField
 			$html .= '<a'
 				. ' class="btn hasTooltip' . ($value ? ' hidden' : '') . '"'
 				. ' id="' . $this->id . '_select"'
-				. ' data-toggle="modal"'
+				. ' data-bs-toggle="modal"'
 				. ' role="button"'
 				. ' href="#ModalSelect' . $modalId . '"'
-				. ' title="' . JHtml::tooltipText('COM_TJDASHBOARD_CHANGE_DASHBOARD') . '">'
-				. '<span class="icon-file" aria-hidden="true"></span> ' . JText::_('JSELECT')
+				. ' title="' . HTMLHelper::tooltipText('COM_TJDASHBOARD_CHANGE_DASHBOARD') . '">'
+				. '<span class="icon-file" aria-hidden="true"></span> ' . Text::_('JSELECT')
 				. '</a>';
 		}
 
@@ -122,7 +141,7 @@ class JFormFieldModaldashboard extends JFormField
 				. ' id="' . $this->id . '_clear"'
 				. ' href="#"'
 				. ' onclick="window.processModalParent(\'' . $this->id . '\'); return false;">'
-				. '<span class="icon-remove" aria-hidden="true"></span>' . JText::_('JCLEAR')
+				. '<span class="icon-remove" aria-hidden="true"></span>' . Text::_('JCLEAR')
 				. '</a>';
 		}
 
@@ -131,7 +150,7 @@ class JFormFieldModaldashboard extends JFormField
 		// Select dashboard modal
 		if ($allowSelect)
 		{
-			$html .= JHtml::_(
+			$html .= HTMLHelper::_(
 				'bootstrap.renderModal',
 				'ModalSelect' . $modalId,
 				array(
@@ -141,7 +160,7 @@ class JFormFieldModaldashboard extends JFormField
 					'width'       => '800px',
 					'bodyHeight'  => '70',
 					'modalWidth'  => '80',
-					'footer'      => '<a role="button" class="btn" data-dismiss="modal" aria-hidden="true">' . JText::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</a>',
+					'footer'      => '<a role="button" class="btn" data-dismiss="modal" aria-hidden="true">' . Text::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</a>',
 				)
 			);
 		}
@@ -149,7 +168,7 @@ class JFormFieldModaldashboard extends JFormField
 		$class = $this->required ? ' class="required modal-value"' : '';
 
 		$html .= '<input type="hidden" id="' . $this->id . '_id"' . $class . ' data-required="' . (int) $this->required . '" name="' . $this->name
-			. '" data-text="' . htmlspecialchars(JText::_('COM_TJDASHBOARD_CHANGE_DASHBOARD', true), ENT_COMPAT, 'UTF-8') . '" value="' . $value . '" />';
+			. '" data-text="' . htmlspecialchars(Text::_('COM_TJDASHBOARD_CHANGE_DASHBOARD', true), ENT_COMPAT, 'UTF-8') . '" value="' . $value . '" />';
 
 		return $html;
 	}

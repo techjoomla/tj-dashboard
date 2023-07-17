@@ -9,10 +9,11 @@
 
 // No direct access
 defined('_JEXEC') or die;
-
-jimport('joomla.filesystem.folder');
-jimport('joomla.filesystem.file');
-jimport('joomla.application.component.controller');
+use Joomla\CMS\Factory;
+use Joomla\CMS\Object\CMSObject;
+use Joomla\CMS\Installer\Installer;
+use Joomla\CMS\Filesystem\File;
+use Joomla\CMS\Filesystem\Folder;
 
 if (! defined('DS'))
 {
@@ -110,9 +111,9 @@ class Pkg_TjdashboardInstallerScript
 	{
 		$src = $parent->getParent()->getPath('source');
 
-		$db  = JFactory::getDbo();
+		$db  = Factory::getDbo();
 
-		$status          = new JObject;
+		$status          = new CMSObject;
 		$status->plugins = array();
 
 		// Plugins installation
@@ -154,7 +155,7 @@ class Pkg_TjdashboardInstallerScript
 						$db->setQuery($query);
 						$count = $db->loadResult();
 
-						$installer = new JInstaller;
+						$installer = new Installer;
 						$result    = $installer->install($path);
 
 						if ($count)
@@ -192,7 +193,7 @@ class Pkg_TjdashboardInstallerScript
 							->where('( ' . ($db->qn('name') . ' = ' . $db->q($plugin)) . ' OR ' . ($db->qn('element') . ' = ' . $db->q($plugin)) . ' )')
 							->where($db->qn('folder') . ' = ' . $db->q($folder));
 							$db->setQuery($query);
-							$db->query();
+							$db->execute();
 						}
 					}
 				}
@@ -213,9 +214,9 @@ class Pkg_TjdashboardInstallerScript
 	{
 		jimport('joomla.installer.installer');
 
-		$db = JFactory::getDBO();
+		$db = Factory::getDBO();
 
-		$status          = new JObject;
+		$status          = new CMSObject;
 		$status->modules = array();
 		$status->plugins = array();
 
@@ -241,7 +242,7 @@ class Pkg_TjdashboardInstallerScript
 
 						if ($id)
 						{
-							$installer         = new JInstaller;
+							$installer         = new Installer;
 							$result            = $installer->uninstall('plugin', $id);
 							$status->plugins[] = array(
 								'name' => 'plg_' . $plugin,
@@ -317,12 +318,12 @@ class Pkg_TjdashboardInstallerScript
 			{
 				$file = JPATH_ROOT . '/' . $file;
 
-				if (!JFile::exists($file))
+				if (!File::exists($file))
 				{
 					continue;
 				}
 
-				JFile::delete($file);
+				File::delete($file);
 			}
 		}
 
@@ -332,12 +333,12 @@ class Pkg_TjdashboardInstallerScript
 			{
 				$folder = JPATH_ROOT . '/' . $folder;
 
-				if (!JFolder::exists($folder))
+				if (!Folder::exists($folder))
 				{
 					continue;
 				}
 
-				JFolder::delete($folder);
+				Folder::delete($folder);
 			}
 		}
 	}

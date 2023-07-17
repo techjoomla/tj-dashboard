@@ -7,6 +7,7 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\Controller\FormController;
 
 use Joomla\Utilities\ArrayHelper;
 
@@ -15,6 +16,6 @@ use Joomla\Utilities\ArrayHelper;
  *
  * @since  1.0.0
  */
-class TjDashboardControllerDashboard extends JControllerForm
+class TjDashboardControllerDashboard extends FormController
 {
 }

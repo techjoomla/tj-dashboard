@@ -9,6 +9,11 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Filter\OutputFilter;
+use Joomla\CMS\Language\Text;
+use Joomla\Data\DataObject;
 JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
 
 /**
@@ -16,7 +21,7 @@ JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINIS
  *
  * @since  1.0.0
  */
-class TjdashboardTableDashboards extends JTable
+class TjdashboardTableDashboards extends Table
 {
 	/**
 	 * Constructor
@@ -50,7 +55,7 @@ class TjdashboardTableDashboards extends JTable
 
 		if (!$this->created_by)
 		{
-			$this->created_by = JFactory::getUser()->id;
+			$this->created_by = Factory::getUser()->id;
 		}
 
 		$this->alias = trim($this->alias);
@@ -62,13 +67,13 @@ class TjdashboardTableDashboards extends JTable
 
 		if ($this->alias)
 		{
-			if (JFactory::getConfig()->get('unicodeslugs') == 1)
+			if (Factory::getConfig()->get('unicodeslugs') == 1)
 			{
-				$this->alias = JFilterOutput::stringURLUnicodeSlug($this->alias);
+				$this->alias = OutputFilter::stringURLUnicodeSlug($this->alias);
 			}
 			else
 			{
-				$this->alias = JFilterOutput::stringURLSafe($this->alias);
+				$this->alias = OutputFilter::stringURLSafe($this->alias);
 			}
 		}
 
@@ -77,19 +82,19 @@ class TjdashboardTableDashboards extends JTable
 
 		if ($table->load(array('alias' => $this->alias)) && ($table->dashboard_id != $this->dashboard_id || $this->dashboard_id == 0))
 		{
-			$msg = JText::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
+			$msg = Text::_('COM_TJDASHBOAD_DASHBOARD_SAVE_ALIAS_ALREADY_EXIST_WARNING');
 
 			while ($table->load(array('alias' => $this->alias)))
 			{
 				$this->alias = JString::increment($this->alias, 'dash');
 			}
 
-			JFactory::getApplication()->enqueueMessage($msg, 'warning');
+			Factory::getApplication()->enqueueMessage($msg, 'warning');
 		}
 
 		if (trim(str_replace('-', '', $this->alias)) == '')
 		{
-			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
+			$this->alias = Factory::getDate()->format("Y-m-d-H-i-s");
 		}
 
 		return parent::check();
@@ -110,22 +115,22 @@ class TjdashboardTableDashboards extends JTable
 		{
 			return parent::delete($pk);
 		}
-		catch (JDatabaseExceptionExecuting $e)
+		catch (DataObjectbaseExceptionExecuting $e)
 		{
 			if ($e->getCode() === 1451)
 			{
-				$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'));
+				$this->setError(Text::_('COM_TJDASHBOARD_DASHBOARDS_DELETE_ERROR_MESSAGE'));
 			}
 			else
 			{
-				$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
+				$this->setError(Text::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
 
 				return false;
 			}
 		}
 		catch (Exception $e)
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
+			$this->setError(Text::_('COM_TJDASHBOARD_DASHBOARD_DELETE_ERROR_MESSAGE_GENERAL'));
 
 			return false;
 		}

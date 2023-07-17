@@ -10,13 +10,18 @@
 
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 /**
  * Dashboards view
  *
  * @since  1.0.0
  */
-class TjdashboardViewDashboards extends JViewLegacy
+class TjdashboardViewDashboards extends HtmlView
 {
 	/**
 	 * An array of items
@@ -124,7 +129,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 		$this->activeFilters = $this->get('ActiveFilters');
 
 		// Get ACL actions
-		$this->user            = JFactory::getUser();
+		$this->user            = Factory::getUser();
 
 		$this->canCreate       = $this->user->authorise('core.content.create', 'com_tjdashboard');
 		$this->canEdit         = $this->user->authorise('core.content.edit', 'com_tjdashboard');
@@ -154,7 +159,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 	 */
 	protected function addToolbar()
 	{
-		JToolBarHelper::title(JText::_('COM_TJDASHBOARD_VIEW_DASHBOARDS'), 'stack article');
+		JToolBarHelper::title(Text::_('COM_TJDASHBOARD_VIEW_DASHBOARDS'), 'stack article');
 
 		// Check if the form exists before showing the add/edit buttons
 		$formPath = JPATH_COMPONENT_ADMINISTRATOR . '/views/dashboard';
@@ -196,10 +201,10 @@ class TjdashboardViewDashboards extends JViewLegacy
 	protected function getSortFields()
 	{
 		return array(
-			'dash.dashboard_id' => JText::_('JGRID_HEADING_ID'),
-			'dash.title' => JText::_('COM_DASHBOARD_LIST_DASHBOARDS_TITLE'),
-			'dash.ordering' => JText::_('JGRID_HEADING_ORDERING'),
-			'dash.state' => JText::_('JSTATUS'),
+			'dash.dashboard_id' => Text::_('JGRID_HEADING_ID'),
+			'dash.title' => Text::_('COM_DASHBOARD_LIST_DASHBOARDS_TITLE'),
+			'dash.ordering' => Text::_('JGRID_HEADING_ORDERING'),
+			'dash.state' => Text::_('JSTATUS'),
 		);
 	}
 
@@ -213,7 +218,7 @@ class TjdashboardViewDashboards extends JViewLegacy
 		if ($this->canCreate)
 		{
 			JToolBarHelper::addNew('dashboard.add', 'JTOOLBAR_NEW');
-			JToolbarHelper::custom('dashboard.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
+			ToolbarHelper::custom('dashboard.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
 		}
 
 		if ($this->canEdit && isset($this->items[0]))

@@ -10,6 +10,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
 
 /**
  * Tjdashboard API widgets class
@@ -25,7 +26,7 @@ class TjdashboardApiResourceWidgets extends ApiResource
 	 */
 	public function post()
 	{
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$widgetmodel = TjdashboardFactory::model("Widgets");
 		$wobj = new stdclass;
 		$input = $app->input;

@@ -10,11 +10,12 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
-JHTML::_('behavior.modal');
+HTMLHelper::_('bootstrap.renderModal', 'a.tjmodal');
 
-
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 
 $document->addStylesheet('components/com_tjdashboard/assets/css/dashboard.css');
 $document->addStylesheet('media/techjoomla_strapper/css/bootstrap.j3.min.css');
@@ -22,7 +23,7 @@ $document->addScript('components/com_tjdashboard/assets/js/tjDashboardService.mi
 $document->addScript('components/com_tjdashboard/assets/js/tjDashboardUI.min.js');
 $document->addStylesheet('media/com_tjdashboard/css/tjdashboard-sb-admin.css');
 ?>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 jQuery(document).ready(function() {
 		TJDashboardUI.initDashboard(<?php echo ($this->item->state == 1? $this->item->dashboard_id : 0); ?>);

@@ -9,13 +9,16 @@
  */
 
 defined('_JEXEC') or die;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
 
 /**
  * Tj-Dashboard widgets table class
  *
  * @since  1.0.0
  */
-class TjdashboardTableWidgets extends JTable
+class TjdashboardTableWidgets extends Table
 {
 	/**
 	 * Constructor
@@ -41,7 +44,7 @@ class TjdashboardTableWidgets extends JTable
 	{
 		if ((!empty($this->params)) && (json_decode($this->params) === null))
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE'));
+			$this->setError(Text::_('COM_TJDASHBOARD_WIDGET_INVALID_JSON_VALUE'));
 
 			return false;
 		}
@@ -54,12 +57,12 @@ class TjdashboardTableWidgets extends JTable
 
 		if ($this->dashboard_widget_id == 0)
 		{
-			$this->created_by = JFactory::getUser()->id;
-			$this->created_on = JFactory::getDate("now", "UTC")->tosql();
+			$this->created_by = Factory::getUser()->id;
+			$this->created_on = Factory::getDate("now", "UTC")->tosql();
 		}
 
-		$this->modified_by = JFactory::getUser()->id;
-		$this->modified_on = JFactory::getDate("now", "UTC")->tosql();
+		$this->modified_by = Factory::getUser()->id;
+		$this->modified_on = Factory::getDate("now", "UTC")->tosql();
 
 		return parent::check();
 	}
@@ -85,14 +88,14 @@ class TjdashboardTableWidgets extends JTable
 			}
 			elseif ($widget->core == 1)
 			{
-				$this->setError(JText::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'));
+				$this->setError(Text::_('COM_TJDASHBOARD_DEFAULT_WIDGETS_DELETE_ERROR_MESSAGE'));
 
 				return false;
 			}
 		}
 		catch (Exception $e)
 		{
-			$this->setError(JText::_('COM_TJDASHBOARD_WIDGETS_DELETE_ERROR_MESSAGE'));
+			$this->setError(Text::_('COM_TJDASHBOARD_WIDGETS_DELETE_ERROR_MESSAGE'));
 
 			return false;
 		}

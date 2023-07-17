@@ -10,6 +10,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
 
 jimport('joomla.plugin.plugin');
 JLoader::import('components.com_tjdashboard.includes.tjdashboard', JPATH_ADMINISTRATOR);
@@ -39,7 +40,7 @@ class PlgAPITjdashboard extends ApiPlugin
 		ApiResource::addIncludePath(dirname(__FILE__) . '/resources');
 
 		// Load language files
-		$lang = JFactory::getLanguage();
+		$lang = Factory::getLanguage();
 		$lang->load('plg_api_tjdashboard', JPATH_ADMINISTRATOR, '', true);
 
 		// Set the resource to be public

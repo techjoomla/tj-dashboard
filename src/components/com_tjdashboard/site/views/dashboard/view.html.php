@@ -10,15 +10,16 @@
 
 // No direct access
 defined('_JEXEC') or die;
+use Joomla\CMS\MVC\View\HtmlView;
+use Joomla\CMS\Language\Text;
 
-jimport('joomla.application.component.view');
 
 /**
  * View to edit
  *
  * @since  1.0.0
  */
-class TjdashboardViewDashboard extends JViewLegacy
+class TjdashboardViewDashboard extends HtmlView
 {
 	protected $item;
 
@@ -54,7 +55,7 @@ class TjdashboardViewDashboard extends JViewLegacy
 	 */
 	public static function getLanguageConstant()
 	{
-		JText::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
-		JText::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
+		Text::script('COM_TJDASHBOARD_WIDGETS_NOTSHOW_ERROR_MESSAGE');
+		Text::script('COM_TJDASHBOARD_NO_DATA_AVAILABLE_MESSAGE');
 	}
 }
